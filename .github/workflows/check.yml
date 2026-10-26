@@ -1,0 +1,22 @@
+name: Check storage package
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check syntax and isolated safety tests
+        run: |
+          python3 -m compileall -q install.py storage_defaults_power.py storage_defaults_repack.py make_patch.py tests
+          sh -n apply.sh undo.sh status.sh systemd/90-bc250-nvme-power
+          python3 -m unittest discover -s tests -v
+      - name: Verify exported patch applies to an empty repository
+        run: |
+          python3 make_patch.py /tmp/bc250-storage.patch
+          mkdir /tmp/patch-target
+          git -C /tmp/patch-target init -q
+          git -C /tmp/patch-target apply --check /tmp/bc250-storage.patch
+          git -C /tmp/patch-target apply /tmp/bc250-storage.patch
+          test -f /tmp/patch-target/bc250-storage-defaults/apply.sh
