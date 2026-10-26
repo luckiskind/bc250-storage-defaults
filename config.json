@@ -1,0 +1,29 @@
+{
+  "roots": [
+    "/usr",
+    "/opt",
+    "/home",
+    "/srv",
+    "/var/lib/flatpak"
+  ],
+  "min_file_bytes": 1048576,
+  "max_file_bytes": 268435456,
+  "quiet_seconds": 3600,
+  "max_bytes_per_run": 536870912,
+  "max_bytes_per_day": 2147483648,
+  "reserve_free_bytes": 68719476736,
+  "max_run_seconds": 300,
+  "max_load": 4,
+  "sample_max_stored_ratio": 0.9,
+  "excluded_dir_names": [
+    ".snapshots",
+    ".git",
+    ".cache",
+    "Trash",
+    "shadercache"
+  ],
+  "excluded_paths": [
+    "/usr/src",
+    "/usr/lib/modules"
+  ]
+}
