@@ -1,0 +1,4 @@
+#!/bin/sh
+if [ "$1" = post ] && /usr/bin/systemctl is-enabled --quiet bc250-nvme-power.service; then
+    /usr/bin/python3 /usr/local/libexec/bc250-storage-defaults/storage_defaults_power.py apply
+fi
