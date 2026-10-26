@@ -1,0 +1,11 @@
+[Unit]
+Description=Maintain BC-250 native compressed-file layout
+
+[Timer]
+OnBootSec=10min
+OnUnitInactiveSec=1h
+RandomizedDelaySec=5min
+Unit=bc250-btrfs-repack.service
+
+[Install]
+WantedBy=timers.target

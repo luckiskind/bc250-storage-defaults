@@ -1,0 +1,28 @@
+[Unit]
+Description=BC-250 gradual verified Btrfs 16 KiB repacking
+After=local-fs.target
+ConditionPathExists=!/var/lib/bc250-storage-defaults/STOP
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/python3 /usr/local/libexec/bc250-storage-defaults/storage_defaults_repack.py --check-access
+ExecStart=/usr/bin/python3 /usr/local/libexec/bc250-storage-defaults/storage_defaults_repack.py
+Nice=19
+IOSchedulingClass=idle
+CPUWeight=10
+IOWeight=10
+MemoryMax=256M
+TimeoutStartSec=360
+TimeoutStopSec=120
+NoNewPrivileges=yes
+CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_DAC_READ_SEARCH CAP_FOWNER
+ProtectSystem=full
+ReadWritePaths=/usr/bin /usr/lib -/usr/lib32 /usr/share /usr/local -/usr/libexec -/opt /home -/srv -/var/lib/flatpak /var/lib/bc250-storage-defaults
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+UMask=0077

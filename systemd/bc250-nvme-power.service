@@ -1,0 +1,16 @@
+[Unit]
+Description=BC-250 NVMe responsive power profile
+After=local-fs.target
+ConditionPathExists=/sys/class/nvme/nvme0/power/pm_qos_latency_tolerance_us
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/python3 /usr/local/libexec/bc250-storage-defaults/storage_defaults_power.py apply
+ExecStop=/usr/bin/python3 /usr/local/libexec/bc250-storage-defaults/storage_defaults_power.py restore
+NoNewPrivileges=yes
+ProtectSystem=full
+ProtectHome=yes
+
+[Install]
+WantedBy=multi-user.target
