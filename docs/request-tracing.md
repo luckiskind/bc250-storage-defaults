@@ -109,3 +109,7 @@ controlled edge-path qualification, and correlate faults/filesystem/decompressio
 with usable-state and frame markers.
 No current request timing is used to claim a system-wide loading gain. The
 [Stage 1 workload gate](workloads.md) remains open.
+
+## Later lifecycle diagnostic
+
+The [native six-probe investigation](request-lifecycle.md) now distinguishes two flush-related callback patterns on this kernel with actual request identities. It supplies a mechanism for future handling, without proving every historical orphan cause, changing this experiment's flags/verdict, or qualifying observer overhead. The original source and compiled artifacts remain unchanged.

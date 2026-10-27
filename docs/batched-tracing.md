@@ -132,3 +132,7 @@ sudo python3 bench/compare_trace_variants.py run \
 Existing outputs are refused. Preserve negative results. A passing transport
 test does not establish low overhead; a synthetic overhead screen does not
 establish application critical-path attribution or an accelerator improvement.
+
+## Later lifecycle diagnostic
+
+The [native six-probe investigation](request-lifecycle.md) now distinguishes two flush-related callback patterns on this kernel with actual request identities. It supplies a mechanism for future handling, without proving every historical orphan cause, changing this experiment's flags/verdict, or qualifying observer overhead. The original source and compiled artifacts remain unchanged.
