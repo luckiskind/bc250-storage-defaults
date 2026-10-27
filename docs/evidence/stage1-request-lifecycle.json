@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "source_sha256": {
+    "bench/request_lifecycle.bpf.c": "56e694c74e7d5e595a13132ca9dd391f71dc4113a08bf035b40ed5ebf03bdb5f",
+    "bench/request_lifecycle.c": "73f972c380debb16745461e82814cc4ab41499c8118fbac5b2c1bd9e579fe471",
+    "bench/request_lifecycle.h": "a19ebdf4eb963a2a5fe0d9c9337fc78baec0b98077d87f744311ba2b631d88c0",
+    "bench/direct_probe.c": "ed3bdb4745fef33030cd482edd8a9682214165272dc9aa475f1ea4aacbbaa9f0",
+    "bench/qualify_request_lifecycle.py": "01fb7ec6cd431160d8b6d34ece35328709d2a9e44e703dbe75c2d588ca8d9374",
+    "bench/qualify_request_trace.py": "d2b0fe28c277655ad68cdcb9c87c476265a424d430c1f41e17b7d546246ea762"
+  },
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "order": [
+    "direct-read-control",
+    "fsync-sequence-1",
+    "fsync-sequence-2"
+  ],
+  "BTF_raw_callback_ABI_verified": true,
+  "flush_entry_return_ABI_verified": true,
+  "flush_function_type": "bool blk_insert_flush(struct request *)",
+  "btf_header_sha256": "208749b874a4539619d55a24f63da3803507c9ba79dc1928d531f7d16969e0b2",
+  "trace_header_sha256": "b3fd53ddda4145f5c904b40309c5ee3abd0c234f86a35684f02aad38e6e79397",
+  "request_header_sha256": "f5b369ef160938b638ba767d5231846b1a37bc76c9b76eddd03cbffba74dcef7",
+  "fixture_bytes": 8388608,
+  "fsync_updates_per_case": 8,
+  "update_bytes": 4096,
+  "window_seconds": 3,
+  "max_saved_callbacks": 50000,
+  "identity_map_limit": 8192,
+  "performance_result": false,
+  "original_timing_observer_changed": false,
+  "old_verdicts_changed": false,
+  "passed": true,
+  "cases": [
+    {
+      "case": "direct-read-control",
+      "passed": true,
+      "events": 768,
+      "transport_complete": true,
+      "owned_programs_gone": true
+    },
+    {
+      "case": "fsync-sequence-1",
+      "passed": true,
+      "events": 422,
+      "transport_complete": true,
+      "owned_programs_gone": true
+    },
+    {
+      "case": "fsync-sequence-2",
+      "passed": true,
+      "events": 200,
+      "transport_complete": true,
+      "owned_programs_gone": true
+    }
+  ],
+  "all_owned_programs_gone": true,
+  "global_trace_state_unchanged": true,
+  "unrelated_program_inventory_unchanged": true,
+  "drive_policy_unchanged": true,
+  "physical_device_formatted": false,
+  "full_lifecycle_interpretation_qualified": false,
+  "foreground_attribution_qualified": false,
+  "completed_unix": 1793127852.8274045,
+  "compiled_sha256": {
+    "request_lifecycle.bpf.o": "d686d24985c0ec2fc79cfdff0f4dae022a703aba542997e7132fbe191f239717",
+    "request-lifecycle": "e75834ef5833d64b08cb12d189f364605a825679418f0aaecba9876b7cd3a843",
+    "direct-probe": "92b4c85627147123a23fb8750a6ce8e7f539656ed3fe09e024094793ef36a72c"
+  },
+  "lifecycle_diagnostics": [
+    {
+      "case": "direct-read-control",
+      "schema_version": 1,
+      "transport_complete": true,
+      "callbacks": 768,
+      "request_identity_groups": 256,
+      "ordinary_read_groups": 256,
+      "ordinary_read_completed_bytes": 1048576,
+      "completion_error_callbacks": 0,
+      "internal_zero_payload_device_flush_groups": 0,
+      "zero_payload_consumed_sequence_groups": 0,
+      "unissued_completion_groups": 0,
+      "unexplained_completion_groups": 0,
+      "classes": [
+        {
+          "operations": [
+            0
+          ],
+          "stages": [
+            1,
+            2,
+            4
+          ],
+          "zero_data": false,
+          "internal_flush_relations": [
+            0
+          ],
+          "groups": 256
+        }
+      ],
+      "historical_orphan_causes_proven": false,
+      "old_verdicts_changed": false,
+      "full_flush_error_partial_requeue_paths_qualified": false,
+      "foreground_request_attribution_qualified": false,
+      "performance_result": false
+    },
+    {
+      "case": "fsync-sequence-1",
+      "schema_version": 1,
+      "transport_complete": true,
+      "callbacks": 422,
+      "request_identity_groups": 138,
+      "ordinary_read_groups": 0,
+      "ordinary_read_completed_bytes": 0,
+      "completion_error_callbacks": 0,
+      "internal_zero_payload_device_flush_groups": 8,
+      "zero_payload_consumed_sequence_groups": 8,
+      "unissued_completion_groups": 8,
+      "unexplained_completion_groups": 0,
+      "classes": [
+        {
+          "operations": [
+            1
+          ],
+          "stages": [
+            1,
+            2,
+            4
+          ],
+          "zero_data": false,
+          "internal_flush_relations": [
+            0
+          ],
+          "groups": 114
+        },
+        {
+          "operations": [
+            1
+          ],
+          "stages": [
+            5,
+            6,
+            1,
+            2,
+            4
+          ],
+          "zero_data": false,
+          "internal_flush_relations": [
+            0
+          ],
+          "groups": 8
+        },
+        {
+          "operations": [
+            1
+          ],
+          "stages": [
+            5,
+            6,
+            4
+          ],
+          "zero_data": true,
+          "internal_flush_relations": [
+            0
+          ],
+          "groups": 8
+        },
+        {
+          "operations": [
+            2
+          ],
+          "stages": [
+            2,
+            4
+          ],
+          "zero_data": true,
+          "internal_flush_relations": [
+            1
+          ],
+          "groups": 8
+        }
+      ],
+      "historical_orphan_causes_proven": false,
+      "old_verdicts_changed": false,
+      "full_flush_error_partial_requeue_paths_qualified": false,
+      "foreground_request_attribution_qualified": false,
+      "performance_result": false
+    },
+    {
+      "case": "fsync-sequence-2",
+      "schema_version": 1,
+      "transport_complete": true,
+      "callbacks": 200,
+      "request_identity_groups": 64,
+      "ordinary_read_groups": 0,
+      "ordinary_read_completed_bytes": 0,
+      "completion_error_callbacks": 0,
+      "internal_zero_payload_device_flush_groups": 8,
+      "zero_payload_consumed_sequence_groups": 8,
+      "unissued_completion_groups": 8,
+      "unexplained_completion_groups": 0,
+      "classes": [
+        {
+          "operations": [
+            1
+          ],
+          "stages": [
+            1,
+            2,
+            4
+          ],
+          "zero_data": false,
+          "internal_flush_relations": [
+            0
+          ],
+          "groups": 40
+        },
+        {
+          "operations": [
+            1
+          ],
+          "stages": [
+            5,
+            6,
+            1,
+            2,
+            4
+          ],
+          "zero_data": false,
+          "internal_flush_relations": [
+            0
+          ],
+          "groups": 8
+        },
+        {
+          "operations": [
+            1
+          ],
+          "stages": [
+            5,
+            6,
+            4
+          ],
+          "zero_data": true,
+          "internal_flush_relations": [
+            0
+          ],
+          "groups": 8
+        },
+        {
+          "operations": [
+            2
+          ],
+          "stages": [
+            2,
+            4
+          ],
+          "zero_data": true,
+          "internal_flush_relations": [
+            1
+          ],
+          "groups": 8
+        }
+      ],
+      "historical_orphan_causes_proven": false,
+      "old_verdicts_changed": false,
+      "full_flush_error_partial_requeue_paths_qualified": false,
+      "foreground_request_attribution_qualified": false,
+      "performance_result": false
+    }
+  ],
+  "review_source_sha256": {
+    "analysis/request_lifecycle.py": "5a9e896b3a53dbc8c0c58c60100392130aa6f94c58552c3c0d1935efbda12bf0"
+  },
+  "baseline_source_and_binaries_unchanged": true,
+  "toolchain": {
+    "clang": "clang version 22.1.8",
+    "gcc": "gcc (GCC) 16.2.1 20260810",
+    "libbpf": "1.7.0"
+  },
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true,
+    "power_and_timer_active_enabled": true
+  },
+  "isolated_linux_tests": 179,
+  "native_two_flush_lifecycle_patterns_observed": true,
+  "baseline_static_helper_call_sites": {
+    "kind": "static_unrelocated_bpf_helper_call_sites_not_runtime_counts",
+    "helper_ids": {
+      "1": "map_lookup_elem",
+      "2": "map_update_elem",
+      "3": "map_delete_elem",
+      "5": "ktime_get_ns",
+      "113": "probe_read_kernel",
+      "130": "ringbuf_output"
+    },
+    "sections": {
+      "raw_tp/block_rq_insert": {
+        "1": 7,
+        "113": 7,
+        "5": 1,
+        "2": 1
+      },
+      "raw_tp/block_rq_issue": {
+        "1": 8,
+        "113": 9,
+        "5": 1,
+        "2": 1
+      },
+      "raw_tp/block_rq_requeue": {
+        "1": 5,
+        "113": 7
+      },
+      "raw_tp/block_rq_complete": {
+        "1": 11,
+        "113": 7,
+        "3": 2,
+        "5": 1,
+        "130": 1
+      }
+    },
+    "runtime_cost_measured": false,
+    "qualified_bpf_object_sha256": "accf5c5169d3f555709ec62c8714ea156b6010dc06615533c17e7fe150fb99a3",
+    "qualified_original_source_sha256": "4e209f2e3403e7be6756a7a27a29faedb5288fc359b43451ff48ebc7d94c219e"
+  },
+  "original_timing_quality_rules_unchanged": true,
+  "stage1_gate_passed": false,
+  "historical_unmatched_request_causes_proven": false,
+  "new_timing_observer_promoted": false,
+  "new_throughput_comparison_performed": false,
+  "builder_limits": {
+    "memory_bytes": 2147483648,
+    "swap_bytes": 0,
+    "cpu_percent": 200,
+    "tasks": 128,
+    "lifetime_seconds": 180
+  },
+  "host_free_space_floor_bytes": 77309411328,
+  "physical_nand_writes_measured": false,
+  "retained_attempts": [
+    {
+      "attempt": 1,
+      "retained": true,
+      "selected_final": false,
+      "programs_attached": false,
+      "reason": "Build stopped on map-name collision with a running-kernel BTF typedef; no workload fixture written"
+    },
+    {
+      "attempt": 2,
+      "retained": true,
+      "selected_final": false,
+      "functional_transport_checks_passed": true,
+      "reason": "Two lifecycle patterns observed; final source adds explicit detachment clock for conservative tail bounds"
+    },
+    {
+      "attempt": 3,
+      "retained": true,
+      "selected_final": true,
+      "functional_transport_checks_passed": true,
+      "scope": "Three native windows, six owned programs, exact transport and independently checked observed patterns"
+    }
+  ]
+}
