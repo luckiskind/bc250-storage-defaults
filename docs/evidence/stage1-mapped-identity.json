@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "source_sha256": {
+    "qualify_mapped_identity.py": "88c42031d01c4a02f71076624f5b9c1f7173c3176063eb0fc6c6f93a1eed4553",
+    "mapped_identity.py": "9e4ea29a29261eb7ffe4861a6c7925b25ed335641d9943ada9274a89ffe9f7f3",
+    "mapped_identity.c": "8cb66eb069f1c2349e1259bc714bc45d33712a451569a3d19ca3e39bfc1fac8e",
+    "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f"
+  },
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "cases": [
+    {
+      "private_mount_namespace": true,
+      "view_matches_expected_inode": true,
+      "host_path_alias_accepted": true,
+      "status": "same_host_object",
+      "worker_normal_exit": true
+    },
+    {
+      "private_mount_namespace": true,
+      "view_matches_expected_inode": true,
+      "host_path_alias_accepted": false,
+      "status": "different_host_object",
+      "worker_normal_exit": true
+    },
+    {
+      "private_mount_namespace": true,
+      "view_matches_expected_inode": true,
+      "host_path_alias_accepted": true,
+      "status": "same_host_object",
+      "worker_normal_exit": true
+    },
+    {
+      "private_mount_namespace": true,
+      "view_matches_expected_inode": true,
+      "host_path_alias_accepted": false,
+      "status": "different_host_object",
+      "worker_normal_exit": true
+    }
+  ],
+  "same_path_different_inode_rejected": true,
+  "parent_mount_namespace_unchanged": true,
+  "private_control_content_unchanged": true,
+  "bytes_per_file": 4096,
+  "production_files_changed": false,
+  "cache_eviction_performed": false,
+  "performance_result": false,
+  "raw_maps_identity_collision_across_btrfs_subvolumes": true,
+  "initial_namespace_root_observer": true,
+  "worker_uid_unprivileged": true,
+  "complete_application_input_closure": false,
+  "stage1_gate_passed": false,
+  "completed_unix": 1793121443.8612359,
+  "isolated_linux_tests": 152,
+  "firefox_audit_source_unchanged": true,
+  "firefox_identity_qualified": false,
+  "mapping_snapshot_is_atomic": false,
+  "method_qualified_scope": "Four controlled private mapping/view cases only",
+  "raw_maps_device_is_not_general_stat_device": true,
+  "observer_limits": {
+    "memory_bytes": 536870912,
+    "swap_bytes": 0,
+    "cpu_percent": 100,
+    "tasks": 64,
+    "lifetime_seconds": 60
+  },
+  "private_data_bytes_per_successful_construction": 16384,
+  "retained_attempts_additional_writes": true,
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true,
+    "power_and_timer_active": true
+  },
+  "development_findings": [
+    {
+      "scope": "Initial live unit check",
+      "passed": false,
+      "reason": "Single proc read omitted later mappings; multi-chunk diagnostic retained; bounded EOF reader corrected"
+    },
+    {
+      "attempt": 1,
+      "passed": false,
+      "retained": true,
+      "reason": "Raw maps device/stat device comparison refused a valid Btrfs mapping"
+    },
+    {
+      "attempt": 2,
+      "passed": false,
+      "retained": true,
+      "reason": "Same raw comparison failed; full private diagnostic now retained before acceptance assertion"
+    },
+    {
+      "attempt": 3,
+      "passed": true,
+      "retained": true,
+      "scope": "Four mapping-reference controls, including cross-subvolume raw identity collision"
+    },
+    {
+      "attempt": 4,
+      "passed": true,
+      "retained": true,
+      "scope": "Final source also closes reference if its metadata lookup fails"
+    }
+  ]
+}
