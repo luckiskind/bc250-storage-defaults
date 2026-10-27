@@ -1,0 +1,181 @@
+{
+  "passed": true,
+  "conditions": [
+    {
+      "condition": "selected-data-cold",
+      "before": {
+        "files": 423,
+        "page_rounded_bytes": 733818880,
+        "resident_bytes": 0,
+        "zero_resident_files": 423,
+        "fully_resident_files": 0
+      },
+      "after": {
+        "files": 423,
+        "page_rounded_bytes": 733818880,
+        "resident_bytes": 588185600,
+        "zero_resident_files": 8,
+        "fully_resident_files": 404
+      },
+      "mapping": {
+        "process_samples": 15,
+        "selected_mapped_files_verified": 200,
+        "mount_namespace_count": 3,
+        "selected_original_mapping_count": 0,
+        "copied_main_executable_verified": true,
+        "unavailable_processes": 0
+      },
+      "functional_endpoint_passed": true
+    },
+    {
+      "condition": "selected-data-warm",
+      "before": {
+        "files": 423,
+        "page_rounded_bytes": 733818880,
+        "resident_bytes": 733818880,
+        "zero_resident_files": 0,
+        "fully_resident_files": 423
+      },
+      "after": {
+        "files": 423,
+        "page_rounded_bytes": 733818880,
+        "resident_bytes": 733818880,
+        "zero_resident_files": 0,
+        "fully_resident_files": 423
+      },
+      "mapping": {
+        "process_samples": 15,
+        "selected_mapped_files_verified": 200,
+        "mount_namespace_count": 3,
+        "selected_original_mapping_count": 0,
+        "copied_main_executable_verified": true,
+        "unavailable_processes": 0
+      },
+      "functional_endpoint_passed": true
+    }
+  ],
+  "private_seeds_identical": true,
+  "selected_readonly_bindings_verified": 423,
+  "controller_capabilities_zero": true,
+  "network": {
+    "interfaces": [
+      "lo"
+    ],
+    "default_route_present": false
+  },
+  "nested_user_namespace_probe_passed": true,
+  "sandbox_fallback_warnings_absent": true,
+  "private_namespace_root_pivoted": true,
+  "per_process_proc_controls_writable": true,
+  "proc_sys_readonly": true,
+  "foreground_empty_except_controller": true,
+  "performance_result": false,
+  "cache_scope": "Selected copied file data only",
+  "complete_application_input_closure": false,
+  "complete_os_baseline": false,
+  "stage1_gate_passed": false,
+  "schema_version": 1,
+  "source_sha256": {
+    "native_browser_inputs.py": "92f4b9813f9240eae5d4a663bdc57b2e0e05eba2f20ae5ec6ae0e80f5fcf0f10",
+    "native_browser_mount.c": "c5734614836ed1db50e18c83e869a6001b39a255f1c3ca92e611e3ebee5452ce",
+    "native_application_inputs.py": "3cf55e19bce5bb86b6b70e1d1dfc455be9ef2a645bca513a7ecacad94b4e271b",
+    "native_input_mount.c": "0bb0d57360c61816062d1c4b21fee15ab03a8771cf14f6544d2dee4cdab14927",
+    "browser_endpoint.py": "7d737f1bc7aa9ae5878c00f147cf71835bb9305c5596412234d44e29fba8b8e8",
+    "browser_inputs.py": "ee8e5639b2678a6540b6c75ff6799acd14eda9ce746f73e67b9d85abadd12109",
+    "browser_identity.py": "4894278538216c6761a1b843b8fccca94955ea8e2d1f8b29722081818297a939",
+    "mapped_identity.py": "df095f9476ecc3de21c5d02c300a6ac16a9b76012c9fc1e551bae5ccb942ffdf",
+    "mapped_identity.c": "8cb66eb069f1c2349e1259bc714bc45d33712a451569a3d19ca3e39bfc1fac8e",
+    "copied_input_probe.py": "0cc5cdcfbbdd7afe57c436b71fb50b2cd3e4c5ec906690edbe01533dcf25b1eb",
+    "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f"
+  },
+  "regular_files": 423,
+  "selected_nodes": 563,
+  "logical_bytes": 732783557,
+  "prior_verified_audited_sources": 197,
+  "max_corpus_bytes": 1073741824,
+  "selected_metadata_preserved": true,
+  "original_and_copy_metadata_unchanged": true,
+  "shared_extent_count": 0,
+  "remaining_view_processes": 0,
+  "additional_namespace_cleanup_signals": 0,
+  "completed_unix": 1793124485.2214453,
+  "isolated_linux_tests": 162,
+  "root_namespace_feature_probes": [
+    {
+      "mode": "chroot-ro",
+      "proc_readonly": true,
+      "proc_sys_readonly": true,
+      "exit_code": 1,
+      "stderr": "unshare: unshare failed: Operation not permitted"
+    },
+    {
+      "mode": "pivot-ro",
+      "proc_readonly": true,
+      "proc_sys_readonly": true,
+      "exit_code": 1,
+      "stderr": "unshare: cannot open /proc/self/uid_map: Read-only file system"
+    },
+    {
+      "mode": "pivot-proc-rw",
+      "proc_readonly": false,
+      "proc_sys_readonly": true,
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "builder_limits": {
+    "memory_bytes": 2147483648,
+    "swap_bytes": 0,
+    "cpu_percent": 200,
+    "tasks": 64,
+    "lifetime_seconds": 360
+  },
+  "separate_foreground_limits": {
+    "memory_bytes": 3221225472,
+    "swap_bytes": 0,
+    "tasks": 512,
+    "lifetime_seconds": 180,
+    "cpu_quota_requested": false
+  },
+  "combined_memory_ceiling_bytes": 5368709120,
+  "construction_min_available_memory_bytes": 7516192768,
+  "host_free_space_floor_bytes": 77309411328,
+  "native_corpus_budget_tradeoff": "1 GiB per corpus replaces 512 MiB terminal-fixture bound because audited browser candidates exceed it; production quota unchanged",
+  "allocation_compression_layout_preserved": false,
+  "filesystem_specific_inode_flags_qualified": false,
+  "complete_browser_sandbox_equivalence_qualified": false,
+  "wrapper_overhead_qualified": false,
+  "normal_browser_quit_qualified": false,
+  "physical_ssd_cold_qualified": false,
+  "physical_nand_writes_measured": false,
+  "retained_attempts": [
+    {
+      "attempt": 1,
+      "qualification_accepted": false,
+      "retained": true,
+      "earlier_harness_result_passed": true,
+      "reason": "File-cache/marker checks passed but chroot blocked user namespaces and Glycin logged sandbox fallback"
+    },
+    {
+      "attempt": 2,
+      "qualification_accepted": false,
+      "retained": true,
+      "browser_launched": false,
+      "reason": "Root mount switched; preflight rejected read-only proc UID-map controls"
+    },
+    {
+      "attempt": 3,
+      "qualification_accepted": true,
+      "retained": true,
+      "scope": "Final source: root mount switch, writable per-process proc controls/read-only sysctls; namespace probe and absent fallback warnings"
+    }
+  ],
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true,
+    "power_and_timer_active": true
+  }
+}
