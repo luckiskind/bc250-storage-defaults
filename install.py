@@ -23,6 +23,7 @@ POWER = 'bc250-nvme-power.service'
 WORKER = 'bc250-btrfs-repack.service'
 TIMER = 'bc250-btrfs-repack.timer'
 UNITS = (POWER, WORKER, TIMER)
+UNIT_DIRECTORY = Path('/etc/systemd/system')
 
 
 def require(condition, message):
@@ -47,7 +48,7 @@ def payloads():
         files[BASE / name] = (SOURCE / name, 0o755)
     files[CONFIG] = (SOURCE / 'config.json', 0o644)
     for name in UNITS:
-        files[Path('/etc/systemd/system') / name] = (SOURCE / 'systemd' / name, 0o644)
+        files[UNIT_DIRECTORY / name] = (SOURCE / 'systemd' / name, 0o644)
     files[Path('/usr/lib/systemd/system-sleep/90-bc250-nvme-power')] = (
         SOURCE / 'systemd/90-bc250-nvme-power', 0o755)
     return files
@@ -147,6 +148,18 @@ def stop_all():
     run(['systemctl', 'disable', '--now', POWER])
     # A failed/stopped unit may not run ExecStop; retain helpers if restoration fails.
     run(['/usr/bin/python3', BASE / 'storage_defaults_power.py', 'restore'])
+    sync_service_links()
+
+
+def sync_service_links():
+    # systemctl's successful enable/disable does not itself promise durable
+    # directory entries. Persist link changes before committing their intent.
+    for name in ('multi-user.target.wants', 'timers.target.wants'):
+        directory = UNIT_DIRECTORY / name
+        if directory.exists() or directory.is_symlink():
+            require(directory.is_dir() and not directory.is_symlink(), 'Unsafe unit dependency directory')
+            transaction.sync_directory(directory)
+    transaction.sync_directory(UNIT_DIRECTORY)
 
 
 def prepare_directories():
@@ -169,6 +182,7 @@ def install():
                     'A different version is installed; keep its checkout and run its undo.sh before applying this version')
             for unit in (POWER, TIMER):
                 run(['systemctl', 'enable', '--now', unit])
+            sync_service_links()
             print('Already applied; installed files verified and startup units enabled.')
             return
     for target in payloads():
@@ -196,6 +210,7 @@ def install():
         run(['systemctl', 'enable', '--now', POWER])
         require(power.info()['latency_tolerance_us'] == power.TARGET, 'Drive did not accept the setting')
         run(['systemctl', 'enable', '--now', TIMER])
+        sync_service_links()
         tx.phase('committing')
         write_manifest(manifest)
         tx.finish('installed')
@@ -253,6 +268,13 @@ def recover():
         return
     if committed and manifest.get('active') is True:
         check_owned(manifest)
+        tx.audit_stages()
+        # An older interrupted commit can retain the manifest while losing an
+        # unsynchronized startup link. Complete the committed activation intent.
+        run(['systemctl', 'daemon-reload'])
+        for unit in (POWER, TIMER):
+            run(['systemctl', 'enable', '--now', unit])
+        sync_service_links()
         tx.finish('recovered-committed-install')
         print('Committed installation preserved; interrupted staging cleanup completed.')
         return
