@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bc250:request-trace-v2",
+  "title": "BC-250 request trace v2 structural schema",
+  "description": "Anonymous events only. analysis/request_trace_v2.py additionally requires cross-field provenance, lifetime and loss accounting before any quality verdict.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "counters",
+    "detached_ns",
+    "discarded",
+    "events",
+    "finish_ns",
+    "foreground_attribution_qualified",
+    "internal_tracking_enabled",
+    "interrupted",
+    "kind",
+    "libbpf",
+    "limit_reached",
+    "links_detached",
+    "malformed",
+    "maps_pinned",
+    "performance_result",
+    "preflush_mask",
+    "records",
+    "return_contexts",
+    "right_censored_requests",
+    "schema_version",
+    "software_tracking_enabled",
+    "start_ns"
+  ],
+  "properties": {
+    "counters": {
+      "type": "array",
+      "minItems": 24,
+      "maxItems": 24,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "detached_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "discarded": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "events": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 200000
+    },
+    "finish_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "foreground_attribution_qualified": {
+      "const": false
+    },
+    "internal_tracking_enabled": {
+      "type": "boolean"
+    },
+    "interrupted": {
+      "type": "boolean"
+    },
+    "kind": {
+      "const": "bc250-request-trace-v2"
+    },
+    "libbpf": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "limit_reached": {
+      "type": "boolean"
+    },
+    "links_detached": {
+      "const": true
+    },
+    "malformed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "maps_pinned": {
+      "const": false
+    },
+    "performance_result": {
+      "const": false
+    },
+    "preflush_mask": {
+      "const": 262144
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 200000,
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    },
+    "return_contexts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8192
+    },
+    "right_censored_requests": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8192
+    },
+    "schema_version": {
+      "const": 2
+    },
+    "software_tracking_enabled": {
+      "type": "boolean"
+    },
+    "start_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    }
+  },
+  "$defs": {
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bytes",
+        "complete_ns",
+        "completed_bytes",
+        "enter_ns",
+        "entry_cmd_flags",
+        "event_class",
+        "evidence",
+        "flags",
+        "id",
+        "insert_ns",
+        "issue_ns",
+        "operation",
+        "return_ns",
+        "status"
+      ],
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "complete_ns": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "completed_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "enter_ns": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "entry_cmd_flags": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "event_class": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "evidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 31
+        },
+        "flags": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1023
+        },
+        "id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "insert_ns": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "issue_ns": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "operation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "return_ns": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "status": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      }
+    }
+  }
+}
