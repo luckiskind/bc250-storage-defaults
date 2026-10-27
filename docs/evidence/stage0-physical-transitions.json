@@ -1,0 +1,68 @@
+{
+  "scope": "One orderly physical reboot and a bounded awake RTC alarm probe",
+  "physical_reboot_passed": true,
+  "reboot": {
+    "passed": true,
+    "action": "reboot",
+    "checks": {
+      "before_profile_healthy": true,
+      "after_profile_healthy": true,
+      "installed_hashes_unchanged": true,
+      "same_kernel": true,
+      "same_root_subvolume": true,
+      "boot_config_unchanged": true,
+      "source_unchanged": true,
+      "daily_reservations_not_rewound": true,
+      "kernel_boot_identity_changed": true
+    },
+    "physical_host_transition": true,
+    "physical_power_loss_tested": false,
+    "recovery_boot_tested": false,
+    "nvme_qos_us": 5000,
+    "power_original_us": 100000,
+    "workspace_records_verified": 3,
+    "suspend_seconds_from_clock_difference": null,
+    "kernel_suspend_counter_delta": null,
+    "source_sha256": {
+      "tools/physical_transition_probe.py": "15786b7c0a7a36eee6614fb508f95e162347a232dd7dc8944806f59513fbafcd",
+      "tools/capture_baseline.py": "8c7878160727ce1eb48d30f5320c130e7f53947279efc59262bb44e1861b8fdd",
+      "tools/prepare_test_os.py": "16242936de8bd78db41897fddb0e045d6ed328975115e190a14d2ad9b97a30d7",
+      "install_transaction.py": "2761bcb1b2508822948b47de56b1a46dc956c1fc45f3094c2431476c46648738"
+    },
+    "completed_unix": 1793097100.056274
+  },
+  "rtc_awake_probe": {
+    "awake_alarm_delivery_verified": false,
+    "command": [
+      "rtcwake",
+      "--mode",
+      "on",
+      "--seconds",
+      "3"
+    ],
+    "timeout_seconds": 12,
+    "timed_out": true,
+    "returncode": null,
+    "elapsed_seconds": 12.016490723999993,
+    "alarm_cleared": true,
+    "physical_suspend_attempted": false,
+    "rtc_wakeup_enabled": true,
+    "rtc_cmos_use_acpi_alarm": "Y",
+    "reported_mem_sleep": "[s2idle]",
+    "completed_unix": 1793097294.891901
+  },
+  "physical_suspend_tested": false,
+  "recovery_boot_tested": false,
+  "physical_power_loss_tested": false,
+  "production_helper_changed": false,
+  "new_throughput_comparison": false,
+  "isolated_linux_tests": 109,
+  "bootloader": {
+    "product": "Limine 12.9.0",
+    "one_shot_entry_control_reported": true,
+    "boot_counting_reported": false,
+    "recovery_entry_exercised": false
+  },
+  "private_before_after_records_retained": true,
+  "completed_unix": 1793097432.3756492
+}
