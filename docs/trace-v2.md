@@ -3,8 +3,9 @@
 Status: ten native controls pass, including two deliberate proof-removal cases.
 The separate v2 protocol distinguishes ordinary device I/O, a positively
 identified internal device flush, and an identity-tracked zero-payload software
-sequence. Overhead, foreground attribution and broader fault/concurrency paths
-remain unqualified. It is opt-in development instrumentation, never an installed
+sequence. The later [fixed calibration](trace-v2-overhead.md) passes two synthetic overhead
+control screens. Application overhead, foreground attribution and broader
+fault/concurrency paths remain unqualified. It is opt-in development instrumentation, never an installed
 service or a demonstrated accelerator improvement. Stage 1 remains open.
 
 ## Why this is a new protocol
@@ -139,11 +140,12 @@ program inventory verify unchanged; all six owned programs detach. The original
 v1 source/binaries, seven live installed files, boot configuration, 5000 us power
 setting, enabled power/timer services and quota history verify after the run.
 
-Next, freeze a new overhead comparison using v2's explicitly qualified stream
-semantics. Unknown events, loss and unclosed contexts must remain disqualifying.
-Then extend native ordering/fault coverage and correlate filesystem/page-fault/
-decompression activity with real workload endpoints. No new application
-throughput comparison or architecture promotion is made here.
+The later [100-trial calibration](trace-v2-overhead.md) now passes its two
+synthetic overhead screens with unknown events, loss and unclosed contexts
+still disqualifying. Next measure application/wrapper cost, extend native
+ordering/fault coverage, and correlate filesystem/page-fault/decompression
+activity with real workload endpoints. No application throughput gain or
+architecture promotion follows from these measurement controls.
 
 ```sh
 sudo python3 bench/qualify_trace_v2.py run \

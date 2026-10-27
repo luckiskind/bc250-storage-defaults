@@ -142,3 +142,7 @@ The [lifecycle-aware v2 implementation](trace-v2.md) now passes its scoped nativ
 identity/proof and negative controls. Its prospective schema keeps raw flags and
 unknown completions visible, without changing this earlier result. V2 overhead,
 actual reversed kernel callback order and foreground attribution remain open.
+
+A later [v2 calibration](trace-v2-overhead.md) passes its two synthetic overhead
+control screens, with every trial and exclusion retained. This does not change
+this historical experiment or qualify real application cost/attribution.
