@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 26 isolated Linux tests, including bounded retry and pre-mutation budget reservations.
+- [x] Pass 36 isolated Linux tests, including bounded retry, pre-mutation budget reservations and installer transaction recovery.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -71,6 +71,9 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Back up the original installed worker, manifest and a consistent SQLite ledger before repair.
 - [x] Apply the tested worker repair and verify a normal bounded production maintenance pass.
 - [x] Restore the previously enabled timer and confirm the 5000 us drive policy.
+- [x] Journal installation/removal and expose explicit recovery with strict file-ownership checks.
+- [x] Pass 40 real SIGKILL recovery checkpoints in a disposable Btrfs namespace.
+- [x] Build native B0/B1/B2 data copies, verify all 15 hashes and absence of shared extents, and record distinct layout histograms.
 
 The repaired pass processed 104 verified files, with 536,367,504 logical bytes processed and 425,984 extra retry bytes. Total charged work was 536,793,488 bytes, within the 536,870,912-byte pass budget. The successful pass took approximately 34.8 seconds including scanning and the quiet check. This timing is an operational observation, not a controlled throughput comparison.
 
@@ -78,15 +81,16 @@ The post-pass ledger held 482 recorded successfully repacked file signatures. Th
 
 ## Isolation boundary and remaining gaps
 
-`tests/integration_install.py` runs as an ordinary user using a disposable Btrfs directory as its root. It mounts required host executables/libraries read-only, supplies private config/state/hooks/sysfs, replaces systemctl inside the namespace, hides host runtime sockets and unshares the network. It must not be described as a real boot or real controller-power test.
+`tests/integration_install.py` runs as an ordinary user using a disposable Btrfs directory as its root. It mounts required host executables/libraries read-only, supplies private config/state/hooks/sysfs, replaces systemctl inside the namespace, hides host runtime sockets and unshares the network. `tests/crash_install.py` uses the same boundary to kill the real installer and then invoke explicit recovery. It must not be described as a real boot or real controller-power test. See [the recorded interruption matrix](evidence/stage0-installer-crash-tests.json) and [recovery invariants](recovery.md).
+
+`tools/build_baseline_datasets.py` created independent byte copies of four ELF libraries and a 32 MiB incompressible control, with zero shared extents. [The manifest](evidence/stage0-native-baseline-manifest.json) records native B0/B1 layouts and verified 16 KiB compressed extents in all four B2 ELF copies. B0/B1/B2 controller values in that manifest are intended measurement policies; the builder never applies them. Power comparisons should reuse the same immutable native files across controller settings so incidental allocation differences cannot masquerade as a power-policy effect. These are preparation results, not performance measurements or independently bootable OS images.
 
 Pending before declaring Stage 0 complete:
 
 - [ ] Qualify a fresh full installation with real systemd in an independently recoverable test OS.
 - [ ] Test actual boot/reboot and suspend/resume transitions with measured controller state.
-- [ ] Test hard interruption and recovery across installer and worker state transitions on disposable storage.
-- [ ] Improve interrupted-install journaling beyond handled Python exceptions; a hard kill can still require manual inspection.
-- [ ] Recreate independent B0/B1/B2 datasets/volumes and verify equal logical bytes plus distinct physical-layout records.
+- [ ] Test device/storage power-loss recovery, including interrupted recovery itself, across installer and worker transitions on disposable storage. Process SIGKILL testing is complete for 40 selected installer checkpoints only.
+- [ ] Recreate independent full-system/volume B0/B1/B2 baselines; the native data-copy preparation above covers only the dataset part of this gate.
 - [ ] Establish and demonstrate a known-good boot/recovery path for kernel/filesystem experiments.
 - [ ] Quantify physical write amplification, metadata growth and lost sharing; logical work budgets are not physical-write limits.
 
