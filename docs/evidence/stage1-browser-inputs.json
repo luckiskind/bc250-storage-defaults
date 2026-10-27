@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "source_sha256": {
+    "browser_inputs.py": "ee8e5639b2678a6540b6c75ff6799acd14eda9ce746f73e67b9d85abadd12109",
+    "application_inputs.py": "29e1ab831332f2f61339ddd20bcb94de343eb4688e2d3b8db7db4f055e5b3c97",
+    "browser_endpoint.py": "7d737f1bc7aa9ae5878c00f147cf71835bb9305c5596412234d44e29fba8b8e8",
+    "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f",
+    "browser-ready.html": "04ca0ff3079862e1bb8dd33314408b66672bbef0f77be0904533eac84c375ba1",
+    "browser-ready.svg": "41cac1ea4f88b4488d51fb05ee5e26d0e07c79996d76d7651ddc997c4c97a2a2"
+  },
+  "workload": "firefox-private-input-audit-v1",
+  "trace_read_write_payloads": false,
+  "strace_version": "strace -- version 7.2",
+  "max_aggregate_trace_bytes": 67108864,
+  "max_trace_files": 1024,
+  "max_input_paths": 8192,
+  "max_unique_regular_input_bytes": 1073741824,
+  "private_profile_seed_only": true,
+  "performance_result": false,
+  "complete_application_input_closure": false,
+  "stage1_gate_passed": false,
+  "passed": true,
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "trace_files": 709,
+  "trace_bytes": 5237189,
+  "observed_path_count": 1099,
+  "path_categories": {
+    "outside_approved_input_roots": 83,
+    "private_generated_fixture": 209,
+    "runtime_or_kernel_context": 364,
+    "system_etc_context": 19,
+    "system_usr": 424
+  },
+  "unique_regular_usr_files": 395,
+  "usr_logical_bytes": 730717601,
+  "unique_regular_etc_files": 14,
+  "etc_logical_bytes": 198561,
+  "manifest_sha256": "787ebd461bf8e868f05da364bf25e33ae49b135b1205ca52124a835c21bc560d",
+  "unresolved_escaped_or_deleted_annotations": 0,
+  "unreadable_process_snapshots": 0,
+  "actual_browser_main_verified_trials": 2,
+  "private_seed_identical": true,
+  "seed_manifest_sha256": "b3c5450b0ed7c99f7c61da3b13632279c307b19c480e44af0fe781e7f87901c1",
+  "seed_nodes": 6,
+  "functional_endpoint_trials": 2,
+  "all_owned_browser_processes_gone": true,
+  "forced_cleanup_required": false,
+  "network_namespace_isolated": true,
+  "network": {
+    "interfaces": [
+      "lo"
+    ],
+    "default_route_present": false
+  },
+  "cleanup_uses_ptrace_exitkill": true,
+  "normal_quit_qualified": false,
+  "profile_durability_qualified": false,
+  "source_files_modified": false,
+  "cache_eviction_performed": false,
+  "cache_state_qualified": false,
+  "namespace_aware_file_identity_qualified": false,
+  "host_resolvable_candidates_only": true,
+  "trace_size_limit_is_sampled_not_filesystem_quota": true,
+  "directory_enumeration_qualified": false,
+  "failed_path_dependencies_frozen": false,
+  "ipc_inputs_frozen": false,
+  "completed_unix": 1793120210.1254866,
+  "isolated_linux_tests": 148,
+  "context_review": {
+    "outside_context_categories": {
+      "host_root_directory": 1,
+      "memory_backed_path": 8,
+      "nested_namespace_setup_path": 61,
+      "font_cache": 13
+    },
+    "nested_namespace_aliases_not_canonicalized": true,
+    "namespace_aware_file_identity_qualified": false,
+    "proposed_private_corpus_limit_bytes": 1073741824,
+    "proposed_limit_not_yet_applied": true
+  },
+  "parent_network_namespace_unchanged": true,
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true,
+    "power_and_timer_active": true
+  },
+  "retained_development_attempts": [
+    {
+      "attempt": 1,
+      "passed": false,
+      "retained": true,
+      "reason": "Application-wide file-size limit restricted Wayland shared memory; browser crashed; capture exception obscured endpoint exception"
+    },
+    {
+      "attempt": 2,
+      "passed": true,
+      "retained": true,
+      "scope": "Corrected file limit and marker-aware capture; two instrumented launches"
+    },
+    {
+      "attempt": 3,
+      "passed": true,
+      "retained": true,
+      "scope": "Final source: capture errors retained without replacing endpoint failure; explicit namespace/candidate/sampled-limit fields"
+    }
+  ],
+  "syntax_check": {
+    "initial_attempt_passed": false,
+    "reason": "Staged root-owned bytecode cache not writable by desktop user",
+    "source_permissions_changed": false,
+    "fresh_user_owned_bytecode_prefix_passed": true
+  },
+  "system_file_candidates_are_not_verified_cross_namespace_identities": true,
+  "original_endpoint_and_page_sources_unchanged": true,
+  "complete_metadata_equivalent_os_baseline": false
+}
