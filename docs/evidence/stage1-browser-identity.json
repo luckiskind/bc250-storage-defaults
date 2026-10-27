@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "source_sha256": {
+    "browser_identity.py": "4894278538216c6761a1b843b8fccca94955ea8e2d1f8b29722081818297a939",
+    "browser_inputs.py": "ee8e5639b2678a6540b6c75ff6799acd14eda9ce746f73e67b9d85abadd12109",
+    "mapped_identity.py": "df095f9476ecc3de21c5d02c300a6ac16a9b76012c9fc1e551bae5ccb942ffdf",
+    "mapped_identity.c": "8cb66eb069f1c2349e1259bc714bc45d33712a451569a3d19ca3e39bfc1fac8e",
+    "application_inputs.py": "29e1ab831332f2f61339ddd20bcb94de343eb4688e2d3b8db7db4f055e5b3c97",
+    "browser_endpoint.py": "7d737f1bc7aa9ae5878c00f147cf71835bb9305c5596412234d44e29fba8b8e8",
+    "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f",
+    "browser-ready.html": "04ca0ff3079862e1bb8dd33314408b66672bbef0f77be0904533eac84c375ba1",
+    "browser-ready.svg": "41cac1ea4f88b4488d51fb05ee5e26d0e07c79996d76d7651ddc997c4c97a2a2"
+  },
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "capture_summaries": [
+    {
+      "process_samples": 15,
+      "mount_namespace_count": 3,
+      "statuses": {
+        "nonregular_view": 13,
+        "same_host_object": 1542,
+        "unresolved_view": 2889
+      },
+      "skipped": {
+        "non_absolute_or_anonymous": 2337,
+        "deleted": 62
+      },
+      "unique_verified_same_host_objects": 172,
+      "atomic_snapshot": false,
+      "host_reference_matching_mapping_rows": 4431,
+      "unique_host_reference_objects": 209,
+      "complete_application_input_closure": false,
+      "main_executable_identity_verified": true,
+      "main_capabilities_zero": true,
+      "unavailable_processes": 0,
+      "proc_fdinfo_root_processes": 6
+    },
+    {
+      "process_samples": 15,
+      "mount_namespace_count": 3,
+      "statuses": {
+        "nonregular_view": 12,
+        "same_host_object": 1542,
+        "unresolved_view": 2889
+      },
+      "skipped": {
+        "non_absolute_or_anonymous": 2385,
+        "deleted": 60
+      },
+      "unique_verified_same_host_objects": 172,
+      "atomic_snapshot": false,
+      "host_reference_matching_mapping_rows": 4431,
+      "unique_host_reference_objects": 209,
+      "complete_application_input_closure": false,
+      "main_executable_identity_verified": true,
+      "main_capabilities_zero": true,
+      "unavailable_processes": 0,
+      "proc_fdinfo_root_processes": 6
+    }
+  ],
+  "rejected_requests": [
+    "uid",
+    "scope",
+    "nonce",
+    "schema",
+    "phase"
+  ],
+  "functional_launches": 2,
+  "private_seed_identical": true,
+  "all_owned_browser_processes_gone": true,
+  "browser_group_empty_except_controller": true,
+  "root_observer_temporary": true,
+  "browser_main_capabilities_zero": true,
+  "unchanged_audit_source": true,
+  "namespace_aware_file_identity_qualified": false,
+  "complete_application_input_closure": false,
+  "cache_state_qualified": false,
+  "performance_result": false,
+  "stage1_gate_passed": false,
+  "completed_unix": 1793122624.579691,
+  "isolated_linux_tests": 157,
+  "native_control_regression": {
+    "schema_version": 1,
+    "passed": true,
+    "source_sha256": {
+      "qualify_mapped_identity.py": "88c42031d01c4a02f71076624f5b9c1f7173c3176063eb0fc6c6f93a1eed4553",
+      "mapped_identity.py": "df095f9476ecc3de21c5d02c300a6ac16a9b76012c9fc1e551bae5ccb942ffdf",
+      "mapped_identity.c": "8cb66eb069f1c2349e1259bc714bc45d33712a451569a3d19ca3e39bfc1fac8e",
+      "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f"
+    },
+    "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+    "cases": [
+      {
+        "private_mount_namespace": true,
+        "view_matches_expected_inode": true,
+        "host_path_alias_accepted": true,
+        "status": "same_host_object",
+        "worker_normal_exit": true
+      },
+      {
+        "private_mount_namespace": true,
+        "view_matches_expected_inode": true,
+        "host_path_alias_accepted": false,
+        "status": "different_host_object",
+        "worker_normal_exit": true
+      },
+      {
+        "private_mount_namespace": true,
+        "view_matches_expected_inode": true,
+        "host_path_alias_accepted": true,
+        "status": "same_host_object",
+        "worker_normal_exit": true
+      },
+      {
+        "private_mount_namespace": true,
+        "view_matches_expected_inode": true,
+        "host_path_alias_accepted": false,
+        "status": "different_host_object",
+        "worker_normal_exit": true
+      }
+    ],
+    "same_path_different_inode_rejected": true,
+    "parent_mount_namespace_unchanged": true,
+    "private_control_content_unchanged": true,
+    "bytes_per_file": 4096,
+    "production_files_changed": false,
+    "cache_eviction_performed": false,
+    "performance_result": false,
+    "raw_maps_identity_collision_across_btrfs_subvolumes": true,
+    "initial_namespace_root_observer": true,
+    "worker_uid_unprivileged": true,
+    "complete_application_input_closure": false,
+    "stage1_gate_passed": false,
+    "completed_unix": 1793122481.9520082
+  },
+  "context_review": [
+    {
+      "unresolved_view_errnos": {
+        "3": 2889
+      },
+      "proc_fdinfo_roots": 6
+    },
+    {
+      "unresolved_view_errnos": {
+        "3": 2889
+      },
+      "proc_fdinfo_roots": 6
+    }
+  ],
+  "observer_limits": {
+    "memory_bytes": 536870912,
+    "swap_bytes": 0,
+    "cpu_percent": 100,
+    "tasks": 64,
+    "lifetime_seconds": 240,
+    "max_capture_processes": 64
+  },
+  "separate_browser_limits": {
+    "memory_bytes": 3221225472,
+    "swap_bytes": 0,
+    "tasks": 512,
+    "lifetime_seconds": 180,
+    "cpu_quota_requested": false
+  },
+  "all_sampled_process_capabilities_qualified": false,
+  "complete_browser_identity_closure": false,
+  "normal_browser_quit_qualified": false,
+  "profile_durability_qualified": false,
+  "observer_overhead_qualified": false,
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true,
+    "power_and_timer_active": true
+  },
+  "retained_attempts": [
+    {
+      "attempt": 1,
+      "passed": true,
+      "retained": true,
+      "scope": "Scoped observer and five negative requests; root-view limitation recorded"
+    },
+    {
+      "attempt": 2,
+      "passed": true,
+      "retained": true,
+      "scope": "Independent host/reference relation and proc-root descriptions"
+    },
+    {
+      "attempt": 3,
+      "passed": true,
+      "retained": true,
+      "scope": "Final source with capability claim restricted to the checked main process"
+    }
+  ]
+}
