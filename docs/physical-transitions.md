@@ -100,7 +100,7 @@ not a physical resume result.
 The existing boot files and same-SSD read-only root reference are preserved as
 described in [the provenance guide](workspace-provenance.md). The current Limine
 12.9.0 reports one-shot entry selection support, but no boot-counting fallback;
-that capability report is not a tested recovery boot. A separately verified
+that capability report is not a tested recovery boot. The subsequent [actual-kernel VM bridge](host-kernel-recovery.md) verifies the minimal recovery userspace with copied installed boot files and matching runtime modules. A separately verified
 test/recovery entry and return to the working root remain open.
 
 Physical write/metadata/lost-sharing accounting on disposable data, selected

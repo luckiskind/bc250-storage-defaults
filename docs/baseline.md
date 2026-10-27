@@ -97,7 +97,7 @@ Current checklist against the roadmap's six numbered Stage 0 requirements:
 | Requirement | Evidence and remaining work |
 | --- | --- |
 | 1. Preserve v0.1.0 and the local deployment | Pinned release/tree, exported source, private installed configuration/history and recovery references retained |
-| 2. Isolated environment, known-good boot/recovery, backups and disposable volumes | Userspace/VM/native isolation and protected resets pass; existing physical reference boot and boot-file backups verify; a demonstrated isolated physical test/recovery boot remains open |
+| 2. Isolated environment, known-good boot/recovery, backups and disposable volumes | Userspace/VM/native isolation and protected resets pass; existing physical reference boot and boot-file backups verify; the minimal recovery userspace passes three VM boots with the actual kernel/initramfs; a demonstrated isolated physical test/recovery boot remains open |
 | 3. Machine/controller/filesystem/power manifest | Recorded capabilities, negotiated link, actual mounted devices, kernel/memory/thermals and policies; no throughput comparison is inferred |
 | 4. Install/reapply/remove/reboot/resume | Selected fresh/real-systemd lifecycle cases pass; actual physical reboot passes; physical suspend/resume remains open |
 | 5. Failed/partial install and refusal/recovery cases | Isolated refusal/dependency tests, 40 process cuts, selected VM/cache-loss and native identity cases pass within their documented scopes |
@@ -200,6 +200,14 @@ The [physical transition evidence](physical-transitions.md) passes one orderly r
 An awake three-second RTC alarm was still waiting after 34 observed seconds before reboot. A second bounded probe timed out after 12 seconds on the fresh boot; both alarms were cleared. Wakeup reports enabled, only s2idle is exposed and the ACPI-alarm parameter reads Y. The underlying cause is unproven. No physical suspend was attempted, and no driver, firmware or boot argument was changed to work around this limit. Available physical wake assistance or a verified automatic wake path is needed for the suspend test.
 
 The normal reference root now has one verified physical reboot; the isolated native baseline images have not been physically booted. A known-good separate test/recovery entry and return path remain open. Limine reports one-shot entry selection but no boot-counting fallback; a capability report is not a recovery result. No new throughput comparison or hardware power cut occurred.
+
+## Minimal recovery userspace with the actual boot files
+
+The [actual-kernel bridge](host-kernel-recovery.md) passes three VM boots with byte-verified copies of the working BC-250 kernel and installed initramfs. A newly copied minimal root gets a UUID-based mount entry, the known probe's explicit ordering/usable-target checks, and the matching runtime module tree. The original protected reference is fingerprint-checked before copying and stays unchanged. The new protected baseline also stays unchanged through the matrix and has a pinned post-run sparse manifest captured without image writes.
+
+All three kernel instances identify as `7.2.8-1.219-cachyos-bore-bc250`, reach real systemd's usable target and report zero failed guest units. Durable counts progress from 1 on VirtIO to 2 on emulated NVMe using the same overlay; a fresh NVMe overlay starts at 1 with a new nonce. Each guest boot identity differs from the host and other guest boots; the guest filesystem differs from the host. The 7,739-entry runtime module copy contains 182,300,140 logical file bytes and matches file/link/normal ownership/mode inventory checks, with build/source material excluded. Security-xattr preservation is not qualified. The new image is a VM compatibility artifact with an automatic guest shutdown probe, not a ready physical recovery entry.
+
+The parent namespace/cgroup bounds constrain CPU, memory, swap and duration; each QEMU VM has no NIC, no filesystem passthrough and only regular image files. All VM processes, test mounts and the copied image's loop attachment are gone at completion. The isolated Linux suite passes 109 tests and the working seven-file profile remains verified, power/timer active and controller policy 5000 us. Physical firmware/device compatibility, a guarded return entry, physical recovery boot and resume remain open. No physical boot setup or installed kernel was changed and no throughput gain is inferred.
 
 ## Recovery procedure for the local reliability repair
 
