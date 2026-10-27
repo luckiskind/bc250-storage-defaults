@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "case_count": 5,
+  "cases": [
+    {
+      "block": 6,
+      "condition": "raw",
+      "warmup": false,
+      "trace_sha256": "25c26d4ba71871df44aec3e4edc3e14a0adffc102048ad9ed8142485689609f8",
+      "diagnostic": {
+        "schema_version": 1,
+        "wire_consistent": true,
+        "transport_complete": true,
+        "events": 8246,
+        "classes": [
+          {
+            "operation": 0,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 8192
+          },
+          {
+            "operation": 1,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 21
+          },
+          {
+            "operation": 1,
+            "bytes": 8192,
+            "completed_bytes": 8192,
+            "flags": 0,
+            "records": 9
+          },
+          {
+            "operation": 1,
+            "bytes": 12288,
+            "completed_bytes": 12288,
+            "flags": 0,
+            "records": 4
+          },
+          {
+            "operation": 1,
+            "bytes": 16384,
+            "completed_bytes": 16384,
+            "flags": 0,
+            "records": 16
+          },
+          {
+            "operation": 2,
+            "bytes": 0,
+            "completed_bytes": 0,
+            "flags": 144,
+            "records": 4
+          }
+        ],
+        "supplied_flush_operation": 2,
+        "flagged_records": 4,
+        "flagged_zero_payload_flush_records": 4,
+        "flagged_read_records": 0,
+        "orphan_complete_total": 4,
+        "orphan_operation_or_cause_known": false,
+        "flush_lifecycle_qualified": false,
+        "existing_verdict_recomputed_or_changed": false,
+        "scope": "Operation/size/flag counts only; matching global orphan counts do not identify their requests or cause"
+      }
+    },
+    {
+      "block": 8,
+      "condition": "batched",
+      "warmup": false,
+      "trace_sha256": "4b32f304ca5d9f4f270b3502935c0fd9feb5883cebc0009e94e96ef46f9eb0a3",
+      "diagnostic": {
+        "schema_version": 1,
+        "wire_consistent": true,
+        "transport_complete": true,
+        "events": 8308,
+        "classes": [
+          {
+            "operation": 0,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 8192
+          },
+          {
+            "operation": 1,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 3
+          },
+          {
+            "operation": 1,
+            "bytes": 16384,
+            "completed_bytes": 16384,
+            "flags": 0,
+            "records": 112
+          },
+          {
+            "operation": 2,
+            "bytes": 0,
+            "completed_bytes": 0,
+            "flags": 144,
+            "records": 1
+          }
+        ],
+        "supplied_flush_operation": 2,
+        "flagged_records": 1,
+        "flagged_zero_payload_flush_records": 1,
+        "flagged_read_records": 0,
+        "orphan_complete_total": 1,
+        "orphan_operation_or_cause_known": false,
+        "flush_lifecycle_qualified": false,
+        "existing_verdict_recomputed_or_changed": false,
+        "scope": "Operation/size/flag counts only; matching global orphan counts do not identify their requests or cause"
+      }
+    },
+    {
+      "block": 9,
+      "condition": "raw",
+      "warmup": false,
+      "trace_sha256": "d8984098d7b5bc440b25bc2f5a78ba17ff457adf25e101dee574827c6015995f",
+      "diagnostic": {
+        "schema_version": 1,
+        "wire_consistent": true,
+        "transport_complete": true,
+        "events": 8219,
+        "classes": [
+          {
+            "operation": 0,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 8192
+          },
+          {
+            "operation": 1,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 7
+          },
+          {
+            "operation": 1,
+            "bytes": 16384,
+            "completed_bytes": 16384,
+            "flags": 0,
+            "records": 16
+          },
+          {
+            "operation": 2,
+            "bytes": 0,
+            "completed_bytes": 0,
+            "flags": 144,
+            "records": 4
+          }
+        ],
+        "supplied_flush_operation": 2,
+        "flagged_records": 4,
+        "flagged_zero_payload_flush_records": 4,
+        "flagged_read_records": 0,
+        "orphan_complete_total": 4,
+        "orphan_operation_or_cause_known": false,
+        "flush_lifecycle_qualified": false,
+        "existing_verdict_recomputed_or_changed": false,
+        "scope": "Operation/size/flag counts only; matching global orphan counts do not identify their requests or cause"
+      }
+    },
+    {
+      "block": 13,
+      "condition": "raw",
+      "warmup": false,
+      "trace_sha256": "476d3e0d3231c2902c7347463e12a5e9419a325902f53cb9c0d4dd3134763b8e",
+      "diagnostic": {
+        "schema_version": 1,
+        "wire_consistent": true,
+        "transport_complete": true,
+        "events": 8318,
+        "classes": [
+          {
+            "operation": 0,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 8192
+          },
+          {
+            "operation": 0,
+            "bytes": 16384,
+            "completed_bytes": 16384,
+            "flags": 0,
+            "records": 2
+          },
+          {
+            "operation": 1,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 3
+          },
+          {
+            "operation": 1,
+            "bytes": 16384,
+            "completed_bytes": 16384,
+            "flags": 0,
+            "records": 120
+          },
+          {
+            "operation": 2,
+            "bytes": 0,
+            "completed_bytes": 0,
+            "flags": 144,
+            "records": 1
+          }
+        ],
+        "supplied_flush_operation": 2,
+        "flagged_records": 1,
+        "flagged_zero_payload_flush_records": 1,
+        "flagged_read_records": 0,
+        "orphan_complete_total": 1,
+        "orphan_operation_or_cause_known": false,
+        "flush_lifecycle_qualified": false,
+        "existing_verdict_recomputed_or_changed": false,
+        "scope": "Operation/size/flag counts only; matching global orphan counts do not identify their requests or cause"
+      }
+    },
+    {
+      "block": 18,
+      "condition": "raw",
+      "warmup": false,
+      "trace_sha256": "83c408f175296795fecf6fad89ac9b1162174ee3d318a0c0d205e7e3421ad5ff",
+      "diagnostic": {
+        "schema_version": 1,
+        "wire_consistent": true,
+        "transport_complete": true,
+        "events": 8278,
+        "classes": [
+          {
+            "operation": 0,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 8192
+          },
+          {
+            "operation": 1,
+            "bytes": 4096,
+            "completed_bytes": 4096,
+            "flags": 0,
+            "records": 3
+          },
+          {
+            "operation": 1,
+            "bytes": 16384,
+            "completed_bytes": 16384,
+            "flags": 0,
+            "records": 82
+          },
+          {
+            "operation": 2,
+            "bytes": 0,
+            "completed_bytes": 0,
+            "flags": 144,
+            "records": 1
+          }
+        ],
+        "supplied_flush_operation": 2,
+        "flagged_records": 1,
+        "flagged_zero_payload_flush_records": 1,
+        "flagged_read_records": 0,
+        "orphan_complete_total": 1,
+        "orphan_operation_or_cause_known": false,
+        "flush_lifecycle_qualified": false,
+        "existing_verdict_recomputed_or_changed": false,
+        "scope": "Operation/size/flag counts only; matching global orphan counts do not identify their requests or cause"
+      }
+    }
+  ],
+  "source_sha256": {
+    "analysis/request_classes.py": "e691a13ee34f434f0e0ad81459a1291d0b1851c2e9dd347163872b0788852eaf"
+  },
+  "source_artifact_result_sha256": "abd6dd96b0055e5af6683c2278ee50016e244d4d8aab0a328d2d139aaec3b034",
+  "operation_header_sha256": "adff86f6d9433c496dc5ddf32d0e353a24969af7ed90191dffc562f1998b2e6e",
+  "req_op_flush": 2,
+  "total_flagged_records": 11,
+  "total_flagged_zero_payload_flush_records": 11,
+  "total_flagged_read_records": 0,
+  "total_orphan_completions": 11,
+  "orphan_operation_or_cause_known": false,
+  "flush_lifecycle_qualified": false,
+  "existing_verdict_recomputed_or_changed": false,
+  "stage1_gate_passed": false,
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true
+  },
+  "isolated_linux_tests": 134
+}
