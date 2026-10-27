@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import stat
 import subprocess
+import argparse
 
 LAB=Path('/vmlab')
 SIZE=80*2**30
@@ -57,6 +58,9 @@ subprocess.run(['systemctl','poweroff','--no-block'],check=True)
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--profile-fixture',action='store_true')
+    args=parser.parse_args()
     assert os.geteuid()==0 and LAB.is_dir() and Path('/run/host').exists()
     root=LAB/'rootfs'
     if root.exists():raise RuntimeError('Existing rootfs is preserved; use a fresh build area')
@@ -98,6 +102,9 @@ WantedBy=multi-user.target
 ''')
     wants=units/'multi-user.target.wants';wants.mkdir(exist_ok=True)
     (wants/name).symlink_to('../'+name)
+    if args.profile_fixture:
+        import vm_profile_guest
+        vm_profile_guest.prepare(root,LAB/'package')
     versions=list(Path('/usr/lib/modules').glob('*/vmlinuz'))
     assert len(versions)==1
     kernel=versions[0]
@@ -116,7 +123,11 @@ WantedBy=multi-user.target
     report=dict(image_virtual_bytes=SIZE,kernel_release=kernel.parent.name,kernel_sha256=digest(LAB/'kernel'),
                 initramfs_sha256=digest(LAB/'initramfs.img'),fixture=reference,
                 rootdir_security_xattrs_copied=False,image_is_regular_file=True,
-                host_device_formatted=False,guest_not_yet_booted=True)
+                host_device_formatted=False,guest_not_yet_booted=True,
+                storage_profile_fixture=args.profile_fixture)
+    if args.profile_fixture:
+        report['package_sha256']={str(p.relative_to(LAB/'package')):digest(p)
+            for p in sorted((LAB/'package').rglob('*')) if p.is_file()}
     (LAB/'image-build.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report),flush=True)
 

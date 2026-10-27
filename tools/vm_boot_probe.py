@@ -51,9 +51,8 @@ def sparse_fingerprint(path):
     finally:os.close(fd)
 
 
-def boot(overlay,label,diagnostic=False):
+def qemu_command(overlay,extra=''):
     manifest=json.loads((LAB/'image-build.json').read_text())
-    log=RUN/(label+'.serial.log')
     for name,key in (('kernel','kernel_sha256'),('initramfs.img','initramfs_sha256')):
         with (LAB/name).open('rb') as stream:
             require(hashlib.file_digest(stream,'sha256').hexdigest()==manifest[key],'Boot artifact hash changed')
@@ -66,6 +65,14 @@ def boot(overlay,label,diagnostic=False):
           '-append','root=/dev/vda rootfstype=btrfs rootflags=compress=zstd:1 rw console=ttyS0 '
                     'systemd.show_status=no systemd.log_color=no loglevel=4 '
                     'systemd.mask=serial-getty@ttyS0.service']
+    args[-1]+=' '+extra
+    return args
+
+
+def boot(overlay,label,diagnostic=False):
+    manifest=json.loads((LAB/'image-build.json').read_text())
+    log=RUN/(label+'.serial.log')
+    args=qemu_command(overlay)
     started=time.monotonic()
     if diagnostic:args[-1]+=' systemd.log_target=console systemd.log_level=debug'
     with log.open('xb') as output:

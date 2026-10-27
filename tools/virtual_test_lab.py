@@ -17,6 +17,7 @@ import uuid
 import fcntl
 import stat
 import prepare_test_os as build
+from vm_profile_guest import PACKAGE_FILES
 
 SOURCE=Path(__file__).resolve().parent
 
@@ -64,10 +65,11 @@ def stage(name,directory):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('step',choices=['packages','inventory','build','boot','diagnostic'])
+    parser.add_argument('step',choices=['packages','inventory','build','boot','diagnostic','profile-build','profile-test'])
     parser.add_argument('--workspace',type=Path,required=True)
     parser.add_argument('--run-label',type=label)
     parser.add_argument('--artifact-label',type=label,default='vm')
+    parser.add_argument('--cases',nargs='+')
     args=parser.parse_args()
     build.configure(args.workspace);build.guards()
     require((build.AREA/'dependencies.json').is_file() and not (build.AREA/'INCOMPLETE').exists(),
@@ -94,20 +96,37 @@ def main():
     require(before=='5000','Working host power policy unexpectedly changed')
     available=dict(line.split(':',1) for line in Path('/proc/meminfo').read_text().splitlines())
     require(int(available['MemAvailable'].split()[0])*1024>=6*2**30,'Need 6 GiB available host memory')
-    helper='vm_image_builder.py' if args.step=='build' else 'vm_boot_probe.py'
+    constructing=args.step in ('build','profile-build')
+    helper='vm_image_builder.py' if constructing else 'vm_profile_faults.py' if args.step=='profile-test' else 'vm_boot_probe.py'
     host_uuid=None
-    if args.step=='boot':
+    if args.step in ('boot','profile-test'):
         host_uuid=subprocess.check_output(['findmnt','-n','-o','UUID','--target',str(build.AREA)],text=True).strip()
         uuid.UUID(host_uuid)
     artifacts=build.AREA/'artifacts'
     require(not artifacts.is_symlink(),'Unsafe artifacts directory')
     artifacts.mkdir(mode=0o700,exist_ok=True)
     directory=artifacts/args.artifact_label
-    if args.step!='build':require(directory.is_dir() and (directory/'image-build.json').is_file(),'Build this artifact set first')
+    if not constructing:require(directory.is_dir() and (directory/'image-build.json').is_file(),'Build this artifact set first')
+    if args.step=='profile-build':
+        require(not directory.exists(),'Use a new profile artifact label; previous artifacts preserved')
     target=stage(helper,directory)
+    if args.step in ('profile-build','profile-test'):
+        stage('vm_profile_guest.py',directory)
+        stage('vm_boot_probe.py',directory)
+    if args.step=='profile-build':
+        package=directory/'package';package.mkdir(mode=0o700)
+        identity=build.GUEST.stat();os.chown(package,identity.st_uid,identity.st_gid)
+        for name in PACKAGE_FILES:
+            source=SOURCE.parent/name
+            require(source.is_file() and not source.is_symlink(),'Unsafe package source')
+            parent=(package/name).parent
+            parent.mkdir(exist_ok=True);os.chown(parent,identity.st_uid,identity.st_gid)
+            write_helper(package/name,source.read_bytes(),identity.st_uid,identity.st_gid)
     run_label=args.run_label or 'run-'+uuid.uuid4().hex
     command=['/usr/bin/python3',target]
-    if args.step!='build':command+=['--run-label',run_label]
+    if not constructing:command+=['--run-label',run_label]
+    if args.step=='profile-build':command+=['--profile-fixture']
+    if args.step=='profile-test' and args.cases:command+=['--cases',*args.cases]
     if args.step=='diagnostic':command+=['--diagnostic']
     try:
         subprocess.run(container_args()+['--bind='+str(directory)+':/vmlab']+command,check=True,timeout=1200)
@@ -128,6 +147,21 @@ def main():
                 for name in ('virtual_test_lab.py','vm_image_builder.py','vm_boot_probe.py','prepare_test_os.py')})
         build.atomic_json(build.AREA/('vm-recovery-'+args.artifact_label+'-'+run_label+'.json'),result)
         print(json.dumps({'passed':True,'run_label':run_label,'boot_checks':3}),flush=True)
+    if args.step=='profile-test':
+        result=json.loads((directory/'runs'/run_label/'vm-profile-fault-result.json').read_text())
+        require(result.get('passed') is True,'Virtual profile recovery did not pass')
+        require(all(c['recovery']['root_uuid']!=host_uuid for c in result['cases']),
+                'Guest Btrfs UUID must differ from the host workspace filesystem')
+        result.update(schema_version=1,host_nvme_qos_unchanged=True,host_nvme_qos_us=int(before),
+            host_filesystem_uuid_differs=True,host_reboot_tested=False,
+            stock_guest_kernel_hardware_compatibility_qualified=False,
+            recorded_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),artifact_label=args.artifact_label,
+            image_build=json.loads((directory/'image-build.json').read_text()),
+            source_hashes={name:hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()
+                for name in ('virtual_test_lab.py','vm_image_builder.py','vm_boot_probe.py','vm_profile_guest.py',
+                             'vm_profile_faults.py','prepare_test_os.py')})
+        build.atomic_json(build.AREA/('vm-profile-'+args.artifact_label+'-'+run_label+'.json'),result)
+        print(json.dumps({'passed':True,'run_label':run_label,'profile_cases':len(result['cases'])}),flush=True)
 
 
 if __name__=='__main__':main()
