@@ -2,6 +2,7 @@
 import os
 import json
 import hashlib
+import socket
 from pathlib import Path
 import sys
 import tempfile
@@ -14,6 +15,7 @@ if sys.platform=='linux':
     import virtual_test_lab as wrapper
     import vm_profile_faults as faults
     import vm_profile_guest as guest
+    import vm_cache_faults as cache_profile
 
 
 @unittest.skipUnless(sys.platform=='linux','Linux virtual qualification')
@@ -112,6 +114,48 @@ class VirtualLabGuards(unittest.TestCase):
                 (source/'vm_profile_guest.py').write_bytes(b'changed guest')
                 with self.assertRaisesRegex(RuntimeError,'Embedded guest source changed'):
                     wrapper.verify_profile_sources(artifact)
+
+    def test_cache_disk_requires_a_private_run_socket(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);run=root/'runs/run-1';run.mkdir(parents=True,mode=0o700)
+            path=run/'disk.nbd'
+            with socket.socket(socket.AF_UNIX,socket.SOCK_STREAM) as sock:
+                sock.bind(str(path));path.chmod(0o600)
+                with mock.patch.object(faults,'LAB',root):
+                    self.assertIn('format=raw',faults.nbd_drive(path))
+                    path.chmod(0o666)
+                    with self.assertRaisesRegex(RuntimeError,'private NBD socket'):faults.nbd_drive(path)
+
+    def test_cache_disk_rejects_paths_outside_the_lab_before_launch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with mock.patch.object(faults,'LAB',Path(directory)/'lab'):
+                with self.assertRaisesRegex(RuntimeError,'private lab runs'):
+                    faults.nbd_drive(Path(directory)/'outside.nbd')
+
+    def test_logical_digest_ignores_allocated_zero_runs_but_detects_changed_bytes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);sparse=root/'sparse';dense=root/'dense'
+            with sparse.open('wb') as stream:stream.truncate(2**20);stream.seek(32768);stream.write(b'A'*4096)
+            dense.write_bytes(sparse.read_bytes())
+            self.assertEqual(cache_profile.logical_sparse_digest(sparse),cache_profile.logical_sparse_digest(dense))
+            with dense.open('r+b') as stream:stream.seek(65536);stream.write(b'changed')
+            self.assertNotEqual(cache_profile.logical_sparse_digest(sparse),cache_profile.logical_sparse_digest(dense))
+
+    def test_calibration_report_accepts_private_workspace_metadata_but_rejects_other_writers(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);tools=root/'tools';tools.mkdir()
+            names=('volatile_disk.py','calibrate_volatile_disk.py')
+            for name in names:(tools/name).write_bytes(b'known source')
+            report=dict(passed=True,case_count=4,actual_backend_sigkill_tested=True,armed_cache_cut_tested=True,
+                cases=[dict(case=c,passed=True) for c in ('unflushed-loss','flush-survival','fua-isolation','backend-sigkill')],
+                source_sha256={n:hashlib.sha256((tools/n).read_bytes()).hexdigest() for n in names})
+            path=root/'report.json';path.write_text(json.dumps(report));path.chmod(0o644)
+            with mock.patch.object(wrapper,'SOURCE',tools):
+                self.assertTrue(wrapper.load_calibration(path,root)['passed'])
+                path.chmod(0o666)
+                with self.assertRaisesRegex(RuntimeError,'Unsafe calibration report'):wrapper.load_calibration(path,root)
+                path.chmod(0o644);(tools/names[0]).write_bytes(b'changed source')
+                with self.assertRaisesRegex(RuntimeError,'changed since calibration'):wrapper.load_calibration(path,root)
 
 
 if __name__=='__main__':unittest.main()
