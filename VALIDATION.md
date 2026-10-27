@@ -1,6 +1,6 @@
 # Validation and limits
 
-Current development checks: 169 isolated Linux tests, syntax/C-helper verification, four native [mapped-identity controls](docs/mapped-identity.md), a [scoped Firefox observer](docs/browser-identity.md) and [selected copied Firefox input/cache controls](docs/native-browser-inputs.md). The [signed private package-update fixture](docs/package-update.md) also passes mismatch rejection, three verified snapshot-reset upgrades and selected archive-data controls. Rejected namespace/sandbox attempts remain explicit. These audit runs are not acceleration measurements; historical results below retain their original scopes.
+Current development checks: 179 isolated Linux tests, syntax/C-helper verification, four native [mapped-identity controls](docs/mapped-identity.md), a [scoped Firefox observer](docs/browser-identity.md) and [selected copied Firefox input/cache controls](docs/native-browser-inputs.md). The [signed private package-update fixture](docs/package-update.md) also passes mismatch rejection, three verified snapshot-reset upgrades and selected archive-data controls. Rejected namespace/sandbox attempts remain explicit. The [native request/flush lifecycle diagnostic](docs/request-lifecycle.md) passes its exact transport and scoped pattern checks; historical overhead failures remain unchanged. These audit runs are not acceleration measurements; historical results below retain their original scopes.
 
 ## Measured on one BC-250
 
