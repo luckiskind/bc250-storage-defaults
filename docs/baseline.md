@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 73 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
+- [x] Pass 79 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -79,6 +79,8 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Boot a separate stock kernel and Btrfs image, verify orderly persistence, and reset to a protected baseline using fresh overlays.
 - [x] Pass seven selected installer recovery scenarios across eight acknowledged whole-guest interruptions and 15 guest boots, including interrupted recovery and missing-link compatibility repair.
 - [x] Independently calibrate a volatile disk-cache model and recover one installer VM after discarding 100 KiB of actual pending model writes.
+- [x] Pass a real-worker baseline and three cache-loss recovery boundaries across seven VM boots, preserving hashes and conservative reservations.
+- [x] Apply tested ledger commit hardening to the owned host helper with configuration/history preserved and all seven installed hashes verified.
 
 The repaired pass processed 104 verified files, with 536,367,504 logical bytes processed and 425,984 extra retry bytes. Total charged work was 536,793,488 bytes, within the 536,870,912-byte pass budget. The successful pass took approximately 34.8 seconds including scanning and the quiet check. This timing is an operational observation, not a controlled throughput comparison.
 
@@ -93,7 +95,7 @@ The post-pass ledger held 482 recorded successfully repacked file signatures. Th
 Pending before declaring Stage 0 complete:
 
 - [ ] Test actual boot/reboot and suspend/resume transitions with measured controller state.
-- [ ] Extend calibrated device-cache fault coverage across installer/interrupted-recovery and worker transitions, then qualify physical storage power-loss behavior. The calibrated software model now passes one installer boundary with positive write loss; process SIGKILL coverage remains 40 selected checkpoints.
+- [ ] Extend calibrated device-cache fault coverage to additional installer, worker and interrupted-recovery orderings, then qualify physical storage power-loss behavior. One installer boundary and three worker boundaries now pass positive write-loss cases; process SIGKILL coverage remains 40 selected installer checkpoints.
 - [ ] Recreate independent full-system/volume B0/B1/B2 baselines; the native data-copy preparation above covers only the dataset part of this gate.
 - [ ] Establish a boot/recovery path applicable to the physical BC-250. The virtual kernel/image reset path is qualified; physical firmware/bootloader and hardware recovery remain open.
 - [ ] Quantify physical write amplification, metadata growth and lost sharing; logical work budgets are not physical-write limits.
@@ -137,6 +139,16 @@ The [cache-backed installer VM result](evidence/stage0-cache-installer-vm.json) 
 An earlier immediate guest-kill run recovered but discarded zero backend-cache bytes; it is not counted as device-cache-loss evidence. A preboot metadata-mode mismatch was also preserved and corrected with a regression test. Accepted evidence comes from the calibrated request-triggered cut. See [the procedure and limits](volatile-cache-faults.md).
 
 This is one selected installer boundary with a calibrated software device model. It does not qualify interrupted worker repacking, all installer transitions, torn writes, partial barriers, physical SSD cache/firmware/NAND behavior, physical reboot/resume, or native throughput. Earlier profile reports retain their own tested source versions; this addition changes the lab harness and leaves installed payloads unchanged.
+
+## Worker reservations and live ledger hardening
+
+The [worker cache-loss matrix](evidence/stage0-worker-cache-vm.json) passes a baseline and three fault scenarios across seven guest boots. The full 6,344,456-byte ELF fixture retains its expected hash and reaches 16 KiB encoded extents. Cuts after the committed reservation, after eight real range-sync operations, and after verification/before final charging discard 49,152, 110,592 and 49,152 pending model bytes respectively. Each original 7,393,032-byte uncertain reservation survives exactly. Recovery preserves that charge, safely completes or recognizes the verified layout, and a repeated pass changes neither attempts nor budget. SQLite integrity and file metadata verify; the actual worker uses live virtual-root disk counters through a documented test-only pathname adapter.
+
+The worker now explicitly establishes and reads back SQLite synchronous=EXTRA, accepts DELETE/WAL journal modes, and synchronizes the state directory's parent before reservations can authorize layout changes. This hardens a documented SQLite durability-contract gap; the selected tests did not demonstrate a lost reservation in the former version. See [SQLite's contract](https://www.sqlite.org/pragma.html#pragma_synchronous) and [the worker qualification guide](worker-cache-recovery.md). The expanded suite passes 79 isolated Linux tests; the [fresh 40-case installation process-crash rerun](evidence/stage0-worker-ledger-process-crashes.json) also passes with the new payload.
+
+The [live repair record](evidence/stage0-worker-ledger-live.json) verifies helper SHA-256 `010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0`, all seven installed file hashes, unchanged configuration and preserved old charges, a consistent root-private ledger backup, actual DELETE/EXTRA policy and a successful disposable content/layout check. A normal service pass succeeds with zero additional processing because 643,253 bytes remain in its UTC-day allowance, below the 1 MiB minimum file size. That limit was respected, not reset. The power service and timer remain active at 5000 us.
+
+These are selected software crash/accounting results, not physical SSD power-loss or throughput results. The deployed ledger schema and history remain intact. Broader recovery interleavings and the remaining Stage 0 volume/hardware/write-amplification gates are still open.
 
 ## Recovery procedure for the local reliability repair
 

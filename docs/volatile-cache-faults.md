@@ -58,4 +58,4 @@ Cuts occur between backend requests. In-progress FLUSH/FUA operations finish bef
 
 These are software durability/correctness results. They measure neither native throughput nor physical power-loss behavior. Source hashes identify the exact executed components in each report; older qualification reports retain their own source versions rather than implying that every historical harness hash equals the latest branch.
 
-Next work is to apply the calibrated device model to more installer and interrupted-recovery boundaries and to actual worker repacking with its durable write-budget reservations. Independent native benchmark volumes, physical boot/resume/recovery and physical-write/metadata/sharing measurements remain separate Stage 0 gates.
+The subsequent [worker recovery matrix](worker-cache-recovery.md) now covers three actual repacker boundaries, content integrity and conservative budget reservations. Next work includes more installer/worker/interrupted-recovery orderings. Independent native benchmark volumes, physical boot/resume/recovery and physical-write/metadata/sharing measurements remain separate Stage 0 gates.
