@@ -90,6 +90,32 @@ class NativeVolumeGuards(unittest.TestCase):
                 self.assertNotIn('etc/pacman.d/gnupg/S.keyboxd', stream.getnames())
                 self.assertEqual(stream.extractfile('etc/pacman.d/gnupg/S.gpg-agent').read(), b'durable regular file')
 
+    def legacy_fixture(self, root):
+        units = root/'etc/systemd/system'; units.mkdir(parents=True)
+        wants = units/'multi-user.target.wants'; wants.mkdir()
+        for name, contents in native.LEGACY_QUALIFICATION_UNITS.items():
+            (units/name).write_text(contents)
+            (wants/name).symlink_to('../'+name)
+        return units
+
+    def test_only_known_historical_fixture_units_are_removed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); units = self.legacy_fixture(root)
+            unrelated = units/'keep.service'; unrelated.write_text('preserve')
+            self.assertEqual(set(native.strip_legacy_fixture(root)), set(native.LEGACY_QUALIFICATION_UNITS))
+            self.assertEqual(unrelated.read_text(), 'preserve')
+            self.assertFalse(any((units/name).exists() for name in native.LEGACY_QUALIFICATION_UNITS))
+
+    def test_edited_historical_unit_preserves_the_whole_set(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory); units = self.legacy_fixture(root)
+            names = list(native.LEGACY_QUALIFICATION_UNITS)
+            (units/names[-1]).write_text('administrator edit')
+            with self.assertRaisesRegex(RuntimeError, 'Unknown historical qualification unit'):
+                native.strip_legacy_fixture(root)
+            self.assertTrue(all((units/name).is_file() for name in names))
+            self.assertTrue(all((units/'multi-user.target.wants'/name).is_symlink() for name in names))
+
 
 if __name__ == '__main__':
     unittest.main()
