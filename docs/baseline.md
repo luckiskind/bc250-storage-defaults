@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 48 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
+- [x] Pass 55 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -77,6 +77,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Prepare an authenticated independent Arch userspace with recorded guest package inventory.
 - [x] Pass 11 lifecycle checks using real guest systemd, including bounded maintenance, undo/reinstall and startup policy reapplication after a guest reboot.
 - [x] Boot a separate stock kernel and Btrfs image, verify orderly persistence, and reset to a protected baseline using fresh overlays.
+- [x] Pass seven selected installer recovery scenarios across eight acknowledged whole-guest interruptions and 15 guest boots, including interrupted recovery and missing-link compatibility repair.
 
 The repaired pass processed 104 verified files, with 536,367,504 logical bytes processed and 425,984 extra retry bytes. Total charged work was 536,793,488 bytes, within the 536,870,912-byte pass budget. The successful pass took approximately 34.8 seconds including scanning and the quiet check. This timing is an operational observation, not a controlled throughput comparison.
 
@@ -90,7 +91,6 @@ The post-pass ledger held 482 recorded successfully repacked file signatures. Th
 
 Pending before declaring Stage 0 complete:
 
-- [ ] Qualify storage-profile installation/recovery under whole-guest interruption in the separately bootable test OS. Userspace service tests and separate-kernel image boot/reset now pass; the combined fault cases remain open.
 - [ ] Test actual boot/reboot and suspend/resume transitions with measured controller state.
 - [ ] Test device/storage power-loss recovery, including interrupted recovery itself, across installer and worker transitions on disposable storage. Process SIGKILL testing is complete for 40 selected installer checkpoints only.
 - [ ] Recreate independent full-system/volume B0/B1/B2 baselines; the native data-copy preparation above covers only the dataset part of this gate.
@@ -117,7 +117,15 @@ The wrapper uses an isolated user range, private networking, no guest NIC, two C
 
 Failed prototype console runs and a first reusable run whose final host-UUID comparison was attempted inside the sandbox were retained. Reserving the serial console for probe output and moving the read-only host identity comparison to the host wrapper resolved those environment/verifier issues. The public result comes from the corrected wrapper on fresh overlays against a newly built artifact set.
 
-See [the virtual image/boot recipe](virtual-recovery.md). This qualifies orderly recovery/reset of the virtual reference. It does not qualify interrupted installation across whole-guest failure, physical SSD cache loss, physical suspend/resume, or independent B0/B1/B2 benchmark volumes.
+See [the virtual image/boot recipe](virtual-recovery.md). This qualifies orderly recovery/reset of the virtual reference. That boot-only probe does not qualify interrupted installation. The subsequent profile fault suite below covers selected installer transitions; physical SSD cache loss, physical suspend/resume and independent B0/B1/B2 benchmark volumes remain open.
+
+## Installer durability across whole-guest interruption
+
+The [seven-case profile fault result](evidence/stage0-virtual-profile-faults.json) records eight acknowledged QEMU SIGKILLs and 15 boots against a new protected Btrfs baseline. It covers partial staging, power/timer activation, committed installation, interrupted removal and an interrupted recovery. Every final recovery is repeated, followed by checks of owned payloads, pending/staged artifacts, services and simulated power restoration. A deliberate missing-timer-link compatibility case is recorded separately from naturally occurring interruption. The fixed install's ordinary committed case verifies enabled/active startup **before** recovery, then verifies preservation and normal undo.
+
+This work found a real installer failure in the prior development version: a committed active manifest survived while the newly created timer dependency directory did not. An isolated child overlay confirmed the missing directory. The repair synchronizes service-link directories and their parent before committing activation or completed shutdown. Committed recovery audits installed contents and remaining staging artifacts, then reestablishes the intended enabled services before finishing cleanup. Failed and diagnostic images were preserved. The repaired source passes 55 isolated tests and a [fresh 40-case process interruption rerun](evidence/stage0-service-link-process-crashes.json).
+
+The final VM result verifies unchanged protected-baseline bytes, a separate guest filesystem identity, matching package/build/runtime source hashes and unchanged actual host policy at 5000 us. The working power service and timer remained active. The host was not rebooted. The [reproduction guide](virtual-profile-faults.md) distinguishes guest-memory loss from physical volatile-cache loss. Interrupted worker repacking and device-level failure models remain open; no new throughput comparison was performed.
 
 ## Recovery procedure for the local reliability repair
 
