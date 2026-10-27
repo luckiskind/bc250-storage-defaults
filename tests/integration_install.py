@@ -91,15 +91,12 @@ print(json.dumps({'passed':True,'real_btrfs_fixture':True,'real_installer_file_o
 '''
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--scratch', type=Path, required=True)
-    args = parser.parse_args()
+def run_isolated(program, scratch, timeout=240):
     if os.geteuid() == 0:
         raise SystemExit('Run as an ordinary user; this test intentionally needs no host root privileges')
     if not shutil.which('bwrap'):
         raise SystemExit('bwrap is required')
-    scratch = args.scratch.resolve(strict=True)
+    scratch = scratch.resolve(strict=True)
     with tempfile.TemporaryDirectory(prefix='bc250-install-isolation-', dir=scratch) as temporary:
         base = Path(temporary)
         tree = base / 'root'
@@ -117,7 +114,7 @@ def main():
             (fake / name).write_text(value)
         hooks = base / 'hooks';hooks.mkdir()
         shim = tree / 'shims/systemctl';shim.write_text(SHIM);shim.chmod(0o755)
-        script = tree / 'inside.py';script.write_text(INSIDE)
+        script = tree / 'inside.py';script.write_text(program)
         command = ['bwrap','--unshare-all','--die-with-parent','--new-session','--uid','0','--gid','0',
                    '--bind',str(tree),'/', '--ro-bind','/usr/bin','/usr/bin', '--ro-bind','/usr/lib','/usr/lib',
                    '--ro-bind','/usr/share','/usr/share', '--bind',str(hooks),'/usr/lib/systemd/system-sleep',
@@ -125,10 +122,17 @@ def main():
                    '--proc','/proc','--dev','/dev','--clearenv','--setenv','PATH','/usr/bin',
                    '--setenv','LC_ALL','C','--setenv','PYTHONDONTWRITEBYTECODE','1',
                    '--chdir','/pkg','/usr/bin/python3','/inside.py']
-        result = subprocess.run(command, capture_output=True, text=True, timeout=240)
+        result = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
         if result.returncode:
             raise SystemExit(result.stdout + result.stderr)
-        print(result.stdout.strip())
+        return result.stdout.strip()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--scratch', type=Path, required=True)
+    args = parser.parse_args()
+    print(run_isolated(INSIDE, args.scratch))
 
 
 if __name__ == '__main__':

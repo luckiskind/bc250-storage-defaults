@@ -136,6 +136,113 @@ class Installation(unittest.TestCase):
             app.write_new(self.target, b'candidate', 0o644)
         self.assertEqual(self.target.read_bytes(), b'existing administrator file')
 
+    def test_pending_transaction_blocks_new_apply(self):
+        app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        with self.assertRaisesRegex(RuntimeError, '--recover'):
+            app.install()
+        self.assertFalse(self.target.exists())
+
+    def test_recover_uncommitted_published_file_and_activation(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        source, mode = app.payloads()[self.target]
+        tx.publish(self.target, source.read_bytes(), app.write_new)
+        tx.phase('activating', activation_started=True)
+        app.recover()
+        self.assertFalse(self.target.exists())
+        self.assertFalse(app.transaction.pending_path(self.state).exists())
+        self.assertIn(['systemctl', 'disable', '--now', app.POWER], self.calls)
+        self.assertFalse(json.loads(self.manifest.read_text())['active'])
+
+    def test_recovery_preserves_administrator_changes_before_any_service_action(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        source, mode = app.payloads()[self.target]
+        tx.publish(self.target, source.read_bytes(), app.write_new)
+        tx.phase('activating', activation_started=True)
+        self.target.write_bytes(b'changed by an administrator')
+        self.calls.clear()
+        with self.assertRaisesRegex(RuntimeError, 'Administrator modified'):
+            app.recover()
+        self.assertEqual(self.calls, [])
+        self.assertEqual(self.target.read_bytes(), b'changed by an administrator')
+        self.assertTrue(app.transaction.pending_path(self.state).exists())
+
+    def test_recovery_preserves_committed_install_after_cleanup_failure(self):
+        with patch.object(app.transaction.Transaction, 'finish', side_effect=RuntimeError('cleanup interrupted')):
+            with self.assertRaisesRegex(RuntimeError, 'cleanup interrupted'):
+                app.install()
+        self.assertTrue(json.loads(self.manifest.read_text())['active'])
+        self.calls.clear()
+        app.recover()
+        self.assertEqual(self.calls, [])
+        self.assertTrue(self.target.exists())
+        self.assertFalse(app.transaction.pending_path(self.state).exists())
+
+    def test_recovery_completes_partial_removal_without_restarting_services(self):
+        app.install()
+        manifest = json.loads(self.manifest.read_text())
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'remove', manifest)
+        tx.phase('removing', services_stopped=True)
+        tx.delete_target(tx.data['entries'][0])
+        self.calls.clear()
+        app.recover()
+        self.assertFalse(self.target.exists())
+        self.assertFalse(json.loads(self.manifest.read_text())['active'])
+        self.assertFalse(any('enable' in call or 'disable' in call for call in self.calls))
+
+    def test_invalid_journal_paths_are_rejected(self):
+        app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        path = app.transaction.pending_path(self.state)
+        data = json.loads(path.read_text())
+        data['entries'][0]['target'] = '/unowned-file'
+        path.write_text(json.dumps(data))
+        with self.assertRaisesRegex(RuntimeError, 'Unexpected paths'):
+            app.recover()
+        self.assertEqual(self.calls, [])
+
+    def test_installer_lock_rejects_a_second_writer(self):
+        with app.transaction.installation_lock(self.state):
+            with self.assertRaisesRegex(RuntimeError, 'Another installer'):
+                with app.transaction.installation_lock(self.state):
+                    self.fail('Second writer entered its critical section')
+
+    def test_recovery_preserves_replaced_staging_file(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        source, mode = app.payloads()[self.target]
+        tx.publish(self.target, source.read_bytes(), app.write_new)
+        staged = Path(tx.data['entries'][0]['staged'])
+        staged.unlink()
+        staged.write_bytes(b'administrator staging replacement')
+        self.calls.clear()
+        with self.assertRaises(RuntimeError):
+            app.recover()
+        self.assertEqual(staged.read_bytes(), b'administrator staging replacement')
+        self.assertTrue(self.target.exists())
+        self.assertEqual(self.calls, [])
+
+    def test_recovery_refuses_unknown_partial_staging_content(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        staged = Path(tx.data['entries'][0]['staged'])
+        staged.parent.mkdir(parents=True, exist_ok=True)
+        staged.write_bytes(b'X')
+        staged.chmod(0o600)
+        with self.assertRaisesRegex(RuntimeError, 'Unknown partial staging'):
+            app.recover()
+        self.assertEqual(staged.read_bytes(), b'X')
+        self.assertFalse(self.target.exists())
+        self.assertEqual(self.calls, [])
+
+    def test_partial_staging_recovery_requires_matching_package(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        source, mode = app.payloads()[self.target]
+        staged = Path(tx.data['entries'][0]['staged'])
+        staged.parent.mkdir(parents=True, exist_ok=True)
+        staged.write_bytes(source.read_bytes()[:3]);staged.chmod(0o600)
+        source.write_bytes(b'a changed package version')
+        with self.assertRaisesRegex(RuntimeError, 'matching package'):
+            app.recover()
+        self.assertTrue(staged.exists())
+        self.assertEqual(self.calls, [])
+
 
 if __name__ == '__main__':
     unittest.main()
