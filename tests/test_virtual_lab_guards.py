@@ -1,5 +1,7 @@
 """Check file/label invariants without launching or formatting anything."""
 import os
+import json
+import hashlib
 from pathlib import Path
 import sys
 import tempfile
@@ -79,6 +81,37 @@ class VirtualLabGuards(unittest.TestCase):
     def test_embedded_guest_programs_compile_before_image_construction(self):
         compile(guest.RESET,'guest reset','exec')
         compile(guest.INSIDE,'guest recovery','exec')
+
+    def profile_sources(self,root):
+        source=root/'tools';source.mkdir()
+        manifest=dict(storage_profile_fixture=True,package_sha256={})
+        for name,key in (('vm_image_builder.py','builder_source_sha256'),
+                         ('vm_profile_guest.py','profile_guest_source_sha256')):
+            path=source/name;path.write_bytes(b'fixture builder')
+            manifest[key]=hashlib.sha256(path.read_bytes()).hexdigest()
+        for name in wrapper.PACKAGE_FILES:
+            path=root/name;path.parent.mkdir(exist_ok=True);path.write_bytes(b'package fixture')
+            manifest['package_sha256'][name]=hashlib.sha256(path.read_bytes()).hexdigest()
+        artifact=root/'artifact';artifact.mkdir()
+        (artifact/'image-build.json').write_text(json.dumps(manifest))
+        return source,artifact
+
+    def test_profile_requires_matching_package_before_launch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source,artifact=self.profile_sources(Path(directory))
+            with mock.patch.object(wrapper,'SOURCE',source):
+                wrapper.verify_profile_sources(artifact)
+                (source.parent/'install.py').write_bytes(b'changed package')
+                with self.assertRaisesRegex(RuntimeError,'Package source changed'):
+                    wrapper.verify_profile_sources(artifact)
+
+    def test_profile_requires_matching_embedded_guest_program(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source,artifact=self.profile_sources(Path(directory))
+            with mock.patch.object(wrapper,'SOURCE',source):
+                (source/'vm_profile_guest.py').write_bytes(b'changed guest')
+                with self.assertRaisesRegex(RuntimeError,'Embedded guest source changed'):
+                    wrapper.verify_profile_sources(artifact)
 
 
 if __name__=='__main__':unittest.main()

@@ -29,11 +29,14 @@ class Installation(unittest.TestCase):
         self.power = SimpleNamespace(TARGET='5000', info=lambda: {'latency_tolerance_us': '5000'})
         self.repack = SimpleNamespace(self_test=lambda _: {'status': 'repacked'})
         self.calls = []
+        self.unit_directory = root / 'units'
+        self.unit_directory.mkdir()
         fake_process = patch.object(app.subprocess, 'run', return_value=SimpleNamespace(returncode=0, stdout='', stderr=''))
         fake_process.start()
         self.addCleanup(fake_process.stop)
         patches = {
             'BASE': root / 'helpers', 'STATE': self.state, 'MANIFEST': self.manifest,
+            'UNIT_DIRECTORY': self.unit_directory,
             'payloads': lambda: {self.target: (source, 0o644)},
             'preflight': lambda: self.power, 'load_module': lambda _: self.repack,
             'prepare_directories': lambda: None, 'run': self.record,
@@ -173,8 +176,42 @@ class Installation(unittest.TestCase):
         self.assertTrue(json.loads(self.manifest.read_text())['active'])
         self.calls.clear()
         app.recover()
-        self.assertEqual(self.calls, [])
+        self.assertIn(['systemctl', 'enable', '--now', app.POWER], self.calls)
+        self.assertIn(['systemctl', 'enable', '--now', app.TIMER], self.calls)
         self.assertTrue(self.target.exists())
+        self.assertFalse(app.transaction.pending_path(self.state).exists())
+
+    def test_service_links_synced_children_before_parent(self):
+        directories=[self.unit_directory / name for name in ('multi-user.target.wants','timers.target.wants')]
+        for directory in directories:directory.mkdir()
+        with patch.object(app.transaction,'sync_directory') as sync:
+            app.sync_service_links()
+        self.assertEqual([call.args[0] for call in sync.call_args_list],directories+[self.unit_directory])
+
+    def test_committed_recovery_checks_staging_before_service_changes(self):
+        with patch.object(app.transaction.Transaction,'finish',side_effect=RuntimeError('cleanup interrupted')):
+            with self.assertRaisesRegex(RuntimeError,'cleanup interrupted'):app.install()
+        tx=app.transaction.Transaction.load(self.state,app.payloads())
+        stage=Path(tx.data['entries'][0]['staged'])
+        stage.unlink();stage.write_bytes(b'administrator replacement')
+        self.calls.clear()
+        with self.assertRaises(RuntimeError):app.recover()
+        self.assertEqual(self.calls,[])
+        self.assertEqual(stage.read_bytes(),b'administrator replacement')
+        self.assertTrue(app.transaction.pending_path(self.state).exists())
+
+    def test_startup_link_sync_failure_prevents_active_commit(self):
+        original=app.sync_service_links
+        count=0
+        def fail_once():
+            nonlocal count
+            count+=1
+            if count==1:raise OSError('injected startup-link sync failure')
+            original()
+        with patch.object(app,'sync_service_links',fail_once):
+            with self.assertRaisesRegex(OSError,'startup-link sync failure'):app.install()
+        self.assertFalse(self.target.exists())
+        self.assertFalse(json.loads(self.manifest.read_text())['active'])
         self.assertFalse(app.transaction.pending_path(self.state).exists())
 
     def test_recovery_completes_partial_removal_without_restarting_services(self):
