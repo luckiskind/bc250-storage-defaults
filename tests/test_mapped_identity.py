@@ -68,5 +68,13 @@ class MappedIdentity(unittest.TestCase):
             selected=[row for row in sample['records'] if row['path']==str(path)]
             self.assertEqual(len(selected),1);self.assertEqual(selected[0]['status'],'mapping_reference_unavailable')
 
+    def test_host_reference_identity_is_independent_of_any_process_root_path(self):
+        with tempfile.TemporaryDirectory() as a:
+            left,right=Path(a)/'left',Path(a)/'right';left.write_bytes(b'a');right.write_bytes(b'b')
+            with left.open('rb') as source:
+                actual=os.fstat(source.fileno())
+                self.assertTrue(identity.compare_host_reference(str(left),actual)['host_identity_matches_mapping'])
+                self.assertFalse(identity.compare_host_reference(str(right),actual)['host_identity_matches_mapping'])
+
 
 if __name__=='__main__':unittest.main()
