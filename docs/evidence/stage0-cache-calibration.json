@@ -1,0 +1,346 @@
+{
+  "passed": true,
+  "schema_version": 1,
+  "case_count": 4,
+  "cases": [
+    {
+      "case": "unflushed-loss",
+      "passed": true,
+      "before": {
+        "read_requests": 1,
+        "write_requests": 1,
+        "volatile_write_bytes": 4096,
+        "flush_completed": 0,
+        "flush_persisted_bytes": 0,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 4096,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 4096,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": false
+      },
+      "cut": {
+        "method": "armed-next-ordinary-write",
+        "after": {
+          "read_requests": 1,
+          "write_requests": 2,
+          "volatile_write_bytes": 8192,
+          "flush_completed": 0,
+          "flush_persisted_bytes": 0,
+          "fua_completed": 0,
+          "fua_persisted_bytes": 0,
+          "power_cuts": 1,
+          "dropped_bytes": 8192,
+          "peak_dirty_bytes": 8192,
+          "cache_limit_errors": 0,
+          "armed_for_volatile_write": true,
+          "cut_trigger_offset": 4096,
+          "cut_trigger_bytes": 4096,
+          "dirty_bytes": 0,
+          "capacity_bytes": 33554432,
+          "cache_limit_bytes": 4194304,
+          "powered_off": true
+        },
+        "trigger_command_completed": true,
+        "earlier_write_acknowledged_and_read_back": true
+      },
+      "stable_readback_verified": true,
+      "independent_qemu_readback_after_restart": true,
+      "restart_stats": {
+        "read_requests": 1,
+        "write_requests": 0,
+        "volatile_write_bytes": 0,
+        "flush_completed": 1,
+        "flush_persisted_bytes": 0,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 1,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 0,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": true
+      },
+      "expected_ranges": [
+        {
+          "offset": 0,
+          "bytes": 8192,
+          "pattern": 0
+        }
+      ]
+    },
+    {
+      "case": "flush-survival",
+      "passed": true,
+      "before": {
+        "read_requests": 0,
+        "write_requests": 2,
+        "volatile_write_bytes": 8192,
+        "flush_completed": 1,
+        "flush_persisted_bytes": 4096,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 4096,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 4096,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": false
+      },
+      "cut": {
+        "method": "explicit-cache-power-cut",
+        "after": {
+          "read_requests": 0,
+          "write_requests": 2,
+          "volatile_write_bytes": 8192,
+          "flush_completed": 1,
+          "flush_persisted_bytes": 4096,
+          "fua_completed": 0,
+          "fua_persisted_bytes": 0,
+          "power_cuts": 1,
+          "dropped_bytes": 4096,
+          "peak_dirty_bytes": 4096,
+          "cache_limit_errors": 0,
+          "armed_for_volatile_write": false,
+          "cut_trigger_offset": -1,
+          "cut_trigger_bytes": 0,
+          "dirty_bytes": 0,
+          "capacity_bytes": 33554432,
+          "cache_limit_bytes": 4194304,
+          "powered_off": true
+        }
+      },
+      "stable_readback_verified": true,
+      "independent_qemu_readback_after_restart": true,
+      "restart_stats": {
+        "read_requests": 2,
+        "write_requests": 0,
+        "volatile_write_bytes": 0,
+        "flush_completed": 1,
+        "flush_persisted_bytes": 0,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 1,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 0,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": true
+      },
+      "expected_ranges": [
+        {
+          "offset": 8192,
+          "bytes": 4096,
+          "pattern": 34
+        },
+        {
+          "offset": 12288,
+          "bytes": 4096,
+          "pattern": 0
+        }
+      ]
+    },
+    {
+      "case": "fua-isolation",
+      "passed": true,
+      "before": {
+        "read_requests": 3,
+        "write_requests": 4,
+        "volatile_write_bytes": 12800,
+        "flush_completed": 0,
+        "flush_persisted_bytes": 0,
+        "fua_completed": 1,
+        "fua_persisted_bytes": 4096,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 8704,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 8704,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": false
+      },
+      "cut": {
+        "method": "explicit-cache-power-cut",
+        "after": {
+          "read_requests": 3,
+          "write_requests": 4,
+          "volatile_write_bytes": 12800,
+          "flush_completed": 0,
+          "flush_persisted_bytes": 0,
+          "fua_completed": 1,
+          "fua_persisted_bytes": 4096,
+          "power_cuts": 1,
+          "dropped_bytes": 8704,
+          "peak_dirty_bytes": 8704,
+          "cache_limit_errors": 0,
+          "armed_for_volatile_write": false,
+          "cut_trigger_offset": -1,
+          "cut_trigger_bytes": 0,
+          "dirty_bytes": 0,
+          "capacity_bytes": 33554432,
+          "cache_limit_bytes": 4194304,
+          "powered_off": true
+        }
+      },
+      "stable_readback_verified": true,
+      "independent_qemu_readback_after_restart": true,
+      "restart_stats": {
+        "read_requests": 3,
+        "write_requests": 0,
+        "volatile_write_bytes": 0,
+        "flush_completed": 1,
+        "flush_persisted_bytes": 0,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 1,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 0,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": true
+      },
+      "expected_ranges": [
+        {
+          "offset": 16384,
+          "bytes": 4096,
+          "pattern": 85
+        },
+        {
+          "offset": 20480,
+          "bytes": 4096,
+          "pattern": 0
+        },
+        {
+          "offset": 24576,
+          "bytes": 4096,
+          "pattern": 0
+        }
+      ]
+    },
+    {
+      "case": "backend-sigkill",
+      "passed": true,
+      "before": {
+        "read_requests": 0,
+        "write_requests": 3,
+        "volatile_write_bytes": 8192,
+        "flush_completed": 1,
+        "flush_persisted_bytes": 4096,
+        "fua_completed": 1,
+        "fua_persisted_bytes": 4096,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 4096,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 4096,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": false
+      },
+      "cut": {
+        "method": "actual-backend-SIGKILL",
+        "exit_code": -9,
+        "pre_kill_dirty_bytes": 4096
+      },
+      "stable_readback_verified": true,
+      "independent_qemu_readback_after_restart": true,
+      "restart_stats": {
+        "read_requests": 3,
+        "write_requests": 0,
+        "volatile_write_bytes": 0,
+        "flush_completed": 1,
+        "flush_persisted_bytes": 0,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 1,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 0,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 33554432,
+        "cache_limit_bytes": 4194304,
+        "powered_off": true
+      },
+      "expected_ranges": [
+        {
+          "offset": 32768,
+          "bytes": 4096,
+          "pattern": 136
+        },
+        {
+          "offset": 36864,
+          "bytes": 4096,
+          "pattern": 153
+        },
+        {
+          "offset": 40960,
+          "bytes": 4096,
+          "pattern": 0
+        }
+      ]
+    }
+  ],
+  "independent_qemu_io_client": true,
+  "actual_backend_sigkill_tested": true,
+  "armed_cache_cut_tested": true,
+  "guest_kernel_tested": false,
+  "installer_or_worker_device_faults_tested": false,
+  "physical_power_loss_tested": false,
+  "torn_writes_modeled": false,
+  "performance_tested": false,
+  "stable_file_bytes": 33554432,
+  "qemu_io_version": "qemu-io version 11.1.2",
+  "recorded_utc": "2026-10-27T06:38:53Z",
+  "source_sha256": {
+    "volatile_disk.py": "22d6f28ead720a28e23e521705a1a59153234cb1f512fbf0d70133230509fd10",
+    "calibrate_volatile_disk.py": "35b2bc2fa149566525c679b36184dfa30ba21207a7d72599fed06c9d1c6e9c19"
+  },
+  "fault_scope": "Bounded volatile sector cache; completed FLUSH/FUA persist; cuts between backend requests",
+  "host_nvme_qos_unchanged": true,
+  "host_nvme_qos_us": 5000,
+  "host_reboot_tested": false,
+  "artifact_label": "cache-model-v3",
+  "run_label": "calibration-01",
+  "harness_source_sha256": {
+    "virtual_test_lab.py": "bd3a84dbfd3b63bf08c6ea36dd94c1f66c185568437e69509ed5e71821f303ca",
+    "vm_boot_probe.py": "a08e49ce85fa3aecf0d0c1075d9828211e1dcb6091ff7cb0518927101f81745d",
+    "prepare_test_os.py": "f19a426f73feda6ed244e70964375d1ec5114059031da2e8b300798e1770fc75"
+  }
+}
