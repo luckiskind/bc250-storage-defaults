@@ -145,7 +145,7 @@ Every stage below specifies ordered work and a gate. If a gate fails, take its f
 1. Pin v0.1.0, preserve its sources/checksums and document the installed lab configuration separately from the reusable package.
 2. Provision an isolated BC-250 test environment with a known-good boot path, backups and disposable test volumes. Retain the user's working installation as a reference rather than the destructive-test target.
 3. Capture controller capabilities, negotiated link, kernel/filesystem versions, mount options, memory split, thermals and current power policies. Identify all actual filesystem devices instead of assuming a permanent `nvme0` naming relationship.
-4. Test a fresh package installation, repeated application, removal, reboot and suspend/resume. Verify actual drive settings and service state after each transition.
+4. Test a fresh package installation, repeated application, removal, reboot and suspend/resume. Verify actual drive settings and service state after each transition. Test suspend/resume only on targets with functional wake support; record an unsupported target explicitly rather than attempting a known nonrecoverable sleep. The owner reports that this BC-250 has no functional suspend wake (2026-10-27), so physical resume is excluded from its compatibility claim and is not a gate for continuing development.
 5. Exercise failed/partial installation, administrator edits, missing dependencies, unsupported hardware and interrupted activation in disposable environments.
 6. Recreate B0/B1/B2 on separate test volumes and verify equal logical content. Record physical layout differences rather than assuming snapshots preserve an independent baseline after in-place repacking.
 
@@ -282,7 +282,7 @@ Every stage below specifies ordered work and a gate. If a gate fails, take its f
 1. Freeze the feature set. Run the full suite against B1, B2 and the integrated candidate, with independent cold/repeat/streaming/pressure/update reports.
 2. Test at least three BC-250 units if available and additional controller/SSD variants only behind explicit capability qualification. Document the limits of a single-machine result if the hardware fleet is unavailable.
 3. Run concurrent package updates, foreground applications, snapshots, low-space conditions, permission changes and sustained memory pressure. Include workloads whose data is already compressed or unpredictable.
-4. Complete repeated reboot/suspend/update cycles and at least a 14-day soak with a recorded activity mix. Inspect data hashes, kernel warnings, memory growth, maintenance writes and SSD health counters throughout.
+4. Complete repeated reboot/update cycles, suspend/resume on supported targets, and at least a 14-day soak with a recorded activity mix. Inspect data hashes, kernel warnings, memory growth, maintenance writes and SSD health counters throughout.
 5. Have engineers who did not implement the mechanism reproduce installation, removal, corruption handling and a performance subset from the documentation alone.
 6. Determine which targets were met, which mechanisms should be default, and which features remain unsupported. Prepare a release candidate only after blockers are resolved.
 

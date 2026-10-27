@@ -87,13 +87,14 @@ The cause on this firmware/kernel is unproven. This awake failure does not prove
 that every ACPI sleep-wake path is broken. No RTC-driver parameter, interrupt
 routing, firmware setting or kernel argument was changed to work around it.
 
-A demonstrated automatic wake path or available physical wake assistance is
-needed before a remote suspend attempt. When testing it, invoke normal system
-sleep so the installed post-resume hook runs through the normal lifecycle;
-do not substitute a direct write to the kernel sleep-state file. Systemd
-[documents](https://www.freedesktop.org/software/systemd/man/latest/systemd-suspend.service.html)
-its pre/post hook execution. A service restart or manually invoking the hook is
-not a physical resume result.
+On 2026-10-27 the owner confirmed that this BC-250 has no functional suspend
+wake. Record system suspend/resume as unsupported on this target; do not attempt
+remote sleep or request wake assistance again. This is an owner-reported target
+limitation, not a physical resume result or a universal BC-250 firmware claim.
+It does not block the separate recovery-boot and workload qualification stages.
+The NVMe drive-idle policy is independent of system sleep and remains supported
+at the qualified 5000 us setting. On other targets, resume qualification still
+requires a functional wake path and an observed physical sleep/resume cycle.
 
 ## Remaining physical gates
 

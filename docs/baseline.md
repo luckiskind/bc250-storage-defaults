@@ -99,11 +99,11 @@ Current checklist against the roadmap's six numbered Stage 0 requirements:
 | 1. Preserve v0.1.0 and the local deployment | Pinned release/tree, exported source, private installed configuration/history and recovery references retained |
 | 2. Isolated environment, known-good boot/recovery, backups and disposable volumes | Userspace/VM/native isolation and protected resets pass; existing physical reference boot and boot-file backups verify; the minimal recovery userspace passes three VM boots with the actual kernel/initramfs; a demonstrated isolated physical test/recovery boot remains open |
 | 3. Machine/controller/filesystem/power manifest | Recorded capabilities, negotiated link, actual mounted devices, kernel/memory/thermals and policies; no throughput comparison is inferred |
-| 4. Install/reapply/remove/reboot/resume | Selected fresh/real-systemd lifecycle cases pass; actual physical reboot passes; physical suspend/resume remains open |
+| 4. Install/reapply/remove/reboot/resume | Selected fresh/real-systemd lifecycle cases pass; actual physical reboot passes; target suspend wake unsupported per owner, physical resume unqualified |
 | 5. Failed/partial install and refusal/recovery cases | Isolated refusal/dependency tests, 40 process cuts, selected VM/cache-loss and native identity cases pass within their documented scopes |
 | 6. Independent B0/B1/B2 test volumes | Three separate Btrfs userspace images have equal verified trees and nine passing native startup/persistence/reset phases; the Stage 1 application suite still needs its own frozen fixtures |
 
-Remaining immediate work is physical suspend/resume and a demonstrated physical test/recovery path. Measure physical writes, metadata growth and lost sharing on disposable data before policy expansion; logical budgets are not physical-write limits. Broader fault/cache-loss orderings and hardware power-loss behavior remain unqualified for subsequent reliability work. Later mechanisms retain their own correctness/fault gates under the complete roadmap.
+Remaining immediate work is a demonstrated physical test/recovery path. The owner reports that this target has no functional suspend wake; no remote suspend will be attempted, and physical resume remains outside its compatibility claim. Measure physical writes, metadata growth and lost sharing on disposable data before policy expansion; logical budgets are not physical-write limits. Broader fault/cache-loss orderings and hardware power-loss behavior remain unqualified for subsequent reliability work. Later mechanisms retain their own correctness/fault gates under the complete roadmap.
 
 No host reboot, suspend, kernel replacement, filesystem formatting or destructive fault injection was performed in this initial milestone. The working installation is not the power-loss-test target.
 
@@ -223,3 +223,13 @@ If maintenance fails again:
 6. Restart the worker once under its normal budget, inspect the result, then restore the timer.
 
 Undoing the package stops future maintenance and restores the captured power setting. It does not reconstruct previous compressed extents or snapshot/reflink sharing. Existing backups are not a substitute for a qualified full-system recovery environment.
+
+## Target suspend compatibility limitation (2026-10-27)
+
+The owner confirms that this BC-250 has no functional suspend wake. System suspend/resume is recorded as unsupported on this target, not as a passed test or a reason to delay the remaining recovery and workload stages. No sleep test will be attempted. The failed awake RTC alarm probes do not establish a universal limitation across all BC-250 firmware. NVMe drive-idle policy is independent of whole-system sleep; its qualified 5000 us setting remains active.
+
+## Guarded UEFI selection and physical candidate preparation
+
+The [guarded recovery matrix](guarded-recovery.md) passes six UEFI boots with copied installed Limine/kernel/initramfs: normal → selected trial → normal for a valid root, and normal → refused root → normal for a deliberately incorrect root identity. The refusal occurs before managed result writes; the fixture stays unchanged and independent boot-policy checks allow return. Each guest reboot request ends QEMU, and a fresh machine instance retains the same case disks and private EFI variables. Continuous-QEMU warm reset remains unqualified: the retained initial run stalled during the third boot after initramfs loading. Its cause is unresolved.
+
+A separate physical candidate is now prepared in a new Btrfs subvolume with a verified 58,000-node source transfer, a root-only mount entry, fresh state, no storage-maintenance service, the VM shutdown probe removed and a guarded return service. The proposed boot configuration stays private in the lab; the actual boot setup and firmware selection were unchanged. The candidate has not been physically booted. The Linux suite passes 114 tests; all seven working-profile files still match, power/timer remain active at 5000 us and daily charges were not rewound. No new throughput result is claimed.

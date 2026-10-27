@@ -97,9 +97,16 @@ I/O make the elapsed times unsuitable for performance comparisons.
    with physical assistance available if the firmware/kernel path fails before
    the return service can run. Limine reports one-shot selection but no
    boot-counting fallback; those are capabilities, not a tested recovery result.
-5. Complete physical suspend/resume with a demonstrated wake path or available
-   wake assistance. The [awake RTC alarm failure](physical-transitions.md)
-   remains unresolved; no physical suspend was attempted here.
+5. Record target sleep compatibility. The owner confirms that this BC-250 has
+   no functional suspend wake, so no remote sleep will be attempted. Physical
+   resume remains unqualified and outside the target's compatibility claim;
+   it does not block the remaining recovery/workload stages. See the
+   [target limitation](physical-transitions.md).
+
+The [guarded-return development guide](guarded-recovery.md) describes the next
+UEFI selection matrix and a preparation-only builder for a separate physical
+candidate. That work retains the continuous-QEMU warm-reset failure explicitly;
+it does not turn the three-boot bridge above into a qualified physical entry.
 
 Physical write/metadata/lost-sharing accounting and the Stage 1 workload and
 cache-state gates remain separate. No throughput improvement, physical NVMe
