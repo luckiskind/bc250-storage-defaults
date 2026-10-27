@@ -3,8 +3,8 @@
 Status: four final-source native controls pass. The observer identifies the
 actual mapped file through a pinned mapping reference, checks the process-root
 view, and accepts a host pathname only when it names that same live object.
-This is a read-only identity primitive for controlled fixtures. It has not yet
-been connected to the Firefox audit or qualified as a complete input recorder.
+This is a read-only identity primitive for controlled fixtures. The later [Firefox observer](browser-identity.md) connects it to the owned audit;
+complete input recording remains unqualified.
 
 ## Why pathname and raw maps identities are insufficient
 
@@ -105,7 +105,9 @@ The Linux suite passes 152 tests, including rooted absolute symlinks, magic-link
 refusal, unsupported names, ownership refusal, live self mappings and a forced
 mapping-reference denial. A denial must remain unresolved even when ordinary
 maps fields would appear to match. The unchanged Firefox audit retains its
-earlier source hash and its incomplete-identity verdict. [Reviewed native evidence](evidence/stage1-mapped-identity.json)
+earlier source hash and its incomplete-identity verdict. The separate root
+observer adds a host/reference relation even when the process-root view is
+unavailable, without changing that unresolved view status. [Reviewed native evidence](evidence/stage1-mapped-identity.json)
 does not promote that browser verdict.
 
 ## Reproduction and next prerequisite
@@ -118,9 +120,8 @@ sudo python3 -B bench/qualify_mapped_identity.py run \
 ```
 
 This creates new disposable subvolumes; it does not remove earlier evidence.
-The GUI user's identity is used only for the private workers. Next, connect a
-bounded read-only observer to the owned Firefox trial without adding GUI
-privileges. Qualify its process-scope authentication and actual browser
-snapshots before accepting sandbox aliases or building the larger copied-input
-fixture. Cold-cache Firefox, complete closure, wrapper overhead and the other
+The GUI user's identity is used only for the private workers. The [bounded Firefox integration](browser-identity.md) now passes its recorded
+process-scope checks and snapshots. Next, use verified mapping associations for
+selected native browser inputs while retaining unresolved root aliases and
+qualifying remaining file/IPC dependencies. Cold-cache Firefox, complete closure, wrapper overhead and the other
 Stage 1 workloads/attribution remain open. The full goal remains active.

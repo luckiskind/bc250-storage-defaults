@@ -104,4 +104,8 @@ The [separate Firefox audit](browser-inputs.md) passes two final-source function
 
 ## Controlled mapping identity
 
-Four native [mapping-reference controls](mapped-identity.md) now distinguish the actual mapped object from its process-root and host pathname views. Raw maps device/inode identity collides across two private Btrfs subvolumes; a pinned mapping reference correctly rejects the wrong host alias. The initial raw-field method remains failed. This read-only primitive uses a privileged observer and unprivileged private workers; it is not yet integrated with Firefox and does not establish complete input closure or performance. The suite passes 152 Linux tests.
+Four native [mapping-reference controls](mapped-identity.md) now distinguish the actual mapped object from its process-root and host pathname views. Raw maps device/inode identity collides across two private Btrfs subvolumes; a pinned mapping reference correctly rejects the wrong host alias. The initial raw-field method remains failed. This read-only primitive uses a privileged observer and unprivileged private workers; its controlled qualification is separate from the later Firefox observation. Complete input closure and performance remain open. The original milestone passed 152 Linux tests.
+
+## Scoped Firefox mapping observer
+
+The [temporary root observer](browser-identity.md) now samples two functional launches, with 15 processes across three mount namespaces each. It verifies 209 host objects against pinned mapping references, while 172 also have matching process-root views. Six proc-fdinfo roots explain the remaining recorded view limitation; those aliases stay unresolved. Five live UID/scope/nonce/schema/replay requests are rejected, browser main capabilities remain zero, and finish verifies browser cleanup. The unchanged audit still has incomplete closure and no cache/performance qualification. All 157 Linux tests and four native identity controls pass.
