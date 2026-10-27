@@ -92,13 +92,18 @@ The post-pass ledger held 482 recorded successfully repacked file signatures. Th
 
 `tools/build_baseline_datasets.py` created independent byte copies of four ELF libraries and a 32 MiB incompressible control, with zero shared extents. [The manifest](evidence/stage0-native-baseline-manifest.json) records native B0/B1 layouts and verified 16 KiB compressed extents in all four B2 ELF copies. B0/B1/B2 controller values in that manifest are intended measurement policies; the builder never applies them. Power comparisons should reuse the same immutable native files across controller settings so incidental allocation differences cannot masquerade as a power-policy effect. These are preparation results, not performance measurements or independently bootable OS images.
 
-Pending before declaring Stage 0 complete:
+Current checklist against the roadmap's six numbered Stage 0 requirements:
 
-- [ ] Test actual boot/reboot and suspend/resume transitions with measured controller state.
-- [ ] Extend calibrated device-cache fault coverage to additional installer, worker and interrupted-recovery orderings, then qualify physical storage power-loss behavior. One installer boundary and three worker boundaries now pass positive write-loss cases; process SIGKILL coverage remains 40 selected installer checkpoints.
-- [ ] Recreate independent full-system/volume B0/B1/B2 baselines; the native data-copy preparation above covers only the dataset part of this gate.
-- [ ] Establish a boot/recovery path applicable to the physical BC-250. The virtual kernel/image reset path is qualified; physical firmware/bootloader and hardware recovery remain open.
-- [ ] Quantify physical write amplification, metadata growth and lost sharing; logical work budgets are not physical-write limits.
+| Requirement | Evidence and remaining work |
+| --- | --- |
+| 1. Preserve v0.1.0 and the local deployment | Pinned release/tree, exported source, private installed configuration/history and recovery references retained |
+| 2. Isolated environment, known-good boot/recovery, backups and disposable volumes | Userspace/VM/native isolation and protected resets pass; existing physical reference boot and boot-file backups verify; a demonstrated isolated physical test/recovery boot remains open |
+| 3. Machine/controller/filesystem/power manifest | Recorded capabilities, negotiated link, actual mounted devices, kernel/memory/thermals and policies; no throughput comparison is inferred |
+| 4. Install/reapply/remove/reboot/resume | Selected fresh/real-systemd lifecycle cases pass; actual physical reboot passes; physical suspend/resume remains open |
+| 5. Failed/partial install and refusal/recovery cases | Isolated refusal/dependency tests, 40 process cuts, selected VM/cache-loss and native identity cases pass within their documented scopes |
+| 6. Independent B0/B1/B2 test volumes | Three separate Btrfs userspace images have equal verified trees and nine passing native startup/persistence/reset phases; the Stage 1 application suite still needs its own frozen fixtures |
+
+Remaining immediate work is physical suspend/resume and a demonstrated physical test/recovery path. Measure physical writes, metadata growth and lost sharing on disposable data before policy expansion; logical budgets are not physical-write limits. Broader fault/cache-loss orderings and hardware power-loss behavior remain unqualified for subsequent reliability work. The earlier open-ended power-loss item is not treated as a requirement to test every firmware failure before Stage 1: Stage 0 follows the explicit roadmap gates, and later mechanisms retain their own correctness/fault gates.
 
 No host reboot, suspend, kernel replacement, filesystem formatting or destructive fault injection was performed in this initial milestone. The working installation is not the power-loss-test target.
 
@@ -187,6 +192,14 @@ Two existing complete lab trees migrated with original fields and guest-root met
 A static audit of the unchanged worker cache key confirms a remount can invalidate remembered eligibility. Already-small compressed files are checked before reservation/repacking, and the independent daily allowance is not reset. Unhelpful-compression or verified layout-miss cases may be reconsidered within normal budgets. Persistent cache keys remain an efficiency decision for later measurement.
 
 Physical preparation verifies 28 existing boot files totaling 673,807,093 bytes and 154 BLAKE2b-tagged kernel/initramfs references. Archive contents verify individually, a private Windows copy has the same SHA-256, and a read-only root reference contains the running kernel modules. A consistent ledger reference passes SQLite integrity checking. The root reference remains on the same SSD and excludes separate home/other subvolumes; it is not a complete independent backup. Boot configuration/firmware variables are unchanged. The working installed seven-file profile still matches its manifest, power/timer are active and the NVMe policy is 5000 us. Physical boot/resume and demonstrated recovery remain open; preservation is not a boot qualification.
+
+## Actual physical reboot
+
+The [physical transition evidence](physical-transitions.md) passes one orderly restart of the BC-250 through its unchanged Limine 12.9.0 configuration. A new kernel boot identity establishes the hardware transition. All seven installed hashes, kernel version, recorded root-subvolume path and boot-config hash match the before record. Power/timer are enabled and active, the actual controller tolerance is 5000 us and the new runtime snapshot records its original 100000 us tolerance. Daily ledger charges were not rewound. Three persistent private-OS ownership records remain accepted. The 109-test isolated Linux suite passes on the restarted host. The recorder performs no reboot, sleep or repairs itself.
+
+An awake three-second RTC alarm was still waiting after 34 observed seconds before reboot. A second bounded probe timed out after 12 seconds on the fresh boot; both alarms were cleared. Wakeup reports enabled, only s2idle is exposed and the ACPI-alarm parameter reads Y. The underlying cause is unproven. No physical suspend was attempted, and no driver, firmware or boot argument was changed to work around this limit. Available physical wake assistance or a verified automatic wake path is needed for the suspend test.
+
+The normal reference root now has one verified physical reboot; the isolated native baseline images have not been physically booted. A known-good separate test/recovery entry and return path remain open. Limine reports one-shot entry selection but no boot-counting fallback; a capability report is not a recovery result. No new throughput comparison or hardware power cut occurred.
 
 ## Recovery procedure for the local reliability repair
 

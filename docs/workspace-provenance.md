@@ -112,6 +112,9 @@ variables, working services or power settings were changed. The first private
 preparation attempt stopped at an incorrect SHA-512 verifier; its empty output
 directory was retained, and the corrected BLAKE2b verifier used a new directory.
 
-Actual physical boot/reboot/resume, a demonstrated recovery path, physical-write
-and lost-sharing accounting, and the Stage 1 workload/measurement gates remain
-open. No hardware power-loss test or new throughput comparison was performed.
+The subsequent [physical transition test](physical-transitions.md) passes one
+orderly reboot of the working reference root, with automatic storage-policy
+startup and these three private OS records still accepted. Physical resume,
+an isolated test/recovery boot, physical-write and lost-sharing accounting, and
+the Stage 1 workload/measurement gates remain open. No hardware power-loss test
+or new throughput comparison was performed.
