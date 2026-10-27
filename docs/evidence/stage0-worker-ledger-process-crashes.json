@@ -1,0 +1,221 @@
+{
+  "passed": true,
+  "case_count": 40,
+  "elapsed_s": 25.749389862990938,
+  "real_sigkill": true,
+  "real_btrfs": true,
+  "simulated_systemd_and_sysfs": true,
+  "device_power_loss_tested": false,
+  "cases": [
+    {
+      "operation": "install",
+      "point": "partial-stage-1",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "staged-1",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "staged-2",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "staged-3",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "staged-4",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "staged-5",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "staged-6",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "staged-7",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "published-1",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "published-2",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "published-3",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "published-4",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "published-5",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "published-6",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "published-7",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "phase-validating",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "phase-activating",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "after-power-enable",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "after-timer-enable",
+      "outcome": "rolled-back"
+    },
+    {
+      "operation": "install",
+      "point": "committed-manifest",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "install",
+      "point": "cleaned-1",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "install",
+      "point": "cleaned-2",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "install",
+      "point": "cleaned-3",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "install",
+      "point": "cleaned-4",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "install",
+      "point": "cleaned-5",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "install",
+      "point": "cleaned-6",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "install",
+      "point": "cleaned-7",
+      "outcome": "committed-install-preserved"
+    },
+    {
+      "operation": "remove",
+      "point": "after-timer-disable",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "after-worker-stop",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "after-power-disable",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "phase-removing",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "deleted-1",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "deleted-2",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "deleted-3",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "deleted-4",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "deleted-5",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "deleted-6",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "deleted-7",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "remove",
+      "point": "committed-manifest",
+      "outcome": "removal-completed"
+    },
+    {
+      "operation": "install",
+      "point": "administrator-identical-replacement",
+      "outcome": "refused-and-preserved"
+    }
+  ],
+  "schema_version": 1,
+  "recorded_utc": "2026-10-27T08:03:14.237687+00:00",
+  "source_sha256": {
+    "install.py": "be809f189febefe41a4d83e724b0601fa390a6f9ebfdf303dc33bf18cb874c91",
+    "install_transaction.py": "a502b4268d52db216349c978831944eaa0c6c09029bca76e81e8a63b98bb3d79",
+    "storage_defaults_repack.py": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+    "tests/crash_install.py": "1b59f616db405d90a27aaa75a1e0c70085136daccce01d659b531d24f23ee150",
+    "tests/integration_install.py": "b9e22a2208f8cb91e81a088eb2a3ee057547b733a6b78fbc7b3aa7501c2b84ce"
+  },
+  "scope": "Fresh 40-case process SIGKILL rerun with hardened worker payload; real Btrfs and installer operations, simulated services/controller"
+}

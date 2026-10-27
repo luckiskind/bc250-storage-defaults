@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "source_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+  "previous_source_sha256": "19beb35a24e69791469001a88fd91e65a56617918eae075c50c868e6fedd9638",
+  "installed_files_verified": 7,
+  "configuration_preserved": true,
+  "consistent_ledger_backup_created": true,
+  "old_reservations_preserved": true,
+  "ledger_policy": {
+    "synchronous": 3,
+    "journal_mode": "delete"
+  },
+  "normal_service_result": {
+    "Result": "success",
+    "ExecMainStatus": "0"
+  },
+  "normal_worker_report": {
+    "processed_bytes": 0,
+    "charged_bytes": 0,
+    "retry_bytes": 0,
+    "verified_files": 0,
+    "counts": {}
+  },
+  "actual_nvme_qos_us": 5000,
+  "timer_was_active": true,
+  "host_reboot_tested": false,
+  "performance_tested": false,
+  "timer_active_restored": true,
+  "daily_budget_observation": {
+    "utc_day": "2026-10-27",
+    "charged_bytes": 2146840395,
+    "limit_bytes": 2147483648,
+    "remaining_bytes": 643253,
+    "minimum_file_bytes": 1048576
+  },
+  "disposable_self_test": {
+    "status": "repacked",
+    "processed_bytes": 2097152,
+    "charged_bytes": 2162688,
+    "retry_bytes": 65536,
+    "sha256": "e45d63f8863fb93f739ffd798351ddaca397bd7142c73e5fc02a1641084e29c5",
+    "shared_before": false,
+    "layout_target_met": true,
+    "large_extent_count": 0,
+    "encoded_extent_max": 16384
+  },
+  "timer_active_now": true,
+  "power_active_now": true,
+  "recorded_utc": "2026-10-27T07:54:24.423508+00:00"
+}
