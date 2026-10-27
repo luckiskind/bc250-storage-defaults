@@ -2,6 +2,8 @@
 
 Apply the tested drive power setting and a bounded Btrfs layout prototype with one command. This is a standalone system profile; it needs no game launch options and installs no driver or kernel patch.
 
+Development toward a broader accelerator follows the [sequential roadmap](docs/DEVELOPMENT_PLAN.md). The [Stage 0 baseline record](docs/baseline.md) separates completed checks from remaining hardware/recovery qualification.
+
 ## Apply
 
 On the BC-250:
@@ -31,7 +33,7 @@ Undo disables the timer, stops maintenance, restores the captured drive latency 
 | Setting | Default |
 | --- | --- |
 | NVMe latency tolerance | 5000 microseconds; reapplied on boot and resume |
-| Native Btrfs layout | zstd level 1, compressed extents of at most 16 KiB |
+| Native Btrfs layout | zstd level 1, target compressed extents of at most 16 KiB; misses reported explicitly |
 | Scope | Eligible stable ELF binaries under `/usr`, `/opt`, `/home`, `/srv`, `/var/lib/flatpak` |
 | Limits | 512 MiB/pass, 2 GiB/UTC day, 5 minutes/pass, 64 GiB free-space floor |
 | Scheduling | About hourly, first check after 10–15 minutes; low CPU/IO priority |
@@ -41,6 +43,8 @@ The power setting excludes the tested drive's deepest slow sleep state. It does 
 The prototype gradually repacks existing compressible files through Btrfs's defrag ioctl. It **does not set a universal 16 KiB policy for future writes**. Ordinary writes retain the existing mount policy, and stable eligible replacements become candidates on later passes. Non-ELF game archives/assets are outside the current validated class. No universal game-loading uplift is claimed.
 
 Before a pass, the worker checks CPU load and waits for low activity on `nvme0n1`. It skips recently modified files, hardlinks, symlinks, privileged binaries, explicit NOCOW/uncompressed/protected files, sparse/unsupported extents and poor compression samples. File sizes are limited to 1–256 MiB. It checks SHA-256 before/after every repack, verifies compressed extent sizes and preserves owner/mode. A stable content mismatch creates a `STOP` marker and halts future passes. Hash verification detects a failure; it is not a backup or an automatic repair mechanism.
+
+The development worker retries residual compressed extents once with stronger per-range flushing, up to 1 MiB of extra submitted logical work per file and within the existing pass/day budget. If the layout still exceeds the target but content verifies, it reports `layout-not-achieved-verified` and remembers the unchanged file instead of repeatedly rewriting it. It never counts that result as a successful 16 KiB layout. Before changing a file, it durably reserves budget; interruptions retain that conservative charge. These budgets count submitted logical layout work, including retries; they do not measure physical SSD write amplification. Each reservation is assigned to its attempt's UTC start day.
 
 **Repacking writes data and can break snapshot/reflink sharing, increasing space use.** Keep backups and adequate free space. Maintenance begins when the drive is quiet but can overlap a later foreground workload; scheduler priorities and budgets limit its impact. This remains experimental filesystem maintenance.
 
@@ -76,3 +80,15 @@ sudo sh bc250-storage-defaults/apply.sh
 The generated patch adds a `bc250-storage-defaults/` directory and does not alter the receiving repository's existing files. Remove the installed OS profile with `undo.sh` before deleting that source directory.
 
 See [VALIDATION.md](VALIDATION.md) for measured results and test coverage. Code is MIT licensed.
+
+## Development validation tools
+
+Capture a read-only machine baseline; root access allows verification of the private installation ledger:
+
+```sh
+sudo python3 tools/capture_baseline.py > baseline.json
+python3 -m unittest discover -s tests -v
+python3 tests/integration_install.py --scratch /path/to/writable/btrfs/scratch
+```
+
+The integration test runs as an ordinary user and requires `bwrap` plus user namespaces. It uses real installer file operations and Btrfs fixture ioctls in a private root, with simulated sysfs and service control. It does not reboot the host or test real systemd suspend/resume. The baseline tool excludes hostnames, serial numbers, usernames, arbitrary configured file paths, command lines and trace data; inspect any report before redistributing it.

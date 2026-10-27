@@ -39,3 +39,13 @@ python3 tests/live_check.py /path/to/writable/btrfs/scratch
 ```
 
 The live check changes only its disposable fixture. It does not alter services, real program files, power settings or the existing maintenance state. Keep performance validation separate from ordinary CI; virtual/cloud disks do not reproduce the target link or NVMe sleep states.
+
+## Stage 0 development qualification
+
+The initial goal audit found a real maintenance failure after a content-verified file retained a 32 KiB encoded extent. The same class of residual extent was reproduced on a disposable installation fixture. The development worker adds one bounded per-range-fsync retry, explicit content-verified layout-miss reporting and durable budget reservations before mutation. It does not claim to have established the precise kernel scheduling cause.
+
+The expanded suite passes **26 isolated Linux tests**, including partial-write cleanup, existing-destination preservation, retry byte limits, residual-layout reporting and durable crash-budget accounting. A bubblewrap user-namespace integration run also passes fresh apply, repeated apply, stop/start restoration, a simulated controller reset and the actual resume hook, administrator-edit refusal, repeated undo, failed-enable cleanup and reinstall. Real Btrfs ioctls and installer file operations run against private fixtures; service control and NVMe sysfs are simulated.
+
+After backing up the installed lab worker, manifest and SQLite ledger, the tested worker repair was applied on the BC-250. A normal bounded pass completed successfully: 104 files met the content/layout checks, 536,367,504 logical bytes were processed, 425,984 retry bytes were submitted, and total charged work was 536,793,488 bytes, below 512 MiB. The timer was restored and the 5000 us drive policy remained active. Installed file hashes matched the updated manifest.
+
+These are reliability results, not a new performance comparison. Actual host reboot/resume, hard power-loss recovery, independently restored full-system baselines and qualification on another clean OS are still open Stage 0 work. See [the baseline and recovery record](docs/baseline.md).

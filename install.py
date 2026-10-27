@@ -90,11 +90,28 @@ def preflight():
 def write_new(path, data, mode):
     # Never follow an existing destination, including a dangling symlink.
     fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, mode)
-    with os.fdopen(fd, 'wb') as stream:
-        stream.write(data)
-        stream.flush()
-        os.fsync(stream.fileno())
-        os.fchmod(stream.fileno(), mode)
+    owned = os.fstat(fd)
+    try:
+        with os.fdopen(fd, 'wb') as stream:
+            stream.write(data)
+            stream.flush()
+            os.fchmod(stream.fileno(), mode)
+            os.fsync(stream.fileno())
+        parent = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(parent)
+        finally:
+            os.close(parent)
+    except BaseException:
+        # A failed write never reaches install()'s completed-file list. Remove
+        # only the inode we created; preserve any administrator replacement.
+        try:
+            current = path.lstat()
+            if (current.st_dev, current.st_ino) == (owned.st_dev, owned.st_ino):
+                path.unlink()
+        except OSError:
+            pass
+        raise
 
 
 def write_manifest(data):
