@@ -148,3 +148,8 @@ sudo python3 bench/compare_disk_lookup.py run \
 
 Existing directories are refused. Raw traces and detailed snapshots stay private;
 reviewed aggregate results retain every trial, exclusion and failed screen.
+
+The [lifecycle-aware v2 implementation](trace-v2.md) now passes its scoped native
+identity/proof and negative controls. Its prospective schema keeps raw flags and
+unknown completions visible, without changing this earlier result. V2 overhead,
+actual reversed kernel callback order and foreground attribution remain open.

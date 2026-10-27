@@ -137,3 +137,8 @@ and compiles two fewer helper sites per callback, but its fixed timing experimen
 shows no demonstrated relative benefit and fails the full overhead screen.
 The next implementation must explicitly qualify software-sequence accounting;
 these lifecycle observations do not waive the existing capture failures.
+
+The [lifecycle-aware v2 implementation](trace-v2.md) now passes its scoped native
+identity/proof and negative controls. Its prospective schema keeps raw flags and
+unknown completions visible, without changing this earlier result. V2 overhead,
+actual reversed kernel callback order and foreground attribution remain open.
