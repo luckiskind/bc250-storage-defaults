@@ -83,3 +83,7 @@ The [two-batch calibration](trace-overhead.md) retains all 86 trials and fails t
 ## Batched observer decision
 
 The [distinct batching variant](batched-tracing.md) passes seven transport checks, including early final drain and visible ring overflow. Its 75-trial blocked comparison on one physical fixture shows no demonstrated overhead benefit and has only 18 valid blocks, below the frozen 20. Preserve the negative decision. Qualify the zero-byte/flush lifecycle and measure probe cost before another observer change, while freezing concrete application workloads and endpoints. No existing strict verdict is retroactively changed.
+
+## Application selection and first operational endpoint
+
+The [workload endpoint record](workload-endpoints.md) now pins installed application/game versions and observed asset suffixes, plus a tentative seven-scenario mix before new performance comparisons. The complete suite is still unfrozen. Three final-source Konsole launches each receive a valid cursor reply through the owned child's PTY and close normally; this qualifies a terminal operational marker, not first composited frame, cold-cache state or acceleration. An offline audit of all five strict failed comparison windows finds 11 flagged zero-byte flush records and no flagged reads. The 11 unmatched completion callbacks still lack operation/cause attribution, so existing verdicts remain unchanged. The Linux suite passes 134 tests.
