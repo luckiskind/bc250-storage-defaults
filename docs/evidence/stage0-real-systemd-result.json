@@ -1,0 +1,57 @@
+{
+  "checks": [
+    "fresh-install-real-systemd",
+    "repeat-apply",
+    "power-and-timer-active",
+    "real-service-stop-start",
+    "simulated-controller-reset-real-resume-hook",
+    "actual-worker-service-private-ELF",
+    "real-service-undo",
+    "repeat-undo",
+    "reinstall",
+    "guest-reboot-enabled-services-reapply-policy",
+    "undo-after-guest-reboot"
+  ],
+  "phase": 2,
+  "passed": true,
+  "real_systemd": true,
+  "simulated_nvme_sysfs": true,
+  "separate_kernel": false,
+  "host_reboot_tested": false,
+  "uid_mapping_isolated": true,
+  "guest_python": "Python 3.14.8",
+  "guest_systemd": "systemd 262 (262.1-1-arch)",
+  "worker_fixture": {
+    "verified_files": 1,
+    "processed_bytes": 6344456,
+    "charged_bytes": 6442760,
+    "retry_bytes": 98304,
+    "counts": {
+      "eligible": 1,
+      "repacked": 1
+    }
+  },
+  "reset_count_before": 1,
+  "schema_version": 1,
+  "container_exit": 0,
+  "elapsed_s": 10.572274657009984,
+  "host_nvme_qos_unchanged": true,
+  "host_nvme_qos_us": 5000,
+  "user_namespace_ownership": "chown",
+  "separate_volume": false,
+  "device_power_loss_tested": false,
+  "source_hashes": {
+    "install.py": "574f0422c3a50b5991742df05658b2b6d066965b0460d186ec4344ff821e4057",
+    "install_transaction.py": "a502b4268d52db216349c978831944eaa0c6c09029bca76e81e8a63b98bb3d79",
+    "storage_defaults_power.py": "124cba850178e4963bc4196c4abd66dea898719b87c564ac3c29f5f1dde7a153",
+    "storage_defaults_repack.py": "19beb35a24e69791469001a88fd91e65a56617918eae075c50c868e6fedd9638",
+    "config.json": "7fb9fe145b1e9b22ff121e977529b43f9122a228b6c1693102713d4f9ede4ebf",
+    "systemd/bc250-nvme-power.service": "90507634a534eddaf1ca73d4e4878df2490d86004738f71ec87125706f8fe488",
+    "systemd/bc250-btrfs-repack.service": "1f231667e996c41dff28d661210100f08b3a9d064385aee8297f17168cd149f7",
+    "systemd/bc250-btrfs-repack.timer": "b0e5c1ff29788a876763a308461a0a02632640fa724e6362d1c37a24d8eb3a9f",
+    "systemd/90-bc250-nvme-power": "2a87de0d0d003b32eec78b52901637869fe1772c657c500127e958d511bbfcc1"
+  },
+  "harness_sha256": "1a8a7d6ac32723c597b9f288776edf4f58ccb666f1201a97f9d8dcaf497b59ea",
+  "builder_sha256": "f19a426f73feda6ed244e70964375d1ec5114059031da2e8b300798e1770fc75",
+  "recorded_utc": "2026-10-27T04:29:17Z"
+}
