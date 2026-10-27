@@ -76,6 +76,17 @@ def maps_at(procfd):
 def identity(info):return info.st_dev,info.st_ino
 
 
+def compare_host_reference(path,actual):
+    """A host/mapping relation is separate from the process-root path relation."""
+    try:
+        fd=os.open(path,os.O_PATH|os.O_CLOEXEC)
+        try:host=os.fstat(fd)
+        finally:os.close(fd)
+        return dict(host_identity_matches_mapping=stat.S_ISREG(actual.st_mode) and
+            stat.S_ISREG(host.st_mode) and identity(host)==identity(actual))
+    except OSError as exc:return dict(host_identity_matches_mapping=False,host_errno=exc.errno)
+
+
 def inspect(pid,owned,lib):
     """Pin PID/root/mapping reference; compare rooted lookup and host lookup.
 
@@ -111,15 +122,12 @@ def inspect(pid,owned,lib):
                         result['view_identity_matches_mapping']=identity(view)==identity(actual)
                         if not stat.S_ISREG(view.st_mode):result['status']='nonregular_view'
                         elif not result['view_identity_matches_mapping']:result['status']='view_path_mismatch'
-                        else:
-                            try:
-                                hostfd=os.open(row['path'],os.O_PATH|os.O_CLOEXEC)
-                                try:host=os.fstat(hostfd)
-                                finally:os.close(hostfd)
-                                same=stat.S_ISREG(host.st_mode) and identity(host)==identity(actual)
-                            except OSError:same=False
-                            result['status']='same_host_object' if same else 'different_host_object'
+                        else:result['status']='view_matches_mapping'
                     except OSError as exc:result.update(status='unresolved_view',errno=exc.errno)
+                    try:
+                        result.update(compare_host_reference(row['path'],actual))
+                        if result['status']=='view_matches_mapping':
+                            result['status']='same_host_object' if result['host_identity_matches_mapping'] else 'different_host_object'
                     finally:os.close(reference)
                     records.append(result)
                 after,_=maps_at(procfd)
@@ -136,12 +144,15 @@ def inspect(pid,owned,lib):
 
 
 def summarize(samples):
-    counts=collections.Counter();skipped=collections.Counter();objects=set();namespaces=set()
+    counts=collections.Counter();skipped=collections.Counter();objects=set();host_objects=set();namespaces=set();host_rows=0
     for sample in samples:
         namespaces.add(sample['mount_namespace']);skipped.update(sample['skipped'])
         for row in sample['records']:
             counts[row['status']]+=1
             if row['status']=='same_host_object':objects.add((row['reference_device'],row['reference_inode']))
+            if row.get('host_identity_matches_mapping'):
+                host_rows+=1;host_objects.add((row['reference_device'],row['reference_inode']))
     return dict(process_samples=len(samples),mount_namespace_count=len(namespaces),statuses=dict(counts),
         skipped=dict(skipped),unique_verified_same_host_objects=len(objects),atomic_snapshot=False,
+        host_reference_matching_mapping_rows=host_rows,unique_host_reference_objects=len(host_objects),
         complete_application_input_closure=False)
