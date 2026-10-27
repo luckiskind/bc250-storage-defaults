@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 36 isolated Linux tests, including bounded retry, pre-mutation budget reservations and installer transaction recovery.
+- [x] Pass 41 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -74,6 +74,8 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Journal installation/removal and expose explicit recovery with strict file-ownership checks.
 - [x] Pass 40 real SIGKILL recovery checkpoints in a disposable Btrfs namespace.
 - [x] Build native B0/B1/B2 data copies, verify all 15 hashes and absence of shared extents, and record distinct layout histograms.
+- [x] Prepare an authenticated independent Arch userspace with recorded guest package inventory.
+- [x] Pass 11 lifecycle checks using real guest systemd, including bounded maintenance, undo/reinstall and startup policy reapplication after a guest reboot.
 
 The repaired pass processed 104 verified files, with 536,367,504 logical bytes processed and 425,984 extra retry bytes. Total charged work was 536,793,488 bytes, within the 536,870,912-byte pass budget. The successful pass took approximately 34.8 seconds including scanning and the quiet check. This timing is an operational observation, not a controlled throughput comparison.
 
@@ -87,7 +89,7 @@ The post-pass ledger held 482 recorded successfully repacked file signatures. Th
 
 Pending before declaring Stage 0 complete:
 
-- [ ] Qualify a fresh full installation with real systemd in an independently recoverable test OS.
+- [ ] Qualify a fresh installation in an independently bootable/recoverable test OS. The real-systemd userspace/container part is qualified; a separate guest kernel, volume and recovery boot path remain open.
 - [ ] Test actual boot/reboot and suspend/resume transitions with measured controller state.
 - [ ] Test device/storage power-loss recovery, including interrupted recovery itself, across installer and worker transitions on disposable storage. Process SIGKILL testing is complete for 40 selected installer checkpoints only.
 - [ ] Recreate independent full-system/volume B0/B1/B2 baselines; the native data-copy preparation above covers only the dataset part of this gate.
@@ -95,6 +97,14 @@ Pending before declaring Stage 0 complete:
 - [ ] Quantify physical write amplification, metadata growth and lost sharing; logical work budgets are not physical-write limits.
 
 No host reboot, suspend, kernel replacement, filesystem formatting or destructive fault injection was performed in this initial milestone. The working installation is not the power-loss-test target.
+
+## Real-systemd userspace qualification
+
+The [reusable harness result](evidence/stage0-real-systemd-result.json) records 11 passing lifecycle checks in a freshly prepared Arch tree: Python 3.14.8, systemd 262.1, real guest PID 1, real Btrfs and real installer/service operations. The controller files are simulated and attached only inside the guest. Qualification uses private networking and an isolated user range, with 1 GiB memory and a two-CPU quota. The copied ELF worker fixture verified 6,344,456 bytes and charged 6,442,760 bytes including a 98,304-byte bounded retry, below the 16 MiB test budget. Startup after a guest reboot reapplied the policy to a freshly reset simulated controller, and undo restored 100000 us in that fixture. The host retained its active services and actual 5000 us policy.
+
+Two environment limitations were resolved before this pass: nspawn's late API-filesystem setup hid early custom sysfs mounts, so the fixture is attached by an early guest service with a marker guard; Btrfs defrag refused ID-mapped ownership, so the dedicated guest tree uses shifted physical IDs while retaining user-namespace isolation. Failed exploratory runs were preserved privately. The public evidence comes from a fresh tree using the reusable tool and unchanged production installer/helpers.
+
+See [the qualification guide](real-systemd-qualification.md) for commands, scope and primary-source references. This is an independent userspace, not an independent kernel or storage volume. No performance comparison, physical controller reset or device power-loss result is inferred from it.
 
 ## Recovery procedure for the local reliability repair
 
