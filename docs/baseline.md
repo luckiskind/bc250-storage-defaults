@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 88 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
+- [x] Pass 95 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -157,6 +157,16 @@ The [native reproduction](evidence/stage0-mount-identity-reproduction.json) chan
 The [seven-case native matrix](evidence/stage0-persistent-ownership.json) passes after real device-number changes and actual installer SIGKILL. Published rollback, committed cleanup and interrupted removal complete idempotently. Identical replacement of both hardlink names, a same-inode/content snapshot, and two legacy-device-mismatch cases are refused with zero service calls and all present files/witnesses/journal bytes unchanged. Two new regular sparse image files are the only formatted targets; all test mounts are removed and images retained. Services/controller operations are simulated. See [the procedure and exact limits](persistent-ownership.md).
 
 The current 88 isolated Linux tests, fresh installation integration and [40-case process interruption rerun](evidence/stage0-persistent-ownership-process-crashes.json) pass. The rebuilt [selected installer cache-loss VM case](evidence/stage0-persistent-ownership-cache-vm.json) also passes with matching package/calibration hashes after dropping 32 KiB, killing the guest and recovering twice; its baseline is unchanged and recovery leaves zero pending model writes. Installed helper bytes remain unchanged; the actual timer and power service remain active at 5000 us with no pending host installation transaction. This installer-only change does not alter repacking policy or claim a new throughput gain. Broader fault/recovery orderings, private-lab/worker boot-dependent identity review, independent native volumes, physical boot/resume/recovery and physical-write measurements remain open.
+
+## Independent native userspace volumes
+
+The [native-volume set](evidence/stage0-native-volume-baselines.json) passes construction of B0/B1/B2 on three independent Btrfs filesystem UUIDs. Each protected image holds 36,650 durable entries and 694,670,218 logical file bytes with the same aggregate content/metadata/hardlink inventory hash. All 26,940 regular paths (25,119 unique inodes) are checked for shared extents. The source authenticated userspace remains unchanged. The outer NOCOW image files have no encoded/shared extents; they are sparse capacities, not reserved host space.
+
+The B2 worker's execution probe verifies the actual `7.2.8-1.219-cachyos-bore-bc250` kernel, matching copied filesystem UUID, mapped root/`/usr` ownership and private user/network namespaces. It verifies 46 files and charges 142,885,416 logical bytes with zero retry bytes, within the existing 512 MiB pass limit. Of 50 ELF candidates of at least 1 MiB, all initially have encoded extents above 16 KiB; four hardlinked candidates remain above target after the conservative worker pass. B0 and B1 retain all 50 larger layouts. All contents and checked metadata remain equal.
+
+The current 95 Linux unit tests pass, including native-output guards, special-node refusal, hardlink preservation, volatile-node exclusions and an actual archive test preserving an ordinary file with a keyring-socket name. The initial build stopped before image creation on stale keyring sockets; accepted construction excludes only the six known paths that are actually sockets. A preliminary set is preserved separately; the accepted report matches the final builder and direct execution probes.
+
+The source, actual 5000 us policy and working seven-file deployment hashes remain unchanged, with power/timer active. No drive-power comparison, cold-cache run or throughput benchmark was performed. These are native loop-backed full userspace volumes, not physical startup/resume qualification. See [the volume recipe and limits](native-volumes.md). Writable trial-copy/reset qualification, the recoverable physical environment and remaining Stage 0 gates stay open.
 
 ## Recovery procedure for the local reliability repair
 
