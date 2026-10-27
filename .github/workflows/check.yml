@@ -9,9 +9,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check syntax and isolated safety tests
         run: |
-          python3 -m compileall -q install.py install_transaction.py storage_defaults_power.py storage_defaults_repack.py make_patch.py tests tools
+          python3 -m compileall -q install.py install_transaction.py storage_defaults_power.py storage_defaults_repack.py make_patch.py tests tools bench analysis
           sh -n apply.sh undo.sh status.sh systemd/90-bc250-nvme-power
           python3 -m unittest discover -s tests -v
+      - name: Build the read-only aligned fixture worker
+        run: |
+          cc -O2 -Wall -Wextra -Werror -pthread bench/direct_probe.c -o /tmp/bc250-direct-probe
+          if /tmp/bc250-direct-probe; then exit 1; else test "$?" -eq 2; fi
       - name: Verify exported patch applies to an empty repository
         run: |
           python3 make_patch.py /tmp/bc250-storage.patch
