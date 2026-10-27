@@ -148,3 +148,5 @@ endpoints. The qualified cost of the separate six-program v2 observer does not
 qualify this 16-program diagnostic. Absolute fixture cost, application-level
 critical-path waiting, the full suite and B0/B1/B2 comparisons remain open.
 No accelerator architecture or default is promoted.
+
+The [selected-worker folio-wake extension](folio-wait-lineage.md) passes 12 native controls with queue identity, original-bio callback/range and scheduler proof. All four cold cases resolve an actual blocked segment; warm cases have none. Native shared 0/0 and exclusive 1/1 wake semantics both pass. Removing folio proof leaves a valid cold read unresolved and correctly fails graph quality. The reference remains unchanged; physical request edges, application critical paths and added diagnostic cost stay open. The suite passes 235 Linux tests.
