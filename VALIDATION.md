@@ -23,7 +23,7 @@ Sequential logical throughput reached about 1195–1225 MB/s. The incompressible
 
 The earlier persistent lab deployment verified 211 files (1,072,514,930 logical bytes) before this reusable packaging work. That deployment history is separate from the tests below. The source retains the same defrag operation, power target, scheduling policy and eligibility limits, with portable installation and disposable validation replacing personal lab paths.
 
-## Packaged source checks
+## Original v0.1.0 packaged source checks
 
 - 15 isolated Linux tests cover repeat apply/undo, existing file preservation, administrator edits, unknown manifest paths, failed activation cleanup, keeping helpers if stopping fails, simulated controller reset, power-policy conflicts, unsupported drive refusal, hash-mismatch STOP handling, deadline bounds and file-class exclusions.
 - Read-only compatibility check passed on the BC-250.
@@ -44,7 +44,11 @@ The live check changes only its disposable fixture. It does not alter services, 
 
 The initial goal audit found a real maintenance failure after a content-verified file retained a 32 KiB encoded extent. The same class of residual extent was reproduced on a disposable installation fixture. The development worker adds one bounded per-range-fsync retry, explicit content-verified layout-miss reporting and durable budget reservations before mutation. It does not claim to have established the precise kernel scheduling cause.
 
-The expanded suite passes **26 isolated Linux tests**, including partial-write cleanup, existing-destination preservation, retry byte limits, residual-layout reporting and durable crash-budget accounting. A bubblewrap user-namespace integration run also passes fresh apply, repeated apply, stop/start restoration, a simulated controller reset and the actual resume hook, administrator-edit refusal, repeated undo, failed-enable cleanup and reinstall. Real Btrfs ioctls and installer file operations run against private fixtures; service control and NVMe sysfs are simulated.
+The expanded suite passes **36 isolated Linux tests**, including partial-write cleanup, existing-destination preservation, retry byte limits, residual-layout reporting, durable crash-budget accounting, transaction locking and recovery ownership checks. A bubblewrap user-namespace integration run also passes fresh apply, repeated apply, stop/start restoration, a simulated controller reset and the actual resume hook, administrator-edit refusal, repeated undo, failed-enable cleanup and reinstall. Real Btrfs ioctls and installer file operations run against private fixtures; service control and NVMe sysfs are simulated.
+
+A separate [40-case SIGKILL matrix](docs/evidence/stage0-installer-crash-tests.json) passes interruption during partial staging, each staged/published file, validation/activation, manifest commit, staged cleanup, service shutdown and each removal. Recovery is checked twice for idempotence. A same-content administrator replacement with a different inode is preserved. These are process-interruption results on real Btrfs with simulated services/controller state; they do not establish device power-loss durability.
+
+The [native data baseline manifest](docs/evidence/stage0-native-baseline-manifest.json) records three independent copies of four public ELF libraries plus a 32 MiB incompressible control. All 15 files matched their reference content hashes and had no FIEMAP shared extents. B0/B1 used ordinary native writes, with maximum compressed extents of 128 KiB where compression occurred; all four repacked B2 ELF copies reached 16 KiB. The control remained uncompressed. The builder did not change power settings or source files. No throughput comparison was performed on these new copies, and they are not full-system/independent-volume baselines.
 
 After backing up the installed lab worker, manifest and SQLite ledger, the tested worker repair was applied on the BC-250. A normal bounded pass completed successfully: 104 files met the content/layout checks, 536,367,504 logical bytes were processed, 425,984 retry bytes were submitted, and total charged work was 536,793,488 bytes, below 512 MiB. The timer was restored and the 5000 us drive policy remained active. Installed file hashes matched the updated manifest.
 

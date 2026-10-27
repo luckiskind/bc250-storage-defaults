@@ -61,7 +61,15 @@ sudo systemctl disable --now bc250-btrfs-repack.timer
 
 The worker being **inactive (dead), Result=success** between timer runs is normal. Its service sandbox grants explicit write access to the binary directories so that it can change physical extents. It needs root; it does not install credentials, change mount options, disable snapshots, change CPU power policy or tune game settings.
 
-Files are installed under `/usr/local/libexec/bc250-storage-defaults`, `/etc/systemd/system`, `/etc/bc250-storage-defaults.json`, and `/usr/lib/systemd/system-sleep/90-bc250-nvme-power`. Root-only runtime/audit state lives under `/run/bc250-storage-power.json` and `/var/lib/bc250-storage-defaults`. If installation fails after activation, it attempts to stop/disable all its units before removing helpers; if stopping fails, files are retained for recovery. A power loss during installation may require inspection of the retained manifest/files.
+Files are installed under `/usr/local/libexec/bc250-storage-defaults`, `/etc/systemd/system`, `/etc/bc250-storage-defaults.json`, and `/usr/lib/systemd/system-sleep/90-bc250-nvme-power`. Root-only runtime/audit state lives under `/run/bc250-storage-power.json` and `/var/lib/bc250-storage-defaults`. Development installs/removals now keep a durable transaction journal and stage complete files before publishing them. If stopping services fails, helpers and the journal are retained for recovery.
+
+After an interrupted development install or removal, keep the matching source checkout, inspect `sudo sh status.sh`, then run:
+
+```sh
+sudo sh apply.sh --recover
+```
+
+Recovery rolls back an uncommitted install, preserves a committed install, or completes an interrupted removal. It refuses changed or replaced owned files. The matching checkout is required to identify an interrupted partial staging write. Forty real process-kill checkpoints pass in an isolated Btrfs root; actual device power-loss recovery remains unqualified. See [recovery details](docs/recovery.md).
 
 Existing earlier lab installations are detected and never overwritten. They can be inspected with `status.sh`. Keep their original undo tool for an intentional migration; this project's undo also accepts their manifest if all owned paths/checksums still match. Downloading this project does not change an already running lab installation.
 
@@ -89,6 +97,16 @@ Capture a read-only machine baseline; root access allows verification of the pri
 sudo python3 tools/capture_baseline.py > baseline.json
 python3 -m unittest discover -s tests -v
 python3 tests/integration_install.py --scratch /path/to/writable/btrfs/scratch
+python3 tests/crash_install.py --scratch /path/to/writable/btrfs/scratch
 ```
 
 The integration test runs as an ordinary user and requires `bwrap` plus user namespaces. It uses real installer file operations and Btrfs fixture ioctls in a private root, with simulated sysfs and service control. It does not reboot the host or test real systemd suspend/resume. The baseline tool excludes hostnames, serial numbers, usernames, arbitrary configured file paths, command lines and trace data; inspect any report before redistributing it.
+
+Build fresh independent data copies for later native-layout comparisons:
+
+```sh
+python3 tools/build_baseline_datasets.py --output /path/to/new/btrfs/dataset \
+  --source /path/to/stable/elf-library
+```
+
+The builder creates three byte-copied variants plus an incompressible control, records hashes and extent layouts, and rejects shared extents. It requires the qualified zstd:1 mount and 64 GiB free. It changes only its new output directory; it does not apply power settings. The public manifest's B0/B1/B2 power values describe the intended future experiment. These data copies do not establish independent OS/volume baselines. `source-paths-private.json` is local provenance and should not be redistributed without review.
