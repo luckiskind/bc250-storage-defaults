@@ -4,7 +4,7 @@ Apply the tested drive power setting and a bounded Btrfs layout prototype with o
 
 Development toward a broader accelerator follows the [sequential roadmap](docs/DEVELOPMENT_PLAN.md). The [Stage 0 baseline record](docs/baseline.md) separates completed checks from remaining hardware/recovery qualification.
 
-Current development measurement work passes 152 Linux tests. [Mapped-file identity controls](docs/mapped-identity.md) distinguish private root views, including Btrfs objects with identical raw maps device/inode values. The [Firefox input/profile audit](docs/browser-inputs.md) still records candidates; integrating that observer and qualifying cold-cache behavior remain open.
+Current development measurement work passes 157 Linux tests. The [temporary Firefox identity observer](docs/browser-identity.md) verifies mapped host objects across the owned test processes and preserves unresolved sandbox-root views. [Native Btrfs identity controls](docs/mapped-identity.md) still pass. Complete input closure, cold-cache behavior and performance comparisons remain open.
 
 ## Apply
 

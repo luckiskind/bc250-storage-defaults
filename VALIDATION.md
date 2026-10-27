@@ -1,6 +1,6 @@
 # Validation and limits
 
-Current development checks: 152 isolated Linux tests, syntax verification, four native [mapped-identity controls](docs/mapped-identity.md) and the [Firefox input/profile audit](docs/browser-inputs.md). These audit runs are not acceleration measurements; historical results below retain their original scopes.
+Current development checks: 157 isolated Linux tests, syntax verification, four native [mapped-identity controls](docs/mapped-identity.md) and a [scoped Firefox mapping observer](docs/browser-identity.md) with five live rejection cases. These audit runs are not acceleration measurements; historical results below retain their original scopes.
 
 ## Measured on one BC-250
 
