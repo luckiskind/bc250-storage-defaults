@@ -52,6 +52,8 @@ This selected scenario is not automatically promoted to every installer or worke
 
 The [four-case calibration](evidence/stage0-cache-calibration.json) passes with QEMU 11.1.2 and the recorded exact source hashes. The [selected installer VM case](evidence/stage0-cache-installer-vm.json) passes after discarding **102,400 bytes (100 KiB)** of pending model data. Recovery is repeated, the same guest filesystem mounts successfully, and its orderly shutdown leaves zero pending writes. The calibration file's unchanged public bytes match the VM report's prerequisite SHA-256. The protected baseline and actual host policy remain unchanged. The expanded isolated Linux suite passes 73 tests.
 
+The later [persistent installer ownership repair](persistent-ownership.md) has its own rebuilt [selected cache-loss result](evidence/stage0-persistent-ownership-cache-vm.json). That repaired payload recovers twice after 32 KiB of positive model write loss, with unchanged prerequisite calibration bytes, baseline and host policy. The original 100 KiB result above remains evidence for its pinned earlier payload; differing lost-byte counts reflect selected pending writes, not a performance comparison.
+
 ## Limits and next qualification
 
 Cuts occur between backend requests. In-progress FLUSH/FUA operations finish before the cut lock; partial barriers, torn sectors, arbitrary reordering, controller firmware failures and NAND behavior are not modeled. The host kernel, its filesystem and the actual SSD remain powered. Real hardware can persist ordinary writes earlier than this deterministic model does.
