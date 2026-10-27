@@ -53,7 +53,15 @@ def instrument():
  app.run=run
  oldmanifest=app.write_manifest
  def manifest(data):
-  oldmanifest(data);cut('committed-manifest')
+  oldmanifest(data)
+  if point=='committed-missing-timer-link':
+   # Explicit compatibility injection for the observed pre-fix failure. This
+   # extra case is not counted as naturally occurring loss in the fixed build.
+   link=app.UNIT_DIRECTORY/'timers.target.wants'/app.TIMER
+   assert link.is_symlink() and link.resolve()==app.UNIT_DIRECTORY/app.TIMER
+   link.unlink();app.sync_service_links()
+   cut('committed-missing-timer-link')
+  cut('committed-manifest')
  app.write_manifest=manifest
  olddelete=app.transaction.Transaction.delete_target
  count=0
@@ -95,6 +103,16 @@ try:
   raise RuntimeError('Requested recovery checkpoint was not reached')
  elif mode=='recover':
   assert app.transaction.pending_path(app.STATE).is_file(),'Expected an interrupted transaction'
+  if params.get('bc250.case')=='manifest-committed':
+   for unit in (app.POWER,app.TIMER):
+    assert command('systemctl','is-enabled',unit)=='enabled'
+    assert command('systemctl','is-active',unit)=='active'
+   assert qos.read_text().strip()=='5000'
+   report['committed_startup_before_recovery_verified']=True
+  elif params.get('bc250.case')=='legacy-missing-timer-link':
+   assert not (app.UNIT_DIRECTORY/'timers.target.wants'/app.TIMER).exists()
+   assert subprocess.run(['systemctl','is-enabled','--quiet',app.TIMER]).returncode!=0
+   report['missing_timer_link_before_recovery_verified']=True
   cli('--recover');cli('--recover')
   assert not app.transaction.pending_path(app.STATE).exists()
   assert all(not list(p.glob('.bc250-storage-*')) for p in {t.parent for t in app.payloads()})

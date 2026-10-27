@@ -20,6 +20,7 @@ CASES={
     'power-enabled':('cut-install','after-power-enable','removed'),
     'timer-enabled':('cut-install','after-timer-enable','removed'),
     'manifest-committed':('cut-install','committed-manifest','installed'),
+    'legacy-missing-timer-link':('cut-install','committed-missing-timer-link','installed'),
     'removal-started':('cut-remove','deleted-1','removed'),
     'recovery-interrupted':('cut-install','after-timer-enable','removed'),
 }
@@ -35,10 +36,10 @@ def acknowledged(line,prefix,token):
     return data
 
 
-def boot(overlay,log,mode,point='none',expected='removed'):
+def boot(overlay,log,mode,point='none',expected='removed',case='none'):
     token=uuid.uuid4().hex
     args=probe.qemu_command(overlay,
-        f'bc250.mode={mode} bc250.point={point} bc250.expected={expected} bc250.token={token}')
+        f'bc250.mode={mode} bc250.point={point} bc250.expected={expected} bc250.token={token} bc250.case={case}')
     started=time.monotonic();cut=None;result=None;pending=b'';total=0
     with log.open('xb') as output:
         proc=subprocess.Popen(args,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
@@ -108,8 +109,10 @@ def main():
         cuts=[boot(overlay,run/(name+'-cut.serial.log'),mode,point)]
         if name=='recovery-interrupted':
             cuts.append(boot(overlay,run/(name+'-recover-cut.serial.log'),'cut-recover','deleted-1'))
-        recovery=boot(overlay,run/(name+'-recover.serial.log'),'recover',expected=expected)
+        recovery=boot(overlay,run/(name+'-recover.serial.log'),'recover',expected=expected,case=name)
         result=dict(case=name,interruptions=cuts,recovery=recovery)
+        if name=='legacy-missing-timer-link':
+            result['additional_fault']='explicit removal of the committed timer startup symlink, synchronized before cut'
         results.append(result)
         print(json.dumps(result),flush=True)
     probe.require(probe.sparse_fingerprint(base)==before,'Protected baseline changed')

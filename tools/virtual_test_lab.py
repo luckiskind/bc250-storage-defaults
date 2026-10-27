@@ -63,6 +63,19 @@ def stage(name,directory):
     return '/vmlab/'+name
 
 
+def verify_profile_sources(directory):
+    manifest=json.loads((directory/'image-build.json').read_text())
+    require(manifest.get('storage_profile_fixture') is True,'Build a profile fixture first')
+    for name,key in (('vm_image_builder.py','builder_source_sha256'),
+                     ('vm_profile_guest.py','profile_guest_source_sha256')):
+        require(hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()==manifest.get(key),
+                'Embedded guest source changed; rebuild profile under a new label')
+    require(set(manifest['package_sha256'])==set(PACKAGE_FILES),'Unexpected embedded package files')
+    for name,sha in manifest['package_sha256'].items():
+        require(hashlib.sha256((SOURCE.parent/name).read_bytes()).hexdigest()==sha,
+                'Package source changed; rebuild profile under a new label')
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('step',choices=['packages','inventory','build','boot','diagnostic','profile-build','profile-test'])
@@ -107,13 +120,14 @@ def main():
     artifacts.mkdir(mode=0o700,exist_ok=True)
     directory=artifacts/args.artifact_label
     if not constructing:require(directory.is_dir() and (directory/'image-build.json').is_file(),'Build this artifact set first')
+    if args.step=='profile-test':verify_profile_sources(directory)
     if args.step=='profile-build':
         require(not directory.exists(),'Use a new profile artifact label; previous artifacts preserved')
     target=stage(helper,directory)
     if args.step in ('profile-build','profile-test'):
-        stage('vm_profile_guest.py',directory)
         stage('vm_boot_probe.py',directory)
     if args.step=='profile-build':
+        stage('vm_profile_guest.py',directory)
         package=directory/'package';package.mkdir(mode=0o700)
         identity=build.GUEST.stat();os.chown(package,identity.st_uid,identity.st_gid)
         for name in PACKAGE_FILES:

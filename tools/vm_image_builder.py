@@ -124,8 +124,11 @@ WantedBy=multi-user.target
                 initramfs_sha256=digest(LAB/'initramfs.img'),fixture=reference,
                 rootdir_security_xattrs_copied=False,image_is_regular_file=True,
                 host_device_formatted=False,guest_not_yet_booted=True,
+                builder_source_sha256=digest(Path(__file__)),
                 storage_profile_fixture=args.profile_fixture)
     if args.profile_fixture:
+        report['profile_guest_source_sha256']=digest(LAB/'vm_profile_guest.py')
+        report['embedded_probe_sha256']=digest(root/'opt/bc250-vm-probe.py')
         report['package_sha256']={str(p.relative_to(LAB/'package')):digest(p)
             for p in sorted((LAB/'package').rglob('*')) if p.is_file()}
     (LAB/'image-build.json').write_text(json.dumps(report,indent=2)+'\n')
