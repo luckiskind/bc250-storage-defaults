@@ -109,3 +109,7 @@ Four native [mapping-reference controls](mapped-identity.md) now distinguish the
 ## Scoped Firefox mapping observer
 
 The [temporary root observer](browser-identity.md) now samples two functional launches, with 15 processes across three mount namespaces each. It verifies 209 host objects against pinned mapping references, while 172 also have matching process-root views. Six proc-fdinfo roots explain the remaining recorded view limitation; those aliases stay unresolved. Five live UID/scope/nonce/schema/replay requests are rejected, browser main capabilities remain zero, and finish verifies browser cleanup. The unchanged audit still has incomplete closure and no cache/performance qualification. All 157 Linux tests and four native identity controls pass.
+
+## Selected native Firefox file data
+
+The [independent native fixture](native-browser-inputs.md) now preserves 423 selected files and metadata, verifies every read-only binding through the main root, and observes 200 mapped copies in each of 15-process/three-namespace captures. Selected copied data starts at zero resident bytes for cold and 733,818,880 page-rounded resident bytes for warm. A root-mount switch and writable per-process proc controls preserve user-namespace availability; sysctls remain read-only and sandbox fallback causes refusal. Two earlier attempts are rejected. This remains selected-file data control, not complete browser cold state, layout-equivalent B0/B1/B2 or performance. The suite passes 162 Linux tests.

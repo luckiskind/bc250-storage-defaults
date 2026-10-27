@@ -128,8 +128,9 @@ Observer collection occurs after the functional ready marker and adds work to
 the audit. It is not an overhead-qualified performance observer. No global
 cache eviction or power/boot/default change occurs.
 
-Next, use the verified mapping associations to construct and validate selected
-native Firefox inputs with the recorded corpus-budget tradeoff. Non-mapped
+The [selected native fixture](native-browser-inputs.md) now uses these associations
+and passes its recorded copied-file cache controls with the explicit corpus-budget
+tradeoff. Complete native application equivalence remains open. Non-mapped
 reads, broker/IPC dependencies, transient loads and full input/reset/cache
 closure remain open. Qualify wrapper cost before comparisons, then continue
 the private package-update, game/streaming and request-attribution work. Stage 1
