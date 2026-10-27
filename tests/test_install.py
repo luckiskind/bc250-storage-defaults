@@ -1,12 +1,14 @@
 """Installer failure, idempotency and ownership tests: only temporary files/mock systemctl."""
 import importlib.util
+import errno
 import json
+import os
 from pathlib import Path
 import tempfile
 import sys
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('installer', ROOT / 'install.py')
@@ -34,6 +36,13 @@ class Installation(unittest.TestCase):
         fake_process = patch.object(app.subprocess, 'run', return_value=SimpleNamespace(returncode=0, stdout='', stderr=''))
         fake_process.start()
         self.addCleanup(fake_process.stop)
+        # Unit roots can be ext4/tmpfs on CI. Native integration and mount-order
+        # qualification exercise actual Btrfs UUID/export-handle lookup.
+        identity = patch.object(app.transaction, 'persistent_identity', side_effect=lambda fd: dict(
+            kind='btrfs-fh-v1', fs_uuid='1' * 32, handle_type=129,
+            handle=os.fstat(fd).st_ino.to_bytes(16, 'little').hex()))
+        identity.start()
+        self.addCleanup(identity.stop)
         patches = {
             'BASE': root / 'helpers', 'STATE': self.state, 'MANIFEST': self.manifest,
             'UNIT_DIRECTORY': self.unit_directory,
@@ -279,6 +288,120 @@ class Installation(unittest.TestCase):
             app.recover()
         self.assertTrue(staged.exists())
         self.assertEqual(self.calls, [])
+
+    def test_removal_uses_persistent_identity_instead_of_saved_device_number(self):
+        app.install()
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'remove',
+                                              json.loads(self.manifest.read_text()))
+        tx.data['entries'][0]['device'] += 1
+        tx.save()
+        app.recover()
+        self.assertFalse(self.target.exists())
+        self.assertFalse(app.transaction.pending_path(self.state).exists())
+
+    def test_same_content_replacement_blocks_removal_before_service_changes(self):
+        app.install()
+        app.transaction.Transaction.begin(self.state, app.payloads(), 'remove',
+                                          json.loads(self.manifest.read_text()))
+        replacement = self.target.with_name('replacement')
+        replacement.write_bytes(self.target.read_bytes()); replacement.chmod(0o644)
+        os.replace(replacement, self.target)
+        self.calls.clear()
+        with self.assertRaisesRegex(RuntimeError, 'Ownership changed'):
+            app.recover()
+        self.assertTrue(self.target.exists())
+        self.assertTrue(app.transaction.pending_path(self.state).exists())
+        self.assertEqual(self.calls, [])
+
+    def test_same_content_stage_replacement_is_preserved(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        source, _ = app.payloads()[self.target]
+        tx.publish(self.target, source.read_bytes(), app.write_new)
+        stage = Path(tx.data['entries'][0]['staged'])
+        replacement = stage.with_name('replacement')
+        replacement.write_bytes(stage.read_bytes()); replacement.chmod(0o644)
+        os.replace(replacement, stage)
+        with self.assertRaisesRegex(RuntimeError, '[Oo]wnership changed'):
+            app.recover()
+        self.assertTrue(stage.exists())
+        self.assertTrue(self.target.exists())
+        self.assertEqual(self.calls, [])
+
+    def test_invalid_persistent_journal_identity_is_rejected(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        source, _ = app.payloads()[self.target]
+        tx.publish(self.target, source.read_bytes(), app.write_new)
+        tx.data['entries'][0]['staged_identity']['handle'] = 'not hex'
+        tx.save()
+        with self.assertRaisesRegex(RuntimeError, 'Invalid staging identity'):
+            app.recover()
+        self.assertTrue(self.target.exists())
+        self.assertEqual(self.calls, [])
+
+    def test_legacy_identity_mismatch_is_not_upgraded_from_content(self):
+        app.install()
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'remove',
+                                              json.loads(self.manifest.read_text()))
+        tx.data['format_version'] = 1
+        del tx.data['entries'][0]['identity']
+        tx.data['entries'][0]['device'] += 1
+        tx.save()
+        self.calls.clear()
+        with self.assertRaisesRegex(RuntimeError, 'Ownership changed'):
+            app.recover()
+        self.assertTrue(self.target.exists())
+        self.assertEqual(self.calls, [])
+
+    def test_legacy_install_journal_can_recover_with_matching_original_identity(self):
+        tx = app.transaction.Transaction.begin(self.state, app.payloads(), 'install')
+        source, _ = app.payloads()[self.target]
+        tx.publish(self.target, source.read_bytes(), app.write_new)
+        s = Path(tx.data['entries'][0]['staged']).stat()
+        tx.data['format_version'] = 1
+        tx.data['entries'][0]['staged_identity'] = dict(device=s.st_dev, inode=s.st_ino)
+        tx.save()
+        app.recover()
+        self.assertFalse(self.target.exists())
+        self.assertFalse(app.transaction.pending_path(self.state).exists())
+
+
+@unittest.skipUnless(sys.platform == 'linux', 'Linux Btrfs ABI required')
+class PersistentIdentity(unittest.TestCase):
+    def fs_info(self, fd, request, data, mutate):
+        self.assertEqual((fd, request, len(data), mutate), (17, 0x8400941f, 1024, True))
+        data[16:32] = bytes(range(1, 17))
+
+    def test_opaque_handle_is_paired_with_uuid_and_ignores_mount_id(self):
+        def lookup(fd, path, handle, mount, flags):
+            self.assertEqual((fd, path, flags), (17, b'', 0x1000))
+            self.assertEqual(handle._obj.handle_bytes, 128)
+            handle._obj.handle_bytes = 3
+            handle._obj.handle_type = 129
+            handle._obj.data[:3] = (1, 2, 3)
+            mount._obj.value = 9999
+            return 0
+        libc = SimpleNamespace(name_to_handle_at=Mock(side_effect=lookup))
+        with patch.object(app.transaction.fcntl, 'ioctl', side_effect=self.fs_info), \
+                patch.object(app.transaction.ctypes, 'CDLL', return_value=libc):
+            identity = app.transaction.persistent_identity(17)
+        self.assertEqual(identity, dict(kind='btrfs-fh-v1', fs_uuid=bytes(range(1,17)).hex(),
+                                        handle_type=129, handle='010203'))
+        self.assertTrue(app.transaction.valid_identity(identity))
+
+    def test_missing_filesystem_identity_is_refused(self):
+        with patch.object(app.transaction.fcntl, 'ioctl'), \
+                patch.object(app.transaction.ctypes, 'CDLL') as libc:
+            with self.assertRaisesRegex(RuntimeError, 'Missing Btrfs filesystem identity'):
+                app.transaction.persistent_identity(17)
+        libc.assert_not_called()
+
+    def test_failed_handle_lookup_has_no_device_number_fallback(self):
+        libc = SimpleNamespace(name_to_handle_at=Mock(return_value=-1))
+        with patch.object(app.transaction.fcntl, 'ioctl', side_effect=self.fs_info), \
+                patch.object(app.transaction.ctypes, 'CDLL', return_value=libc), \
+                patch.object(app.transaction.ctypes, 'get_errno', return_value=errno.EPERM):
+            with self.assertRaisesRegex(OSError, 'persistent Btrfs file identity'):
+                app.transaction.persistent_identity(17)
 
 
 if __name__ == '__main__':
