@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 95 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
+- [x] Pass 102 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -167,6 +167,16 @@ The B2 worker's execution probe verifies the actual `7.2.8-1.219-cachyos-bore-bc
 The current 95 Linux unit tests pass, including native-output guards, special-node refusal, hardlink preservation, volatile-node exclusions and an actual archive test preserving an ordinary file with a keyring-socket name. The initial build stopped before image creation on stale keyring sockets; accepted construction excludes only the six known paths that are actually sockets. A preliminary set is preserved separately; the accepted report matches the final builder and direct execution probes.
 
 The source, actual 5000 us policy and working seven-file deployment hashes remain unchanged, with power/timer active. No drive-power comparison, cold-cache run or throughput benchmark was performed. These are native loop-backed full userspace volumes, not physical startup/resume qualification. See [the volume recipe and limits](native-volumes.md). Writable trial-copy/reset qualification, the recoverable physical environment and remaining Stage 0 gates stay open.
+
+## Native startup, persistence and independent reset
+
+The startup audit found two historical qualification services still enabled in the initial construction set, with their scripts outside the copied tree. The original content/layout report remains valid for its earlier scope; it did not establish clean guest startup. The corrected producer removes only the exact known fixture services and activation links from new copies, validates the whole set first and preserves unknown/edited files. Source OS and original images remain unchanged.
+
+The [new clean B0/B1/B2 set](evidence/stage0-native-clean-volume-baselines.json) has three distinct filesystem UUIDs, equal original content/metadata/hardlink inventories, 36,646 durable entries and 694,669,717 logical file bytes per tree. The new B2 pass verifies 45 files and charges 141,427,840 logical bytes without retries, within its unchanged per-pass allowance. Fresh native layout can vary between constructions; the exact frozen images define each trial.
+
+The [nine-launch native trial matrix](evidence/stage0-native-trials.json) passes three creates, three orderly remount/persistence relaunches and three independent resets. It verifies actual guest systemd PID 1, the BC-250 kernel, correct copied filesystem UUIDs, mapped root and private user/PID/network namespaces. Each phase reaches `multi-user.target` with zero failed services, executes Python and OpenSSL, checks SQLite integrity and commits durable state. Counts progress 1 to 2 on the first copy and restart at 1 with a new nonce on a fresh copy. Fixture mutations survive relaunch and disappear on reset; full initial/reset trees and every protected baseline fingerprint verify. Each phase unit exits before remounting. The 102-test Linux suite passes, and all seven live installed hashes, the active power/timer services and actual 5000 us policy still verify.
+
+See [the startup/reset recipe](native-trials.md). These are native guest/userspace and orderly persistence results, with a shared host kernel and retained host caches. Physical boot/reboot/suspend/resume, crash/cache-loss extension to these trial volumes, private-lab/worker boot-dependent identity review, physical-write accounting and Stage 1 measurement gates remain open.
 
 ## Recovery procedure for the local reliability repair
 

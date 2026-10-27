@@ -42,7 +42,15 @@ The output parent must exist and contain no symlink components. Existing output 
 
 The generated archive retains package metadata and hardlinks. Only six explicitly named package-keyring Unix socket paths are excluded when they are actually sockets; unexpected special files still fail the source inventory. The first construction attempt stopped on these leftover runtime sockets before any image was created. Their exclusion has its own regression test. Ordinary files with the same names remain part of the durable inventory.
 
-## Recorded construction result
+## Startup audit and clean successor
+
+The first construction set below is preserved as historical content/layout evidence. A later startup audit found two enabled qualification fixture services whose scripts were not included in the copied userspace. The corrected builder validates and removes only those exact known fixtures and activation links from new copies; edited units and unrelated services are preserved. It does not change the prepared source OS or earlier images.
+
+The [clean successor](evidence/stage0-native-clean-volume-baselines.json) has 36,646 durable entries, 26,938 regular paths / 25,117 unique regular inodes and 694,669,717 logical file bytes per variant, with equal checked trees and separate UUIDs. B2 verifies 45 files and charges 141,427,840 logical bytes with zero retries. Of 50 ELF paths, the fresh native B0/B1/B2 layouts start with 50, 47 and 50 paths above 16 KiB respectively; B2 ends with five above target under its conservative exclusions. This variation reinforces the need to hold frozen layout constant when measuring power-only effects.
+
+The [native trial lab](native-trials.md) qualifies nine guest-systemd launches on that clean set, including orderly persistence and fresh independent resets with zero failed services. The current isolated suite passes 102 Linux tests. These are native userspace startup/reset results; physical boot/resume and performance gates remain separate.
+
+## Initial construction result (before startup audit)
 
 The accepted [native-volume evidence](evidence/stage0-native-volume-baselines.json) has three distinct filesystem UUIDs and an equal aggregate tree hash. Each tree contains **36,650 durable entries**, **26,940 regular paths / 25,119 unique regular inodes**, and **694,670,218 logical file bytes**. All checked file extents are unshared. The B2 worker's direct probe verifies the actual BC-250 kernel, copied root UUID, mapped root ownership, private user/network namespaces and readable real NVMe counters.
 
@@ -60,4 +68,4 @@ The suite passes 95 isolated Linux tests, including the archive/socket-name regr
 
 ## Remaining qualification
 
-Construction and content/layout checks precede native launch/persistence tests and Stage 1 measurements. Physical BC-250 startup/reboot/suspend/resume, a recoverable hardware boot path, workload definitions, cache-state procedures, tracing attribution, write amplification and broad user-visible performance remain unqualified. These volumes extend the earlier 15-file native data fixture; they do not replace those missing gates with synthetic throughput.
+The clean successor now passes the selected native launch/persistence/reset sequence described above. The initial construction set retains its earlier scope. Stage 1 measurements remain pending. Physical BC-250 startup/reboot/suspend/resume, a recoverable hardware boot path, workload definitions, cache-state procedures, tracing attribution, write amplification and broad user-visible performance remain unqualified. These volumes extend the earlier 15-file native data fixture; they do not replace those missing gates with synthetic throughput.
