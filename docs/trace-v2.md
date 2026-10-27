@@ -164,3 +164,5 @@ stream quality, including 17 proven internal flushes and 17 proven software
 sequences. No loss, unresolved context or remaining owned process is accepted.
 The suite passes 207 Linux tests; application overhead and foreground
 critical-path attribution remain open. No accelerator gain is claimed.
+
+The [selected-file Btrfs lineage diagnostic](read-lineage.md) passes 11 controls on the actual kernel: buffered/mmap cold/warm paths, a same-inode wrong-open-description rejection, explicit cap incompleteness and forced-exit cleanup. The final source captures fault-around that an earlier attempt missed, links 54 original bios and 48 zstd spans, and retains every attempt. Exact folio wait/request dependencies and this diagnostic's overhead remain unqualified. The suite passes 225 Linux tests; no accelerator gain or default promotion is claimed.
