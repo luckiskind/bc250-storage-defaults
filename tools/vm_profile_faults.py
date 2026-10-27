@@ -9,6 +9,7 @@ from pathlib import Path
 import selectors
 import re
 import signal
+import stat
 import subprocess
 import time
 import uuid
@@ -36,10 +37,23 @@ def acknowledged(line,prefix,token):
     return data
 
 
-def boot(overlay,log,mode,point='none',expected='removed',case='none'):
+def nbd_drive(path):
+    path=Path(path).absolute()
+    probe.require(path.parent.resolve()==path.parent and path.parent.parent==LAB/'runs'
+                  and re.fullmatch('[a-z0-9][a-z0-9_-]{0,63}',path.parent.name) is not None
+                  and re.fullmatch('[a-z0-9_.-]+',path.name) is not None,
+                  'NBD socket must be in the private lab runs directory')
+    info=path.lstat()
+    probe.require(stat.S_ISSOCK(info.st_mode) and info.st_uid==os.geteuid() and info.st_mode&0o077==0,
+                  'Expected an owned private NBD socket')
+    return 'file=nbd+unix:///?socket='+str(path)+',if=virtio,format=raw,cache=writeback'
+
+
+def boot(overlay,log,mode,point='none',expected='removed',case='none',nbd_socket=None,before_guest_kill=None):
     token=uuid.uuid4().hex
     args=probe.qemu_command(overlay,
         f'bc250.mode={mode} bc250.point={point} bc250.expected={expected} bc250.token={token} bc250.case={case}')
+    if nbd_socket is not None:args[args.index('-drive')+1]=nbd_drive(nbd_socket)
     started=time.monotonic();cut=None;result=None;pending=b'';total=0
     with log.open('xb') as output:
         proc=subprocess.Popen(args,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
@@ -65,6 +79,8 @@ def boot(overlay,log,mode,point='none',expected='removed',case='none'):
                             probe.require(mode.startswith('cut-') and value['mode']==mode and value['point']==point,
                                           'Unexpected interruption checkpoint')
                             cut=value
+                            if before_guest_kill is not None:
+                                cut['device_fault_before_guest_kill']=before_guest_kill()
                             # Only the Popen-owned VM PID; never a host reboot or broad process match.
                             proc.kill();break
                         value=acknowledged(text,'BC250_VM_RESULT=',token)

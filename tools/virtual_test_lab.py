@@ -76,13 +76,37 @@ def verify_profile_sources(directory):
                 'Package source changed; rebuild profile under a new label')
 
 
+def load_calibration(path,area):
+    path=path.absolute()
+    require(path.resolve(strict=True)==path and path.is_relative_to(area),
+            'Calibration report must be inside this private toolchain workspace')
+    info=path.lstat()
+    # prepare_test_os.atomic_json uses the root umask, commonly producing 0644
+    # metadata under a 0700 workspace. Others may not MODIFY the trusted report.
+    require(stat.S_ISREG(info.st_mode) and info.st_uid==os.geteuid() and info.st_mode&0o022==0
+            and info.st_nlink==1 and info.st_size<=2**20,'Unsafe calibration report')
+    calibration=json.loads(path.read_text())
+    require(calibration.get('passed') is True and calibration.get('case_count')==4 and
+            calibration.get('actual_backend_sigkill_tested') is True and len(calibration['cases'])==4 and
+            calibration.get('armed_cache_cut_tested') is True and
+            {c['case'] for c in calibration['cases']}=={'unflushed-loss','flush-survival','fua-isolation','backend-sigkill'} and
+            all(c.get('passed') is True for c in calibration['cases']), 'Calibration did not pass completely')
+    require(set(calibration['source_sha256'])=={'volatile_disk.py','calibrate_volatile_disk.py'},
+            'Unexpected calibration source set')
+    for name,digest in calibration['source_sha256'].items():
+        require(hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()==digest,
+                'Disk model/client changed since calibration; recalibrate first')
+    return calibration
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('step',choices=['packages','inventory','build','boot','diagnostic','profile-build','profile-test'])
+    parser.add_argument('step',choices=['packages','inventory','build','boot','diagnostic','profile-build','profile-test','cache-calibrate','cache-profile-test'])
     parser.add_argument('--workspace',type=Path,required=True)
     parser.add_argument('--run-label',type=label)
     parser.add_argument('--artifact-label',type=label,default='vm')
     parser.add_argument('--cases',nargs='+')
+    parser.add_argument('--calibration-report',type=Path)
     args=parser.parse_args()
     build.configure(args.workspace);build.guards()
     require((build.AREA/'dependencies.json').is_file() and not (build.AREA/'INCOMPLETE').exists(),
@@ -110,22 +134,38 @@ def main():
     available=dict(line.split(':',1) for line in Path('/proc/meminfo').read_text().splitlines())
     require(int(available['MemAvailable'].split()[0])*1024>=6*2**30,'Need 6 GiB available host memory')
     constructing=args.step in ('build','profile-build')
-    helper='vm_image_builder.py' if constructing else 'vm_profile_faults.py' if args.step=='profile-test' else 'vm_boot_probe.py'
+    calibrating=args.step=='cache-calibrate'
+    cache_profile=args.step=='cache-profile-test'
+    helper=('vm_image_builder.py' if constructing else 'calibrate_volatile_disk.py' if calibrating
+            else 'vm_cache_faults.py' if cache_profile
+            else 'vm_profile_faults.py' if args.step=='profile-test' else 'vm_boot_probe.py')
     host_uuid=None
-    if args.step in ('boot','profile-test'):
+    if args.step in ('boot','profile-test','cache-profile-test'):
         host_uuid=subprocess.check_output(['findmnt','-n','-o','UUID','--target',str(build.AREA)],text=True).strip()
         uuid.UUID(host_uuid)
     artifacts=build.AREA/'artifacts'
     require(not artifacts.is_symlink(),'Unsafe artifacts directory')
     artifacts.mkdir(mode=0o700,exist_ok=True)
     directory=artifacts/args.artifact_label
-    if not constructing:require(directory.is_dir() and (directory/'image-build.json').is_file(),'Build this artifact set first')
-    if args.step=='profile-test':verify_profile_sources(directory)
-    if args.step=='profile-build':
-        require(not directory.exists(),'Use a new profile artifact label; previous artifacts preserved')
+    if not constructing and not calibrating:
+        require(directory.is_dir() and (directory/'image-build.json').is_file(),'Build this artifact set first')
+    if args.step in ('profile-test','cache-profile-test'):verify_profile_sources(directory)
+    if args.step in ('profile-build','cache-calibrate'):
+        require(not directory.exists(),'Use a new artifact label; previous artifacts preserved')
     target=stage(helper,directory)
     if args.step in ('profile-build','profile-test'):
         stage('vm_boot_probe.py',directory)
+    if calibrating:
+        stage('volatile_disk.py',directory)
+        stage('vm_boot_probe.py',directory)
+    if cache_profile:
+        require(args.calibration_report is not None,'Pass a matching completed --calibration-report')
+        calibration_path=args.calibration_report.absolute()
+        calibration=load_calibration(calibration_path,build.AREA)
+        for name in ('volatile_disk.py','calibrate_volatile_disk.py','vm_profile_faults.py','vm_boot_probe.py'):
+            stage(name,directory)
+        owner=build.GUEST.stat()
+        write_helper(directory/'matched-cache-calibration.json',json.dumps(calibration).encode(),owner.st_uid,owner.st_gid)
     if args.step=='profile-build':
         stage('vm_profile_guest.py',directory)
         package=directory/'package';package.mkdir(mode=0o700)
@@ -146,6 +186,30 @@ def main():
         subprocess.run(container_args()+['--bind='+str(directory)+':/vmlab']+command,check=True,timeout=1200)
     finally:
         require(actual.read_text().strip()==before,'Host NVMe policy changed during virtual qualification')
+    if calibrating:
+        result=json.loads((directory/'runs'/run_label/'volatile-cache-calibration.json').read_text())
+        require(result.get('passed') is True,'Volatile cache calibration did not pass')
+        require(all(hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()==digest
+                    for name,digest in result['source_sha256'].items()),'Calibration source changed during execution')
+        result.update(host_nvme_qos_unchanged=True,host_nvme_qos_us=int(before),host_reboot_tested=False,
+            artifact_label=args.artifact_label,run_label=run_label,
+            harness_source_sha256={name:hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()
+                                  for name in ('virtual_test_lab.py','vm_boot_probe.py','prepare_test_os.py')})
+        build.atomic_json(build.AREA/('vm-cache-calibration-'+args.artifact_label+'-'+run_label+'.json'),result)
+        print(json.dumps({'passed':True,'cache_calibration_cases':result['case_count']}),flush=True)
+    if cache_profile:
+        result=json.loads((directory/'runs'/run_label/'vm-cache-fault-result.json').read_text())
+        require(result.get('passed') is True,'Cache-backed profile recovery did not pass')
+        require(result['recovery']['root_uuid']!=host_uuid,'Expected a separate guest filesystem')
+        require(all(hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()==digest
+                    for name,digest in result['source_sha256'].items()),'Executed cache-profile source changed')
+        result.update(host_nvme_qos_unchanged=True,host_nvme_qos_us=int(before),host_filesystem_uuid_differs=True,
+            host_reboot_tested=False,recorded_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),
+            calibration_report_sha256=hashlib.sha256(calibration_path.read_bytes()).hexdigest(),
+            harness_source_sha256=hashlib.sha256((SOURCE/'virtual_test_lab.py').read_bytes()).hexdigest(),
+            artifact_label=args.artifact_label)
+        build.atomic_json(build.AREA/('vm-cache-fault-'+args.artifact_label+'-'+run_label+'.json'),result)
+        print(json.dumps({'passed':True,'cache_loss_exercised':result['volatile_device_write_loss_exercised']}),flush=True)
     if args.step=='boot':
         result=json.loads((directory/'runs'/run_label/'vm-recovery-result.json').read_text())
         require(result.get('passed') is True,'Virtual recovery did not pass')
