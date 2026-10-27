@@ -110,3 +110,5 @@ python3 tools/build_baseline_datasets.py --output /path/to/new/btrfs/dataset \
 ```
 
 The builder creates three byte-copied variants plus an incompressible control, records hashes and extent layouts, and rejects shared extents. It requires the qualified zstd:1 mount and 64 GiB free. It changes only its new output directory; it does not apply power settings. The public manifest's B0/B1/B2 power values describe the intended future experiment. These data copies do not establish independent OS/volume baselines. `source-paths-private.json` is local provenance and should not be redistributed without review.
+
+For validation with an independent userspace and real guest systemd, see [the disposable OS qualification guide](docs/real-systemd-qualification.md). It covers real service startup, bounded fixture maintenance, undo and guest reboot using simulated drive controls. It shares the host kernel and volume and does not replace hardware reboot or power-loss qualification.
