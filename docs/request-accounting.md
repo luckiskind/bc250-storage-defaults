@@ -39,10 +39,12 @@ the revision does not waive the original quality verdict.
 
 ## Replay evidence
 
-The [reviewed record](evidence/stage1-request-accounting.json) anchors the parent
-native result and every raw-capture hash to the previously published reviewed
-evidence. Source and compiled hashes are checked before replay. All 13 original
-verdicts are preserved, and every complete valid total stays unchanged.
+The [public summary](evidence/stage1-request-accounting.json) records the result
+totals without machine configuration, installation, quota or integrity metadata.
+Detailed replay records and capability observations remain local. The local
+replay checks its parent evidence and raw records against the frozen review.
+All 13 original verdicts are preserved, and every complete valid total stays
+unchanged.
 
 One additional test takes the original compressed cold trace only through its
 first completion chunk. Its counters are reconstructed and its open-context
@@ -66,26 +68,20 @@ starting Python because it used a relative path. Neither is a hardware trial.
 The final replay runs with a 512 MiB memory limit, 100% CPU quota, no swap,
 64-task limit and 60-second lifetime. It reads existing protected evidence and
 creates only a fresh private result directory. It starts no BPF observer or
-foreground workload. The full Linux suite and syntax checks pass. All seven
-installed profile files, original boot configuration, 5000 us setting, quota
-history and active/enabled power service and timer remain verified.
+foreground workload. The full Linux suite and syntax checks pass. This
+correction changes offline analysis only.
 
 ## Read-only preparation for combined causality
 
-Actual BTF records `bio_vec` as 16 bytes, `page` as 64 and `folio` as 256. The
-bio vector contains a page pointer, length and offset. The installed kernel
-uses `compound_info`, and its head-conversion logic can use a mask according to
-configuration; an unconditional older pointer-plus-one decoder is unsuitable.
-The installed header hashes and selected configuration are retained with the
-layout offsets. The upstream
+The next observer must check actual BTF layouts and configuration locally.
+It must not assume an older folio-head encoding: the upstream
 [page/folio conversion implementation](https://raw.githubusercontent.com/torvalds/linux/v7.2/include/linux/page-flags.h)
-provides source context; actual host layouts and configuration are authoritative.
+supports a configuration-dependent representation. Detailed host observations
+are kept in the local evidence, not this public document.
 
-The official virtual block-test driver modules are available but remain
-unloaded and unconfigured. No error, requeue or partial completion was injected.
-A later private virtual target may qualify common block-layer behavior, but
-cannot silently qualify physical NVMe driver errors. Production device guards
-remain unchanged.
+No virtual fault target was configured for this revision. A later isolated
+target may qualify common block-layer behavior, but cannot silently qualify
+physical NVMe driver errors. Production device guards remain unchanged.
 
 The next combined observer needs saved original iterator/vector identity,
 bounded inspection of actual folio-vector overlap, correct multi-page/large
