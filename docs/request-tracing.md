@@ -101,8 +101,11 @@ does not erase orphan/censored boundaries or establish application coverage.
 
 ## Next gate
 
-Quantify observer overhead against uninstrumented runs, freeze real workload
-endpoints/cache procedures, extend controlled edge-path qualification, and
-correlate faults/filesystem/decompression with usable-state and frame markers.
+The [frozen overhead calibration](trace-overhead.md) now fails its serial-read
+screen: the fixed extension estimates +4.460% overhead, with an exploratory
+95% interval of +2.191% to +6.706%. Preserve that baseline and qualify a separate
+lower-overhead variant. Freeze real workload endpoints/cache procedures, extend
+controlled edge-path qualification, and correlate faults/filesystem/decompression
+with usable-state and frame markers.
 No current request timing is used to claim a system-wide loading gain. The
 [Stage 1 workload gate](workloads.md) remains open.

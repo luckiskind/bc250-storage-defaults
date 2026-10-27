@@ -24,9 +24,9 @@ critical-path latency or foreground stall from these fields alone.
 BTF, bpftool, clang and gcc are present. perf, bpftrace and trace-cmd are absent.
 Relevant Btrfs/zstd decompression and readahead functions are exposed in the
 available function list, but that is not proof of a supported probe ABI or a
-successful attachment. The next instrumentation experiment should validate
-request identity through the running kernel's typed/raw tracepoint ABI and
-record partial completion/requeue handling and orphan/lost-event counters.
+successful attachment. The initial observer below validates request identity through the running
+kernel's raw tracepoint ABI. Partial completion/requeue handling and
+orphan/lost-event interpretation still need broader qualification.
 Keep all maps/buffers/time bounded, avoid persistent pins, and preserve unrelated
 tracing. Application dependency attribution remains an additional requirement.
 
@@ -75,3 +75,7 @@ feature inventory, historical synthetic throughput or an ambiguous disk trace.
 ## Initial request-identity qualification
 
 The [temporary request observer](request-tracing.md) now passes five bounded cases on the real kernel: idle, 2,048 serial reads, 8,192 overlapping same-location reads, an explicitly incomplete cap, and cleanup after forced exit. Known-read counts and bytes match exactly with no ring loss; fixture residency remains zero before/after the accepted controls. This supplies request-identity evidence rather than sector matching. The first control failure is retained and documented. Tracing overhead, partial/requeue/error paths, foreground dependency attribution and the frozen application matrix remain open.
+
+## Frozen observer overhead screen
+
+The [two-batch calibration](trace-overhead.md) retains all 86 trials and fails the prespecified serial-read screen. The fixed extension estimates +4.460% elapsed-time overhead (exploratory 95% interval +2.191% to +6.706%); three whole-window capture flags also remain disqualifying. Read bytes match and ring loss is zero, so those flags are not presented as proven read transport loss. The concurrent pilot control alone passes. Keep the observer opt-in, preserve these separate batches, qualify a distinct batched-consumption variant and compare it under a new frozen contract. No accelerator improvement or Stage 1 gate pass follows from this measurement. The Linux suite now passes 127 tests.
