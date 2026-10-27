@@ -101,3 +101,7 @@ The [separate file audit and copied-set probe](application-inputs.md) observes 5
 ## Firefox candidates and fresh seeds
 
 The [separate Firefox audit](browser-inputs.md) passes two final-source functional launches with identical six-node initial private seeds. It records 395 host-resolvable regular `/usr` candidates (730,717,601 bytes), plus explicit runtime and nested sandbox setup context. These path strings are not verified cross-namespace file identities. The candidate set exceeds the previous 512 MiB corpus bound; a 1 GiB private construction limit is proposed but not applied. Cold-cache Firefox, complete closure, wrapper cost and profile durability remain unqualified. The suite now passes 148 Linux tests.
+
+## Controlled mapping identity
+
+Four native [mapping-reference controls](mapped-identity.md) now distinguish the actual mapped object from its process-root and host pathname views. Raw maps device/inode identity collides across two private Btrfs subvolumes; a pinned mapping reference correctly rejects the wrong host alias. The initial raw-field method remains failed. This read-only primitive uses a privileged observer and unprivileged private workers; it is not yet integrated with Firefox and does not establish complete input closure or performance. The suite passes 152 Linux tests.
