@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "mode": "partial-copied-usr-cache-qualification",
+  "source_sha256": {
+    "copied_input_probe.py": "0cc5cdcfbbdd7afe57c436b71fb50b2cd3e4c5ec906690edbe01533dcf25b1eb",
+    "application_inputs.py": "29e1ab831332f2f61339ddd20bcb94de343eb4688e2d3b8db7db4f055e5b3c97",
+    "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f",
+    "qualify_request_trace.py": "d2b0fe28c277655ad68cdcb9c87c476265a424d430c1f41e17b7d546246ea762"
+  },
+  "audit_result_sha256": "9d64d3d2596d27b187514036a2603e516d22fb5ba8fb73a4bdbe7088eeb37cc1",
+  "files": 507,
+  "logical_bytes": 219330272,
+  "max_logical_copy_bytes": 536870912,
+  "free_space_floor_bytes": 68719476736,
+  "ordinary_independent_copies": true,
+  "shared_extent_count": 0,
+  "copy_modes_and_mtimes_preserved": true,
+  "source_ownership_not_preserved": true,
+  "xattrs_not_preserved": true,
+  "complete_os_or_application_baseline": false,
+  "complete_application_input_closure": false,
+  "context": "Host /etc/runtime/IPC and unaudited dependencies remain shared; copied file data only",
+  "explicitly_shared_privileged_input_count": 1,
+  "privileged_helper_functionality_qualified": false,
+  "original_endpoint_helper_unchanged": true,
+  "binding_checks_in_controller_after_ready_timestamp": true,
+  "performance_result": false,
+  "global_page_cache_reset_performed": false,
+  "original_file_cache_evicted": false,
+  "drive_policy_changed": false,
+  "stage1_gate_passed": false,
+  "passed": true,
+  "conditions": [
+    {
+      "condition": "copied-data-cold",
+      "before": {
+        "files": 507,
+        "page_rounded_bytes": 220401664,
+        "resident_bytes": 0,
+        "zero_resident_files": 507,
+        "fully_resident_files": 2
+      },
+      "after": {
+        "files": 507,
+        "page_rounded_bytes": 220401664,
+        "resident_bytes": 182427648,
+        "zero_resident_files": 2,
+        "fully_resident_files": 505
+      },
+      "endpoint_passed": true,
+      "normal_close_verified": true,
+      "readonly_bindings_verified": 507
+    },
+    {
+      "condition": "copied-data-warm",
+      "before": {
+        "files": 507,
+        "page_rounded_bytes": 220401664,
+        "resident_bytes": 220401664,
+        "zero_resident_files": 2,
+        "fully_resident_files": 507
+      },
+      "after": {
+        "files": 507,
+        "page_rounded_bytes": 220401664,
+        "resident_bytes": 220401664,
+        "zero_resident_files": 2,
+        "fully_resident_files": 507
+      },
+      "endpoint_passed": true,
+      "normal_close_verified": true,
+      "readonly_bindings_verified": 507
+    }
+  ],
+  "copied_and_source_content_unchanged": true,
+  "parent_mount_namespace_unchanged": true,
+  "completed_unix": 1793116444.1423242,
+  "isolated_linux_tests": 140,
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true
+  },
+  "hardlink_topology_not_preserved": true,
+  "retained_development_attempts": [
+    {
+      "attempt": 1,
+      "passed": false,
+      "corpus_created": false,
+      "reason": "Strict privileged-mode guard refused the session-recording helper before writes"
+    },
+    {
+      "attempt": 2,
+      "passed": true,
+      "scope": "Cold/warm prototype with extra child-side binding verification",
+      "retained": true
+    },
+    {
+      "attempt": 3,
+      "passed": true,
+      "scope": "Original child helper; controller-side process-root binding verification",
+      "retained": true
+    }
+  ]
+}
