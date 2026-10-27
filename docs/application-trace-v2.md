@@ -105,3 +105,5 @@ then qualify filesystem/page-fault/decompression dependencies to connect device
 observations to foreground progress. Complete input/context closure and the
 remaining workload scenarios before comparing accelerator baselines. No
 tracer is enabled in the installed profile and no default is promoted here.
+
+The [fixed native Konsole tracing-cost experiment](application-trace-cost.md) passes both prespecified selected-application cost screens. All 100 planned launches, 50 captures and pair exclusions are retained. This estimates incremental tracing cost within the selected fixture; absolute wrapper cost, general application overhead and foreground attribution remain open. The suite passes 216 Linux tests. No accelerator comparison or default promotion follows.

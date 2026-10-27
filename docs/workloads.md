@@ -142,3 +142,5 @@ stream quality, including 17 proven internal flushes and 17 proven software
 sequences. No loss, unresolved context or remaining owned process is accepted.
 The suite passes 207 Linux tests; application overhead and foreground
 critical-path attribution remain open. No accelerator gain is claimed.
+
+The [fixed native Konsole tracing-cost experiment](application-trace-cost.md) passes both prespecified selected-application cost screens. All 100 planned launches, 50 captures and pair exclusions are retained. This estimates incremental tracing cost within the selected fixture; absolute wrapper cost, general application overhead and foreground attribution remain open. The suite passes 216 Linux tests. No accelerator comparison or default promotion follows.
