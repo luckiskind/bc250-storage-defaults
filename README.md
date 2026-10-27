@@ -4,7 +4,7 @@ Apply the tested drive power setting and a bounded Btrfs layout prototype with o
 
 Development toward a broader accelerator follows the [sequential roadmap](docs/DEVELOPMENT_PLAN.md). The [Stage 0 baseline record](docs/baseline.md) separates completed checks from remaining hardware/recovery qualification.
 
-Current development measurement work passes 200 Linux tests. The [fixed v2 calibration](docs/trace-v2-overhead.md) passes both synthetic read-control overhead screens with sufficient pairs and no capture failures. The [v2 observer](docs/trace-v2.md) also passes ten native provenance/loss controls. Application overhead, foreground attribution and the [remaining workload qualification](docs/workloads.md) stay open; no new accelerator gain is claimed.
+Current development measurement work passes 207 Linux tests. The [fixed v2 calibration](docs/trace-v2-overhead.md) passes both synthetic read-control overhead screens with sufficient pairs and no capture failures. The [v2 observer](docs/trace-v2.md) also passes ten native provenance/loss controls. Two [native Konsole captures](docs/application-trace-v2.md) pass integration with the unchanged endpoint and selected cold/warm fixture. Application overhead, foreground attribution and the [remaining workload qualification](docs/workloads.md) stay open; no new accelerator gain is claimed.
 
 ## Apply
 

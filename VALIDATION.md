@@ -99,3 +99,12 @@ The [second initial application marker](docs/browser-endpoint.md) now passes thr
 [Partial application-input/cache qualification](docs/application-inputs.md) now verifies 507 independent copied `/usr` inputs at normal read-only application paths, with exact zero-resident and fully resident file-data controls and the unchanged terminal marker. A privileged helper remains explicit shared context. Complete input closure, metadata-equivalent baselines, wrapper overhead and application performance remain unqualified. The Linux suite passes 140 tests.
 
 [Native selected-input qualification](docs/native-application-inputs.md) preserves 530 files and selected ownership/permissions/xattrs/link relations, verifies copied paths through the owned process root, and exercises the original setgid helper with private session-accounting files in cold/warm data states. A controlled counterexample confirms nonowner mincore residency masking; a root observer measures only private copies. Normal close leaves no view processes. The Linux suite passes 144 tests. This partial fixture is not complete application input closure, a full OS baseline or speed evidence. Foreground cgroup bounds and wrapper cost remain unqualified.
+
+
+The [native application capture integration](docs/application-trace-v2.md) now
+passes one cold and one warm Konsole launch with the unchanged selected-input
+fixture and endpoint. Both whole-device captures cover the full trials and pass
+stream quality, including 17 proven internal flushes and 17 proven software
+sequences. No loss, unresolved context or remaining owned process is accepted.
+The suite passes 207 Linux tests; application overhead and foreground
+critical-path attribution remain open. No accelerator gain is claimed.
