@@ -103,7 +103,7 @@ Current checklist against the roadmap's six numbered Stage 0 requirements:
 | 5. Failed/partial install and refusal/recovery cases | Isolated refusal/dependency tests, 40 process cuts, selected VM/cache-loss and native identity cases pass within their documented scopes |
 | 6. Independent B0/B1/B2 test volumes | Three separate Btrfs userspace images have equal verified trees and nine passing native startup/persistence/reset phases; the Stage 1 application suite still needs its own frozen fixtures |
 
-Remaining immediate work is physical suspend/resume and a demonstrated physical test/recovery path. Measure physical writes, metadata growth and lost sharing on disposable data before policy expansion; logical budgets are not physical-write limits. Broader fault/cache-loss orderings and hardware power-loss behavior remain unqualified for subsequent reliability work. The earlier open-ended power-loss item is not treated as a requirement to test every firmware failure before Stage 1: Stage 0 follows the explicit roadmap gates, and later mechanisms retain their own correctness/fault gates.
+Remaining immediate work is physical suspend/resume and a demonstrated physical test/recovery path. Measure physical writes, metadata growth and lost sharing on disposable data before policy expansion; logical budgets are not physical-write limits. Broader fault/cache-loss orderings and hardware power-loss behavior remain unqualified for subsequent reliability work. Later mechanisms retain their own correctness/fault gates under the complete roadmap.
 
 No host reboot, suspend, kernel replacement, filesystem formatting or destructive fault injection was performed in this initial milestone. The working installation is not the power-loss-test target.
 
