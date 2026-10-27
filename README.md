@@ -4,7 +4,7 @@ Apply the tested drive power setting and a bounded Btrfs layout prototype with o
 
 Development toward a broader accelerator follows the [sequential roadmap](docs/DEVELOPMENT_PLAN.md). The [Stage 0 baseline record](docs/baseline.md) separates completed checks from remaining hardware/recovery qualification.
 
-Current development measurement work passes 162 Linux tests. The [selected native Firefox fixture](docs/native-browser-inputs.md) preserves 423 copied files and passes zero/fully resident file-data controls with 200 mapped copies verified. Nested user namespaces work; sandbox-fallback warnings cause refusal. Complete application input/cache closure, wrapper cost and performance comparisons remain open.
+Current development measurement work passes 169 Linux tests. The [signed private package-update fixture](docs/package-update.md) passes signature rejection, three snapshot-reset upgrades and selected archive-data cache controls; it is a single-package endpoint, not a full system update or performance result. The [selected native Firefox fixture](docs/native-browser-inputs.md) preserves 423 copied files and passes zero/fully resident file-data controls with 200 mapped copies verified. Nested user namespaces work; sandbox-fallback warnings cause refusal. Complete application input/cache closure, wrapper cost and performance comparisons remain open.
 
 ## Apply
 
