@@ -10,6 +10,8 @@ if sys.platform=='linux':
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
     import vm_boot_probe as probe
     import virtual_test_lab as wrapper
+    import vm_profile_faults as faults
+    import vm_profile_guest as guest
 
 
 @unittest.skipUnless(sys.platform=='linux','Linux virtual qualification')
@@ -64,6 +66,19 @@ class VirtualLabGuards(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError,'Unsafe helper'):
                 wrapper.write_helper(path,b'replacement',os.geteuid(),os.getegid())
             self.assertEqual(target.read_bytes(),b'preserve')
+
+    def test_virtual_acknowledgement_rejects_another_run_token(self):
+        with self.assertRaisesRegex(RuntimeError,'token'):
+            faults.acknowledged('BC250_VM_CUT={"token":"other"}','BC250_VM_CUT=','expected')
+        self.assertIsNone(faults.acknowledged('console text BC250_VM_CUT={}','BC250_VM_CUT=','expected'))
+        self.assertEqual(faults.acknowledged('BC250_VM_CUT={"token":"expected"}\r',
+                                            'BC250_VM_CUT=','expected')['token'],'expected')
+        self.assertEqual(faults.acknowledged('\x1bP+q6E616D65\x1b\\BC250_VM_RESULT={"token":"expected"}',
+                                            'BC250_VM_RESULT=','expected')['token'],'expected')
+
+    def test_embedded_guest_programs_compile_before_image_construction(self):
+        compile(guest.RESET,'guest reset','exec')
+        compile(guest.INSIDE,'guest recovery','exec')
 
 
 if __name__=='__main__':unittest.main()
