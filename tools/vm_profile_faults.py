@@ -49,7 +49,7 @@ def nbd_drive(path):
     return 'file=nbd+unix:///?socket='+str(path)+',if=virtio,format=raw,cache=writeback'
 
 
-def boot(overlay,log,mode,point='none',expected='removed',case='none',nbd_socket=None,before_guest_kill=None):
+def boot(overlay,log,mode,point='none',expected='removed',case='none',nbd_socket=None,before_guest_kill=None,timeout_s=300):
     token=uuid.uuid4().hex
     args=probe.qemu_command(overlay,
         f'bc250.mode={mode} bc250.point={point} bc250.expected={expected} bc250.token={token} bc250.case={case}')
@@ -61,7 +61,7 @@ def boot(overlay,log,mode,point='none',expected='removed',case='none',nbd_socket
             with selectors.DefaultSelector() as selector:
                 selector.register(proc.stdout,selectors.EVENT_READ)
                 while True:
-                    probe.require(time.monotonic()-started<300,'Virtual boot deadline; disk and log preserved')
+                    probe.require(time.monotonic()-started<timeout_s,'Virtual boot deadline; disk and log preserved')
                     ready=selector.select(timeout=1)
                     if not ready:
                         if proc.poll() is not None:break

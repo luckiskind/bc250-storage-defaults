@@ -59,7 +59,9 @@ subprocess.run(['systemctl','poweroff','--no-block'],check=True)
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--profile-fixture',action='store_true')
+    fixtures=parser.add_mutually_exclusive_group()
+    fixtures.add_argument('--profile-fixture',action='store_true')
+    fixtures.add_argument('--worker-fixture',action='store_true')
     args=parser.parse_args()
     assert os.geteuid()==0 and LAB.is_dir() and Path('/run/host').exists()
     root=LAB/'rootfs'
@@ -105,6 +107,10 @@ WantedBy=multi-user.target
     if args.profile_fixture:
         import vm_profile_guest
         vm_profile_guest.prepare(root,LAB/'package')
+    worker_reference=None
+    if args.worker_fixture:
+        import vm_worker_guest
+        worker_reference=vm_worker_guest.prepare(root,LAB/'worker-package')
     versions=list(Path('/usr/lib/modules').glob('*/vmlinuz'))
     assert len(versions)==1
     kernel=versions[0]
@@ -125,12 +131,16 @@ WantedBy=multi-user.target
                 rootdir_security_xattrs_copied=False,image_is_regular_file=True,
                 host_device_formatted=False,guest_not_yet_booted=True,
                 builder_source_sha256=digest(Path(__file__)),
-                storage_profile_fixture=args.profile_fixture)
+                storage_profile_fixture=args.profile_fixture,worker_fixture=args.worker_fixture)
     if args.profile_fixture:
         report['profile_guest_source_sha256']=digest(LAB/'vm_profile_guest.py')
         report['embedded_probe_sha256']=digest(root/'opt/bc250-vm-probe.py')
         report['package_sha256']={str(p.relative_to(LAB/'package')):digest(p)
             for p in sorted((LAB/'package').rglob('*')) if p.is_file()}
+    if args.worker_fixture:
+        report.update(worker_guest_source_sha256=digest(LAB/'vm_worker_guest.py'),worker_reference=worker_reference,
+                      embedded_probe_sha256=digest(root/'opt/bc250-vm-probe.py'),
+                      embedded_worker_bootstrap_sha256=digest(root/'opt/bc250-worker-vm/run-worker.py'))
     (LAB/'image-build.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report),flush=True)
 

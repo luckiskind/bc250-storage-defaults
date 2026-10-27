@@ -76,6 +76,17 @@ def verify_profile_sources(directory):
                 'Package source changed; rebuild profile under a new label')
 
 
+def verify_worker_sources(directory):
+    manifest=json.loads((directory/'image-build.json').read_text())
+    require(manifest.get('worker_fixture') is True,'Build a worker fixture first')
+    for name,key in (('vm_image_builder.py','builder_source_sha256'),
+                     ('vm_worker_guest.py','worker_guest_source_sha256')):
+        require(hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()==manifest.get(key),
+                'Embedded worker guest changed; rebuild under a new label')
+    require(hashlib.sha256((SOURCE.parent/'storage_defaults_repack.py').read_bytes()).hexdigest()==
+            manifest['worker_reference']['worker_sha256'],'Worker source changed; rebuild under a new label')
+
+
 def load_calibration(path,area):
     path=path.absolute()
     require(path.resolve(strict=True)==path and path.is_relative_to(area),
@@ -101,7 +112,7 @@ def load_calibration(path,area):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('step',choices=['packages','inventory','build','boot','diagnostic','profile-build','profile-test','cache-calibrate','cache-profile-test'])
+    parser.add_argument('step',choices=['packages','inventory','build','boot','diagnostic','profile-build','profile-test','cache-calibrate','cache-profile-test','worker-build','worker-test'])
     parser.add_argument('--workspace',type=Path,required=True)
     parser.add_argument('--run-label',type=label)
     parser.add_argument('--artifact-label',type=label,default='vm')
@@ -133,14 +144,15 @@ def main():
     require(before=='5000','Working host power policy unexpectedly changed')
     available=dict(line.split(':',1) for line in Path('/proc/meminfo').read_text().splitlines())
     require(int(available['MemAvailable'].split()[0])*1024>=6*2**30,'Need 6 GiB available host memory')
-    constructing=args.step in ('build','profile-build')
+    constructing=args.step in ('build','profile-build','worker-build')
     calibrating=args.step=='cache-calibrate'
     cache_profile=args.step=='cache-profile-test'
+    worker_test=args.step=='worker-test'
     helper=('vm_image_builder.py' if constructing else 'calibrate_volatile_disk.py' if calibrating
-            else 'vm_cache_faults.py' if cache_profile
+            else 'vm_cache_faults.py' if cache_profile else 'vm_worker_faults.py' if worker_test
             else 'vm_profile_faults.py' if args.step=='profile-test' else 'vm_boot_probe.py')
     host_uuid=None
-    if args.step in ('boot','profile-test','cache-profile-test'):
+    if args.step in ('boot','profile-test','cache-profile-test','worker-test'):
         host_uuid=subprocess.check_output(['findmnt','-n','-o','UUID','--target',str(build.AREA)],text=True).strip()
         uuid.UUID(host_uuid)
     artifacts=build.AREA/'artifacts'
@@ -150,7 +162,8 @@ def main():
     if not constructing and not calibrating:
         require(directory.is_dir() and (directory/'image-build.json').is_file(),'Build this artifact set first')
     if args.step in ('profile-test','cache-profile-test'):verify_profile_sources(directory)
-    if args.step in ('profile-build','cache-calibrate'):
+    if worker_test:verify_worker_sources(directory)
+    if args.step in ('profile-build','cache-calibrate','worker-build'):
         require(not directory.exists(),'Use a new artifact label; previous artifacts preserved')
     target=stage(helper,directory)
     if args.step in ('profile-build','profile-test'):
@@ -158,7 +171,7 @@ def main():
     if calibrating:
         stage('volatile_disk.py',directory)
         stage('vm_boot_probe.py',directory)
-    if cache_profile:
+    if cache_profile or worker_test:
         require(args.calibration_report is not None,'Pass a matching completed --calibration-report')
         calibration_path=args.calibration_report.absolute()
         calibration=load_calibration(calibration_path,build.AREA)
@@ -166,6 +179,14 @@ def main():
             stage(name,directory)
         owner=build.GUEST.stat()
         write_helper(directory/'matched-cache-calibration.json',json.dumps(calibration).encode(),owner.st_uid,owner.st_gid)
+    if args.step=='worker-build':
+        stage('vm_worker_guest.py',directory)
+        package=directory/'worker-package';package.mkdir(mode=0o700)
+        owner=build.GUEST.stat();os.chown(package,owner.st_uid,owner.st_gid)
+        source=SOURCE.parent/'storage_defaults_repack.py'
+        require(source.is_file() and not source.is_symlink(),'Unsafe worker source')
+        write_helper(package/source.name,source.read_bytes(),owner.st_uid,owner.st_gid)
+    if worker_test:stage('vm_cache_faults.py',directory)
     if args.step=='profile-build':
         stage('vm_profile_guest.py',directory)
         package=directory/'package';package.mkdir(mode=0o700)
@@ -180,10 +201,13 @@ def main():
     command=['/usr/bin/python3',target]
     if not constructing:command+=['--run-label',run_label]
     if args.step=='profile-build':command+=['--profile-fixture']
+    if args.step=='worker-build':command+=['--worker-fixture']
     if args.step=='profile-test' and args.cases:command+=['--cases',*args.cases]
+    if worker_test and args.cases:command+=['--cases',*args.cases]
     if args.step=='diagnostic':command+=['--diagnostic']
     try:
-        subprocess.run(container_args()+['--bind='+str(directory)+':/vmlab']+command,check=True,timeout=1200)
+        subprocess.run(container_args()+['--bind='+str(directory)+':/vmlab']+command,check=True,
+                       timeout=2400 if worker_test else 1200)
     finally:
         require(actual.read_text().strip()==before,'Host NVMe policy changed during virtual qualification')
     if calibrating:
@@ -210,6 +234,22 @@ def main():
             artifact_label=args.artifact_label)
         build.atomic_json(build.AREA/('vm-cache-fault-'+args.artifact_label+'-'+run_label+'.json'),result)
         print(json.dumps({'passed':True,'cache_loss_exercised':result['volatile_device_write_loss_exercised']}),flush=True)
+    if worker_test:
+        result=json.loads((directory/'runs'/run_label/'vm-worker-fault-result.json').read_text())
+        require(result.get('passed') is True,'Worker VM qualification did not pass')
+        require(all(c.get('recovery',c.get('baseline'))['root_uuid']!=host_uuid for c in result['cases']),
+                'Expected a separate worker guest filesystem')
+        require(all(hashlib.sha256((SOURCE/name).read_bytes()).hexdigest()==digest
+                    for name,digest in result['source_sha256'].items()),'Executed worker harness source changed')
+        require(hashlib.sha256((SOURCE.parent/'storage_defaults_repack.py').read_bytes()).hexdigest()==
+                result['worker_source_sha256'],'Executed worker source changed')
+        result.update(host_nvme_qos_unchanged=True,host_nvme_qos_us=int(before),host_filesystem_uuid_differs=True,
+            host_reboot_tested=False,recorded_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),
+            calibration_report_sha256=hashlib.sha256(calibration_path.read_bytes()).hexdigest(),
+            harness_source_sha256=hashlib.sha256((SOURCE/'virtual_test_lab.py').read_bytes()).hexdigest(),
+            image_build=json.loads((directory/'image-build.json').read_text()),artifact_label=args.artifact_label)
+        build.atomic_json(build.AREA/('vm-worker-'+args.artifact_label+'-'+run_label+'.json'),result)
+        print(json.dumps({'passed':True,'worker_fault_cases':result['worker_fault_cases_passed']}),flush=True)
     if args.step=='boot':
         result=json.loads((directory/'runs'/run_label/'vm-recovery-result.json').read_text())
         require(result.get('passed') is True,'Virtual recovery did not pass')
