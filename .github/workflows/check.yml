@@ -16,6 +16,11 @@ jobs:
         run: |
           cc -O2 -Wall -Wextra -Werror -pthread bench/direct_probe.c -o /tmp/bc250-direct-probe
           if /tmp/bc250-direct-probe; then exit 1; else test "$?" -eq 2; fi
+      - name: Build private native-input helpers
+        run: |
+          cc -O2 -Wall -Wextra -Werror -shared -fPIC bench/native_input_mount.c -o /tmp/bc250-native-mount.so
+          cc -O2 -Wall -Wextra -Werror bench/native_input_utmp.c -o /tmp/bc250-native-utmp
+          if /tmp/bc250-native-utmp; then exit 1; else test "$?" -eq 2; fi
       - name: Verify exported patch applies to an empty repository
         run: |
           python3 make_patch.py /tmp/bc250-storage.patch
