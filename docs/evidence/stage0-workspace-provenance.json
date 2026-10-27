@@ -1,0 +1,146 @@
+{
+  "passed": true,
+  "native_remount": {
+    "passed": true,
+    "host_reboot_tested": false,
+    "actual_btrfs_mount_order_change": true,
+    "test_images": 2,
+    "cases": [
+      {
+        "case": "authenticated-migration-and-idempotence",
+        "passed": true,
+        "original_marker_byte_verified": true
+      },
+      {
+        "case": "persistent-identity-after-remount",
+        "passed": true,
+        "device_number_changed": true,
+        "provenance_unchanged": true
+      },
+      {
+        "case": "legacy-mismatch-refuses-migration",
+        "passed": true,
+        "marker_and_backups_unchanged": true
+      },
+      {
+        "case": "byte-identical-directory-replacement-refused",
+        "passed": true,
+        "both_directories_preserved": true
+      },
+      {
+        "case": "snapshot-directory-replacement-refused",
+        "passed": true,
+        "same_inode_and_bytes": true,
+        "original_accepted": true
+      },
+      {
+        "case": "legitimate-private-user-ownership-shift",
+        "passed": true,
+        "persistent_identity_accepted": true,
+        "payload_unchanged": true
+      }
+    ],
+    "source_sha256": {
+      "tools/prepare_test_os.py": "16242936de8bd78db41897fddb0e045d6ed328975115e190a14d2ad9b97a30d7",
+      "install_transaction.py": "2761bcb1b2508822948b47de56b1a46dc956c1fc45f3094c2431476c46648738",
+      "tests/remount_test_os.py": "ea095c4c236c7ce4f4d08bbd0ecc00e3718fa8d56cdf96e07a719ae177823c49",
+      "tests/remount_install.py": "87714bc07e0b5f7a74a55fc5e36dd88eff3488d363566d2f82da218fde3d8ce6"
+    },
+    "case_count": 6,
+    "all_test_mounts_unmounted": true,
+    "completed_unix": 1793095932.8774228
+  },
+  "existing_workspace_migration": {
+    "passed": true,
+    "host_reboot_tested": false,
+    "host_startup_changed": false,
+    "source_sha256": "16242936de8bd78db41897fddb0e045d6ed328975115e190a14d2ad9b97a30d7",
+    "workspaces": [
+      {
+        "label": "stage0-clean-os-02",
+        "passed": true,
+        "before_format": 1,
+        "after_format": 2,
+        "private_seed_verified": true,
+        "legacy_identity_matched": true,
+        "exact_marker_backup": true,
+        "previous_fields_preserved": true,
+        "guest_root_metadata_unchanged": true,
+        "repeated_migration_unchanged": true
+      },
+      {
+        "label": "stage0-vm-toolchain-01",
+        "passed": true,
+        "before_format": 1,
+        "after_format": 2,
+        "private_seed_verified": true,
+        "legacy_identity_matched": true,
+        "exact_marker_backup": true,
+        "previous_fields_preserved": true,
+        "guest_root_metadata_unchanged": true,
+        "repeated_migration_unchanged": true
+      }
+    ],
+    "completed_unix": 1793096007.7919328
+  },
+  "new_extraction": {
+    "passed": true,
+    "provenance_format": 2,
+    "authenticated_seed": true,
+    "actual_private_users_probe": true,
+    "guest_root_shifted_to_foreign_uid": true,
+    "persistent_identity_unchanged_after_probe": true,
+    "host_reboot_tested": false,
+    "dependencies_installed": false,
+    "source_sha256": "16242936de8bd78db41897fddb0e045d6ed328975115e190a14d2ad9b97a30d7",
+    "completed_unix": 1793096012.5792677
+  },
+  "physical_boot_preparation": {
+    "passed": true,
+    "preparation_only": true,
+    "physical_boot_tested": false,
+    "host_startup_changed": false,
+    "firmware_variables_changed": false,
+    "bootloader": "existing Limine",
+    "boot_files_copied": 28,
+    "boot_file_bytes": 673807093,
+    "archive_contents_sha256_verified": true,
+    "referenced_kernel_initramfs_hashes_checked": 154,
+    "reference_hash_algorithm": "blake2b-512",
+    "boot_source_unchanged_during_copy": true,
+    "read_only_root_reference_created": true,
+    "running_kernel_modules_present_in_reference": true,
+    "consistent_ledger_reference_integrity_ok": true,
+    "root_reference_includes_separate_home_subvolume": false,
+    "reference_on_same_ssd": true,
+    "independent_failure_recovery_qualified": false,
+    "boot_archive_sha256": "d2ed71a20d636fc15d6c924444ca9e58d3931b0a5dde50c43a1283d9faf4a59c",
+    "completed_unix": 1793096197.9309068,
+    "off_device_boot_archive_sha256_verified": true
+  },
+  "unmigrated_workspace": {
+    "label": "stage0-clean-os-01",
+    "incomplete": true,
+    "reason": "No original guest ownership record; refused before any migration; preserved unchanged"
+  },
+  "host_reboot_tested": false,
+  "new_performance_comparison": false,
+  "live_installation": {
+    "installed_files_verified": 7,
+    "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+    "power_active": true,
+    "timer_active": true,
+    "nvme_qos_us": 5000,
+    "stop_marker": false,
+    "daily_quota_remaining": 643253
+  },
+  "isolated_linux_tests": 109,
+  "worker_signature_review": {
+    "method": "static code audit",
+    "production_code_changed": false,
+    "changed_device_rechecks_eligibility": true,
+    "already_small_checked_before_reservation": true,
+    "daily_ledger_not_reset": true,
+    "unhelpful_or_missed_layout_may_be_reconsidered": true
+  }
+}
