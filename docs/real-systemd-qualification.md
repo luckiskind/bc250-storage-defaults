@@ -50,6 +50,6 @@ The harness checks:
 5. A guest reboot with a fresh PID 1 and simulated controller reset, followed by enabled-service startup and policy reapplication.
 6. Undo after that guest reboot and orderly guest shutdown.
 
-`qualification-result.json` is written in the private workspace. A successful report includes source/harness hashes, userspace versions, the bounded worker result and explicit scope flags. The construction marker records the guest directory's device/inode identity, and later actions refuse a replaced directory. The `INCOMPLETE` marker concerns dependency preparation; qualification success is established only by the result report.
+`qualification-result.json` is written in the private workspace. A successful report includes source/harness hashes, userspace versions, the bounded worker result and explicit scope flags. New construction markers record persistent Btrfs identities for both workspace and guest directories, and later actions refuse replacements. See [the provenance guide](workspace-provenance.md) for guarded legacy migration before a restart and native remount/replacement evidence. The `INCOMPLETE` marker concerns dependency preparation; qualification success is established only by the result report.
 
 The guest reboot is a container lifecycle transition. It does not reset the physical SSD or reboot the host kernel. The resource caps, simulated controller and copied workload make these correctness checks unsuitable for throughput or application-latency claims.

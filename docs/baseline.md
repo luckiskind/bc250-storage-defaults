@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 102 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
+- [x] Pass 109 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -177,6 +177,16 @@ The [new clean B0/B1/B2 set](evidence/stage0-native-clean-volume-baselines.json)
 The [nine-launch native trial matrix](evidence/stage0-native-trials.json) passes three creates, three orderly remount/persistence relaunches and three independent resets. It verifies actual guest systemd PID 1, the BC-250 kernel, correct copied filesystem UUIDs, mapped root and private user/PID/network namespaces. Each phase reaches `multi-user.target` with zero failed services, executes Python and OpenSSL, checks SQLite integrity and commits durable state. Counts progress 1 to 2 on the first copy and restart at 1 with a new nonce on a fresh copy. Fixture mutations survive relaunch and disappear on reset; full initial/reset trees and every protected baseline fingerprint verify. Each phase unit exits before remounting. The 102-test Linux suite passes, and all seven live installed hashes, the active power/timer services and actual 5000 us policy still verify.
 
 See [the startup/reset recipe](native-trials.md). These are native guest/userspace and orderly persistence results, with a shared host kernel and retained host caches. Physical boot/reboot/suspend/resume, crash/cache-loss extension to these trial volumes, private-lab/worker boot-dependent identity review, physical-write accounting and Stage 1 measurement gates remain open.
+
+## Restart-stable lab provenance and physical boot preservation
+
+The [provenance guide and evidence](workspace-provenance.md) add format-2 private OS construction records using persistent Btrfs workspace/guest identities. Six native cases pass authenticated migration/idempotence, actual changed device numbers, strict legacy-mismatch refusal, identical-directory replacement, snapshot replacement and legitimate private-user ownership shifts. Both new identities are validated before later lab mutations. Format-1 migration requires the original ownership check and pinned private archive, preserves an exact synchronized marker backup and commits atomically. It never upgrades a mismatch from file contents.
+
+Two existing complete lab trees migrated with original fields and guest-root metadata unchanged; their repeat migration writes nothing. An older incomplete build had no guest ownership field and was preserved after refusal. A fresh pinned-seed tree passes extraction and an offline nspawn ownership-shift probe using the new marker. It has not installed its dependencies or replaced a benchmark baseline. The isolated Linux suite passes 109 tests. Source hashes bind these new results to the actual tooling; prior reports retain their own epochs.
+
+A static audit of the unchanged worker cache key confirms a remount can invalidate remembered eligibility. Already-small compressed files are checked before reservation/repacking, and the independent daily allowance is not reset. Unhelpful-compression or verified layout-miss cases may be reconsidered within normal budgets. Persistent cache keys remain an efficiency decision for later measurement.
+
+Physical preparation verifies 28 existing boot files totaling 673,807,093 bytes and 154 BLAKE2b-tagged kernel/initramfs references. Archive contents verify individually, a private Windows copy has the same SHA-256, and a read-only root reference contains the running kernel modules. A consistent ledger reference passes SQLite integrity checking. The root reference remains on the same SSD and excludes separate home/other subvolumes; it is not a complete independent backup. Boot configuration/firmware variables are unchanged. The working installed seven-file profile still matches its manifest, power/timer are active and the NVMe policy is 5000 us. Physical boot/resume and demonstrated recovery remain open; preservation is not a boot qualification.
 
 ## Recovery procedure for the local reliability repair
 
