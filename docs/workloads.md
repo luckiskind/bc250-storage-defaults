@@ -79,3 +79,7 @@ The [temporary request observer](request-tracing.md) now passes five bounded cas
 ## Frozen observer overhead screen
 
 The [two-batch calibration](trace-overhead.md) retains all 86 trials and fails the prespecified serial-read screen. The fixed extension estimates +4.460% elapsed-time overhead (exploratory 95% interval +2.191% to +6.706%); three whole-window capture flags also remain disqualifying. Read bytes match and ring loss is zero, so those flags are not presented as proven read transport loss. The concurrent pilot control alone passes. Keep the observer opt-in, preserve these separate batches, qualify a distinct batched-consumption variant and compare it under a new frozen contract. No accelerator improvement or Stage 1 gate pass follows from this measurement. The Linux suite now passes 127 tests.
+
+## Batched observer decision
+
+The [distinct batching variant](batched-tracing.md) passes seven transport checks, including early final drain and visible ring overflow. Its 75-trial blocked comparison on one physical fixture shows no demonstrated overhead benefit and has only 18 valid blocks, below the frozen 20. Preserve the negative decision. Qualify the zero-byte/flush lifecycle and measure probe cost before another observer change, while freezing concrete application workloads and endpoints. No existing strict verdict is retroactively changed.

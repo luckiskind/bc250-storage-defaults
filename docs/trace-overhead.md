@@ -124,3 +124,7 @@ same physical fixture within that experiment. Do not loosen the old screen or
 compare the independently allocated historical batches as a variant effect.
 Then qualify application endpoints, cache state, edge paths and dependency
 attribution before the roadmap's B0/B1/B2 performance comparisons.
+
+## Follow-up completed
+
+The proposed separate [batched-consumption experiment](batched-tracing.md) is now measured. It shows no demonstrated reduction and does not pass its strict screen. The original results above remain unchanged. Continue with lifecycle qualification, probe-cost evidence and concrete workload definitions instead of repeating notification tuning without new evidence.
