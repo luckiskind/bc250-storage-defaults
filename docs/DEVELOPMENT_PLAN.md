@@ -1,6 +1,6 @@
 # BC-250 storage accelerator: sequential development plan
 
-**Status:** active goal; Stage 0 is underway. See [the baseline record](baseline.md) for completed checks and open gates. This document itself does not execute commands or change a machine.
+**Status:** active goal; Stage 0 has passed its target-specific gate; Stage 1 measurement work is underway. See [the baseline record](baseline.md) for completed checks and open gates. This document itself does not execute commands or change a machine.
 
 **Prepared:** October 26, 2026.
 

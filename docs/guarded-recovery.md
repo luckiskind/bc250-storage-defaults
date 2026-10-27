@@ -89,8 +89,9 @@ Preparation writes the original and proposed configuration **privately in the
 lab**. It does not edit `/boot`, select an entry, write firmware variables,
 reboot or suspend. This tool currently targets the exact qualified BC-250
 kernel/layout, rather than arbitrary installations. All incomplete artifacts
-are retained. A separate physical entry/return test and restoration of the
-original boot configuration remain required.
+are retained. The subsequent [physical trial](physical-recovery.md) completes entry/return
+and restores the original boot configuration for this target. This preparation
+tool itself still performs no boot-menu publication or reboot.
 
 The owner reports no functional system suspend wake on this BC-250. No remote
 sleep will be attempted; physical resume is outside the compatibility claim.

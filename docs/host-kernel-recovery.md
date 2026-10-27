@@ -84,7 +84,12 @@ and private paths. Private phase records and serial logs retain diagnostic
 details. Review results before redistribution. Software emulation and file-backed
 I/O make the elapsed times unsuitable for performance comparisons.
 
-## Remaining path to physical recovery
+## Conversion path and subsequent physical result
+
+The subsequent [physical private-root trial](physical-recovery.md) now passes
+entry and return and restores the original menu/profile. The following steps
+describe the conversion procedure; the three-boot VM result above retains its
+own narrower scope. Used physical candidates are retained and not silently reset.
 
 1. Derive a separate physical candidate from the verified minimal userspace,
    with its own root selection and storage state. Preserve the working root.

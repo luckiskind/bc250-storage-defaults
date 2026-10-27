@@ -96,14 +96,16 @@ The NVMe drive-idle policy is independent of system sleep and remains supported
 at the qualified 5000 us setting. On other targets, resume qualification still
 requires a functional wake path and an observed physical sleep/resume cycle.
 
-## Remaining physical gates
+## Subsequent physical recovery result
 
-The existing boot files and same-SSD read-only root reference are preserved as
-described in [the provenance guide](workspace-provenance.md). The current Limine
-12.9.0 reports one-shot entry selection support, but no boot-counting fallback;
-that capability report is not a tested recovery boot. The subsequent [actual-kernel VM bridge](host-kernel-recovery.md) verifies the minimal recovery userspace with copied installed boot files and matching runtime modules. A separately verified
-test/recovery entry and return to the working root remain open.
+The [physical private-root trial](physical-recovery.md) now passes separate-root
+entry and return, original boot-menu restoration, original kernel/root/profile
+checks and retained quota history. The [Stage 0 audit](evidence/stage0-gate.json)
+maps that result and the earlier lifecycle/native tests to the six requirements.
+The prepared physical candidate is single-use and retained as evidence; create
+a fresh independent candidate for another controlled trial.
 
-Physical write/metadata/lost-sharing accounting on disposable data, selected
-native interruption cases and Stage 1 workload measurements also remain open.
-No hardware power cut was performed against the working installation.
+Stage 1 workload/cache-state qualification, request/decompression attribution
+and tracing overhead remain open. Physical write/metadata/lost-sharing costs
+on disposable data are required before expanding maintenance policies. No
+hardware power cut or system suspend/resume was performed.

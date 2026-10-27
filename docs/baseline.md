@@ -1,6 +1,6 @@
 # Stage 0 baseline and recovery record
 
-Status: **in progress**. This record is part of the [active development roadmap](DEVELOPMENT_PLAN.md). Stage 0 is not complete and new accelerator subsystems have not been promoted.
+Status: **Stage 0 gate passed for this target and the recorded test scopes**. The [requirement audit](evidence/stage0-gate.json) maps all six requirements to evidence and limitations. Stage 1 measurement work is now underway under the [active development roadmap](DEVELOPMENT_PLAN.md). No new accelerator subsystem or throughput claim has been promoted.
 
 The 12-person staffing model in the roadmap is a planning assumption. Current execution uses one agent and one connected BC-250; no independent hardware fleet has been qualified.
 
@@ -97,13 +97,13 @@ Current checklist against the roadmap's six numbered Stage 0 requirements:
 | Requirement | Evidence and remaining work |
 | --- | --- |
 | 1. Preserve v0.1.0 and the local deployment | Pinned release/tree, exported source, private installed configuration/history and recovery references retained |
-| 2. Isolated environment, known-good boot/recovery, backups and disposable volumes | Userspace/VM/native isolation and protected resets pass; existing physical reference boot and boot-file backups verify; the minimal recovery userspace passes three VM boots with the actual kernel/initramfs; a demonstrated isolated physical test/recovery boot remains open |
+| 2. Isolated environment, known-good boot/recovery, backups and disposable volumes | Userspace/VM/native isolation and protected resets pass; existing physical reference boot and boot-file backups verify; the actual-kernel private recovery root now passes physical entry and return; original boot configuration and profile are restored and verified |
 | 3. Machine/controller/filesystem/power manifest | Recorded capabilities, negotiated link, actual mounted devices, kernel/memory/thermals and policies; no throughput comparison is inferred |
 | 4. Install/reapply/remove/reboot/resume | Selected fresh/real-systemd lifecycle cases pass; actual physical reboot passes; target suspend wake unsupported per owner, physical resume unqualified |
 | 5. Failed/partial install and refusal/recovery cases | Isolated refusal/dependency tests, 40 process cuts, selected VM/cache-loss and native identity cases pass within their documented scopes |
 | 6. Independent B0/B1/B2 test volumes | Three separate Btrfs userspace images have equal verified trees and nine passing native startup/persistence/reset phases; the Stage 1 application suite still needs its own frozen fixtures |
 
-Remaining immediate work is a demonstrated physical test/recovery path. The owner reports that this target has no functional suspend wake; no remote suspend will be attempted, and physical resume remains outside its compatibility claim. Measure physical writes, metadata growth and lost sharing on disposable data before policy expansion; logical budgets are not physical-write limits. Broader fault/cache-loss orderings and hardware power-loss behavior remain unqualified for subsequent reliability work. Later mechanisms retain their own correctness/fault gates under the complete roadmap.
+The demonstrated physical test/recovery path now passes; Stage 1 workload and attribution qualification is the next gate. The owner reports that this target has no functional suspend wake; no remote suspend will be attempted, and physical resume remains outside its compatibility claim. Measure physical writes, metadata growth and lost sharing on disposable data before policy expansion; logical budgets are not physical-write limits. Broader fault/cache-loss orderings and hardware power-loss behavior remain unqualified for subsequent reliability work. Later mechanisms retain their own correctness/fault gates under the complete roadmap.
 
 No host reboot, suspend, kernel replacement, filesystem formatting or destructive fault injection was performed in this initial milestone. The working installation is not the power-loss-test target.
 
@@ -233,3 +233,35 @@ The owner confirms that this BC-250 has no functional suspend wake. System suspe
 The [guarded recovery matrix](guarded-recovery.md) passes six UEFI boots with copied installed Limine/kernel/initramfs: normal → selected trial → normal for a valid root, and normal → refused root → normal for a deliberately incorrect root identity. The refusal occurs before managed result writes; the fixture stays unchanged and independent boot-policy checks allow return. Each guest reboot request ends QEMU, and a fresh machine instance retains the same case disks and private EFI variables. Continuous-QEMU warm reset remains unqualified: the retained initial run stalled during the third boot after initramfs loading. Its cause is unresolved.
 
 A separate physical candidate is now prepared in a new Btrfs subvolume with a verified 58,000-node source transfer, a root-only mount entry, fresh state, no storage-maintenance service, the VM shutdown probe removed and a guarded return service. The proposed boot configuration stays private in the lab; the actual boot setup and firmware selection were unchanged. The candidate has not been physically booted. The Linux suite passes 114 tests; all seven working-profile files still match, power/timer remain active at 5000 us and daily charges were not rewound. No new throughput result is claimed.
+
+## Physical recovery gate passed; Stage 1 started
+
+The [physical recovery report](evidence/stage0-physical-recovery.json) verifies
+entry into the separate prepared Btrfs root and automatic return to the original
+working root. Three distinct kernel boot identities establish the before,
+trial and returned systems. The trial runs the unchanged installed kernel,
+reaches real systemd's usable target with zero failed units, verifies its root
+identity and fixture, consumes the one-shot request and checks a normal-default
+boot policy. It performs no storage maintenance or suspend.
+
+The controller verifies the returned root and profile before restoring only the
+exact temporary boot configuration it published. The original menu bytes,
+remembered normal selection, seven installed hashes, original kernel and root
+selection all match; the one-shot is absent, power/timer are active at 5000 us,
+and daily reservations were not rewound. The Linux suite passes 121 tests after
+return, and three private workspace records remain accepted. The off-device boot
+archive hash and same-SSD reference's read-only property were checked again.
+
+The [six-requirement audit](evidence/stage0-gate.json) closes Stage 0 within its
+documented scope. Physical SSD power loss, complete disk/user-data disaster
+recovery, arbitrary fault interleavings and system resume are not qualified.
+The continuous-QEMU warm-reset stall remains unresolved; the actual physical
+entry/return result is separate evidence, not a diagnosis of that stall.
+
+Stage 1 begins with a fresh [machine baseline](evidence/stage1-opening-baseline.json)
+and [read-only trace feature probe](evidence/stage1-trace-features.json). Standard
+issue/completion payloads expose no shared request identifier. Device/sector
+matching alone is ambiguous, and issuing context is not proven to be the
+foreground owner. BTF, bpftool and compilers are available; perf, bpftrace and
+trace-cmd are absent. No trace events were enabled by the probe and no new
+latency or throughput comparison was performed. See [the workload worklist](workloads.md).

@@ -2,7 +2,7 @@
 
 The native-volume lab creates B0, B1 and B2 on three separately formatted Btrfs filesystems. Each contains a complete prepared Arch userspace: `/usr`, `/etc`, `/boot`, the package database, a fresh empty home and other runtime directories, and a deterministic 32 MiB incompressible control. The source is the authenticated disposable OS from [the preparation guide](real-systemd-qualification.md), not the working host's configuration or home directory.
 
-These are native, loop-backed filesystem images on the BC-250. The B2 worker executes through a private user/container namespace on the actual CachyOS host kernel, without QEMU or CPU emulation. This is an intermediate native measurement environment. It does not establish physical boot, suspend/resume, graphics/game compatibility, or a known-good hardware recovery path. Those remain separate Stage 0 work.
+These are native, loop-backed filesystem images on the BC-250. The B2 worker executes through a private user/container namespace on the actual CachyOS host kernel, without QEMU or CPU emulation. This is an intermediate native measurement environment. It does not establish physical boot, suspend/resume, graphics/game compatibility, or a known-good hardware recovery path. A separate [physical recovery candidate](physical-recovery.md) now passes entry and return; this native-volume matrix retains its own narrower scope.
 
 ## Baseline contract
 
@@ -68,4 +68,4 @@ The suite passes 95 isolated Linux tests, including the archive/socket-name regr
 
 ## Remaining qualification
 
-The clean successor now passes the selected native launch/persistence/reset sequence described above. The initial construction set retains its earlier scope. Stage 1 measurements remain pending. Physical BC-250 startup/reboot/suspend/resume, a recoverable hardware boot path, workload definitions, cache-state procedures, tracing attribution, write amplification and broad user-visible performance remain unqualified. These volumes extend the earlier 15-file native data fixture; they do not replace those missing gates with synthetic throughput.
+The clean successor now passes the selected native launch/persistence/reset sequence described above. The initial construction set retains its earlier scope. Stage 1 measurements remain pending. These B0/B1/B2 images have not themselves been physically booted. A separate physical recovery candidate now passes entry/return; target suspend wake is unsupported per owner. Workload definitions, cache-state procedures, tracing attribution, write amplification and broad user-visible performance remain unqualified. These volumes extend the earlier 15-file native data fixture; they do not replace those missing gates with synthetic throughput.
