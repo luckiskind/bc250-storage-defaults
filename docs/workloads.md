@@ -71,3 +71,7 @@ growth and lost sharing separate from logical maintenance budget charges.
 
 The stage gate remains open. No accelerator architecture is selected from the
 feature inventory, historical synthetic throughput or an ambiguous disk trace.
+
+## Initial request-identity qualification
+
+The [temporary request observer](request-tracing.md) now passes five bounded cases on the real kernel: idle, 2,048 serial reads, 8,192 overlapping same-location reads, an explicitly incomplete cap, and cleanup after forced exit. Known-read counts and bytes match exactly with no ring loss; fixture residency remains zero before/after the accepted controls. This supplies request-identity evidence rather than sector matching. The first control failure is retained and documented. Tracing overhead, partial/requeue/error paths, foreground dependency attribution and the frozen application matrix remain open.
