@@ -37,6 +37,26 @@ VOLATILE = ('dev', 'proc', 'sys', 'run', 'tmp', 'var/tmp')
 VARIANTS = ('B0', 'B1', 'B2')
 KEYRING_SOCKETS = tuple('etc/pacman.d/gnupg/' + name for name in
     ('S.keyboxd', 'S.gpg-agent', 'S.gpg-agent.ssh', 'S.gpg-agent.extra', 'S.gpg-agent.browser', 'S.dirmngr'))
+LEGACY_QUALIFICATION_UNITS = {
+    'bc250-qualification-reset.service': '''[Unit]
+Description=Reset simulated NVMe policy in the qualification guest
+Before=bc250-nvme-power.service bc250-qualification.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /qualification/reset.py
+[Install]
+WantedBy=multi-user.target
+''',
+    'bc250-qualification.service': '''[Unit]
+Description=Private BC-250 storage lifecycle qualification
+After=multi-user.target bc250-qualification-reset.service
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /qualification/inside.py
+TimeoutStartSec=240
+[Install]
+WantedBy=multi-user.target
+'''}
 
 WORKER = r'''import importlib.util,json,os,sys
 from pathlib import Path
@@ -218,6 +238,26 @@ def seed_archive(guest, area):
     return archive, exclusions
 
 
+def strip_legacy_fixture(target):
+    """Only new image copies are passed here; preserve unknown administrator edits."""
+    units = target/'etc/systemd/system'
+    selected = []
+    for name, contents in LEGACY_QUALIFICATION_UNITS.items():
+        path = units/name
+        link = units/'multi-user.target.wants'/name
+        if not path.exists() and not path.is_symlink() and not link.exists() and not link.is_symlink():
+            continue
+        require(path.is_file() and not path.is_symlink() and path.read_text() == contents,
+                'Unknown historical qualification unit; preserve the copy for review')
+        require(link.is_symlink() and os.readlink(link) == '../'+name,
+                'Unknown historical qualification activation; preserve the copy for review')
+        selected.append((path, link))
+    # Check the entire known set before removing any entry.
+    for path, link in selected:
+        link.unlink(); path.unlink()
+    return [path.name for path, _ in selected]
+
+
 def populate(archive, target, id_base, machine_id):
     os.chown(target, id_base, id_base); target.chmod(0o755)
     run('tar', '--extract', '--file', archive, '--directory', target, '--numeric-owner',
@@ -250,6 +290,7 @@ def populate(archive, target, id_base, machine_id):
     os.chown(control, id_base, id_base); control.chmod(0o644)
     # Set a fixed mtime for generated fixtures so variant metadata compares exactly.
     os.utime(control, ns=(1700000000000000000, 1700000000000000000))
+    return strip_legacy_fixture(target)
 
 
 def layout_inventory(root, manifest):
@@ -358,7 +399,7 @@ def build(workspace, area):
             uuid.UUID(fs_uuid)
             require(fs_uuid != host_uuid and fs_uuid not in uuids, 'Filesystem independence failed')
             uuids.add(fs_uuid)
-            populate(archive, point, id_base, machine_id)
+            removed_fixture_units = populate(archive, point, id_base, machine_id)
             run('sync', '-f', point)
             manifest = tree_manifest(point, id_base)
             if reference is None:
@@ -388,6 +429,7 @@ def build(workspace, area):
             finally:
                 os.close(outer)
             report['variants'][variant] = dict(filesystem_uuid=fs_uuid, tree_sha256=manifest['sha256'],
+                historical_qualification_units_removed_from_copy=removed_fixture_units,
                 durable_nodes=manifest['nodes'], logical_file_bytes=manifest['logical_bytes'],
                 initial_layout=initial_layout, final_layout=final_layout, maintenance=maintenance,
                 image_fingerprint=sparse_fingerprint(image),
