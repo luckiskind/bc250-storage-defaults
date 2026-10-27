@@ -31,5 +31,23 @@ class TraceWire(unittest.TestCase):
         report['kernel_counters'][2]=3
         self.assertFalse(validate(report)['transport_complete'])
 
+    def test_zero_payload_read_is_not_labeled_flush_or_used_to_erase_failure(self):
+        from request_classes import summarize
+        report=self.report();row=report['records'][1]
+        row.update(operation=2,bytes=0,completed_bytes=0,flags=144,insert_ns=0)
+        report.update(read_completed_bytes=4096,qualified_full_requests=1,flagged_events=1,
+            service_sum_ns=60,queue_sum_ns=20)
+        report['service_log2_ns'][5]=1;report['queue_log2_ns'][4]=1
+        report['kernel_counters'][3]=1
+        result=summarize(report,2)
+        self.assertEqual(result['flagged_zero_payload_flush_records'],1)
+        self.assertEqual(result['orphan_complete_total'],1)
+        self.assertFalse(result['flush_lifecycle_qualified'])
+        self.assertFalse(result['existing_verdict_recomputed_or_changed'])
+        row['operation']=0
+        result=summarize(report,2)
+        self.assertEqual(result['flagged_zero_payload_flush_records'],0)
+        self.assertEqual(result['flagged_read_records'],1)
+
 
 if __name__=='__main__':unittest.main()
