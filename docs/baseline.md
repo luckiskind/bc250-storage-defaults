@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 55 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
+- [x] Pass 73 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -78,6 +78,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Pass 11 lifecycle checks using real guest systemd, including bounded maintenance, undo/reinstall and startup policy reapplication after a guest reboot.
 - [x] Boot a separate stock kernel and Btrfs image, verify orderly persistence, and reset to a protected baseline using fresh overlays.
 - [x] Pass seven selected installer recovery scenarios across eight acknowledged whole-guest interruptions and 15 guest boots, including interrupted recovery and missing-link compatibility repair.
+- [x] Independently calibrate a volatile disk-cache model and recover one installer VM after discarding 100 KiB of actual pending model writes.
 
 The repaired pass processed 104 verified files, with 536,367,504 logical bytes processed and 425,984 extra retry bytes. Total charged work was 536,793,488 bytes, within the 536,870,912-byte pass budget. The successful pass took approximately 34.8 seconds including scanning and the quiet check. This timing is an operational observation, not a controlled throughput comparison.
 
@@ -92,7 +93,7 @@ The post-pass ledger held 482 recorded successfully repacked file signatures. Th
 Pending before declaring Stage 0 complete:
 
 - [ ] Test actual boot/reboot and suspend/resume transitions with measured controller state.
-- [ ] Test device/storage power-loss recovery, including interrupted recovery itself, across installer and worker transitions on disposable storage. Process SIGKILL testing is complete for 40 selected installer checkpoints only.
+- [ ] Extend calibrated device-cache fault coverage across installer/interrupted-recovery and worker transitions, then qualify physical storage power-loss behavior. The calibrated software model now passes one installer boundary with positive write loss; process SIGKILL coverage remains 40 selected checkpoints.
 - [ ] Recreate independent full-system/volume B0/B1/B2 baselines; the native data-copy preparation above covers only the dataset part of this gate.
 - [ ] Establish a boot/recovery path applicable to the physical BC-250. The virtual kernel/image reset path is qualified; physical firmware/bootloader and hardware recovery remain open.
 - [ ] Quantify physical write amplification, metadata growth and lost sharing; logical work budgets are not physical-write limits.
@@ -126,6 +127,16 @@ The [seven-case profile fault result](evidence/stage0-virtual-profile-faults.jso
 This work found a real installer failure in the prior development version: a committed active manifest survived while the newly created timer dependency directory did not. An isolated child overlay confirmed the missing directory. The repair synchronizes service-link directories and their parent before committing activation or completed shutdown. Committed recovery audits installed contents and remaining staging artifacts, then reestablishes the intended enabled services before finishing cleanup. Failed and diagnostic images were preserved. The repaired source passes 55 isolated tests and a [fresh 40-case process interruption rerun](evidence/stage0-service-link-process-crashes.json).
 
 The final VM result verifies unchanged protected-baseline bytes, a separate guest filesystem identity, matching package/build/runtime source hashes and unchanged actual host policy at 5000 us. The working power service and timer remained active. The host was not rebooted. The [reproduction guide](virtual-profile-faults.md) distinguishes guest-memory loss from physical volatile-cache loss. Interrupted worker repacking and device-level failure models remain open; no new throughput comparison was performed.
+
+## Calibrated device-cache loss
+
+The [independent calibration report](evidence/stage0-cache-calibration.json) passes four QEMU-client scenarios: acknowledged unflushed write loss with an armed cut, flush survival, FUA isolation/overlap handling, and actual backend process SIGKILL followed by readback through fresh processes. The disk keeps ordinary writes only in bounded RAM; FLUSH and FUA synchronize their specified durable state before successful replies. Its source hashes and the caller's harness hashes identify the executed versions.
+
+The [cache-backed installer VM result](evidence/stage0-cache-installer-vm.json) then passes recovery after **102,400 bytes (100 KiB)** of pending disk-model writes were discarded. The installer paused after power/timer activation; the disk cut after its next ordinary write reply; the tracked guest was killed and rebooted on the same stable raw file with a fresh backend. Recovery twice verified the disposable fixture, removed the uncommitted installation/staging/journal, disabled services and restored the simulated original policy. Orderly shutdown left zero pending backend bytes. The protected baseline, separate guest filesystem identity, matching calibration/package/runtime source hashes and actual host 5000 us policy all verified. The suite now passes 73 unit tests.
+
+An earlier immediate guest-kill run recovered but discarded zero backend-cache bytes; it is not counted as device-cache-loss evidence. A preboot metadata-mode mismatch was also preserved and corrected with a regression test. Accepted evidence comes from the calibrated request-triggered cut. See [the procedure and limits](volatile-cache-faults.md).
+
+This is one selected installer boundary with a calibrated software device model. It does not qualify interrupted worker repacking, all installer transitions, torn writes, partial barriers, physical SSD cache/firmware/NAND behavior, physical reboot/resume, or native throughput. Earlier profile reports retain their own tested source versions; this addition changes the lab harness and leaves installed payloads unchanged.
 
 ## Recovery procedure for the local reliability repair
 
