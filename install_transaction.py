@@ -1,5 +1,7 @@
 """Durable seven-file installation transactions; no services are controlled here."""
 from contextlib import contextmanager
+import ctypes
+import fcntl
 import hashlib
 import json
 import os
@@ -8,6 +10,42 @@ import re
 import stat
 import tempfile
 import uuid
+
+
+class FileHandle(ctypes.Structure):
+    _fields_ = [('handle_bytes', ctypes.c_uint), ('handle_type', ctypes.c_int),
+                ('data', ctypes.c_ubyte * 128)]
+
+
+def persistent_identity(fd):
+    # Qualified payloads live on Btrfs. Its export handle includes the inode,
+    # subvolume and generation; pair it with the filesystem UUID, not a mount ID.
+    info = bytearray(1024)
+    fcntl.ioctl(fd, 0x8400941f, info, True)  # BTRFS_IOC_FS_INFO, x86_64 Linux ABI
+    fs_uuid = bytes(info[16:32]).hex()
+    require(any(info[16:32]), 'Missing Btrfs filesystem identity')
+    libc = ctypes.CDLL(None, use_errno=True)
+    lookup = libc.name_to_handle_at
+    lookup.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.POINTER(FileHandle),
+                       ctypes.POINTER(ctypes.c_int), ctypes.c_int]
+    lookup.restype = ctypes.c_int
+    handle = FileHandle(handle_bytes=128)
+    mount_id = ctypes.c_int()
+    if lookup(fd, b'', ctypes.byref(handle), ctypes.byref(mount_id), 0x1000):  # AT_EMPTY_PATH
+        code = ctypes.get_errno()
+        raise OSError(code, 'Cannot establish persistent Btrfs file identity: ' + os.strerror(code))
+    require(0 < handle.handle_bytes <= 128 and handle.handle_type > 0, 'Invalid Btrfs export handle')
+    return dict(kind='btrfs-fh-v1', fs_uuid=fs_uuid, handle_type=handle.handle_type,
+                handle=bytes(handle.data[:handle.handle_bytes]).hex())
+
+
+def valid_identity(value):
+    return (isinstance(value, dict) and set(value) == {'kind', 'fs_uuid', 'handle_type', 'handle'}
+            and value['kind'] == 'btrfs-fh-v1' and isinstance(value['fs_uuid'], str)
+            and re.fullmatch('[0-9a-f]{32}', value['fs_uuid']) is not None
+            and value['fs_uuid'] != '0' * 32 and type(value['handle_type']) is int
+            and value['handle_type'] > 0 and isinstance(value['handle'], str)
+            and re.fullmatch('(?:[0-9a-f]{2}){1,128}', value['handle']) is not None)
 
 
 def require(condition, message):
@@ -80,11 +118,19 @@ def bounded_bytes(path):
 
 
 def fingerprint(path):
-    s = path.lstat()
-    require(stat.S_ISREG(s.st_mode) and s.st_uid == os.geteuid(), f'Unsafe transaction file: {path}')
-    require(s.st_size <= 4 * 2**20, f'Transaction metadata file exceeds the 4 MiB limit: {path}')
-    return dict(device=s.st_dev, inode=s.st_ino, mode=stat.S_IMODE(s.st_mode),
-                sha256=hashlib.sha256(bounded_bytes(path)).hexdigest())
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    try:
+        s = os.fstat(fd)
+        require(stat.S_ISREG(s.st_mode) and s.st_uid == os.geteuid(), f'Unsafe transaction file: {path}')
+        require(s.st_size <= 4 * 2**20, f'Transaction metadata file exceeds the 4 MiB limit: {path}')
+        identity = persistent_identity(fd)
+        with os.fdopen(os.dup(fd), 'rb') as stream:
+            contents = stream.read(4 * 2**20 + 1)
+        require(len(contents) <= 4 * 2**20, f'Transaction metadata file exceeds the 4 MiB limit: {path}')
+        return dict(device=s.st_dev, inode=s.st_ino, mode=stat.S_IMODE(s.st_mode),
+                    sha256=hashlib.sha256(contents).hexdigest(), identity=identity)
+    finally:
+        os.close(fd)
 
 
 class Transaction:
@@ -114,7 +160,7 @@ class Transaction:
             else:
                 raise RuntimeError('Unknown transaction operation')
             entries.append(entry)
-        data = dict(format_version=1, id=token, operation=operation,
+        data = dict(format_version=2, id=token, operation=operation,
                     phase='staging' if operation == 'install' else 'stopping',
                     activation_started=False, services_stopped=False, entries=entries)
         tx = cls(state, data, files)
@@ -131,7 +177,7 @@ class Transaction:
         require(stat.S_ISREG(s.st_mode) and s.st_uid == os.geteuid() and s.st_mode & 0o077 == 0,
                 'Unsafe transaction journal')
         data = json.loads(bounded_bytes(path))
-        require(isinstance(data, dict) and data.get('format_version') == 1
+        require(isinstance(data, dict) and data.get('format_version') in (1, 2)
                 and isinstance(data.get('id'), str) and re.fullmatch('[0-9a-f]{32}', data['id']),
                 'Unsupported transaction journal')
         require(data.get('operation') in ('install', 'remove'), 'Invalid transaction operation')
@@ -154,11 +200,15 @@ class Transaction:
                 require(entry.get('staged') == str(expected), 'Unexpected staging path')
                 require(type(entry.get('size')) is int and 0 <= entry['size'] <= 4 * 2**20, 'Invalid staged size')
                 if 'staged_identity' in entry:
-                    require(isinstance(entry['staged_identity'], dict) and set(entry['staged_identity']) == {'device', 'inode'}
-                            and all(type(v) is int for v in entry['staged_identity'].values()), 'Invalid staging identity')
+                    identity = entry['staged_identity']
+                    require((valid_identity(identity) if data['format_version'] == 2 else
+                             isinstance(identity, dict) and set(identity) == {'device', 'inode'}
+                             and all(type(v) is int for v in identity.values())), 'Invalid staging identity')
             else:
                 require(type(entry.get('inode')) is int and type(entry.get('device')) is int,
                         'Missing removal identity')
+                if data['format_version'] == 2:
+                    require(valid_identity(entry.get('identity')), 'Invalid removal identity')
         return cls(state, data, files)
 
     def save(self):
@@ -176,7 +226,7 @@ class Transaction:
         writer(staged, data, entry['mode'])
         actual = fingerprint(staged)
         require(actual['sha256'] == entry['sha256'] and actual['mode'] == entry['mode'], 'Staging verification failed')
-        entry['staged_identity'] = {k: actual[k] for k in ('device', 'inode')}
+        entry['staged_identity'] = actual['identity']
         self.save()
         sync_directory(staged.parent)
         # Stage and destination share a directory/filesystem. link never replaces
@@ -198,7 +248,9 @@ class Transaction:
             require((owner.st_dev, owner.st_ino) == (current['device'], current['inode']),
                     f'Ownership changed for {target}; recovery preserved all files')
         else:
-            require((entry['device'], entry['inode']) == (current['device'], current['inode']),
+            matches = (entry['identity'] == current['identity'] if self.data['format_version'] == 2 else
+                       (entry['device'], entry['inode']) == (current['device'], current['inode']))
+            require(matches,
                     f'Ownership changed for {target}; recovery preserved all files')
         return True
 
@@ -234,9 +286,12 @@ class Transaction:
                 'Unsafe staging artifact; retained for inspection')
         identity = entry.get('staged_identity')
         if identity:
-            require((s.st_dev, s.st_ino) == (identity['device'], identity['inode']),
+            current = fingerprint(path)
+            matches = (current['identity'] == identity if self.data['format_version'] == 2 else
+                       (s.st_dev, s.st_ino) == (identity['device'], identity['inode']))
+            require(matches,
                     'Staging ownership changed; artifact preserved')
-            require(stat.S_IMODE(s.st_mode) == entry['mode'] and fingerprint(path)['sha256'] == entry['sha256'],
+            require(current['mode'] == entry['mode'] and current['sha256'] == entry['sha256'],
                     'Staging contents changed; artifact preserved')
         else:
             # An interrupted writer may not have recorded its inode yet. It
