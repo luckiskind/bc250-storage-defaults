@@ -1,0 +1,273 @@
+{
+  "architecture": "x86_64",
+  "block_devices": {
+    "nvme0n1": {
+      "major_minor": "259:0",
+      "max_sectors_kb": "256",
+      "nr_requests": "256",
+      "partition": null,
+      "read_ahead_kb": "256",
+      "scheduler": "none mq-deadline [kyber] adios bfq",
+      "sectors_512b": "1953525168"
+    },
+    "nvme0n1p1": {
+      "major_minor": "259:1",
+      "max_sectors_kb": null,
+      "nr_requests": null,
+      "partition": "1",
+      "read_ahead_kb": null,
+      "scheduler": null,
+      "sectors_512b": "8388608"
+    },
+    "nvme0n1p2": {
+      "major_minor": "259:2",
+      "max_sectors_kb": null,
+      "nr_requests": null,
+      "partition": "2",
+      "read_ahead_kb": null,
+      "scheduler": null,
+      "sectors_512b": "1945132392"
+    }
+  },
+  "captured_utc": "2026-10-27T12:30:13Z",
+  "collector_sha256": "8c7878160727ce1eb48d30f5320c130e7f53947279efc59262bb44e1861b8fdd",
+  "cpu_model": "AMD BC-250",
+  "graphics_memory": {
+    "card1": {
+      "mem_info_gtt_total": "12884901888",
+      "mem_info_vis_vram_total": "536870912",
+      "mem_info_vram_total": "536870912"
+    }
+  },
+  "installation": {
+    "installed_files": {
+      "/etc/bc250-storage-defaults.json": {
+        "matches_manifest": true,
+        "sha256": "3eb072811bd4b5b91a6182186ba03dd329b78e78913eaf6b0cf611b7b6916499"
+      },
+      "/etc/systemd/system/bc250-btrfs-repack.service": {
+        "matches_manifest": true,
+        "sha256": "1f231667e996c41dff28d661210100f08b3a9d064385aee8297f17168cd149f7"
+      },
+      "/etc/systemd/system/bc250-btrfs-repack.timer": {
+        "matches_manifest": true,
+        "sha256": "b0e5c1ff29788a876763a308461a0a02632640fa724e6362d1c37a24d8eb3a9f"
+      },
+      "/etc/systemd/system/bc250-nvme-power.service": {
+        "matches_manifest": true,
+        "sha256": "90507634a534eddaf1ca73d4e4878df2490d86004738f71ec87125706f8fe488"
+      },
+      "/usr/lib/systemd/system-sleep/90-bc250-nvme-power": {
+        "matches_manifest": true,
+        "sha256": "e70961b9a05a2a8a58b43289d635fead6bdea277aaee49293991278c50cc20fb"
+      },
+      "/usr/local/libexec/bc250-storage-defaults/storage_defaults_power.py": {
+        "matches_manifest": true,
+        "sha256": "68036596c6970425b0312276dd429fe9b99757880bb7f365c1565c7008ca1fc2"
+      },
+      "/usr/local/libexec/bc250-storage-defaults/storage_defaults_repack.py": {
+        "matches_manifest": true,
+        "sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0"
+      }
+    },
+    "last_run": {
+      "charged_bytes": 0,
+      "counts": {},
+      "dry_run": false,
+      "finished": 1793101794.189582,
+      "processed_bytes": 0,
+      "retry_bytes": 0,
+      "started": 1793101791.183185,
+      "verified_files": 0
+    },
+    "ledger": {
+      "attempt_status_counts": {
+        "repacked": 168
+      },
+      "daily_charged_bytes": {
+        "2026-10-26": 1621155618,
+        "2026-10-27": 2146840395
+      },
+      "status_counts": {
+        "little-compression-benefit": 1,
+        "not-single-regular": 56,
+        "outside-validated-binary-class": 229,
+        "protected-or-explicitly-uncompressed": 8,
+        "repacked": 546
+      }
+    },
+    "manifest_readable": true,
+    "policy_limits": {
+      "max_bytes_per_day": 2147483648,
+      "max_bytes_per_run": 536870912,
+      "max_file_bytes": 268435456,
+      "max_load": 4,
+      "max_run_seconds": 300,
+      "min_file_bytes": 1048576,
+      "quiet_seconds": 3600,
+      "reserve_free_bytes": 68719476736,
+      "sample_max_stored_ratio": 0.9
+    },
+    "stop_marker": false
+  },
+  "isolation": {
+    "kvm_present": false,
+    "user_namespace_enabled": "60543"
+  },
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "kernel_features": {
+    "CONFIG_BLK_DEV_LOOP": "m",
+    "CONFIG_BPF": "y",
+    "CONFIG_BPF_EVENTS": "y",
+    "CONFIG_BPF_SYSCALL": "y",
+    "CONFIG_BTRFS_FS": "y",
+    "CONFIG_EROFS_FS": "m",
+    "CONFIG_EROFS_FS_ZIP": "y",
+    "CONFIG_FTRACE": "y",
+    "CONFIG_KVM": "m",
+    "CONFIG_KVM_AMD": "m",
+    "CONFIG_MEMCG": "y",
+    "CONFIG_USER_NS": "y"
+  },
+  "load_average": [
+    "0.03",
+    "0.09",
+    "0.04"
+  ],
+  "logical_cpus": 16,
+  "memory": {
+    "Cached": "1363484 kB",
+    "Dirty": "324 kB",
+    "MemAvailable": "14070264 kB",
+    "MemTotal": "15564668 kB",
+    "SwapFree": "25162916 kB",
+    "SwapTotal": "25165820 kB",
+    "Writeback": "0 kB"
+  },
+  "mounts": {
+    "/": {
+      "fstype": "btrfs",
+      "options": [
+        "rw",
+        "noatime",
+        "compress=zstd:1",
+        "ssd",
+        "discard=async",
+        "space_cache=v2"
+      ],
+      "source": "/dev/nvme0n1p2"
+    },
+    "/home": {
+      "fstype": "btrfs",
+      "options": [
+        "rw",
+        "noatime",
+        "compress=zstd:1",
+        "ssd",
+        "discard=async",
+        "space_cache=v2"
+      ],
+      "source": "/dev/nvme0n1p2"
+    },
+    "/usr": {
+      "fstype": "btrfs",
+      "options": [
+        "rw",
+        "noatime",
+        "compress=zstd:1",
+        "ssd",
+        "discard=async",
+        "space_cache=v2"
+      ],
+      "source": "/dev/nvme0n1p2"
+    },
+    "/var/lib": {
+      "fstype": "btrfs",
+      "options": [
+        "rw",
+        "noatime",
+        "compress=zstd:1",
+        "ssd",
+        "discard=async",
+        "space_cache=v2"
+      ],
+      "source": "/dev/nvme0n1p2"
+    }
+  },
+  "nvme": {
+    "nvme0": {
+      "firmware": "CS224301",
+      "latency_tolerance_us": "5000",
+      "link_speed": "5.0 GT/s PCIe",
+      "link_width": "2",
+      "model": "PNY CS2241 1TB SSD"
+    }
+  },
+  "pressure": {
+    "cpu": "some avg10=0.00 avg60=0.00 avg300=0.00 total=109687\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0",
+    "io": "some avg10=0.00 avg60=0.04 avg300=0.14 total=1181029\nfull avg10=0.00 avg60=0.04 avg300=0.12 total=1072369",
+    "memory": "some avg10=0.00 avg60=0.00 avg300=0.00 total=1564\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=1480"
+  },
+  "schema_version": 1,
+  "temperatures_millicelsius": {
+    "hwmon0:nvme": {
+      "temp1_input": "20850",
+      "temp2_input": "20850"
+    },
+    "hwmon1:amdgpu": {
+      "temp1_input": "44000"
+    },
+    "hwmon2:k10temp": {
+      "temp1_input": "44875"
+    }
+  },
+  "trace_events": [
+    "block:block_rq_complete",
+    "block:block_rq_error",
+    "block:block_rq_insert",
+    "block:block_rq_issue",
+    "block:block_rq_merge",
+    "block:block_rq_remap",
+    "block:block_rq_requeue",
+    "block:block_rq_tag_wait",
+    "btrfs:btrfs_sync_file_enter",
+    "btrfs:btrfs_sync_file_exit",
+    "exceptions:page_fault_kernel",
+    "exceptions:page_fault_user",
+    "filemap:mm_filemap_add_to_page_cache",
+    "filemap:mm_filemap_delete_from_page_cache",
+    "filemap:mm_filemap_fault",
+    "filemap:mm_filemap_get_pages",
+    "filemap:mm_filemap_map_pages",
+    "sched:sched_switch"
+  ],
+  "units": {
+    "bc250-btrfs-repack.service": {
+      "ActiveState": "inactive",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "LoadState": "loaded",
+      "MemoryPeak": "[not set]",
+      "Result": "success",
+      "SubState": "dead",
+      "UnitFileState": "static"
+    },
+    "bc250-btrfs-repack.timer": {
+      "ActiveState": "active",
+      "LoadState": "loaded",
+      "Result": "success",
+      "SubState": "waiting",
+      "UnitFileState": "enabled"
+    },
+    "bc250-nvme-power.service": {
+      "ActiveState": "active",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "0",
+      "LoadState": "loaded",
+      "MemoryPeak": "11239424",
+      "Result": "success",
+      "SubState": "exited",
+      "UnitFileState": "enabled"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "stage": 0,
+  "gate_passed": true,
+  "next_stage": 1,
+  "goal_complete": false,
+  "scope": "Qualified starting/recovery environment for this BC-250 and recorded sources; no new speed or universal reliability claim",
+  "requirements": [
+    {
+      "number": 1,
+      "requirement": "Preserve release and local deployment",
+      "verdict": "passed",
+      "evidence": [
+        "../baseline.md",
+        "../workspace-provenance.md"
+      ],
+      "observed": "Remote v0.1.0 tag and preserved commit/tree verified; installed profile/history retained separately"
+    },
+    {
+      "number": 2,
+      "requirement": "Isolated environment, known-good boot/recovery, backups and disposable volumes",
+      "verdict": "passed_with_documented_scope",
+      "evidence": [
+        "stage0-physical-recovery.json",
+        "stage0-native-trials.json",
+        "stage0-native-clean-volume-baselines.json",
+        "../workspace-provenance.md"
+      ],
+      "observed": "Physical private root reaches usable target and returns to original root; original config restored; same-SSD read-only root reference and off-device boot archive verified",
+      "limitation": "Boot archive plus same-SSD root reference do not qualify full-disk failure or off-device user-data recovery"
+    },
+    {
+      "number": 3,
+      "requirement": "Controller, filesystem, actual devices, memory, thermals and power manifest",
+      "verdict": "passed",
+      "evidence": [
+        "stage1-opening-baseline.json"
+      ],
+      "observed": "Fresh physical post-return collector maps actual mounted device sources and records negotiated 5 GT/s x2 link and 5000 us policy"
+    },
+    {
+      "number": 4,
+      "requirement": "Fresh install, reapply, remove, reboot and supported resume",
+      "verdict": "passed_with_target_exception",
+      "evidence": [
+        "stage0-real-systemd-result.json",
+        "stage0-persistent-ownership-process-crashes.json",
+        "stage0-physical-recovery.json"
+      ],
+      "observed": "11 real guest-systemd lifecycle checks, current-source process recovery, physical reboot/return and real policy reapplication verified",
+      "limitation": "Real-systemd fixture uses simulated controller sysfs at its recorded source epoch; physical lab deployment remains separate from portable installation. Owner reports no functional target suspend wake; resume excluded, not passed"
+    },
+    {
+      "number": 5,
+      "requirement": "Partial/failed installation, edits, dependencies, hardware refusals and activation interruption",
+      "verdict": "passed_with_documented_scope",
+      "evidence": [
+        "stage0-persistent-ownership-process-crashes.json",
+        "stage0-persistent-ownership.json",
+        "stage0-persistent-ownership-cache-vm.json",
+        "../recovery.md"
+      ],
+      "observed": "Current installer/transaction/worker bytes match latest 40 real process-kill matrix; selected cache-loss and identity refusals pass; 121 Linux tests pass after physical return",
+      "limitation": "Selected boundaries do not establish arbitrary crash-ordering or physical SSD power-loss correctness"
+    },
+    {
+      "number": 6,
+      "requirement": "Separate B0/B1/B2 volumes with equal logical data and recorded layout differences",
+      "verdict": "passed",
+      "evidence": [
+        "stage0-native-clean-volume-baselines.json",
+        "stage0-native-trials.json"
+      ],
+      "observed": "Three independent UUIDs, equal 36646-node logical trees, measured native layouts, zero shared extents and nine startup/persistence/reset phases",
+      "limitation": "Loop-backed prepared userspaces are not the future frozen application suite; B0/B1 power-only comparisons must hold layout fixed"
+    }
+  ],
+  "reference_commit": "c9ee4b2133af11e6ffb85f017c8a197997889df8",
+  "reference_tree": "c88de25a36eea6465514aeffb5f6f3eba62fb1f7",
+  "boot_archive_sha256": "d2ed71a20d636fc15d6c924444ca9e58d3931b0a5dde50c43a1283d9faf4a59c",
+  "off_device_boot_archive_rechecked": true,
+  "same_ssd_reference_read_only_rechecked": true,
+  "isolated_linux_tests": 121,
+  "physical_suspend_tested": false,
+  "physical_power_loss_tested": false,
+  "completed_utc": "2026-10-27T12:41:22.709627+00:00"
+}

@@ -1,0 +1,1152 @@
+{
+  "schema_version": 1,
+  "kind": "bc250-trace-feature-probe",
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "collected_unix": 1793104370.6446888,
+  "events": {
+    "block:block_rq_insert": {
+      "available": true,
+      "format_sha256": "854f53526340ec3f4470e559867eec051d195feaa4c4d8f4b055a9e9e1d67772",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "dev",
+          "declaration": "dev_t dev",
+          "offset": 8,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "sector",
+          "declaration": "sector_t sector",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "nr_sector",
+          "declaration": "unsigned int nr_sector",
+          "offset": 24,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "bytes",
+          "declaration": "unsigned int bytes",
+          "offset": 28,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "ioprio",
+          "declaration": "unsigned short ioprio",
+          "offset": 32,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "rwbs",
+          "declaration": "char rwbs[10]",
+          "offset": 34,
+          "bytes": 10,
+          "signed": false
+        },
+        {
+          "name": "comm",
+          "declaration": "char comm[16]",
+          "offset": 44,
+          "bytes": 16,
+          "signed": false
+        },
+        {
+          "name": "cmd",
+          "declaration": "__data_loc char[] cmd",
+          "offset": 60,
+          "bytes": 4,
+          "signed": false
+        }
+      ]
+    },
+    "block:block_rq_issue": {
+      "available": true,
+      "format_sha256": "6e128ace9cb8d9ea626bee6cc229984d1b467e08e5644e30845ff298b3bfeef4",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "dev",
+          "declaration": "dev_t dev",
+          "offset": 8,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "sector",
+          "declaration": "sector_t sector",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "nr_sector",
+          "declaration": "unsigned int nr_sector",
+          "offset": 24,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "bytes",
+          "declaration": "unsigned int bytes",
+          "offset": 28,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "ioprio",
+          "declaration": "unsigned short ioprio",
+          "offset": 32,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "rwbs",
+          "declaration": "char rwbs[10]",
+          "offset": 34,
+          "bytes": 10,
+          "signed": false
+        },
+        {
+          "name": "comm",
+          "declaration": "char comm[16]",
+          "offset": 44,
+          "bytes": 16,
+          "signed": false
+        },
+        {
+          "name": "cmd",
+          "declaration": "__data_loc char[] cmd",
+          "offset": 60,
+          "bytes": 4,
+          "signed": false
+        }
+      ]
+    },
+    "block:block_rq_complete": {
+      "available": true,
+      "format_sha256": "2f3be8540978039c63f113c4d22dd0d6fdf97de9fcbafd368dfdc46dd8860080",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "dev",
+          "declaration": "dev_t dev",
+          "offset": 8,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "sector",
+          "declaration": "sector_t sector",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "nr_sector",
+          "declaration": "unsigned int nr_sector",
+          "offset": 24,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "error",
+          "declaration": "int error",
+          "offset": 28,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "ioprio",
+          "declaration": "unsigned short ioprio",
+          "offset": 32,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "rwbs",
+          "declaration": "char rwbs[10]",
+          "offset": 34,
+          "bytes": 10,
+          "signed": false
+        },
+        {
+          "name": "cmd",
+          "declaration": "__data_loc char[] cmd",
+          "offset": 44,
+          "bytes": 4,
+          "signed": false
+        }
+      ]
+    },
+    "block:block_rq_requeue": {
+      "available": true,
+      "format_sha256": "3e61807023634eae31ec029ec21b7da600ab467747b800dbb486e11fa77036a1",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "dev",
+          "declaration": "dev_t dev",
+          "offset": 8,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "sector",
+          "declaration": "sector_t sector",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "nr_sector",
+          "declaration": "unsigned int nr_sector",
+          "offset": 24,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "ioprio",
+          "declaration": "unsigned short ioprio",
+          "offset": 28,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "rwbs",
+          "declaration": "char rwbs[10]",
+          "offset": 30,
+          "bytes": 10,
+          "signed": false
+        },
+        {
+          "name": "cmd",
+          "declaration": "__data_loc char[] cmd",
+          "offset": 40,
+          "bytes": 4,
+          "signed": false
+        }
+      ]
+    },
+    "block:block_rq_merge": {
+      "available": true,
+      "format_sha256": "7e22a0f8521e9f0e77f2adf130ada354a4076455e35ecadba844a3b81e5fd5f4",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "dev",
+          "declaration": "dev_t dev",
+          "offset": 8,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "sector",
+          "declaration": "sector_t sector",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "nr_sector",
+          "declaration": "unsigned int nr_sector",
+          "offset": 24,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "bytes",
+          "declaration": "unsigned int bytes",
+          "offset": 28,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "ioprio",
+          "declaration": "unsigned short ioprio",
+          "offset": 32,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "rwbs",
+          "declaration": "char rwbs[10]",
+          "offset": 34,
+          "bytes": 10,
+          "signed": false
+        },
+        {
+          "name": "comm",
+          "declaration": "char comm[16]",
+          "offset": 44,
+          "bytes": 16,
+          "signed": false
+        },
+        {
+          "name": "cmd",
+          "declaration": "__data_loc char[] cmd",
+          "offset": 60,
+          "bytes": 4,
+          "signed": false
+        }
+      ]
+    },
+    "exceptions:page_fault_user": {
+      "available": true,
+      "format_sha256": "ffa4389e4eebf3f2fc752489452fb93fa455363abccfd670a3300478130b9337",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "address",
+          "declaration": "unsigned long address",
+          "offset": 8,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "ip",
+          "declaration": "unsigned long ip",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "error_code",
+          "declaration": "unsigned long error_code",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        }
+      ]
+    },
+    "filemap:mm_filemap_fault": {
+      "available": true,
+      "format_sha256": "1ac062ad46fe182445fd26c1d8afb65fbe9221d8fba107e809c81499c25fe9e9",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "i_ino",
+          "declaration": "u64 i_ino",
+          "offset": 8,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "s_dev",
+          "declaration": "dev_t s_dev",
+          "offset": 16,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "index",
+          "declaration": "unsigned long index",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        }
+      ]
+    },
+    "filemap:mm_filemap_get_pages": {
+      "available": true,
+      "format_sha256": "00f13b3bcb399cbcbab47c450e103c2f01280f6fd3a6be7c8853fb8de497a34a",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "i_ino",
+          "declaration": "u64 i_ino",
+          "offset": 8,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "s_dev",
+          "declaration": "dev_t s_dev",
+          "offset": 16,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "index",
+          "declaration": "unsigned long index",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "last_index",
+          "declaration": "unsigned long last_index",
+          "offset": 32,
+          "bytes": 8,
+          "signed": false
+        }
+      ]
+    },
+    "filemap:mm_filemap_map_pages": {
+      "available": true,
+      "format_sha256": "ca1cee93e47d513d68a368fcc2fe45d84ee1fadab5d2ce0d03fa20f5f1cefc4d",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "i_ino",
+          "declaration": "u64 i_ino",
+          "offset": 8,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "s_dev",
+          "declaration": "dev_t s_dev",
+          "offset": 16,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "index",
+          "declaration": "unsigned long index",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "last_index",
+          "declaration": "unsigned long last_index",
+          "offset": 32,
+          "bytes": 8,
+          "signed": false
+        }
+      ]
+    },
+    "filemap:mm_filemap_add_to_page_cache": {
+      "available": true,
+      "format_sha256": "71d46efb4428fac97e71cd3198e74b872c244e7306e754586bbe22d65439d603",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "i_ino",
+          "declaration": "u64 i_ino",
+          "offset": 8,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "pfn",
+          "declaration": "unsigned long pfn",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "index",
+          "declaration": "unsigned long index",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "s_dev",
+          "declaration": "dev_t s_dev",
+          "offset": 32,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "order",
+          "declaration": "unsigned char order",
+          "offset": 36,
+          "bytes": 1,
+          "signed": false
+        }
+      ]
+    },
+    "filemap:mm_filemap_delete_from_page_cache": {
+      "available": true,
+      "format_sha256": "da3051912bb20cea4c6ea836801a810ce1dbcc3e7f0cfc6ad6814f39e63eae86",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "i_ino",
+          "declaration": "u64 i_ino",
+          "offset": 8,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "pfn",
+          "declaration": "unsigned long pfn",
+          "offset": 16,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "index",
+          "declaration": "unsigned long index",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "s_dev",
+          "declaration": "dev_t s_dev",
+          "offset": 32,
+          "bytes": 4,
+          "signed": false
+        },
+        {
+          "name": "order",
+          "declaration": "unsigned char order",
+          "offset": 36,
+          "bytes": 1,
+          "signed": false
+        }
+      ]
+    },
+    "btrfs:btrfs_sync_file_enter": {
+      "available": true,
+      "format_sha256": "c718b7aa7960474c1d870196f06760731f5bec2df948b1c407f70da6423d3992",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "fsid",
+          "declaration": "u8 fsid[16]",
+          "offset": 8,
+          "bytes": 16,
+          "signed": false
+        },
+        {
+          "name": "ino",
+          "declaration": "u64 ino",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "mode",
+          "declaration": "umode_t mode",
+          "offset": 32,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "parent",
+          "declaration": "u64 parent",
+          "offset": 40,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "datasync",
+          "declaration": "int datasync",
+          "offset": 48,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "root_objectid",
+          "declaration": "u64 root_objectid",
+          "offset": 56,
+          "bytes": 8,
+          "signed": false
+        }
+      ]
+    },
+    "btrfs:btrfs_sync_file_exit": {
+      "available": true,
+      "format_sha256": "dcd34b82821b903044cade1bdec8ab7d20d16b4df927ad9ba71e6424756f3190",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "fsid",
+          "declaration": "u8 fsid[16]",
+          "offset": 8,
+          "bytes": 16,
+          "signed": false
+        },
+        {
+          "name": "ino",
+          "declaration": "u64 ino",
+          "offset": 24,
+          "bytes": 8,
+          "signed": false
+        },
+        {
+          "name": "ret",
+          "declaration": "int ret",
+          "offset": 32,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "root_objectid",
+          "declaration": "u64 root_objectid",
+          "offset": 40,
+          "bytes": 8,
+          "signed": false
+        }
+      ]
+    },
+    "sched:sched_switch": {
+      "available": true,
+      "format_sha256": "f7dfa32e6a018817cdb44ef806166a134d646fed4b80941040f812fd10b2e7d7",
+      "fields": [
+        {
+          "name": "common_type",
+          "declaration": "unsigned short common_type",
+          "offset": 0,
+          "bytes": 2,
+          "signed": false
+        },
+        {
+          "name": "common_flags",
+          "declaration": "unsigned char common_flags",
+          "offset": 2,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_preempt_count",
+          "declaration": "unsigned char common_preempt_count",
+          "offset": 3,
+          "bytes": 1,
+          "signed": false
+        },
+        {
+          "name": "common_pid",
+          "declaration": "int common_pid",
+          "offset": 4,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "prev_comm",
+          "declaration": "char prev_comm[16]",
+          "offset": 8,
+          "bytes": 16,
+          "signed": false
+        },
+        {
+          "name": "prev_pid",
+          "declaration": "pid_t prev_pid",
+          "offset": 24,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "prev_prio",
+          "declaration": "int prev_prio",
+          "offset": 28,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "prev_state",
+          "declaration": "long prev_state",
+          "offset": 32,
+          "bytes": 8,
+          "signed": true
+        },
+        {
+          "name": "next_comm",
+          "declaration": "char next_comm[16]",
+          "offset": 40,
+          "bytes": 16,
+          "signed": false
+        },
+        {
+          "name": "next_pid",
+          "declaration": "pid_t next_pid",
+          "offset": 56,
+          "bytes": 4,
+          "signed": true
+        },
+        {
+          "name": "next_prio",
+          "declaration": "int next_prio",
+          "offset": 60,
+          "bytes": 4,
+          "signed": true
+        }
+      ]
+    }
+  },
+  "btf_available": true,
+  "userspace_tools": {
+    "perf": false,
+    "bpftrace": false,
+    "trace-cmd": false,
+    "bpftool": true,
+    "clang": true,
+    "gcc": true
+  },
+  "available_function_names": [
+    "FSE_decompress_wksp_bmi2",
+    "FSE_decompress_wksp_body_default",
+    "HUF_DecompressFastArgs_init",
+    "HUF_decompress1X1_DCtx_wksp",
+    "HUF_decompress1X1_usingDTable_internal.isra.0",
+    "HUF_decompress1X2_DCtx_wksp",
+    "HUF_decompress1X2_usingDTable_internal.isra.0",
+    "HUF_decompress1X_DCtx_wksp",
+    "HUF_decompress1X_usingDTable",
+    "HUF_decompress4X1_usingDTable_internal_default.part.0",
+    "HUF_decompress4X1_usingDTable_internal_fast.constprop.0",
+    "HUF_decompress4X1_usingDTable_internal_fast_c_loop",
+    "HUF_decompress4X2_usingDTable_internal_default.part.0",
+    "HUF_decompress4X2_usingDTable_internal_fast.constprop.0",
+    "HUF_decompress4X2_usingDTable_internal_fast_c_loop",
+    "HUF_decompress4X_hufOnly_wksp",
+    "HUF_decompress4X_usingDTable",
+    "LZ4_decompress_fast",
+    "LZ4_decompress_fast_continue",
+    "LZ4_decompress_fast_extDict",
+    "LZ4_decompress_fast_usingDict",
+    "LZ4_decompress_safe",
+    "LZ4_decompress_safe_continue",
+    "LZ4_decompress_safe_forceExtDict",
+    "LZ4_decompress_safe_partial",
+    "LZ4_decompress_safe_usingDict",
+    "LZ4_decompress_safe_withPrefix64k",
+    "LZ4_decompress_safe_withSmallPrefix",
+    "ZSTD_decompress",
+    "ZSTD_decompressBegin",
+    "ZSTD_decompressBegin_usingDDict",
+    "ZSTD_decompressBegin_usingDict",
+    "ZSTD_decompressBegin_usingDict.part.0",
+    "ZSTD_decompressBlock",
+    "ZSTD_decompressBlock_deprecated",
+    "ZSTD_decompressBlock_internal",
+    "ZSTD_decompressBound",
+    "ZSTD_decompressContinue",
+    "ZSTD_decompressContinue.part.0",
+    "ZSTD_decompressContinueStream",
+    "ZSTD_decompressDCtx",
+    "ZSTD_decompressMultiFrame",
+    "ZSTD_decompressSequencesLong_default.constprop.0",
+    "ZSTD_decompressSequencesSplitLitBuffer_default.constprop.0",
+    "ZSTD_decompressSequences_default.constprop.0",
+    "ZSTD_decompressStream",
+    "ZSTD_decompressStream_simpleArgs",
+    "ZSTD_decompress_usingDDict",
+    "ZSTD_decompress_usingDict",
+    "ZSTD_decompressionMargin",
+    "ZSTD_findDecompressedSize",
+    "ZSTD_getDecompressedSize",
+    "ZSTD_nextSrcSizeToDecompress",
+    "__breadahead",
+    "__ia32_sys_ia32_readahead",
+    "__ia32_sys_readahead",
+    "__probestub_iomap_readahead",
+    "__traceiter_iomap_readahead",
+    "__x64_sys_ia32_readahead",
+    "__x64_sys_readahead",
+    "blkdev_readahead",
+    "btrfs_decompress",
+    "btrfs_decompress_buf2page",
+    "btrfs_readahead",
+    "btrfs_readahead_node_child",
+    "btrfs_readahead_tree_block",
+    "crypto_acomp_decompress",
+    "decompress_threadfn",
+    "ext4_readahead",
+    "ext4_readahead_merkle_tree",
+    "ext4_sb_breadahead_unmovable",
+    "fat_readahead",
+    "fsverity_readahead",
+    "fuse_readahead",
+    "fw_decompress_xz",
+    "fw_decompress_zstd",
+    "generic_readahead_merkle_tree",
+    "iomap_readahead",
+    "ipv6_rpl_addr_decompress",
+    "ipv6_rpl_srh_decompress",
+    "ksys_readahead",
+    "lz4_sdecompress",
+    "lzo1x_decompress_safe",
+    "lzo_decompress",
+    "lzo_decompress_bio",
+    "lzo_sdecompress",
+    "lzorle_sdecompress",
+    "module_decompress",
+    "module_decompress_cleanup",
+    "mpage_readahead",
+    "readahead_cache",
+    "readahead_expand",
+    "scomp_acomp_decompress",
+    "swap_cluster_readahead",
+    "swap_update_readahead",
+    "swapin_readahead",
+    "zlib_decompress",
+    "zlib_decompress_bio",
+    "zstd_decompress",
+    "zstd_decompress_bio",
+    "zstd_decompress_dctx",
+    "zstd_decompress_stream",
+    "zstd_decompress_using_ddict",
+    "zswap_decompress"
+  ],
+  "trace_state_unchanged": true,
+  "events_enabled_by_probe": false,
+  "shared_issue_complete_identifier_fields": [],
+  "request_pairing_from_sector_dev_alone_is_unambiguous": false,
+  "issue_pid_is_proven_foreground_owner": false,
+  "latency_or_performance_measured": false,
+  "source_sha256": "d08949d411942a700029e7948a558fc9861913af68ebf2f00204ab4925486ff6"
+}
