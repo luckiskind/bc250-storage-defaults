@@ -1,6 +1,6 @@
 # Validation and limits
 
-Current development checks: 195 isolated Linux tests, syntax/C-helper checks and a shared atomic-publication control. The [v2 observer](docs/trace-v2.md) passes ten native cases with explicit auxiliary proof, proof-removal refusal, cap/loss and cleanup checks. Host concurrency controls do not prove every kernel interleaving; tracing overhead and real workload attribution remain open. Historical scopes and failed overhead results remain unchanged. These are measurement foundations, not new acceleration results.
+Current development checks: 200 isolated Linux tests, syntax/C-helper checks and a shared atomic-publication control. The [v2 observer](docs/trace-v2.md) passes ten native cases with explicit auxiliary proof, proof-removal refusal, cap/loss and cleanup checks. Host concurrency controls do not prove every kernel interleaving; the [v2 calibration](docs/trace-v2-overhead.md) passes its two synthetic overhead screens while application cost and real workload attribution remain open. Historical scopes and failed overhead results remain unchanged. These are measurement foundations, not new acceleration results.
 
 ## Measured on one BC-250
 
