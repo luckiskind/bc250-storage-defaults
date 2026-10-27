@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "selection_version": 1,
+  "status": "candidate_selection_before_new_performance_comparisons",
+  "suite_freeze_complete": false,
+  "weights_are_tentative_until_endpoint_and_input_qualification": true,
+  "weight_units": "percent_of_nonoverlapping_storage_critical_wait_mix",
+  "selection_rule": "Resolve endpoint/input/cache feasibility before freezing the suite; never select or reweight using measured accelerator gains",
+  "primary_candidates": [
+    {"id": "konsole-pty-ready", "domain": "application_startup", "tentative_weight": 10, "endpoint": "Owned child receives terminal cursor-position reply", "endpoint_status": "initial_uninstrumented_functional_checks_passed", "cache_status": "unqualified"},
+    {"id": "firefox-local-visible-document", "domain": "application_startup", "tentative_weight": 10, "endpoint": "Private offline document becomes visible and completes an explicitly qualified scripted readiness marker", "endpoint_status": "unqualified", "cache_status": "unqualified"},
+    {"id": "private-package-update", "domain": "package_update", "tentative_weight": 10, "endpoint": "Versioned package update and verification complete inside a disposable native volume", "endpoint_status": "unqualified", "cache_status": "unqualified"},
+    {"id": "pragmata-title", "domain": "game_loading", "appid": "3357650", "tentative_weight": 20, "endpoint": "Stable title prompt confirmed by an independently qualified visual marker", "endpoint_status": "historical_procedure_only_requalification_required", "cache_status": "unqualified"},
+    {"id": "control-resonant-menu", "domain": "game_loading", "appid": "3669870", "tentative_weight": 20, "endpoint": "Repeatable menu or scene-ready marker chosen and qualified before comparisons", "endpoint_status": "unqualified", "cache_status": "unqualified"},
+    {"id": "pragmata-streaming", "domain": "asset_streaming", "appid": "3357650", "tentative_weight": 15, "endpoint": "Frozen save/replay route with frame markers and storage-dependent long-frame attribution", "endpoint_status": "unqualified", "cache_status": "unqualified"},
+    {"id": "control-resonant-streaming", "domain": "asset_streaming", "appid": "3669870", "tentative_weight": 15, "endpoint": "Frozen save/replay route with frame markers and storage-dependent long-frame attribution", "endpoint_status": "unqualified", "cache_status": "unqualified"}
+  ],
+  "held_out_regressions": [
+    {"id": "borderlands4-loading-and-streaming", "appid": "1285190", "status": "unqualified", "aggregate_weight": 0},
+    {"id": "concurrent-memory-pressure", "status": "unqualified", "aggregate_weight": 0}
+  ],
+  "controls": ["compressible-data", "already-compressed-incompressible-data", "warm-repeat", "observer-off"],
+  "regression_rules_to_freeze": {
+    "major_subsystem_geometric_end_to_end_improvement_min": 0.05,
+    "confirmed_per_scenario_end_to_end_regression_max": 0.03,
+    "p99_frame_time_regression_max": 0.05,
+    "source": "docs/DEVELOPMENT_PLAN.md proposed global promotion rules"
+  },
+  "before_suite_freeze": [
+    "Pin input and dependency content hashes, package/build/runtime versions and application state",
+    "Qualify endpoints, ownership-safe launch/stop behavior and cache conditions",
+    "Back up and isolate mutable game/shader/save state before game trials",
+    "Record deterministic route/replay and frame marker feasibility",
+    "Resolve candidate feasibility and freeze final weights before B0/B1/B2 or new accelerator comparisons",
+    "Publish every held-out and primary scenario, exclusions and individual regressions"
+  ],
+  "stage1_gate_passed": false
+}
