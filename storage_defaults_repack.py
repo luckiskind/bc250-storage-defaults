@@ -151,6 +151,23 @@ def repack(fd, cfg, deadline, failure_state=None, byte_budget=None):
             'large_extent_count': len(large), 'encoded_extent_max': max((n for _, n, f in spans if f & 8), default=0)}
 
 
+def open_ledger(path):
+    """Require explicit strong commit synchronization for the write-work ledger."""
+    db = sqlite3.connect(path)
+    try:
+        # FULL in rollback-journal mode protects consistency but may lose the
+        # last commit after power loss. EXTRA also syncs journal unlink metadata.
+        db.execute('PRAGMA synchronous=EXTRA')
+        if db.execute('PRAGMA synchronous').fetchone()[0] != 3:
+            raise RuntimeError('Cannot establish strong ledger synchronization')
+        if db.execute('PRAGMA journal_mode').fetchone()[0].lower() not in ('delete', 'wal'):
+            raise RuntimeError('Unsupported ledger journal mode; no repacking performed')
+        return db
+    except BaseException:
+        db.close()
+        raise
+
+
 def reserve_budget(db, day, path, sig, amount):
     """Commit a conservative reservation before any layout-changing syscall."""
     with db:
@@ -230,6 +247,13 @@ def main():
         return
     cfg = json.loads(CONFIG.read_text())
     STATE.mkdir(mode=0o700, exist_ok=True)
+    # Persist a newly created state-directory name before durable reservations
+    # inside it can authorize mutations elsewhere on the filesystem.
+    parent = os.open(STATE.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        os.fsync(parent)
+    finally:
+        os.close(parent)
     if (STATE / 'STOP').exists():
         raise SystemExit('Repacking disabled by STOP marker; inspect the journal')
     lock = os.open(STATE / 'lock', os.O_RDWR | os.O_CREAT, 0o600)
@@ -237,7 +261,7 @@ def main():
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
         return
-    db = sqlite3.connect(STATE / 'state.sqlite3')
+    db = open_ledger(STATE / 'state.sqlite3')
     db.execute('CREATE TABLE IF NOT EXISTS files(path TEXT PRIMARY KEY, signature TEXT, status TEXT, bytes INTEGER, day TEXT)')
     db.execute('CREATE TABLE IF NOT EXISTS budget(day TEXT PRIMARY KEY, bytes INTEGER)')
     db.execute('CREATE TABLE IF NOT EXISTS attempts(id INTEGER PRIMARY KEY, path TEXT, signature TEXT, day TEXT, reserved_bytes INTEGER, charged_bytes INTEGER, status TEXT)')
