@@ -91,3 +91,7 @@ The [workload endpoint record](workload-endpoints.md) now pins installed applica
 ## Second initial application marker
 
 The [private Firefox endpoint](browser-endpoint.md) passes three final-source functional launches. Its fixed local page reports complete load, browser-visible state, image/font readiness, a scripted handler and two advancing animation callbacks; marker receipt is the endpoint. It does not prove first displayed frame, trusted input or cold-cache behavior. Each browser uses a fresh private HOME/profile in loopback-only IP networking; owned cgroup cleanup succeeds after SIGTERM. Selection v2 preserves all tentative weights/candidates while recording this status. Complete inputs, cache procedures, package/game/replay markers and attribution remain open. The Linux suite passes 137 tests.
+
+## Partial copied-input cache qualification
+
+The [separate file audit and copied-set probe](application-inputs.md) observes 508 regular `/usr` files and qualifies cold/warm data residency for 507 independent copies, with one privileged helper explicitly left as shared host context. The original PTY-ready helper works in both states; the controller verifies every read-only copied inode through the owned process root. This is a partial file-set cache primitive, not complete application cold state, a metadata-equivalent OS baseline or a speed result. Shared context, input closure, wrapper cost and the other workload domains remain open. The Linux suite passes 140 tests.
