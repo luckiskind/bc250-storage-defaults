@@ -111,3 +111,12 @@ Next, finish input/context closure and repeatability, quantify wrapper cost,
 extend auditing/reset/cache controls to Firefox, and qualify private package
 updates and reproducible game/streaming markers. Observer flush/orphan lifecycle,
 overhead and foreground dependency attribution remain prerequisites for Stage 1.
+
+
+The [native application capture integration](application-trace-v2.md) now
+passes one cold and one warm Konsole launch with the unchanged selected-input
+fixture and endpoint. Both whole-device captures cover the full trials and pass
+stream quality, including 17 proven internal flushes and 17 proven software
+sequences. No loss, unresolved context or remaining owned process is accepted.
+The suite passes 207 Linux tests; application overhead and foreground
+critical-path attribution remain open. No accelerator gain is claimed.

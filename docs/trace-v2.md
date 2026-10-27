@@ -155,3 +155,12 @@ sudo python3 bench/qualify_trace_v2.py run \
 Existing output directories are refused and failures retained. The structural
 schema uses exact unsigned 64-bit integer clocks; consumers must preserve them
 without rounding.
+
+
+The [native application capture integration](application-trace-v2.md) now
+passes one cold and one warm Konsole launch with the unchanged selected-input
+fixture and endpoint. Both whole-device captures cover the full trials and pass
+stream quality, including 17 proven internal flushes and 17 proven software
+sequences. No loss, unresolved context or remaining owned process is accepted.
+The suite passes 207 Linux tests; application overhead and foreground
+critical-path attribution remain open. No accelerator gain is claimed.

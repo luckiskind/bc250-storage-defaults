@@ -133,3 +133,12 @@ The [separate v2 observer](trace-v2.md) now keeps anonymous ordinary/device-flus
 ## V2 synthetic overhead screen passes
 
 The [fixed 100-trial calibration](trace-v2-overhead.md) passes both prespecified screens: 22/24 valid serial pairs give +0.389% overhead (exploratory 95% interval -1.677% to +2.475%); 23/24 concurrent pairs give +2.052% (-0.796% to +4.267%). All 50 instrumented trials account exactly and pass stream quality, including three proven internal flushes and three proven software sequences with raw flags retained. Three environmental pair exclusions remain visible. The minimum 20-pair, 3% point and 5% upper limits are unchanged; no repeat or pooling. This qualifies the two synthetic controls, not application overhead or the full Stage 1 gate. The Linux suite passes 200 tests. Next instrument real workload endpoints and establish wrapper/attribution cost while extending broader callback controls.
+
+
+The [native application capture integration](application-trace-v2.md) now
+passes one cold and one warm Konsole launch with the unchanged selected-input
+fixture and endpoint. Both whole-device captures cover the full trials and pass
+stream quality, including 17 proven internal flushes and 17 proven software
+sequences. No loss, unresolved context or remaining owned process is accepted.
+The suite passes 207 Linux tests; application overhead and foreground
+critical-path attribution remain open. No accelerator gain is claimed.
