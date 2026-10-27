@@ -6,6 +6,7 @@ import sys
 import tempfile
 import time
 import unittest
+import sqlite3
 from unittest.mock import patch
 
 if sys.platform != 'linux':
@@ -52,6 +53,71 @@ class LayoutChecks(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'sparse'):
                 repack.self_test(self.state)
         self.assertEqual(sorted(p.name for p in self.state.iterdir()), ['fixture'])
+
+    def fake_layout(self, final):
+        return patch.object(repack, 'extents', side_effect=[[(0, 32768, 0)], [(0, 32768, 8)], final])
+
+    def test_residual_large_extent_gets_one_bounded_retry(self):
+        with self.fake_layout([(0, 16384, 8), (16384, 16384, 8)]), \
+             patch.object(repack.fcntl, 'ioctl') as ioctl, \
+             patch.object(repack.libc, 'sync_file_range', return_value=0), \
+             patch.object(repack.os, 'fsync'):
+            result = repack.repack(self.fd, {}, time.monotonic() + 30, self.state, byte_budget=65536)
+        self.assertEqual(result['status'], 'repacked')
+        self.assertEqual(result['processed_bytes'], 32768)
+        self.assertEqual(result['charged_bytes'], 65536)
+        self.assertEqual(result['retry_bytes'], 32768)
+        self.assertEqual(ioctl.call_count, 4)
+
+    def test_remaining_large_extent_is_reported_without_claiming_target(self):
+        with self.fake_layout([(0, 32768, 8)]), patch.object(repack.fcntl, 'ioctl'), \
+             patch.object(repack.libc, 'sync_file_range', return_value=0), patch.object(repack.os, 'fsync'):
+            result = repack.repack(self.fd, {}, time.monotonic() + 30, self.state, byte_budget=65536)
+        self.assertEqual(result['status'], 'layout-not-achieved-verified')
+        self.assertFalse(result['layout_target_met'])
+        self.assertEqual(result['encoded_extent_max'], 32768)
+        self.assertEqual(result['charged_bytes'], 65536)
+        self.assertFalse((self.state / 'STOP').exists())
+
+    def test_retry_cannot_exceed_reservation(self):
+        with self.fake_layout([(0, 32768, 8)]), patch.object(repack.fcntl, 'ioctl') as ioctl, \
+             patch.object(repack.libc, 'sync_file_range', return_value=0), patch.object(repack.os, 'fsync'):
+            result = repack.repack(self.fd, {}, time.monotonic() + 30, self.state, byte_budget=32768)
+        self.assertEqual(result['charged_bytes'], 32768)
+        self.assertEqual(result['retry_bytes'], 0)
+        self.assertEqual(ioctl.call_count, 2)
+
+
+class DurableBudget(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.path = Path(self.tmp.name) / 'ledger.sqlite3'
+        self.db = sqlite3.connect(self.path)
+        self.addCleanup(self.db.close)
+        self.db.execute('CREATE TABLE budget(day TEXT PRIMARY KEY, bytes INTEGER)')
+        self.db.execute('CREATE TABLE attempts(id INTEGER PRIMARY KEY, path TEXT, signature TEXT, day TEXT, reserved_bytes INTEGER, charged_bytes INTEGER, status TEXT)')
+        self.db.commit()
+
+    def test_reservation_survives_process_reopen_without_completion(self):
+        repack.reserve_budget(self.db, 'day', '/fixture', 'signature', 65536)
+        self.db.close()
+        reopened = sqlite3.connect(self.path)
+        self.addCleanup(reopened.close)
+        self.assertEqual(reopened.execute('SELECT bytes FROM budget').fetchone()[0], 65536)
+        self.assertEqual(reopened.execute('SELECT status FROM attempts').fetchone()[0], 'started')
+
+    def test_completion_refunds_only_known_unused_work(self):
+        attempt = repack.reserve_budget(self.db, 'day', '/fixture', 'signature', 65536)
+        repack.finish_budget(self.db, attempt, 'day', 65536, dict(charged_bytes=49152, status='repacked'))
+        self.assertEqual(self.db.execute('SELECT bytes FROM budget').fetchone()[0], 49152)
+        self.assertEqual(self.db.execute('SELECT charged_bytes,status FROM attempts').fetchone(), (49152, 'repacked'))
+
+    def test_overrun_refuses_refund_and_retains_conservative_reservation(self):
+        attempt = repack.reserve_budget(self.db, 'day', '/fixture', 'signature', 65536)
+        with self.assertRaisesRegex(RuntimeError, 'exceeded'):
+            repack.finish_budget(self.db, attempt, 'day', 65536, dict(charged_bytes=65537, status='repacked'))
+        self.assertEqual(self.db.execute('SELECT bytes FROM budget').fetchone()[0], 65536)
 
 
 if __name__ == '__main__':

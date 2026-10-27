@@ -122,6 +122,20 @@ class Installation(unittest.TestCase):
             app.uninstall()
         self.assertEqual(self.calls, [])
 
+    def test_partial_file_write_failure_does_not_leave_an_orphan(self):
+        self.target.parent.mkdir()
+        with patch.object(app.os, 'fsync', side_effect=OSError('injected storage failure')):
+            with self.assertRaisesRegex(OSError, 'injected storage failure'):
+                app.write_new(self.target, b'partially staged content', 0o644)
+        self.assertFalse(self.target.exists())
+
+    def test_exclusive_write_preserves_existing_destination(self):
+        self.target.parent.mkdir()
+        self.target.write_bytes(b'existing administrator file')
+        with self.assertRaises(FileExistsError):
+            app.write_new(self.target, b'candidate', 0o644)
+        self.assertEqual(self.target.read_bytes(), b'existing administrator file')
+
 
 if __name__ == '__main__':
     unittest.main()
