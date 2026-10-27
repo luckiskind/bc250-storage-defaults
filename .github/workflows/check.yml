@@ -27,6 +27,8 @@ jobs:
         run: |
           cc -O2 -Wall -Wextra -Werror bench/read_lineage_probe.c -o /tmp/bc250-read-lineage-probe
           if /tmp/bc250-read-lineage-probe; then exit 1; else test "$?" -eq 2; fi
+          cc -O2 -Wall -Wextra -Werror bench/request_bio_repeat_probe.c -o /tmp/bc250-request-bio-repeat-probe
+          if /tmp/bc250-request-bio-repeat-probe; then exit 1; else test "$?" -eq 2; fi
       - name: Exercise the v2 atomic publication protocol
         run: |
           cc -O2 -Wall -Wextra -Werror -pthread bench/trace2_protocol_probe.c -o /tmp/bc250-trace2-protocol
