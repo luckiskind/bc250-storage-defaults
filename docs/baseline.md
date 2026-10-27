@@ -62,7 +62,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Capture actual host policy and filesystem devices without exposing unrelated user data.
 - [x] Verify the installed files against their private deployment manifest.
 - [x] Reproduce a residual encoded-extent problem on disposable data.
-- [x] Pass 41 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS filesystem guards.
+- [x] Pass 48 isolated Linux tests, including bounded retry, pre-mutation budget reservations, installer transaction recovery and disposable-OS/image filesystem guards.
 - [x] Exercise actual installer file operations inside a disposable bubblewrap root.
 - [x] Exercise repeat application/removal and restoration against simulated sysfs/service control.
 - [x] Execute the real installed resume hook after a simulated controller reset in that private root.
@@ -76,6 +76,7 @@ See [Btrfs's advisory extent-target behavior](https://btrfs.readthedocs.io/en/la
 - [x] Build native B0/B1/B2 data copies, verify all 15 hashes and absence of shared extents, and record distinct layout histograms.
 - [x] Prepare an authenticated independent Arch userspace with recorded guest package inventory.
 - [x] Pass 11 lifecycle checks using real guest systemd, including bounded maintenance, undo/reinstall and startup policy reapplication after a guest reboot.
+- [x] Boot a separate stock kernel and Btrfs image, verify orderly persistence, and reset to a protected baseline using fresh overlays.
 
 The repaired pass processed 104 verified files, with 536,367,504 logical bytes processed and 425,984 extra retry bytes. Total charged work was 536,793,488 bytes, within the 536,870,912-byte pass budget. The successful pass took approximately 34.8 seconds including scanning and the quiet check. This timing is an operational observation, not a controlled throughput comparison.
 
@@ -89,14 +90,16 @@ The post-pass ledger held 482 recorded successfully repacked file signatures. Th
 
 Pending before declaring Stage 0 complete:
 
-- [ ] Qualify a fresh installation in an independently bootable/recoverable test OS. The real-systemd userspace/container part is qualified; a separate guest kernel, volume and recovery boot path remain open.
+- [ ] Qualify storage-profile installation/recovery under whole-guest interruption in the separately bootable test OS. Userspace service tests and separate-kernel image boot/reset now pass; the combined fault cases remain open.
 - [ ] Test actual boot/reboot and suspend/resume transitions with measured controller state.
 - [ ] Test device/storage power-loss recovery, including interrupted recovery itself, across installer and worker transitions on disposable storage. Process SIGKILL testing is complete for 40 selected installer checkpoints only.
 - [ ] Recreate independent full-system/volume B0/B1/B2 baselines; the native data-copy preparation above covers only the dataset part of this gate.
-- [ ] Establish and demonstrate a known-good boot/recovery path for kernel/filesystem experiments.
+- [ ] Establish a boot/recovery path applicable to the physical BC-250. The virtual kernel/image reset path is qualified; physical firmware/bootloader and hardware recovery remain open.
 - [ ] Quantify physical write amplification, metadata growth and lost sharing; logical work budgets are not physical-write limits.
 
 No host reboot, suspend, kernel replacement, filesystem formatting or destructive fault injection was performed in this initial milestone. The working installation is not the power-loss-test target.
+
+Later virtual-lab formatting in this record is restricted to new regular image files. No host device was formatted.
 
 ## Real-systemd userspace qualification
 
@@ -105,6 +108,16 @@ The [reusable harness result](evidence/stage0-real-systemd-result.json) records 
 Two environment limitations were resolved before this pass: nspawn's late API-filesystem setup hid early custom sysfs mounts, so the fixture is attached by an early guest service with a marker guard; Btrfs defrag refused ID-mapped ownership, so the dedicated guest tree uses shifted physical IDs while retaining user-namespace isolation. Failed exploratory runs were preserved privately. The public evidence comes from a fresh tree using the reusable tool and unchanged production installer/helpers.
 
 See [the qualification guide](real-systemd-qualification.md) for commands, scope and primary-source references. This is an independent userspace, not an independent kernel or storage volume. No performance comparison, physical controller reset or device power-loss result is inferred from it.
+
+## Separate-kernel virtual recovery qualification
+
+The [virtual recovery result](evidence/stage0-virtual-recovery-result.json) records three passing boots using QEMU 11.1.2 and stock Linux `7.2.11-arch1-1`, with real guest systemd and a separately formatted 80 GiB sparse Btrfs image. A committed state record and reference fixture survived an orderly restart. A fresh qcow2 overlay reset the guest to the protected baseline without its prior state. The baseline sparse fingerprint stayed unchanged, and the host wrapper verified that the guest filesystem UUID differs from the workspace filesystem's UUID. The recorded source hashes match the executed tools.
+
+The wrapper uses an isolated user range, private networking, no guest NIC, two CPU equivalents, a 2 GiB memory ceiling and a 768 MiB VM. The working power/timer services remained active at 5000 microseconds. CPU emulation and layered image I/O make these correctness results unsuitable as performance evidence. The VM image omits source security xattrs and is a fresh test OS, not a backup of the user's working system.
+
+Failed prototype console runs and a first reusable run whose final host-UUID comparison was attempted inside the sandbox were retained. Reserving the serial console for probe output and moving the read-only host identity comparison to the host wrapper resolved those environment/verifier issues. The public result comes from the corrected wrapper on fresh overlays against a newly built artifact set.
+
+See [the virtual image/boot recipe](virtual-recovery.md). This qualifies orderly recovery/reset of the virtual reference. It does not qualify interrupted installation across whole-guest failure, physical SSD cache loss, physical suspend/resume, or independent B0/B1/B2 benchmark volumes.
 
 ## Recovery procedure for the local reliability repair
 
