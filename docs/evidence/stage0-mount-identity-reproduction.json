@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "scope": "Two new sparse regular Btrfs images, private mount namespace; no host reboot",
+  "source_sha256": {
+    "install.py": "be809f189febefe41a4d83e724b0601fa390a6f9ebfdf303dc33bf18cb874c91",
+    "install_transaction.py": "a502b4268d52db216349c978831944eaa0c6c09029bca76e81e8a63b98bb3d79"
+  },
+  "observed_device_change": true,
+  "before": {
+    "device": 136,
+    "inode": 259,
+    "filesystem_uuid": "dd29758a-7d27-46a6-81cc-38403c24223a"
+  },
+  "after": {
+    "device": 138,
+    "inode": 259,
+    "filesystem_uuid": "dd29758a-7d27-46a6-81cc-38403c24223a"
+  },
+  "failures": {
+    "install-stage-audit": "Staging ownership changed; artifact preserved",
+    "remove-target-audit": "Ownership changed for <owned-audit>/a/remove-target; recovery preserved all files"
+  },
+  "content_preserved": true,
+  "journals_retained": true,
+  "all_test_mounts_unmounted": true,
+  "completed_unix": 1793088850.9330304
+}
