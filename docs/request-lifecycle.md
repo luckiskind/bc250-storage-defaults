@@ -131,3 +131,9 @@ python3 analysis/request_lifecycle.py \
 The first command qualifies transport. The independent second step describes
 observed patterns; private root-owned captures require appropriately scoped
 read access. Existing output directories are refused and never overwritten.
+
+The [shared-lookup follow-up](shared-disk-tracing.md) now passes transport checks
+and compiles two fewer helper sites per callback, but its fixed timing experiment
+shows no demonstrated relative benefit and fails the full overhead screen.
+The next implementation must explicitly qualify software-sequence accounting;
+these lifecycle observations do not waive the existing capture failures.
