@@ -7,7 +7,7 @@ import tempfile
 import time
 import unittest
 import sqlite3
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 if sys.platform != 'linux':
     raise unittest.SkipTest('Linux Btrfs interfaces required')
@@ -93,7 +93,7 @@ class DurableBudget(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.path = Path(self.tmp.name) / 'ledger.sqlite3'
-        self.db = sqlite3.connect(self.path)
+        self.db = repack.open_ledger(self.path)
         self.addCleanup(self.db.close)
         self.db.execute('CREATE TABLE budget(day TEXT PRIMARY KEY, bytes INTEGER)')
         self.db.execute('CREATE TABLE attempts(id INTEGER PRIMARY KEY, path TEXT, signature TEXT, day TEXT, reserved_bytes INTEGER, charged_bytes INTEGER, status TEXT)')
@@ -102,7 +102,7 @@ class DurableBudget(unittest.TestCase):
     def test_reservation_survives_process_reopen_without_completion(self):
         repack.reserve_budget(self.db, 'day', '/fixture', 'signature', 65536)
         self.db.close()
-        reopened = sqlite3.connect(self.path)
+        reopened = repack.open_ledger(self.path)
         self.addCleanup(reopened.close)
         self.assertEqual(reopened.execute('SELECT bytes FROM budget').fetchone()[0], 65536)
         self.assertEqual(reopened.execute('SELECT status FROM attempts').fetchone()[0], 'started')
@@ -118,6 +118,41 @@ class DurableBudget(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'exceeded'):
             repack.finish_budget(self.db, attempt, 'day', 65536, dict(charged_bytes=65537, status='repacked'))
         self.assertEqual(self.db.execute('SELECT bytes FROM budget').fetchone()[0], 65536)
+
+    def test_strong_policy_is_reestablished_without_erasing_existing_reservations(self):
+        self.assertEqual(self.db.execute('PRAGMA synchronous').fetchone()[0],3)
+        self.assertEqual(self.db.execute('PRAGMA journal_mode').fetchone()[0],'delete')
+        repack.reserve_budget(self.db,'day','/fixture','signature',65536)
+        self.db.close()
+        reopened=repack.open_ledger(self.path)
+        try:
+            self.assertEqual(reopened.execute('PRAGMA synchronous').fetchone()[0],3)
+            self.assertEqual(reopened.execute('SELECT bytes FROM budget').fetchone()[0],65536)
+        finally:
+            reopened.close()
+
+    def test_unenforced_sync_policy_fails_closed(self):
+        db=Mock();db.execute.return_value.fetchone.return_value=(2,)
+        with patch.object(repack.sqlite3,'connect',return_value=db):
+            with self.assertRaisesRegex(RuntimeError,'strong ledger synchronization'):repack.open_ledger(self.path)
+        db.close.assert_called_once()
+
+    def test_unsafe_journal_mode_fails_closed(self):
+        db=Mock()
+        db.execute.side_effect=lambda sql:Mock(fetchone=lambda: (3,) if sql=='PRAGMA synchronous' else ('off',))
+        with patch.object(repack.sqlite3,'connect',return_value=db):
+            with self.assertRaisesRegex(RuntimeError,'Unsupported ledger journal mode'):repack.open_ledger(self.path)
+        db.close.assert_called_once()
+
+    def test_state_directory_sync_failure_prevents_any_ledger_or_layout_mutation(self):
+        config=Path(self.tmp.name)/'config.json';config.write_text('{}')
+        state=Path(self.tmp.name)/'new-state'
+        with patch.object(repack,'CONFIG',config),patch.object(repack,'STATE',state), \
+             patch.object(repack.os,'geteuid',return_value=0),patch.object(sys,'argv',['worker']), \
+             patch.object(repack.os,'fsync',side_effect=OSError('directory sync failed')), \
+             patch.object(repack,'open_ledger') as ledger,patch.object(repack,'repack') as mutate:
+            with self.assertRaisesRegex(OSError,'directory sync failed'):repack.main()
+        ledger.assert_not_called();mutate.assert_not_called()
 
 
 if __name__ == '__main__':

@@ -16,6 +16,7 @@ if sys.platform=='linux':
     import vm_profile_faults as faults
     import vm_profile_guest as guest
     import vm_cache_faults as cache_profile
+    import vm_worker_guest as worker_guest
 
 
 @unittest.skipUnless(sys.platform=='linux','Linux virtual qualification')
@@ -156,6 +157,27 @@ class VirtualLabGuards(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError,'Unsafe calibration report'):wrapper.load_calibration(path,root)
                 path.chmod(0o644);(tools/names[0]).write_bytes(b'changed source')
                 with self.assertRaisesRegex(RuntimeError,'changed since calibration'):wrapper.load_calibration(path,root)
+
+    def test_embedded_worker_programs_compile(self):
+        compile(worker_guest.BOOTSTRAP,'worker bootstrap','exec')
+        compile(worker_guest.INSIDE,'worker guest probe','exec')
+
+    def test_worker_image_refuses_changed_worker_and_embedded_guest_sources(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);source=root/'tools';source.mkdir();artifact=root/'artifact';artifact.mkdir()
+            builder=source/'vm_image_builder.py';builder.write_bytes(b'builder')
+            guest=source/'vm_worker_guest.py';guest.write_bytes(b'guest')
+            worker=root/'storage_defaults_repack.py';worker.write_bytes(b'worker')
+            sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+            manifest=dict(worker_fixture=True,builder_source_sha256=sha(builder),worker_guest_source_sha256=sha(guest),
+                          worker_reference=dict(worker_sha256=sha(worker)))
+            (artifact/'image-build.json').write_text(json.dumps(manifest))
+            with mock.patch.object(wrapper,'SOURCE',source):
+                wrapper.verify_worker_sources(artifact)
+                worker.write_bytes(b'changed worker')
+                with self.assertRaisesRegex(RuntimeError,'Worker source changed'):wrapper.verify_worker_sources(artifact)
+                worker.write_bytes(b'worker');guest.write_bytes(b'changed guest')
+                with self.assertRaisesRegex(RuntimeError,'Embedded worker guest changed'):wrapper.verify_worker_sources(artifact)
 
 
 if __name__=='__main__':unittest.main()
