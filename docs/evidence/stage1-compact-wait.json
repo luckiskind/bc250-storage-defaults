@@ -1,0 +1,43 @@
+{
+  "kind": "bc250-compact-wait-public-summary",
+  "passed": true,
+  "native_controls": 16,
+  "positive_cases": 9,
+  "active_programs": 28,
+  "pending_context_maps": 13,
+  "linux_tests": 302,
+  "positive_totals": {
+    "request_generations": 129,
+    "selected_request_members": 148,
+    "multi_bio_requests": 7,
+    "request_address_reuses_with_changed_generation": 13,
+    "physical_completed_bytes": 23658496,
+    "actual_vector_edges": 20,
+    "request_backed_matched_wakes": 20,
+    "blocked_switch_segments": 20,
+    "resolved_request_folio_blocked_segments": 20,
+    "large_folio_vector_edges": 0,
+    "multi_page_vector_edges": 0,
+    "partial_folio_vector_edges": 0
+  },
+  "only_additional_hook_omitted": "unlock_call",
+  "unlock_counts_available": false,
+  "all_four_proof_removals_fail_quality": true,
+  "exact_shared_worker_reused": true,
+  "all_owned_programs_detached": true,
+  "global_state_unchanged": true,
+  "independent_cross_graph_audit_passed": true,
+  "retained_attempts": 2,
+  "failed_attempts": 1,
+  "offline_reference_projections": 15,
+  "offline_projection_is_not_native_collection": true,
+  "stage1_gate_passed": false,
+  "new_accelerator_gain_claimed": false,
+  "limits": [
+    "Selected-worker disposable fixtures only",
+    "Unlock counts unavailable, not an observed zero",
+    "Functional qualification does not establish cost",
+    "Broader native paths and whole-application critical paths remain open",
+    "Detailed machine records remain local"
+  ]
+}
