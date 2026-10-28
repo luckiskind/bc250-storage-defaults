@@ -4,7 +4,7 @@ Apply the tested drive power setting and a bounded Btrfs layout prototype with o
 
 Development toward a broader accelerator follows the [sequential roadmap](docs/DEVELOPMENT_PLAN.md). The [Stage 0 baseline record](docs/baseline.md) separates completed checks from remaining hardware/recovery qualification.
 
-Current development passes **262 Linux tests**. The latest [request-generation extension](docs/request-bio-lineage.md) passes 14 native controls, including multi-bio membership and changed-generation request recycling. A separate [accounting revision](docs/request-accounting.md) distinguishes issued and reported bytes in incomplete traces while preserving frozen native results. The [measurement record](docs/workloads.md) retains earlier observer-cost screens, selected native application fixtures and read/folio/bio lineage results. Broader native request paths, the combined folio chain, total diagnostic cost and whole-application critical paths remain open; no new accelerator gain is claimed.
+Current development passes **274 Linux tests**. The latest [combined request/vector/folio diagnostic](docs/combined-wait.md) passes 16 native controls and connects all 24 observed blocked segments to actual vector membership and reported request input. The [accounting revision](docs/request-accounting.md) preserves complete frozen results while distinguishing issued and reported bytes in incomplete captures. The [measurement record](docs/workloads.md) retains earlier cost screens and native fixture results. Broader native paths, total combined-observer cost and whole-application critical paths remain open; no new accelerator gain is claimed.
 
 ## Apply
 
