@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BC-250 compact request/vector/folio diagnostic v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "start_ns",
+    "finish_ns",
+    "detached_ns",
+    "events",
+    "malformed",
+    "discarded",
+    "schema_version",
+    "kind",
+    "libbpf",
+    "records",
+    "counters",
+    "pending_contexts",
+    "interrupted",
+    "limit_reached",
+    "links_detached",
+    "maps_pinned",
+    "critical_path_attribution_qualified",
+    "overhead_qualified",
+    "physical_counters",
+    "callback_proof_enabled",
+    "callback_identity_witnessed",
+    "request_counters",
+    "issue_proof_enabled",
+    "wait_counters",
+    "vector_counters",
+    "folio_proof_enabled",
+    "vector_proof_enabled",
+    "unlock_hook_loaded"
+  ],
+  "properties": {
+    "start_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "finish_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "detached_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "events": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "malformed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "discarded": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "bc250-compact-wait-diagnostic"
+    },
+    "libbpf": {
+      "type": "string"
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 50000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "parent",
+          "time_ns",
+          "value",
+          "aux",
+          "stage",
+          "flags",
+          "result"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "parent": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "time_ns": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "value": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "aux": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30,
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30
+            ]
+          },
+          "flags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "result": {
+            "type": "integer",
+            "minimum": -9223372036854775808,
+            "maximum": 9223372036854775807
+          }
+        }
+      }
+    },
+    "counters": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "pending_contexts": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "interrupted": {
+      "type": "boolean"
+    },
+    "limit_reached": {
+      "type": "boolean"
+    },
+    "links_detached": {
+      "const": true
+    },
+    "maps_pinned": {
+      "const": false
+    },
+    "critical_path_attribution_qualified": {
+      "const": false
+    },
+    "overhead_qualified": {
+      "const": false
+    },
+    "physical_counters": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "callback_proof_enabled": {
+      "type": "boolean"
+    },
+    "callback_identity_witnessed": {
+      "type": "boolean"
+    },
+    "request_counters": {
+      "type": "array",
+      "minItems": 24,
+      "maxItems": 24,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "issue_proof_enabled": {
+      "type": "boolean"
+    },
+    "wait_counters": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "vector_counters": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "folio_proof_enabled": {
+      "type": "boolean"
+    },
+    "vector_proof_enabled": {
+      "type": "boolean"
+    },
+    "unlock_hook_loaded": {
+      "const": false
+    }
+  },
+  "$comment": "Structural schema only; analysis/compact_wait.py and all frozen causal readers are mandatory. Unlock observations are unavailable, not a measured zero."
+}
