@@ -1,0 +1,416 @@
+{
+  "kind": "bc250-probe-cost-public-summary",
+  "collection_complete": true,
+  "slots": 16,
+  "work_slots": 8,
+  "idle_slots": 8,
+  "owned_programs": 28,
+  "linux_tests": 328,
+  "qualified_bpf_binary_reused": true,
+  "all_accounting_screens_passed": true,
+  "all_causal_screens_passed": true,
+  "independent_counter_arithmetic_passed": true,
+  "independently_replayed_captures": 16,
+  "actual_vector_edges": 9,
+  "causal_record_runtime_lower_bound_checks": 92,
+  "aggregate": {
+    "work": {
+      "runtime_ns": 3907053,
+      "invocations": 18122
+    },
+    "idle": {
+      "runtime_ns": 1724274,
+      "invocations": 14046
+    }
+  },
+  "programs": [
+    {
+      "program": "fw_sched_switch",
+      "work": {
+        "runtime_ns": 770727,
+        "invocations": 5958,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 701412,
+        "invocations": 5560,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fw_sched_waking",
+      "work": {
+        "runtime_ns": 491111,
+        "invocations": 3012,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 447473,
+        "invocations": 2802,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fw_sched_wakeup",
+      "work": {
+        "runtime_ns": 368389,
+        "invocations": 3012,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 337067,
+        "invocations": 2802,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "map_enter",
+      "work": {
+        "runtime_ns": 300709,
+        "invocations": 1118,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 26167,
+        "invocations": 278,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pr_issue",
+      "work": {
+        "runtime_ns": 254911,
+        "invocations": 173,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 29712,
+        "invocations": 238,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "cv_bio_enter",
+      "work": {
+        "runtime_ns": 216551,
+        "invocations": 178,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 3212,
+        "invocations": 13,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "cv_data_enter",
+      "work": {
+        "runtime_ns": 208534,
+        "invocations": 107,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pr_complete",
+      "work": {
+        "runtime_ns": 153342,
+        "invocations": 173,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 24703,
+        "invocations": 239,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "map_exit",
+      "work": {
+        "runtime_ns": 146461,
+        "invocations": 1118,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 17403,
+        "invocations": 278,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pb_root",
+      "work": {
+        "runtime_ns": 137207,
+        "invocations": 182,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 12193,
+        "invocations": 200,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fault_enter",
+      "work": {
+        "runtime_ns": 108227,
+        "invocations": 974,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 35022,
+        "invocations": 336,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pb_submit",
+      "work": {
+        "runtime_ns": 96314,
+        "invocations": 190,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 12510,
+        "invocations": 240,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "decomp_enter",
+      "work": {
+        "runtime_ns": 94593,
+        "invocations": 96,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "compressed_done",
+      "work": {
+        "runtime_ns": 91749,
+        "invocations": 96,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "decomp_exit",
+      "work": {
+        "runtime_ns": 88473,
+        "invocations": 96,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "cv_data_exit",
+      "work": {
+        "runtime_ns": 85759,
+        "invocations": 107,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fault_exit",
+      "work": {
+        "runtime_ns": 67581,
+        "invocations": 974,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 19733,
+        "invocations": 336,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pb_split_exit",
+      "work": {
+        "runtime_ns": 62397,
+        "invocations": 42,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "read_enter",
+      "work": {
+        "runtime_ns": 46489,
+        "invocations": 107,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 4916,
+        "invocations": 38,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fw_match_enter",
+      "work": {
+        "runtime_ns": 33511,
+        "invocations": 9,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 17826,
+        "invocations": 158,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fw_sleep_enter",
+      "work": {
+        "runtime_ns": 22909,
+        "invocations": 25,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 9684,
+        "invocations": 166,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "read_exit",
+      "work": {
+        "runtime_ns": 22676,
+        "invocations": 107,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 3645,
+        "invocations": 38,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fw_sleep_exit",
+      "work": {
+        "runtime_ns": 10659,
+        "invocations": 25,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 7595,
+        "invocations": 166,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pb_witness",
+      "work": {
+        "runtime_ns": 8084,
+        "invocations": 96,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pb_split_enter",
+      "work": {
+        "runtime_ns": 7802,
+        "invocations": 42,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "compressed_enter",
+      "work": {
+        "runtime_ns": 6911,
+        "invocations": 96,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "fw_match_exit",
+      "work": {
+        "runtime_ns": 4977,
+        "invocations": 9,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 14001,
+        "invocations": 158,
+        "recursion_misses": 0
+      }
+    },
+    {
+      "program": "pr_requeue",
+      "work": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      },
+      "idle": {
+        "runtime_ns": 0,
+        "invocations": 0,
+        "recursion_misses": 0
+      }
+    }
+  ],
+  "scheduler_work_recorded_runtime_share": 0.41725233827132624,
+  "recursion_misses": 0,
+  "bad_descriptor_control_passed": true,
+  "killed_holder_control_passed": true,
+  "all_owned_descriptors_closed": true,
+  "all_owned_probes_detached": true,
+  "global_state_unchanged": true,
+  "installed_profile_healthy": true,
+  "profiling_overhead_present": true,
+  "snapshot_windows_are_not_simultaneous": true,
+  "foreground_only_accounting": false,
+  "exclusive_cpu_time_qualified": false,
+  "endpoint_speed_comparison": false,
+  "new_accelerator_gain_claimed": false,
+  "stage1_gate_passed": false,
+  "next_candidate": "Investigate kernel task-local lookup for scheduler context, subject to helper/tracepoint feature qualification",
+  "limits": [
+    "Eight one-second work and eight idle windows in one fixed diagnostic schedule",
+    "Other BPF accounting is temporarily enabled by a shared reference",
+    "Global invocation counts include unrelated activity and controller work",
+    "Recorded program runtimes can include nesting/interruption; their sum is not exclusive CPU time",
+    "Profiling overhead is present; no subtraction establishes unprofiled endpoint cost",
+    "Native early overlap and application critical paths remain unqualified"
+  ]
+}
