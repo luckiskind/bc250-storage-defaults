@@ -4,7 +4,7 @@ Apply the tested drive power setting and a bounded Btrfs layout prototype with o
 
 Development toward a broader accelerator follows the [sequential roadmap](docs/DEVELOPMENT_PLAN.md). The [Stage 0 baseline record](docs/baseline.md) separates completed checks from remaining hardware/recovery qualification.
 
-Current development passes **283 Linux tests**. The [combined request/vector/folio diagnostic](docs/combined-wait.md) passes 16 native controls with actual request-backed wait evidence. Its separate [fixed 200-trial cost experiment](docs/combined-wait-cost.md) does not pass the full four-condition screen. The [measurement record](docs/workloads.md) preserves every failed result and remaining gate. Broader native paths, general application overhead and whole-application critical paths remain open; no new accelerator gain is claimed.
+Current development passes **302 Linux tests**. A separate [compact causal diagnostic](docs/compact-wait.md) omits optional unlock logging and passes 16 native controls with 28 probes. The [fixed 300-trial off/full/compact comparison](docs/compact-wait-cost.md) fails both complete cost screens and establishes no direct speed difference. One scheduler race remains unresolved; the prior full-observer failure is retained. The [measurement record](docs/workloads.md) keeps the remaining gates explicit. No new accelerator gain or default promotion is claimed.
 
 ## Apply
 
