@@ -1,0 +1,74 @@
+{
+  "kind": "bc250-combined-wait-cost-public-summary",
+  "collection_complete": true,
+  "total_trials": 200,
+  "instrumented_trials": 100,
+  "linux_tests": 283,
+  "fit_for_selected_worker_screen": false,
+  "point_limit": 0.03,
+  "upper_interval_limit": 0.05,
+  "minimum_valid_pairs": 20,
+  "scenarios": {
+    "plain-read": {
+      "valid_pairs": 24,
+      "environment_excluded_pairs": 0,
+      "capture_integrity_failed_pairs": 0,
+      "warmup_capture_failures": 0,
+      "geometric_overhead": 0.0025730822867020262,
+      "exploratory_paired_percentile_95": [
+        -0.0067076301406839844,
+        0.011647274174876543
+      ],
+      "fit_for_selected_worker_screen": true
+    },
+    "plain-mmap": {
+      "valid_pairs": 23,
+      "environment_excluded_pairs": 1,
+      "capture_integrity_failed_pairs": 0,
+      "warmup_capture_failures": 0,
+      "geometric_overhead": 0.01892163852872909,
+      "exploratory_paired_percentile_95": [
+        -0.02603183804675946,
+        0.06444956789412015
+      ],
+      "fit_for_selected_worker_screen": false
+    },
+    "encoded-read": {
+      "valid_pairs": 22,
+      "environment_excluded_pairs": 2,
+      "capture_integrity_failed_pairs": 0,
+      "warmup_capture_failures": 0,
+      "geometric_overhead": 0.036820620111578065,
+      "exploratory_paired_percentile_95": [
+        0.01960941947662387,
+        0.06617845969692482
+      ],
+      "fit_for_selected_worker_screen": false
+    },
+    "encoded-mmap": {
+      "valid_pairs": 23,
+      "environment_excluded_pairs": 1,
+      "capture_integrity_failed_pairs": 0,
+      "warmup_capture_failures": 0,
+      "geometric_overhead": 0.07477833803047544,
+      "exploratory_paired_percentile_95": [
+        0.041708746794533846,
+        0.12587614004635062
+      ],
+      "fit_for_selected_worker_screen": false
+    }
+  },
+  "all_owned_programs_detached": true,
+  "qualified_observer_binary_unchanged": true,
+  "historical_results_pooled": false,
+  "stage1_gate_passed": false,
+  "application_tracing_qualified": false,
+  "accelerator_gain_comparison": false,
+  "limits": [
+    "Four cold selected-worker endpoints including a content hash",
+    "Setup and general application cost remain separate",
+    "Global device bounds do not identify every unrelated I/O",
+    "Exploratory paired resampling; independence unproven",
+    "Detailed machine records remain local"
+  ]
+}
