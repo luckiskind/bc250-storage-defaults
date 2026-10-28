@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "workload": "firefox-private-visible-document-v1",
+  "source_sha256": {
+    "browser_endpoint.py": "7d737f1bc7aa9ae5878c00f147cf71835bb9305c5596412234d44e29fba8b8e8",
+    "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f",
+    "browser-ready.html": "04ca0ff3079862e1bb8dd33314408b66672bbef0f77be0904533eac84c375ba1",
+    "browser-ready.svg": "41cac1ea4f88b4488d51fb05ee5e26d0e07c79996d76d7651ddc997c4c97a2a2"
+  },
+  "package": "firefox 156.0.1-1.1",
+  "firefox_full_version": "Mozilla Firefox 156.0.1 20260923073044 20260923073044",
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "trials": [
+    {
+      "trial": 0,
+      "passed": true,
+      "launch_to_marker_received_ns": 1543933863,
+      "marker": {
+        "document_complete": true,
+        "visibility": "visible",
+        "image_decoded": true,
+        "fonts_loaded": true,
+        "scripted_clicks": 1,
+        "status_text": "Ready 1",
+        "frames_waited": 2,
+        "distinct_frame_timestamps": true,
+        "inner_width": 1280,
+        "inner_height": 692,
+        "page_elapsed_ms": 339
+      },
+      "invalid_markers": 0,
+      "browser_parent_capabilities_zero": true,
+      "browser_parent_in_owned_test_group": true,
+      "cpu_policy_unchanged": true,
+      "owned_browser_processes_gone": true,
+      "forced_cleanup_required": false,
+      "termination": "SIGTERM to owned disposable test cgroup members after measurement",
+      "browser_exit_code": -15
+    },
+    {
+      "trial": 1,
+      "passed": true,
+      "launch_to_marker_received_ns": 1571189652,
+      "marker": {
+        "document_complete": true,
+        "visibility": "visible",
+        "image_decoded": true,
+        "fonts_loaded": true,
+        "scripted_clicks": 1,
+        "status_text": "Ready 1",
+        "frames_waited": 2,
+        "distinct_frame_timestamps": true,
+        "inner_width": 1280,
+        "inner_height": 692,
+        "page_elapsed_ms": 328
+      },
+      "invalid_markers": 0,
+      "browser_parent_capabilities_zero": true,
+      "browser_parent_in_owned_test_group": true,
+      "cpu_policy_unchanged": true,
+      "owned_browser_processes_gone": true,
+      "forced_cleanup_required": false,
+      "termination": "SIGTERM to owned disposable test cgroup members after measurement",
+      "browser_exit_code": -15
+    },
+    {
+      "trial": 2,
+      "passed": true,
+      "launch_to_marker_received_ns": 1577057135,
+      "marker": {
+        "document_complete": true,
+        "visibility": "visible",
+        "image_decoded": true,
+        "fonts_loaded": true,
+        "scripted_clicks": 1,
+        "status_text": "Ready 1",
+        "frames_waited": 2,
+        "distinct_frame_timestamps": true,
+        "inner_width": 1280,
+        "inner_height": 692,
+        "page_elapsed_ms": 386
+      },
+      "invalid_markers": 0,
+      "browser_parent_capabilities_zero": true,
+      "browser_parent_in_owned_test_group": true,
+      "cpu_policy_unchanged": true,
+      "owned_browser_processes_gone": true,
+      "forced_cleanup_required": false,
+      "termination": "SIGTERM to owned disposable test cgroup members after measurement",
+      "browser_exit_code": -15
+    }
+  ],
+  "network_namespace_isolated": true,
+  "network": {
+    "interfaces": [
+      "lo"
+    ],
+    "default_route_present": false
+  },
+  "private_home_and_profile": true,
+  "private_preferences": {
+    "browser.aboutwelcome.enabled": false,
+    "browser.shell.checkDefaultBrowser": false,
+    "browser.startup.homepage_override.mstone": "ignore",
+    "startup.homepage_welcome_url": "",
+    "startup.homepage_welcome_url.additional": ""
+  },
+  "remote_agent_enabled": false,
+  "endpoint": "Controller receives valid visible-document/load/image/font/scripted-click/two-frame marker",
+  "endpoint_does_not_prove_first_composited_frame": true,
+  "trusted_input_qualified": false,
+  "cache_state": "Fresh private HOME/profile/config/data/cache; local document preloaded into server RAM; system page cache uncontrolled",
+  "cache_eviction_performed": false,
+  "system_wide_settings_changed": false,
+  "benchmark_comparison_performed": false,
+  "application_suite_frozen": false,
+  "stage1_gate_passed": false,
+  "passed": true,
+  "completed_trials": 3,
+  "all_owned_browser_processes_gone": true,
+  "completed_unix": 1793114433.6482682,
+  "isolated_linux_tests": 137,
+  "first_composited_frame_qualified": false,
+  "cache_state_qualified": false,
+  "normal_browser_quit_qualified": false,
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true
+  },
+  "requested_resource_limits": {
+    "cgroup_memory_max_bytes": 3221225472,
+    "cgroup_memory_swap_max_bytes": 0,
+    "tasks_max": 512,
+    "runtime_max_seconds": 180,
+    "cpu_quota_requested": false
+  },
+  "retained_development_prototype": {
+    "functional_trials": 1,
+    "passed": true,
+    "source_epoch": "Before final explicit parent-membership and cleanup-race checks"
+  },
+  "test_invocation_record": {
+    "initial_wrong_working_directory_failed_local_import": true,
+    "source_root_invocation_passed": true,
+    "failed_log_retained": true
+  }
+}

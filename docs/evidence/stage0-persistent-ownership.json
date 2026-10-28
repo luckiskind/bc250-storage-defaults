@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "published",
+      "passed": true,
+      "before_device": 137,
+      "after_device": 143,
+      "persistent_identity_unchanged_on_remount": true,
+      "actual_installer_sigkill": true,
+      "recovery": "completed-and-idempotent",
+      "refused_files_and_journal_byte_verified": false,
+      "service_calls_on_refusal": null,
+      "expected_refusal": null
+    },
+    {
+      "case": "committed",
+      "passed": true,
+      "before_device": 137,
+      "after_device": 143,
+      "persistent_identity_unchanged_on_remount": true,
+      "actual_installer_sigkill": true,
+      "recovery": "completed-and-idempotent",
+      "refused_files_and_journal_byte_verified": false,
+      "service_calls_on_refusal": null,
+      "expected_refusal": null
+    },
+    {
+      "case": "removing",
+      "passed": true,
+      "before_device": 137,
+      "after_device": 143,
+      "persistent_identity_unchanged_on_remount": true,
+      "actual_installer_sigkill": true,
+      "recovery": "completed-and-idempotent",
+      "refused_files_and_journal_byte_verified": false,
+      "service_calls_on_refusal": null,
+      "expected_refusal": null
+    },
+    {
+      "case": "same-content-replacement",
+      "passed": true,
+      "before_device": 137,
+      "after_device": 143,
+      "persistent_identity_unchanged_on_remount": true,
+      "actual_installer_sigkill": true,
+      "recovery": "refused-and-preserved",
+      "refused_files_and_journal_byte_verified": true,
+      "service_calls_on_refusal": 0,
+      "expected_refusal": "Staging ownership changed; artifact preserved"
+    },
+    {
+      "case": "snapshot-replacement",
+      "passed": true,
+      "before_device": 137,
+      "after_device": 143,
+      "persistent_identity_unchanged_on_remount": true,
+      "actual_installer_sigkill": true,
+      "recovery": "refused-and-preserved",
+      "refused_files_and_journal_byte_verified": true,
+      "service_calls_on_refusal": 0,
+      "expected_refusal": "Staging ownership changed; artifact preserved"
+    },
+    {
+      "case": "legacy-published",
+      "passed": true,
+      "before_device": 137,
+      "after_device": 143,
+      "persistent_identity_unchanged_on_remount": true,
+      "actual_installer_sigkill": true,
+      "recovery": "refused-and-preserved",
+      "refused_files_and_journal_byte_verified": true,
+      "service_calls_on_refusal": 0,
+      "expected_refusal": "Staging ownership changed; artifact preserved"
+    },
+    {
+      "case": "legacy-removing",
+      "passed": true,
+      "before_device": 137,
+      "after_device": 143,
+      "persistent_identity_unchanged_on_remount": true,
+      "actual_installer_sigkill": true,
+      "recovery": "refused-and-preserved",
+      "refused_files_and_journal_byte_verified": true,
+      "service_calls_on_refusal": 0,
+      "expected_refusal": "Ownership changed for <private-lab>/a/legacy-removing/usr/local/libexec/bc250-storage-defaults/storage_defaults_power.py; recovery preserved all files"
+    }
+  ],
+  "host_reboot_tested": false,
+  "simulated_systemd": true,
+  "simulated_controller": true,
+  "actual_btrfs_mount_order_change": true,
+  "source_sha256": {
+    "install.py": "be809f189febefe41a4d83e724b0601fa390a6f9ebfdf303dc33bf18cb874c91",
+    "install_transaction.py": "2761bcb1b2508822948b47de56b1a46dc956c1fc45f3094c2431476c46648738",
+    "storage_defaults_repack.py": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+    "tests/remount_install.py": "87714bc07e0b5f7a74a55fc5e36dd88eff3488d363566d2f82da218fde3d8ce6"
+  },
+  "case_count": 7,
+  "all_test_mounts_unmounted": true,
+  "completed_unix": 1793089446.0588624
+}

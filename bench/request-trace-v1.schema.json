@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BC-250 request trace v1",
+  "description": "Private observer output. Integer consumers must preserve unsigned 64-bit values exactly. No kernel pointers, sectors, filenames, PIDs or process names are exported. This is block-layer observation, not foreground ownership or device-only latency.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "libbpf", "elapsed_ns", "start_monotonic_ns", "detached_monotonic_ns", "events", "qualified_full_requests", "interrupted", "limit_discarded_records", "read_completed_bytes", "write_completed_bytes", "flagged_events", "malformed_events", "service_sum_ns", "queue_sum_ns", "right_censored_requests", "event_limit_reached", "kernel_counters", "service_log2_ns", "queue_log2_ns", "records", "links_detached", "maps_pinned", "foreground_owner_known"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "bc250-request-trace"},
+    "libbpf": {"type": "string", "maxLength": 64},
+    "elapsed_ns": {"$ref": "#/$defs/u64"},
+    "start_monotonic_ns": {"$ref": "#/$defs/u64"},
+    "detached_monotonic_ns": {"$ref": "#/$defs/u64"},
+    "events": {"type": "integer", "minimum": 0, "maximum": 200000},
+    "qualified_full_requests": {"$ref": "#/$defs/u64"},
+    "interrupted": {"type": "boolean"},
+    "limit_discarded_records": {"$ref": "#/$defs/u64"},
+    "read_completed_bytes": {"$ref": "#/$defs/u64"},
+    "write_completed_bytes": {"$ref": "#/$defs/u64"},
+    "flagged_events": {"$ref": "#/$defs/u64"},
+    "malformed_events": {"$ref": "#/$defs/u64"},
+    "service_sum_ns": {"$ref": "#/$defs/u64"},
+    "queue_sum_ns": {"$ref": "#/$defs/u64"},
+    "right_censored_requests": {"type": "integer", "minimum": 0, "maximum": 8192},
+    "event_limit_reached": {"type": "boolean"},
+    "kernel_counters": {"type": "array", "minItems": 16, "maxItems": 16, "items": {"$ref": "#/$defs/u64"}},
+    "service_log2_ns": {"$ref": "#/$defs/histogram"},
+    "queue_log2_ns": {"$ref": "#/$defs/histogram"},
+    "records": {"type": "array", "maxItems": 200000, "items": {"$ref": "#/$defs/event"}},
+    "links_detached": {"const": true},
+    "maps_pinned": {"const": false},
+    "foreground_owner_known": {"const": false}
+  },
+  "$defs": {
+    "u64": {"type": "integer", "minimum": 0, "maximum": 18446744073709551615},
+    "histogram": {"type": "array", "minItems": 64, "maxItems": 64, "items": {"$ref": "#/$defs/u64"}},
+    "event": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "insert_ns", "issue_ns", "complete_ns", "bytes", "completed_bytes", "operation", "flags"],
+      "properties": {
+        "id": {"$ref": "#/$defs/u64"},
+        "insert_ns": {"$ref": "#/$defs/u64"},
+        "issue_ns": {"$ref": "#/$defs/u64"},
+        "complete_ns": {"$ref": "#/$defs/u64"},
+        "bytes": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "completed_bytes": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "operation": {"type": "integer", "minimum": 0, "maximum": 255},
+        "flags": {"type": "integer", "minimum": 0, "maximum": 511}
+      }
+    }
+  }
+}

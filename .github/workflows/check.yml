@@ -9,9 +9,34 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check syntax and isolated safety tests
         run: |
-          python3 -m compileall -q install.py storage_defaults_power.py storage_defaults_repack.py make_patch.py tests
+          python3 -m compileall -q install.py install_transaction.py storage_defaults_power.py storage_defaults_repack.py make_patch.py tests tools bench analysis
           sh -n apply.sh undo.sh status.sh systemd/90-bc250-nvme-power
           python3 -m unittest discover -s tests -v
+      - name: Build the read-only aligned fixture worker
+        run: |
+          cc -O2 -Wall -Wextra -Werror -pthread bench/direct_probe.c -o /tmp/bc250-direct-probe
+          if /tmp/bc250-direct-probe; then exit 1; else test "$?" -eq 2; fi
+      - name: Build private native-input helpers
+        run: |
+          cc -O2 -Wall -Wextra -Werror -shared -fPIC bench/native_input_mount.c -o /tmp/bc250-native-mount.so
+          cc -O2 -Wall -Wextra -Werror -shared -fPIC bench/native_browser_mount.c -o /tmp/bc250-native-browser-mount.so
+          cc -O2 -Wall -Wextra -Werror -shared -fPIC bench/mapped_identity.c -o /tmp/bc250-mapped-identity.so
+          cc -O2 -Wall -Wextra -Werror bench/native_input_utmp.c -o /tmp/bc250-native-utmp
+          if /tmp/bc250-native-utmp; then exit 1; else test "$?" -eq 2; fi
+      - name: Build the inherited-descriptor read worker
+        run: |
+          cc -O2 -Wall -Wextra -Werror bench/read_lineage_probe.c -o /tmp/bc250-read-lineage-probe
+          if /tmp/bc250-read-lineage-probe; then exit 1; else test "$?" -eq 2; fi
+          cc -O2 -Wall -Wextra -Werror bench/request_bio_repeat_probe.c -o /tmp/bc250-request-bio-repeat-probe
+          if /tmp/bc250-request-bio-repeat-probe; then exit 1; else test "$?" -eq 2; fi
+          cc -O2 -Wall -Wextra -Werror bench/wake_overlap_probe.c -o /tmp/bc250-wake-overlap-probe
+          if /tmp/bc250-wake-overlap-probe; then exit 1; else test "$?" -eq 2; fi
+          cc -O2 -Wall -Wextra -Werror -pthread bench/task_context_worker.c -o /tmp/bc250-task-context-worker
+          if /tmp/bc250-task-context-worker; then exit 1; else test "$?" -eq 2; fi
+      - name: Exercise the v2 atomic publication protocol
+        run: |
+          cc -O2 -Wall -Wextra -Werror -pthread bench/trace2_protocol_probe.c -o /tmp/bc250-trace2-protocol
+          /tmp/bc250-trace2-protocol
       - name: Verify exported patch applies to an empty repository
         run: |
           python3 make_patch.py /tmp/bc250-storage.patch

@@ -1,0 +1,285 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "manifest-committed",
+      "interruptions": [
+        {
+          "point": "committed-manifest",
+          "token": "5fe886bd451b4416a5e3303690d84a0b",
+          "mode": "cut-install",
+          "qemu_exit": -9,
+          "elapsed_s": 58.7410712219862,
+          "whole_guest_terminated": true
+        }
+      ],
+      "recovery": {
+        "passed": true,
+        "mode": "recover",
+        "point": "none",
+        "token": "375063f80d9941a68c402bc63655cfbe",
+        "committed_startup_before_recovery_verified": true,
+        "outcome": "installed",
+        "repeat_recovery_passed": true,
+        "final_removed": true,
+        "root_uuid": "c3e89f75-9f16-452e-b08e-bfe63c49af50",
+        "kernel": "7.2.11-arch1-1",
+        "boot_id": "d9e6486b-786e-4d22-a92c-0145b21a0c68",
+        "qemu_exit": 0,
+        "elapsed_s": 64.42223488399759
+      }
+    },
+    {
+      "case": "legacy-missing-timer-link",
+      "interruptions": [
+        {
+          "point": "committed-missing-timer-link",
+          "token": "c9dde7fef597439b912c0198447514f2",
+          "mode": "cut-install",
+          "qemu_exit": -9,
+          "elapsed_s": 56.076172956993105,
+          "whole_guest_terminated": true
+        }
+      ],
+      "recovery": {
+        "passed": true,
+        "mode": "recover",
+        "point": "none",
+        "token": "9769199430904ea68c175e30a85e937c",
+        "missing_timer_link_before_recovery_verified": true,
+        "outcome": "installed",
+        "repeat_recovery_passed": true,
+        "final_removed": true,
+        "root_uuid": "c3e89f75-9f16-452e-b08e-bfe63c49af50",
+        "kernel": "7.2.11-arch1-1",
+        "boot_id": "cd25dc7f-3c47-4c16-a93d-40a2a43df27e",
+        "qemu_exit": 0,
+        "elapsed_s": 66.27020652900683
+      },
+      "additional_fault": "explicit removal of the committed timer startup symlink, synchronized before cut"
+    },
+    {
+      "case": "partial-stage",
+      "interruptions": [
+        {
+          "point": "partial-stage-1",
+          "token": "ceb14a2488b24f9995a8743c485e9d70",
+          "mode": "cut-install",
+          "qemu_exit": -9,
+          "elapsed_s": 41.426360573997954,
+          "whole_guest_terminated": true
+        }
+      ],
+      "recovery": {
+        "passed": true,
+        "mode": "recover",
+        "point": "none",
+        "token": "90b578b5f5ab46fe86213b7fba42fdf3",
+        "outcome": "removed",
+        "repeat_recovery_passed": true,
+        "final_removed": true,
+        "root_uuid": "c3e89f75-9f16-452e-b08e-bfe63c49af50",
+        "kernel": "7.2.11-arch1-1",
+        "boot_id": "1fdca5d9-7ed7-492c-91ba-cd54b2cbf3aa",
+        "qemu_exit": 0,
+        "elapsed_s": 48.56099763599923
+      }
+    },
+    {
+      "case": "power-enabled",
+      "interruptions": [
+        {
+          "point": "after-power-enable",
+          "token": "f4d2aa7d57504d4d8973317d2cba6b4e",
+          "mode": "cut-install",
+          "qemu_exit": -9,
+          "elapsed_s": 50.311666431996855,
+          "whole_guest_terminated": true
+        }
+      ],
+      "recovery": {
+        "passed": true,
+        "mode": "recover",
+        "point": "none",
+        "token": "306d090a0ff74bb8a35fdff4dc747ee2",
+        "outcome": "removed",
+        "repeat_recovery_passed": true,
+        "final_removed": true,
+        "root_uuid": "c3e89f75-9f16-452e-b08e-bfe63c49af50",
+        "kernel": "7.2.11-arch1-1",
+        "boot_id": "41cdf5e9-21a3-4628-8dad-3ead5a35c7f4",
+        "qemu_exit": 0,
+        "elapsed_s": 55.292849583987845
+      }
+    },
+    {
+      "case": "timer-enabled",
+      "interruptions": [
+        {
+          "point": "after-timer-enable",
+          "token": "dde3c39756dd4f8999335bc028236ca1",
+          "mode": "cut-install",
+          "qemu_exit": -9,
+          "elapsed_s": 57.63612966000801,
+          "whole_guest_terminated": true
+        }
+      ],
+      "recovery": {
+        "passed": true,
+        "mode": "recover",
+        "point": "none",
+        "token": "ba240c2eb0cc4f208287e9ac00387105",
+        "outcome": "removed",
+        "repeat_recovery_passed": true,
+        "final_removed": true,
+        "root_uuid": "c3e89f75-9f16-452e-b08e-bfe63c49af50",
+        "kernel": "7.2.11-arch1-1",
+        "boot_id": "af5abc40-1099-4643-9f81-15534720cce7",
+        "qemu_exit": 0,
+        "elapsed_s": 55.621287358997506
+      }
+    },
+    {
+      "case": "removal-started",
+      "interruptions": [
+        {
+          "point": "deleted-1",
+          "token": "462a57de58314452b4b69ab4b0d993cc",
+          "mode": "cut-remove",
+          "qemu_exit": -9,
+          "elapsed_s": 63.73712906098808,
+          "whole_guest_terminated": true
+        }
+      ],
+      "recovery": {
+        "passed": true,
+        "mode": "recover",
+        "point": "none",
+        "token": "896f717de5ee42158435fa49549e06d9",
+        "outcome": "removed",
+        "repeat_recovery_passed": true,
+        "final_removed": true,
+        "root_uuid": "c3e89f75-9f16-452e-b08e-bfe63c49af50",
+        "kernel": "7.2.11-arch1-1",
+        "boot_id": "50810fa5-a9b2-4e79-86b5-330d3b94fd34",
+        "qemu_exit": 0,
+        "elapsed_s": 49.80997633399966
+      }
+    },
+    {
+      "case": "recovery-interrupted",
+      "interruptions": [
+        {
+          "point": "after-timer-enable",
+          "token": "aeee664f896b478a9599a5b3125493b4",
+          "mode": "cut-install",
+          "qemu_exit": -9,
+          "elapsed_s": 52.658958311003516,
+          "whole_guest_terminated": true
+        },
+        {
+          "point": "deleted-1",
+          "token": "37dbc716dcfc421d9831733007be1aaf",
+          "mode": "cut-recover",
+          "qemu_exit": -9,
+          "elapsed_s": 43.662911780993454,
+          "whole_guest_terminated": true
+        }
+      ],
+      "recovery": {
+        "passed": true,
+        "mode": "recover",
+        "point": "none",
+        "token": "40a949941d674e52a49f7e813a2029b2",
+        "outcome": "removed",
+        "repeat_recovery_passed": true,
+        "final_removed": true,
+        "root_uuid": "c3e89f75-9f16-452e-b08e-bfe63c49af50",
+        "kernel": "7.2.11-arch1-1",
+        "boot_id": "2bf6df6f-2e33-4c39-b9fc-c3c6ae595f59",
+        "qemu_exit": 0,
+        "elapsed_s": 49.88863505999325
+      }
+    }
+  ],
+  "case_count": 7,
+  "whole_guest_interruption_tested": true,
+  "physical_power_loss_tested": false,
+  "volatile_drive_cache_loss_modeled": false,
+  "simulated_nvme_sysfs": true,
+  "separate_guest_kernel": true,
+  "real_systemd_pid1": true,
+  "base_fingerprint_unchanged": true,
+  "base_sparse_fingerprint": {
+    "sha256": "8f2ab8d4992494b3bd434f7182b06507bf97bfebe23218fd2f7a8a3d9fd32724",
+    "data_ranges": 13,
+    "data_bytes": 687443968,
+    "virtual_bytes": 85899345920
+  },
+  "package_sha256": {
+    "config.json": "7fb9fe145b1e9b22ff121e977529b43f9122a228b6c1693102713d4f9ede4ebf",
+    "install.py": "be809f189febefe41a4d83e724b0601fa390a6f9ebfdf303dc33bf18cb874c91",
+    "install_transaction.py": "a502b4268d52db216349c978831944eaa0c6c09029bca76e81e8a63b98bb3d79",
+    "storage_defaults_power.py": "124cba850178e4963bc4196c4abd66dea898719b87c564ac3c29f5f1dde7a153",
+    "storage_defaults_repack.py": "19beb35a24e69791469001a88fd91e65a56617918eae075c50c868e6fedd9638",
+    "systemd/90-bc250-nvme-power": "2a87de0d0d003b32eec78b52901637869fe1772c657c500127e958d511bbfcc1",
+    "systemd/bc250-btrfs-repack.service": "1f231667e996c41dff28d661210100f08b3a9d064385aee8297f17168cd149f7",
+    "systemd/bc250-btrfs-repack.timer": "b0e5c1ff29788a876763a308461a0a02632640fa724e6362d1c37a24d8eb3a9f",
+    "systemd/bc250-nvme-power.service": "90507634a534eddaf1ca73d4e4878df2490d86004738f71ec87125706f8fe488"
+  },
+  "run_label": "durability-01",
+  "fault_model": "SIGKILL acknowledged QEMU PID; guest RAM/kernel lost; host write cache survives",
+  "schema_version": 1,
+  "host_nvme_qos_unchanged": true,
+  "host_nvme_qos_us": 5000,
+  "host_filesystem_uuid_differs": true,
+  "host_reboot_tested": false,
+  "stock_guest_kernel_hardware_compatibility_qualified": false,
+  "recorded_utc": "2026-10-27T06:10:37Z",
+  "artifact_label": "profile-fault-v2",
+  "image_build": {
+    "image_virtual_bytes": 85899345920,
+    "kernel_release": "7.2.11-arch1-1",
+    "kernel_sha256": "7ca8265d776950dd3cdfb8eab7ee33978d139125e09bcf2a3a4ff482b7d5728c",
+    "initramfs_sha256": "4d71a839ec399606eb4f57f9824ca9fd98ef819d45d94aa3ab072aab84a9be13",
+    "fixture": {
+      "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "bytes": 6344456
+    },
+    "rootdir_security_xattrs_copied": false,
+    "image_is_regular_file": true,
+    "host_device_formatted": false,
+    "guest_not_yet_booted": true,
+    "builder_source_sha256": "b29749065e3d851a897776d82e2813eb2988837124a5819c4c4b8c65445a14ec",
+    "storage_profile_fixture": true,
+    "profile_guest_source_sha256": "b71de5b8192ef6b4babe4d6de24d442565abb3193b11673b3776f5f2c98d8bbb",
+    "embedded_probe_sha256": "497822c728166a8029f4e0c8da04aaedeb13f205228bf83843b1885fe47254f0",
+    "package_sha256": {
+      "config.json": "7fb9fe145b1e9b22ff121e977529b43f9122a228b6c1693102713d4f9ede4ebf",
+      "install.py": "be809f189febefe41a4d83e724b0601fa390a6f9ebfdf303dc33bf18cb874c91",
+      "install_transaction.py": "a502b4268d52db216349c978831944eaa0c6c09029bca76e81e8a63b98bb3d79",
+      "storage_defaults_power.py": "124cba850178e4963bc4196c4abd66dea898719b87c564ac3c29f5f1dde7a153",
+      "storage_defaults_repack.py": "19beb35a24e69791469001a88fd91e65a56617918eae075c50c868e6fedd9638",
+      "systemd/90-bc250-nvme-power": "2a87de0d0d003b32eec78b52901637869fe1772c657c500127e958d511bbfcc1",
+      "systemd/bc250-btrfs-repack.service": "1f231667e996c41dff28d661210100f08b3a9d064385aee8297f17168cd149f7",
+      "systemd/bc250-btrfs-repack.timer": "b0e5c1ff29788a876763a308461a0a02632640fa724e6362d1c37a24d8eb3a9f",
+      "systemd/bc250-nvme-power.service": "90507634a534eddaf1ca73d4e4878df2490d86004738f71ec87125706f8fe488"
+    }
+  },
+  "source_hashes": {
+    "virtual_test_lab.py": "7c3b3616ba299d0596789ca5587885cba61f229fea2be046bca48d64284b1280",
+    "vm_image_builder.py": "b29749065e3d851a897776d82e2813eb2988837124a5819c4c4b8c65445a14ec",
+    "vm_boot_probe.py": "a08e49ce85fa3aecf0d0c1075d9828211e1dcb6091ff7cb0518927101f81745d",
+    "vm_profile_guest.py": "b71de5b8192ef6b4babe4d6de24d442565abb3193b11673b3776f5f2c98d8bbb",
+    "vm_profile_faults.py": "9feb7fc4a0b7a510df5d584859b194da2990711da55b45ba70b0e9aeada697fa",
+    "prepare_test_os.py": "f19a426f73feda6ed244e70964375d1ec5114059031da2e8b300798e1770fc75"
+  },
+  "acknowledged_qemu_kills": 8,
+  "total_guest_boots": 15,
+  "qualification_notes": {
+    "observed_pre_fix_failure": "Active manifest and power startup link survived, but timers.target.wants was absent after an acknowledged guest interruption. Confirmed by inspecting a child overlay; failed parent preserved.",
+    "repair": "Synchronize service dependency directories and their parent before commit/completed shutdown; audit and reestablish committed service activation during recovery.",
+    "reader_exploration": "A prior reader rejected a successful guest result prefixed by systemd terminal queries. Fresh passing evidence uses a tested control-sequence reader.",
+    "physical_scope": "Host kernel and SSD stayed powered. No physical reboot, suspend, drive-cache-loss or throughput claim."
+  }
+}

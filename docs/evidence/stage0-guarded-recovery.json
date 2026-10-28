@@ -1,0 +1,105 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "passed": true,
+      "expected_refusal": false,
+      "normal_return_verified": true,
+      "one_shot_consumed": true,
+      "fixture_unchanged": true,
+      "normal_boot_ids_distinct": true,
+      "trial": {
+        "passed": true,
+        "mode": "vm",
+        "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+        "root_identity_verified": true,
+        "normal_default_verified": true,
+        "one_shot_consumed": true,
+        "selected_entry_verified": true,
+        "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+        "managed_fixture_unchanged": true,
+        "real_systemd_pid1": true,
+        "usable_target_active": true,
+        "failed_units": 0,
+        "completed_unix": 1793102665.4836845
+      },
+      "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+      "real_systemd_pid1": true,
+      "failed_units": 0,
+      "case": "valid",
+      "elapsed_s": 190.39798166299988
+    },
+    {
+      "passed": true,
+      "expected_refusal": true,
+      "normal_return_verified": true,
+      "one_shot_consumed": true,
+      "fixture_unchanged": true,
+      "normal_boot_ids_distinct": true,
+      "trial": null,
+      "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+      "real_systemd_pid1": true,
+      "failed_units": 0,
+      "case": "refused",
+      "elapsed_s": 186.0337125040005
+    }
+  ],
+  "uefi_boots": 6,
+  "cold_machine_instances": true,
+  "in_process_warm_reset_qualified": false,
+  "private_efi_variables_persist_across_machine_instances": true,
+  "actual_kernel_and_initramfs_bytes": true,
+  "installed_limine_sha256": "f24efeecf6cfd3e11dd47a8263fece74509ec91f83b7f1d166b8ca30892d629f",
+  "uses_copied_limine": true,
+  "protected_images_unchanged": true,
+  "host_boot_setup_changed": false,
+  "physical_recovery_tested": false,
+  "physical_suspend_tested": false,
+  "no_guest_nic": true,
+  "host_nvme_qos_us": 5000,
+  "source_sha256": {
+    "tools/uefi_recovery_vm.py": "d9d76e1866a9039f53b5fd0495ea088583cc43e946bc5e2970b0add62aed868f",
+    "tools/recovery_boot_guard.py": "497d51ae1d47c56f9dd8ad06a4c62ddd0ab930d9b9f3727a27ac2426aa406073",
+    "install_transaction.py": "2761bcb1b2508822948b47de56b1a46dc956c1fc45f3094c2431476c46648738"
+  },
+  "completed_unix": 1793102924.336877,
+  "isolated_linux_tests": 114,
+  "host_boot_config_unchanged": true,
+  "no_physical_boot_request_set": true,
+  "test_loop_attachments_gone": true,
+  "parent_unit_exited": true,
+  "live_installation": {
+    "installed_files_verified": 7,
+    "power_service_active": true,
+    "maintenance_timer_active": true,
+    "nvme_qos_us": 5000,
+    "daily_charges_not_rewound": true
+  },
+  "initial_continuous_qemu_run": {
+    "passed": false,
+    "normal_boot_and_trial_guard_passed": true,
+    "third_boot_stalled_after_initramfs_loading": true,
+    "cause_unresolved": true,
+    "retained": true,
+    "source_baseline_fingerprint_unchanged": true
+  },
+  "system_suspend_wake_supported": false,
+  "suspend_support_evidence": "Owner reports no functional suspend wake on this target, 2026-10-27",
+  "physical_candidate_preparation": {
+    "prepared": true,
+    "physical_boot_tested": false,
+    "kernel_release": "7.2.8-1.219-cachyos-bore-bc250",
+    "boot_sha256": {
+      "vmlinuz": "5f76cd2d1fbe450a38812e4af27bc279bcf41e1b51d8ffdc651a045c08a3a6e5",
+      "initramfs": "0814d4f878a6623245bd3fd7e2fb14ac53fa380f527ed9482c10bd67b3a1354c"
+    },
+    "vm_poweroff_probe_removed": true,
+    "production_home_mounted": false,
+    "working_boot_setup_changed": false,
+    "guarded_return_installed": true,
+    "candidate_tree_nodes": 58000,
+    "copied_tree_content_links_modes_owners_verified": true,
+    "security_xattr_preservation_qualified": false,
+    "preparation_source_sha256": "e9d3790d1c4ef544aa113e2678bba0510e1067e3b8ff82a89530a4c65d765650"
+  }
+}

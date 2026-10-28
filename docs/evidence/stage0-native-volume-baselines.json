@@ -1,0 +1,1987 @@
+{
+  "passed": true,
+  "variants": {
+    "B0": {
+      "filesystem_uuid": "1cd81f4d-1fb3-4a26-b99c-0037faff70e9",
+      "tree_sha256": "88cc8812f2d142c35987ff651a5baca7a6bfdeb98c504e55859fc99f71dacc2f",
+      "durable_nodes": 36650,
+      "logical_file_bytes": 694670218,
+      "initial_layout": {
+        "regular_files_checked": 26940,
+        "unique_regular_inodes": 25119,
+        "allocated_file_bytes": 749850624,
+        "shared_extents": 0,
+        "elf_candidates": [
+          {
+            "path": "usr/bin/bash",
+            "bytes": 1195144,
+            "sha256": "c14c8f498f3be96f076ceb07d65dba584a86dca3c86b5dce65ed0f6cae73358d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/btrfs",
+            "bytes": 1421704,
+            "sha256": "5afe6a912a190c129c5529d2f039fc5b3b7a65ee95dc67921d5d2948d3dddaf0",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/captree",
+            "bytes": 1937136,
+            "sha256": "32a6139c6cfb48b47a7a0da815fc6734ac85fe61632680f027113f0eab32be48",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbdump",
+            "bytes": 1644800,
+            "sha256": "d07963a9759605490ad42b2322c7ff6a21f4fc66338463a13182d76b6dc9f397",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbhash",
+            "bytes": 1648864,
+            "sha256": "0c6afc0893d55aa98a598b49e47467505f5f919946f5e1554521ac2524188733",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk-5.4.1",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gpg",
+            "bytes": 1189008,
+            "sha256": "ffdf75b9133c3dcf0bf53896801b9e4559cb4f15031c9a2bf24821cdcddd7cc6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/index_usage",
+            "bytes": 1640704,
+            "sha256": "440af7a7809d0289a1d1f0899a6754f9defee1ece2f3b0b37b86c8073f831d26",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.bfd",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.gold",
+            "bytes": 2324744,
+            "sha256": "4119c9f1e8a60bb685885181794e0c176fed394346921065bef433d2898288ae",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ldconfig",
+            "bytes": 1243208,
+            "sha256": "c76a53e9bb7d141492dc974e591cc2595d43bc015ab537e81b2547eebb3d39e3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showdb",
+            "bytes": 1661248,
+            "sha256": "8573e80006824181b23dcd87cd36f086a9e03524652cfb0c071dc1ffbdda165b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showstat4",
+            "bytes": 1636608,
+            "sha256": "3422f88a78de098ba76636528fa611be5a802c7f3175e7b137be10467867f59f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqldiff",
+            "bytes": 1677536,
+            "sha256": "271e3c4c16ba19cdd95b55bf1635fdd3699f51fad908f19056a8107a65c2ee09",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3",
+            "bytes": 2130656,
+            "sha256": "a383f6a1fe7cda0f461d7848cfa312e53d67e8dd0f2621ff19a721270df74d81",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_expert",
+            "bytes": 1665480,
+            "sha256": "2ad5b7f422dfafd05581ea55e5b4a49b6280e7ab95cadb1fc5d5435f60c2abf3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_rsync",
+            "bytes": 1599808,
+            "sha256": "f3e9ad23bd667832919020a33754f69248278c22d4572825397610e4d759ff9b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/xgettext",
+            "bytes": 13607528,
+            "sha256": "24d748b361ce8eac52f397678ac94234b523ce9e8a2546fc3278814a9cc70784",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/gprofng/libgp-collector.so",
+            "bytes": 1127240,
+            "sha256": "ca2edd8d6c8dda43cc948c904d26316770018e995ed7a41b9585027f06efb76b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libasan.so.8.0.0",
+            "bytes": 1970792,
+            "sha256": "01e4a9dbaab305a2e9574a4d85dc4f95487bd333abf11cbbfe4cfe104157c8c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libbfd-2.47.so",
+            "bytes": 1364584,
+            "sha256": "730687d04c52164e1386a4e82c587e829747bc375f84fd06de79250655d159fa",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libc.so.6",
+            "bytes": 2215072,
+            "sha256": "02c8c3d06180beee9c7d0392aa85736c7d19f274a81e7f8f0b3d9e28e0641524",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcrypto.so.3",
+            "bytes": 5926392,
+            "sha256": "a75a864dcda6ef9e4dc29fad4b7988ca832b904c3915a63c920062c40763dae1",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcurl.so.4.8.0",
+            "bytes": 1091176,
+            "sha256": "d53ce30e973b9120643dfb53b9c99986330f28d2db245189e6bda6bc1aa55bdd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgcrypt.so.20.8.9",
+            "bytes": 1767864,
+            "sha256": "3b6d1189d37c612da66e5b2552c90188a50df6218dbe2525638a95ab51af1473",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgfortran.so.5.0.0",
+            "bytes": 3681264,
+            "sha256": "4a9cd191a0863e623d9877da4df52432412873ae9eebe0becc72cf8d18ef1c08",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgio-2.0.so.0.9000.1",
+            "bytes": 1969504,
+            "sha256": "b38001cca69b2890a22fd3f6590bea7392bf489009de7ddfb6dbf296a133685e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libglib-2.0.so.0.9000.1",
+            "bytes": 1457576,
+            "sha256": "1e8739af791b1a2f1f01fc7c6f3b9158888387d5a816195475e406438d41b688",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgnutls.so.30.42.0",
+            "bytes": 2254952,
+            "sha256": "34fb5f09418585343efa342a2a4b57904544d6f562d7179a5eeaca60b0abd0c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgprofng.so.0.0.0",
+            "bytes": 2300576,
+            "sha256": "36182c2a18d276f52fe9a50086b26ea9bcf8e5aec56eb8d606f507f3799ecb6e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicudata.so.78.3",
+            "bytes": 33112920,
+            "sha256": "d72003b08760852bee4c80cff32c1e6248ae6b1fda5bd313482733a4d5e70dc9",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicui18n.so.78.3",
+            "bytes": 3721776,
+            "sha256": "60d7ad7b3f8e6e1c42895c03379954ee46008948dcdb2e556fa8e4c875742c60",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicuuc.so.78.3",
+            "bytes": 2144304,
+            "sha256": "c99f0dd0c797c07f9ab64413d36c595393cdded6fa04cc4edd6f6a521fd155ca",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto-fips.so.1.9.1",
+            "bytes": 2853504,
+            "sha256": "fed4a8ee21fdde83585a2846ac359ebbcb4691c36baf19db508d0085fd2f0256",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto.so.1.9.1",
+            "bytes": 2845224,
+            "sha256": "6f7c44d5854ca7af86556bb300efdda8346f316e652d3f7e7ee0bf5cf55b41c4",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libm.so.6",
+            "bytes": 1268336,
+            "sha256": "965106704753eefe8c31ae7da6daba3ead3d18c52b19b5fcc41178bcc4aa999d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libp11-kit.so.0.4.11",
+            "bytes": 1708192,
+            "sha256": "1b87739328f0b11906554145ab4e506281644d94a5b6195cd11594aad5e310b8",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libpython3.14.so.1.0",
+            "bytes": 6344456,
+            "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsqlite3.so.3.54.0",
+            "bytes": 1697864,
+            "sha256": "758544266d5060aff683efcc94ee9abf2625c6ff9d02b70bb6d1296e0ee9128f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libstdc++.so.6.0.36",
+            "bytes": 2939928,
+            "sha256": "f5fc7380f2ae46fa4053a64be04e7b98109f1066a4bbfff3c37042488aa0be0e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsystemd.so.0.45.0",
+            "bytes": 1345056,
+            "sha256": "1666c3ef4591827c32abb1f62d7556656c038cd2078b0a8ded73de9a33442802",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libtsan.so.2.0.0",
+            "bytes": 1524320,
+            "sha256": "396d02953faa5c79d1dba6066cceb10e7c491f57c1cd8ffdfff61d34490ef48b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libunistring.so.5.2.1",
+            "bytes": 1992752,
+            "sha256": "ba7a4afb4b6f823d64ebe324416e182cd42a981dba049e3ddcfa1c9af03cb7f3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libxml2.so.16.1.4",
+            "bytes": 1326024,
+            "sha256": "5ff12cee1e6992555ba638190cce88a0aab40acad51d5c826f6487888a0160ab",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/pkcs11/p11-kit-client.so",
+            "bytes": 1323880,
+            "sha256": "cfb2eeac889f23bfa12256f5289d1591e36e43a8ceb40d9aec2eb4c11d946077",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-core-262.1-1.so",
+            "bytes": 2988368,
+            "sha256": "7d072ccb5b4181bcac26d76a5a1110050c1fe33a8b9f443a66907decd71da477",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-shared-262.1-1.so",
+            "bytes": 6297480,
+            "sha256": "35062156eb1f1bfa478fa7477714cec702d990a15fa825790c58a3f6a63f6f05",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/systemd-networkd",
+            "bytes": 2099864,
+            "sha256": "6fb7506dae0b662de931d7b24cd54e1bb462e5403b6d2eea88744a367844aedc",
+            "encoded_extent_max": 131072
+          }
+        ]
+      },
+      "final_layout": {
+        "regular_files_checked": 26940,
+        "unique_regular_inodes": 25119,
+        "allocated_file_bytes": 749850624,
+        "shared_extents": 0,
+        "elf_candidates": [
+          {
+            "path": "usr/bin/bash",
+            "bytes": 1195144,
+            "sha256": "c14c8f498f3be96f076ceb07d65dba584a86dca3c86b5dce65ed0f6cae73358d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/btrfs",
+            "bytes": 1421704,
+            "sha256": "5afe6a912a190c129c5529d2f039fc5b3b7a65ee95dc67921d5d2948d3dddaf0",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/captree",
+            "bytes": 1937136,
+            "sha256": "32a6139c6cfb48b47a7a0da815fc6734ac85fe61632680f027113f0eab32be48",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbdump",
+            "bytes": 1644800,
+            "sha256": "d07963a9759605490ad42b2322c7ff6a21f4fc66338463a13182d76b6dc9f397",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbhash",
+            "bytes": 1648864,
+            "sha256": "0c6afc0893d55aa98a598b49e47467505f5f919946f5e1554521ac2524188733",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk-5.4.1",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gpg",
+            "bytes": 1189008,
+            "sha256": "ffdf75b9133c3dcf0bf53896801b9e4559cb4f15031c9a2bf24821cdcddd7cc6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/index_usage",
+            "bytes": 1640704,
+            "sha256": "440af7a7809d0289a1d1f0899a6754f9defee1ece2f3b0b37b86c8073f831d26",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.bfd",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.gold",
+            "bytes": 2324744,
+            "sha256": "4119c9f1e8a60bb685885181794e0c176fed394346921065bef433d2898288ae",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ldconfig",
+            "bytes": 1243208,
+            "sha256": "c76a53e9bb7d141492dc974e591cc2595d43bc015ab537e81b2547eebb3d39e3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showdb",
+            "bytes": 1661248,
+            "sha256": "8573e80006824181b23dcd87cd36f086a9e03524652cfb0c071dc1ffbdda165b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showstat4",
+            "bytes": 1636608,
+            "sha256": "3422f88a78de098ba76636528fa611be5a802c7f3175e7b137be10467867f59f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqldiff",
+            "bytes": 1677536,
+            "sha256": "271e3c4c16ba19cdd95b55bf1635fdd3699f51fad908f19056a8107a65c2ee09",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3",
+            "bytes": 2130656,
+            "sha256": "a383f6a1fe7cda0f461d7848cfa312e53d67e8dd0f2621ff19a721270df74d81",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_expert",
+            "bytes": 1665480,
+            "sha256": "2ad5b7f422dfafd05581ea55e5b4a49b6280e7ab95cadb1fc5d5435f60c2abf3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_rsync",
+            "bytes": 1599808,
+            "sha256": "f3e9ad23bd667832919020a33754f69248278c22d4572825397610e4d759ff9b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/xgettext",
+            "bytes": 13607528,
+            "sha256": "24d748b361ce8eac52f397678ac94234b523ce9e8a2546fc3278814a9cc70784",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/gprofng/libgp-collector.so",
+            "bytes": 1127240,
+            "sha256": "ca2edd8d6c8dda43cc948c904d26316770018e995ed7a41b9585027f06efb76b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libasan.so.8.0.0",
+            "bytes": 1970792,
+            "sha256": "01e4a9dbaab305a2e9574a4d85dc4f95487bd333abf11cbbfe4cfe104157c8c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libbfd-2.47.so",
+            "bytes": 1364584,
+            "sha256": "730687d04c52164e1386a4e82c587e829747bc375f84fd06de79250655d159fa",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libc.so.6",
+            "bytes": 2215072,
+            "sha256": "02c8c3d06180beee9c7d0392aa85736c7d19f274a81e7f8f0b3d9e28e0641524",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcrypto.so.3",
+            "bytes": 5926392,
+            "sha256": "a75a864dcda6ef9e4dc29fad4b7988ca832b904c3915a63c920062c40763dae1",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcurl.so.4.8.0",
+            "bytes": 1091176,
+            "sha256": "d53ce30e973b9120643dfb53b9c99986330f28d2db245189e6bda6bc1aa55bdd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgcrypt.so.20.8.9",
+            "bytes": 1767864,
+            "sha256": "3b6d1189d37c612da66e5b2552c90188a50df6218dbe2525638a95ab51af1473",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgfortran.so.5.0.0",
+            "bytes": 3681264,
+            "sha256": "4a9cd191a0863e623d9877da4df52432412873ae9eebe0becc72cf8d18ef1c08",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgio-2.0.so.0.9000.1",
+            "bytes": 1969504,
+            "sha256": "b38001cca69b2890a22fd3f6590bea7392bf489009de7ddfb6dbf296a133685e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libglib-2.0.so.0.9000.1",
+            "bytes": 1457576,
+            "sha256": "1e8739af791b1a2f1f01fc7c6f3b9158888387d5a816195475e406438d41b688",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgnutls.so.30.42.0",
+            "bytes": 2254952,
+            "sha256": "34fb5f09418585343efa342a2a4b57904544d6f562d7179a5eeaca60b0abd0c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgprofng.so.0.0.0",
+            "bytes": 2300576,
+            "sha256": "36182c2a18d276f52fe9a50086b26ea9bcf8e5aec56eb8d606f507f3799ecb6e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicudata.so.78.3",
+            "bytes": 33112920,
+            "sha256": "d72003b08760852bee4c80cff32c1e6248ae6b1fda5bd313482733a4d5e70dc9",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicui18n.so.78.3",
+            "bytes": 3721776,
+            "sha256": "60d7ad7b3f8e6e1c42895c03379954ee46008948dcdb2e556fa8e4c875742c60",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicuuc.so.78.3",
+            "bytes": 2144304,
+            "sha256": "c99f0dd0c797c07f9ab64413d36c595393cdded6fa04cc4edd6f6a521fd155ca",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto-fips.so.1.9.1",
+            "bytes": 2853504,
+            "sha256": "fed4a8ee21fdde83585a2846ac359ebbcb4691c36baf19db508d0085fd2f0256",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto.so.1.9.1",
+            "bytes": 2845224,
+            "sha256": "6f7c44d5854ca7af86556bb300efdda8346f316e652d3f7e7ee0bf5cf55b41c4",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libm.so.6",
+            "bytes": 1268336,
+            "sha256": "965106704753eefe8c31ae7da6daba3ead3d18c52b19b5fcc41178bcc4aa999d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libp11-kit.so.0.4.11",
+            "bytes": 1708192,
+            "sha256": "1b87739328f0b11906554145ab4e506281644d94a5b6195cd11594aad5e310b8",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libpython3.14.so.1.0",
+            "bytes": 6344456,
+            "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsqlite3.so.3.54.0",
+            "bytes": 1697864,
+            "sha256": "758544266d5060aff683efcc94ee9abf2625c6ff9d02b70bb6d1296e0ee9128f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libstdc++.so.6.0.36",
+            "bytes": 2939928,
+            "sha256": "f5fc7380f2ae46fa4053a64be04e7b98109f1066a4bbfff3c37042488aa0be0e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsystemd.so.0.45.0",
+            "bytes": 1345056,
+            "sha256": "1666c3ef4591827c32abb1f62d7556656c038cd2078b0a8ded73de9a33442802",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libtsan.so.2.0.0",
+            "bytes": 1524320,
+            "sha256": "396d02953faa5c79d1dba6066cceb10e7c491f57c1cd8ffdfff61d34490ef48b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libunistring.so.5.2.1",
+            "bytes": 1992752,
+            "sha256": "ba7a4afb4b6f823d64ebe324416e182cd42a981dba049e3ddcfa1c9af03cb7f3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libxml2.so.16.1.4",
+            "bytes": 1326024,
+            "sha256": "5ff12cee1e6992555ba638190cce88a0aab40acad51d5c826f6487888a0160ab",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/pkcs11/p11-kit-client.so",
+            "bytes": 1323880,
+            "sha256": "cfb2eeac889f23bfa12256f5289d1591e36e43a8ceb40d9aec2eb4c11d946077",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-core-262.1-1.so",
+            "bytes": 2988368,
+            "sha256": "7d072ccb5b4181bcac26d76a5a1110050c1fe33a8b9f443a66907decd71da477",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-shared-262.1-1.so",
+            "bytes": 6297480,
+            "sha256": "35062156eb1f1bfa478fa7477714cec702d990a15fa825790c58a3f6a63f6f05",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/systemd-networkd",
+            "bytes": 2099864,
+            "sha256": "6fb7506dae0b662de931d7b24cd54e1bb462e5403b6d2eea88744a367844aedc",
+            "encoded_extent_max": 131072
+          }
+        ]
+      },
+      "maintenance": null,
+      "image_fingerprint": {
+        "sha256": "f21a1bc24feaa889c8762e90c663847f1c75d79101c926dbf6b1c614c1a8d5ee",
+        "data_ranges": 22,
+        "data_bytes": 416661504,
+        "virtual_bytes": 85899345920
+      },
+      "outer_nocow": true,
+      "outer_encoded_or_shared_extents": 0,
+      "allocated_image_bytes": 416661504,
+      "read_only_baseline": true
+    },
+    "B1": {
+      "filesystem_uuid": "7b627bb0-750a-4f16-9f47-b5c738bd9725",
+      "tree_sha256": "88cc8812f2d142c35987ff651a5baca7a6bfdeb98c504e55859fc99f71dacc2f",
+      "durable_nodes": 36650,
+      "logical_file_bytes": 694670218,
+      "initial_layout": {
+        "regular_files_checked": 26940,
+        "unique_regular_inodes": 25119,
+        "allocated_file_bytes": 749850624,
+        "shared_extents": 0,
+        "elf_candidates": [
+          {
+            "path": "usr/bin/bash",
+            "bytes": 1195144,
+            "sha256": "c14c8f498f3be96f076ceb07d65dba584a86dca3c86b5dce65ed0f6cae73358d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/btrfs",
+            "bytes": 1421704,
+            "sha256": "5afe6a912a190c129c5529d2f039fc5b3b7a65ee95dc67921d5d2948d3dddaf0",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/captree",
+            "bytes": 1937136,
+            "sha256": "32a6139c6cfb48b47a7a0da815fc6734ac85fe61632680f027113f0eab32be48",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbdump",
+            "bytes": 1644800,
+            "sha256": "d07963a9759605490ad42b2322c7ff6a21f4fc66338463a13182d76b6dc9f397",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbhash",
+            "bytes": 1648864,
+            "sha256": "0c6afc0893d55aa98a598b49e47467505f5f919946f5e1554521ac2524188733",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk-5.4.1",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gpg",
+            "bytes": 1189008,
+            "sha256": "ffdf75b9133c3dcf0bf53896801b9e4559cb4f15031c9a2bf24821cdcddd7cc6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/index_usage",
+            "bytes": 1640704,
+            "sha256": "440af7a7809d0289a1d1f0899a6754f9defee1ece2f3b0b37b86c8073f831d26",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.bfd",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.gold",
+            "bytes": 2324744,
+            "sha256": "4119c9f1e8a60bb685885181794e0c176fed394346921065bef433d2898288ae",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ldconfig",
+            "bytes": 1243208,
+            "sha256": "c76a53e9bb7d141492dc974e591cc2595d43bc015ab537e81b2547eebb3d39e3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showdb",
+            "bytes": 1661248,
+            "sha256": "8573e80006824181b23dcd87cd36f086a9e03524652cfb0c071dc1ffbdda165b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showstat4",
+            "bytes": 1636608,
+            "sha256": "3422f88a78de098ba76636528fa611be5a802c7f3175e7b137be10467867f59f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqldiff",
+            "bytes": 1677536,
+            "sha256": "271e3c4c16ba19cdd95b55bf1635fdd3699f51fad908f19056a8107a65c2ee09",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3",
+            "bytes": 2130656,
+            "sha256": "a383f6a1fe7cda0f461d7848cfa312e53d67e8dd0f2621ff19a721270df74d81",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_expert",
+            "bytes": 1665480,
+            "sha256": "2ad5b7f422dfafd05581ea55e5b4a49b6280e7ab95cadb1fc5d5435f60c2abf3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_rsync",
+            "bytes": 1599808,
+            "sha256": "f3e9ad23bd667832919020a33754f69248278c22d4572825397610e4d759ff9b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/xgettext",
+            "bytes": 13607528,
+            "sha256": "24d748b361ce8eac52f397678ac94234b523ce9e8a2546fc3278814a9cc70784",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/gprofng/libgp-collector.so",
+            "bytes": 1127240,
+            "sha256": "ca2edd8d6c8dda43cc948c904d26316770018e995ed7a41b9585027f06efb76b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libasan.so.8.0.0",
+            "bytes": 1970792,
+            "sha256": "01e4a9dbaab305a2e9574a4d85dc4f95487bd333abf11cbbfe4cfe104157c8c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libbfd-2.47.so",
+            "bytes": 1364584,
+            "sha256": "730687d04c52164e1386a4e82c587e829747bc375f84fd06de79250655d159fa",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libc.so.6",
+            "bytes": 2215072,
+            "sha256": "02c8c3d06180beee9c7d0392aa85736c7d19f274a81e7f8f0b3d9e28e0641524",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcrypto.so.3",
+            "bytes": 5926392,
+            "sha256": "a75a864dcda6ef9e4dc29fad4b7988ca832b904c3915a63c920062c40763dae1",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcurl.so.4.8.0",
+            "bytes": 1091176,
+            "sha256": "d53ce30e973b9120643dfb53b9c99986330f28d2db245189e6bda6bc1aa55bdd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgcrypt.so.20.8.9",
+            "bytes": 1767864,
+            "sha256": "3b6d1189d37c612da66e5b2552c90188a50df6218dbe2525638a95ab51af1473",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgfortran.so.5.0.0",
+            "bytes": 3681264,
+            "sha256": "4a9cd191a0863e623d9877da4df52432412873ae9eebe0becc72cf8d18ef1c08",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgio-2.0.so.0.9000.1",
+            "bytes": 1969504,
+            "sha256": "b38001cca69b2890a22fd3f6590bea7392bf489009de7ddfb6dbf296a133685e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libglib-2.0.so.0.9000.1",
+            "bytes": 1457576,
+            "sha256": "1e8739af791b1a2f1f01fc7c6f3b9158888387d5a816195475e406438d41b688",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgnutls.so.30.42.0",
+            "bytes": 2254952,
+            "sha256": "34fb5f09418585343efa342a2a4b57904544d6f562d7179a5eeaca60b0abd0c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgprofng.so.0.0.0",
+            "bytes": 2300576,
+            "sha256": "36182c2a18d276f52fe9a50086b26ea9bcf8e5aec56eb8d606f507f3799ecb6e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicudata.so.78.3",
+            "bytes": 33112920,
+            "sha256": "d72003b08760852bee4c80cff32c1e6248ae6b1fda5bd313482733a4d5e70dc9",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicui18n.so.78.3",
+            "bytes": 3721776,
+            "sha256": "60d7ad7b3f8e6e1c42895c03379954ee46008948dcdb2e556fa8e4c875742c60",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicuuc.so.78.3",
+            "bytes": 2144304,
+            "sha256": "c99f0dd0c797c07f9ab64413d36c595393cdded6fa04cc4edd6f6a521fd155ca",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto-fips.so.1.9.1",
+            "bytes": 2853504,
+            "sha256": "fed4a8ee21fdde83585a2846ac359ebbcb4691c36baf19db508d0085fd2f0256",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto.so.1.9.1",
+            "bytes": 2845224,
+            "sha256": "6f7c44d5854ca7af86556bb300efdda8346f316e652d3f7e7ee0bf5cf55b41c4",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libm.so.6",
+            "bytes": 1268336,
+            "sha256": "965106704753eefe8c31ae7da6daba3ead3d18c52b19b5fcc41178bcc4aa999d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libp11-kit.so.0.4.11",
+            "bytes": 1708192,
+            "sha256": "1b87739328f0b11906554145ab4e506281644d94a5b6195cd11594aad5e310b8",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libpython3.14.so.1.0",
+            "bytes": 6344456,
+            "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsqlite3.so.3.54.0",
+            "bytes": 1697864,
+            "sha256": "758544266d5060aff683efcc94ee9abf2625c6ff9d02b70bb6d1296e0ee9128f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libstdc++.so.6.0.36",
+            "bytes": 2939928,
+            "sha256": "f5fc7380f2ae46fa4053a64be04e7b98109f1066a4bbfff3c37042488aa0be0e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsystemd.so.0.45.0",
+            "bytes": 1345056,
+            "sha256": "1666c3ef4591827c32abb1f62d7556656c038cd2078b0a8ded73de9a33442802",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libtsan.so.2.0.0",
+            "bytes": 1524320,
+            "sha256": "396d02953faa5c79d1dba6066cceb10e7c491f57c1cd8ffdfff61d34490ef48b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libunistring.so.5.2.1",
+            "bytes": 1992752,
+            "sha256": "ba7a4afb4b6f823d64ebe324416e182cd42a981dba049e3ddcfa1c9af03cb7f3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libxml2.so.16.1.4",
+            "bytes": 1326024,
+            "sha256": "5ff12cee1e6992555ba638190cce88a0aab40acad51d5c826f6487888a0160ab",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/pkcs11/p11-kit-client.so",
+            "bytes": 1323880,
+            "sha256": "cfb2eeac889f23bfa12256f5289d1591e36e43a8ceb40d9aec2eb4c11d946077",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-core-262.1-1.so",
+            "bytes": 2988368,
+            "sha256": "7d072ccb5b4181bcac26d76a5a1110050c1fe33a8b9f443a66907decd71da477",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-shared-262.1-1.so",
+            "bytes": 6297480,
+            "sha256": "35062156eb1f1bfa478fa7477714cec702d990a15fa825790c58a3f6a63f6f05",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/systemd-networkd",
+            "bytes": 2099864,
+            "sha256": "6fb7506dae0b662de931d7b24cd54e1bb462e5403b6d2eea88744a367844aedc",
+            "encoded_extent_max": 131072
+          }
+        ]
+      },
+      "final_layout": {
+        "regular_files_checked": 26940,
+        "unique_regular_inodes": 25119,
+        "allocated_file_bytes": 749850624,
+        "shared_extents": 0,
+        "elf_candidates": [
+          {
+            "path": "usr/bin/bash",
+            "bytes": 1195144,
+            "sha256": "c14c8f498f3be96f076ceb07d65dba584a86dca3c86b5dce65ed0f6cae73358d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/btrfs",
+            "bytes": 1421704,
+            "sha256": "5afe6a912a190c129c5529d2f039fc5b3b7a65ee95dc67921d5d2948d3dddaf0",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/captree",
+            "bytes": 1937136,
+            "sha256": "32a6139c6cfb48b47a7a0da815fc6734ac85fe61632680f027113f0eab32be48",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbdump",
+            "bytes": 1644800,
+            "sha256": "d07963a9759605490ad42b2322c7ff6a21f4fc66338463a13182d76b6dc9f397",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbhash",
+            "bytes": 1648864,
+            "sha256": "0c6afc0893d55aa98a598b49e47467505f5f919946f5e1554521ac2524188733",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk-5.4.1",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gpg",
+            "bytes": 1189008,
+            "sha256": "ffdf75b9133c3dcf0bf53896801b9e4559cb4f15031c9a2bf24821cdcddd7cc6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/index_usage",
+            "bytes": 1640704,
+            "sha256": "440af7a7809d0289a1d1f0899a6754f9defee1ece2f3b0b37b86c8073f831d26",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.bfd",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.gold",
+            "bytes": 2324744,
+            "sha256": "4119c9f1e8a60bb685885181794e0c176fed394346921065bef433d2898288ae",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ldconfig",
+            "bytes": 1243208,
+            "sha256": "c76a53e9bb7d141492dc974e591cc2595d43bc015ab537e81b2547eebb3d39e3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showdb",
+            "bytes": 1661248,
+            "sha256": "8573e80006824181b23dcd87cd36f086a9e03524652cfb0c071dc1ffbdda165b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showstat4",
+            "bytes": 1636608,
+            "sha256": "3422f88a78de098ba76636528fa611be5a802c7f3175e7b137be10467867f59f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqldiff",
+            "bytes": 1677536,
+            "sha256": "271e3c4c16ba19cdd95b55bf1635fdd3699f51fad908f19056a8107a65c2ee09",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3",
+            "bytes": 2130656,
+            "sha256": "a383f6a1fe7cda0f461d7848cfa312e53d67e8dd0f2621ff19a721270df74d81",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_expert",
+            "bytes": 1665480,
+            "sha256": "2ad5b7f422dfafd05581ea55e5b4a49b6280e7ab95cadb1fc5d5435f60c2abf3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_rsync",
+            "bytes": 1599808,
+            "sha256": "f3e9ad23bd667832919020a33754f69248278c22d4572825397610e4d759ff9b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/xgettext",
+            "bytes": 13607528,
+            "sha256": "24d748b361ce8eac52f397678ac94234b523ce9e8a2546fc3278814a9cc70784",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/gprofng/libgp-collector.so",
+            "bytes": 1127240,
+            "sha256": "ca2edd8d6c8dda43cc948c904d26316770018e995ed7a41b9585027f06efb76b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libasan.so.8.0.0",
+            "bytes": 1970792,
+            "sha256": "01e4a9dbaab305a2e9574a4d85dc4f95487bd333abf11cbbfe4cfe104157c8c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libbfd-2.47.so",
+            "bytes": 1364584,
+            "sha256": "730687d04c52164e1386a4e82c587e829747bc375f84fd06de79250655d159fa",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libc.so.6",
+            "bytes": 2215072,
+            "sha256": "02c8c3d06180beee9c7d0392aa85736c7d19f274a81e7f8f0b3d9e28e0641524",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcrypto.so.3",
+            "bytes": 5926392,
+            "sha256": "a75a864dcda6ef9e4dc29fad4b7988ca832b904c3915a63c920062c40763dae1",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcurl.so.4.8.0",
+            "bytes": 1091176,
+            "sha256": "d53ce30e973b9120643dfb53b9c99986330f28d2db245189e6bda6bc1aa55bdd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgcrypt.so.20.8.9",
+            "bytes": 1767864,
+            "sha256": "3b6d1189d37c612da66e5b2552c90188a50df6218dbe2525638a95ab51af1473",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgfortran.so.5.0.0",
+            "bytes": 3681264,
+            "sha256": "4a9cd191a0863e623d9877da4df52432412873ae9eebe0becc72cf8d18ef1c08",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgio-2.0.so.0.9000.1",
+            "bytes": 1969504,
+            "sha256": "b38001cca69b2890a22fd3f6590bea7392bf489009de7ddfb6dbf296a133685e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libglib-2.0.so.0.9000.1",
+            "bytes": 1457576,
+            "sha256": "1e8739af791b1a2f1f01fc7c6f3b9158888387d5a816195475e406438d41b688",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgnutls.so.30.42.0",
+            "bytes": 2254952,
+            "sha256": "34fb5f09418585343efa342a2a4b57904544d6f562d7179a5eeaca60b0abd0c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgprofng.so.0.0.0",
+            "bytes": 2300576,
+            "sha256": "36182c2a18d276f52fe9a50086b26ea9bcf8e5aec56eb8d606f507f3799ecb6e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicudata.so.78.3",
+            "bytes": 33112920,
+            "sha256": "d72003b08760852bee4c80cff32c1e6248ae6b1fda5bd313482733a4d5e70dc9",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicui18n.so.78.3",
+            "bytes": 3721776,
+            "sha256": "60d7ad7b3f8e6e1c42895c03379954ee46008948dcdb2e556fa8e4c875742c60",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicuuc.so.78.3",
+            "bytes": 2144304,
+            "sha256": "c99f0dd0c797c07f9ab64413d36c595393cdded6fa04cc4edd6f6a521fd155ca",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto-fips.so.1.9.1",
+            "bytes": 2853504,
+            "sha256": "fed4a8ee21fdde83585a2846ac359ebbcb4691c36baf19db508d0085fd2f0256",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto.so.1.9.1",
+            "bytes": 2845224,
+            "sha256": "6f7c44d5854ca7af86556bb300efdda8346f316e652d3f7e7ee0bf5cf55b41c4",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libm.so.6",
+            "bytes": 1268336,
+            "sha256": "965106704753eefe8c31ae7da6daba3ead3d18c52b19b5fcc41178bcc4aa999d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libp11-kit.so.0.4.11",
+            "bytes": 1708192,
+            "sha256": "1b87739328f0b11906554145ab4e506281644d94a5b6195cd11594aad5e310b8",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libpython3.14.so.1.0",
+            "bytes": 6344456,
+            "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsqlite3.so.3.54.0",
+            "bytes": 1697864,
+            "sha256": "758544266d5060aff683efcc94ee9abf2625c6ff9d02b70bb6d1296e0ee9128f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libstdc++.so.6.0.36",
+            "bytes": 2939928,
+            "sha256": "f5fc7380f2ae46fa4053a64be04e7b98109f1066a4bbfff3c37042488aa0be0e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsystemd.so.0.45.0",
+            "bytes": 1345056,
+            "sha256": "1666c3ef4591827c32abb1f62d7556656c038cd2078b0a8ded73de9a33442802",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libtsan.so.2.0.0",
+            "bytes": 1524320,
+            "sha256": "396d02953faa5c79d1dba6066cceb10e7c491f57c1cd8ffdfff61d34490ef48b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libunistring.so.5.2.1",
+            "bytes": 1992752,
+            "sha256": "ba7a4afb4b6f823d64ebe324416e182cd42a981dba049e3ddcfa1c9af03cb7f3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libxml2.so.16.1.4",
+            "bytes": 1326024,
+            "sha256": "5ff12cee1e6992555ba638190cce88a0aab40acad51d5c826f6487888a0160ab",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/pkcs11/p11-kit-client.so",
+            "bytes": 1323880,
+            "sha256": "cfb2eeac889f23bfa12256f5289d1591e36e43a8ceb40d9aec2eb4c11d946077",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-core-262.1-1.so",
+            "bytes": 2988368,
+            "sha256": "7d072ccb5b4181bcac26d76a5a1110050c1fe33a8b9f443a66907decd71da477",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-shared-262.1-1.so",
+            "bytes": 6297480,
+            "sha256": "35062156eb1f1bfa478fa7477714cec702d990a15fa825790c58a3f6a63f6f05",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/systemd-networkd",
+            "bytes": 2099864,
+            "sha256": "6fb7506dae0b662de931d7b24cd54e1bb462e5403b6d2eea88744a367844aedc",
+            "encoded_extent_max": 131072
+          }
+        ]
+      },
+      "maintenance": null,
+      "image_fingerprint": {
+        "sha256": "9ed77e81d3d7afb7846e0b420808dd18a5f38b22e6a728b3d68db1bb2f817a1d",
+        "data_ranges": 23,
+        "data_bytes": 411930624,
+        "virtual_bytes": 85899345920
+      },
+      "outer_nocow": true,
+      "outer_encoded_or_shared_extents": 0,
+      "allocated_image_bytes": 411930624,
+      "read_only_baseline": true
+    },
+    "B2": {
+      "filesystem_uuid": "2dcc0d0e-05d0-4859-adfd-1b54799ec8d0",
+      "tree_sha256": "88cc8812f2d142c35987ff651a5baca7a6bfdeb98c504e55859fc99f71dacc2f",
+      "durable_nodes": 36650,
+      "logical_file_bytes": 694670218,
+      "initial_layout": {
+        "regular_files_checked": 26940,
+        "unique_regular_inodes": 25119,
+        "allocated_file_bytes": 749850624,
+        "shared_extents": 0,
+        "elf_candidates": [
+          {
+            "path": "usr/bin/bash",
+            "bytes": 1195144,
+            "sha256": "c14c8f498f3be96f076ceb07d65dba584a86dca3c86b5dce65ed0f6cae73358d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/btrfs",
+            "bytes": 1421704,
+            "sha256": "5afe6a912a190c129c5529d2f039fc5b3b7a65ee95dc67921d5d2948d3dddaf0",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/captree",
+            "bytes": 1937136,
+            "sha256": "32a6139c6cfb48b47a7a0da815fc6734ac85fe61632680f027113f0eab32be48",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbdump",
+            "bytes": 1644800,
+            "sha256": "d07963a9759605490ad42b2322c7ff6a21f4fc66338463a13182d76b6dc9f397",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/dbhash",
+            "bytes": 1648864,
+            "sha256": "0c6afc0893d55aa98a598b49e47467505f5f919946f5e1554521ac2524188733",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk-5.4.1",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gpg",
+            "bytes": 1189008,
+            "sha256": "ffdf75b9133c3dcf0bf53896801b9e4559cb4f15031c9a2bf24821cdcddd7cc6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/index_usage",
+            "bytes": 1640704,
+            "sha256": "440af7a7809d0289a1d1f0899a6754f9defee1ece2f3b0b37b86c8073f831d26",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.bfd",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.gold",
+            "bytes": 2324744,
+            "sha256": "4119c9f1e8a60bb685885181794e0c176fed394346921065bef433d2898288ae",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ldconfig",
+            "bytes": 1243208,
+            "sha256": "c76a53e9bb7d141492dc974e591cc2595d43bc015ab537e81b2547eebb3d39e3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showdb",
+            "bytes": 1661248,
+            "sha256": "8573e80006824181b23dcd87cd36f086a9e03524652cfb0c071dc1ffbdda165b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/showstat4",
+            "bytes": 1636608,
+            "sha256": "3422f88a78de098ba76636528fa611be5a802c7f3175e7b137be10467867f59f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqldiff",
+            "bytes": 1677536,
+            "sha256": "271e3c4c16ba19cdd95b55bf1635fdd3699f51fad908f19056a8107a65c2ee09",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3",
+            "bytes": 2130656,
+            "sha256": "a383f6a1fe7cda0f461d7848cfa312e53d67e8dd0f2621ff19a721270df74d81",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_expert",
+            "bytes": 1665480,
+            "sha256": "2ad5b7f422dfafd05581ea55e5b4a49b6280e7ab95cadb1fc5d5435f60c2abf3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/sqlite3_rsync",
+            "bytes": 1599808,
+            "sha256": "f3e9ad23bd667832919020a33754f69248278c22d4572825397610e4d759ff9b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/xgettext",
+            "bytes": 13607528,
+            "sha256": "24d748b361ce8eac52f397678ac94234b523ce9e8a2546fc3278814a9cc70784",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/gprofng/libgp-collector.so",
+            "bytes": 1127240,
+            "sha256": "ca2edd8d6c8dda43cc948c904d26316770018e995ed7a41b9585027f06efb76b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libasan.so.8.0.0",
+            "bytes": 1970792,
+            "sha256": "01e4a9dbaab305a2e9574a4d85dc4f95487bd333abf11cbbfe4cfe104157c8c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libbfd-2.47.so",
+            "bytes": 1364584,
+            "sha256": "730687d04c52164e1386a4e82c587e829747bc375f84fd06de79250655d159fa",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libc.so.6",
+            "bytes": 2215072,
+            "sha256": "02c8c3d06180beee9c7d0392aa85736c7d19f274a81e7f8f0b3d9e28e0641524",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcrypto.so.3",
+            "bytes": 5926392,
+            "sha256": "a75a864dcda6ef9e4dc29fad4b7988ca832b904c3915a63c920062c40763dae1",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libcurl.so.4.8.0",
+            "bytes": 1091176,
+            "sha256": "d53ce30e973b9120643dfb53b9c99986330f28d2db245189e6bda6bc1aa55bdd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgcrypt.so.20.8.9",
+            "bytes": 1767864,
+            "sha256": "3b6d1189d37c612da66e5b2552c90188a50df6218dbe2525638a95ab51af1473",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgfortran.so.5.0.0",
+            "bytes": 3681264,
+            "sha256": "4a9cd191a0863e623d9877da4df52432412873ae9eebe0becc72cf8d18ef1c08",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgio-2.0.so.0.9000.1",
+            "bytes": 1969504,
+            "sha256": "b38001cca69b2890a22fd3f6590bea7392bf489009de7ddfb6dbf296a133685e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libglib-2.0.so.0.9000.1",
+            "bytes": 1457576,
+            "sha256": "1e8739af791b1a2f1f01fc7c6f3b9158888387d5a816195475e406438d41b688",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgnutls.so.30.42.0",
+            "bytes": 2254952,
+            "sha256": "34fb5f09418585343efa342a2a4b57904544d6f562d7179a5eeaca60b0abd0c6",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libgprofng.so.0.0.0",
+            "bytes": 2300576,
+            "sha256": "36182c2a18d276f52fe9a50086b26ea9bcf8e5aec56eb8d606f507f3799ecb6e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicudata.so.78.3",
+            "bytes": 33112920,
+            "sha256": "d72003b08760852bee4c80cff32c1e6248ae6b1fda5bd313482733a4d5e70dc9",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicui18n.so.78.3",
+            "bytes": 3721776,
+            "sha256": "60d7ad7b3f8e6e1c42895c03379954ee46008948dcdb2e556fa8e4c875742c60",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libicuuc.so.78.3",
+            "bytes": 2144304,
+            "sha256": "c99f0dd0c797c07f9ab64413d36c595393cdded6fa04cc4edd6f6a521fd155ca",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto-fips.so.1.9.1",
+            "bytes": 2853504,
+            "sha256": "fed4a8ee21fdde83585a2846ac359ebbcb4691c36baf19db508d0085fd2f0256",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libleancrypto.so.1.9.1",
+            "bytes": 2845224,
+            "sha256": "6f7c44d5854ca7af86556bb300efdda8346f316e652d3f7e7ee0bf5cf55b41c4",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libm.so.6",
+            "bytes": 1268336,
+            "sha256": "965106704753eefe8c31ae7da6daba3ead3d18c52b19b5fcc41178bcc4aa999d",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libp11-kit.so.0.4.11",
+            "bytes": 1708192,
+            "sha256": "1b87739328f0b11906554145ab4e506281644d94a5b6195cd11594aad5e310b8",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libpython3.14.so.1.0",
+            "bytes": 6344456,
+            "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsqlite3.so.3.54.0",
+            "bytes": 1697864,
+            "sha256": "758544266d5060aff683efcc94ee9abf2625c6ff9d02b70bb6d1296e0ee9128f",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libstdc++.so.6.0.36",
+            "bytes": 2939928,
+            "sha256": "f5fc7380f2ae46fa4053a64be04e7b98109f1066a4bbfff3c37042488aa0be0e",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libsystemd.so.0.45.0",
+            "bytes": 1345056,
+            "sha256": "1666c3ef4591827c32abb1f62d7556656c038cd2078b0a8ded73de9a33442802",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libtsan.so.2.0.0",
+            "bytes": 1524320,
+            "sha256": "396d02953faa5c79d1dba6066cceb10e7c491f57c1cd8ffdfff61d34490ef48b",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libunistring.so.5.2.1",
+            "bytes": 1992752,
+            "sha256": "ba7a4afb4b6f823d64ebe324416e182cd42a981dba049e3ddcfa1c9af03cb7f3",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/libxml2.so.16.1.4",
+            "bytes": 1326024,
+            "sha256": "5ff12cee1e6992555ba638190cce88a0aab40acad51d5c826f6487888a0160ab",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/pkcs11/p11-kit-client.so",
+            "bytes": 1323880,
+            "sha256": "cfb2eeac889f23bfa12256f5289d1591e36e43a8ceb40d9aec2eb4c11d946077",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-core-262.1-1.so",
+            "bytes": 2988368,
+            "sha256": "7d072ccb5b4181bcac26d76a5a1110050c1fe33a8b9f443a66907decd71da477",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-shared-262.1-1.so",
+            "bytes": 6297480,
+            "sha256": "35062156eb1f1bfa478fa7477714cec702d990a15fa825790c58a3f6a63f6f05",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/lib/systemd/systemd-networkd",
+            "bytes": 2099864,
+            "sha256": "6fb7506dae0b662de931d7b24cd54e1bb462e5403b6d2eea88744a367844aedc",
+            "encoded_extent_max": 131072
+          }
+        ]
+      },
+      "final_layout": {
+        "regular_files_checked": 26940,
+        "unique_regular_inodes": 25119,
+        "allocated_file_bytes": 749850624,
+        "shared_extents": 0,
+        "elf_candidates": [
+          {
+            "path": "usr/bin/bash",
+            "bytes": 1195144,
+            "sha256": "c14c8f498f3be96f076ceb07d65dba584a86dca3c86b5dce65ed0f6cae73358d",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/btrfs",
+            "bytes": 1421704,
+            "sha256": "5afe6a912a190c129c5529d2f039fc5b3b7a65ee95dc67921d5d2948d3dddaf0",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/captree",
+            "bytes": 1937136,
+            "sha256": "32a6139c6cfb48b47a7a0da815fc6734ac85fe61632680f027113f0eab32be48",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/dbdump",
+            "bytes": 1644800,
+            "sha256": "d07963a9759605490ad42b2322c7ff6a21f4fc66338463a13182d76b6dc9f397",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/dbhash",
+            "bytes": 1648864,
+            "sha256": "0c6afc0893d55aa98a598b49e47467505f5f919946f5e1554521ac2524188733",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/gawk",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gawk-5.4.1",
+            "bytes": 1274872,
+            "sha256": "3ac64468ec05bde58b4294771f0afd9c626d4e95cc7a97efd7e7f7a55230febd",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/gpg",
+            "bytes": 1189008,
+            "sha256": "ffdf75b9133c3dcf0bf53896801b9e4559cb4f15031c9a2bf24821cdcddd7cc6",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/index_usage",
+            "bytes": 1640704,
+            "sha256": "440af7a7809d0289a1d1f0899a6754f9defee1ece2f3b0b37b86c8073f831d26",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/ld",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.bfd",
+            "bytes": 1611760,
+            "sha256": "4d83828f709f0eade25bcae2f4a2508c47db2f01b58daaca5c1c4cefce897847",
+            "encoded_extent_max": 131072
+          },
+          {
+            "path": "usr/bin/ld.gold",
+            "bytes": 2324744,
+            "sha256": "4119c9f1e8a60bb685885181794e0c176fed394346921065bef433d2898288ae",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/ldconfig",
+            "bytes": 1243208,
+            "sha256": "c76a53e9bb7d141492dc974e591cc2595d43bc015ab537e81b2547eebb3d39e3",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/showdb",
+            "bytes": 1661248,
+            "sha256": "8573e80006824181b23dcd87cd36f086a9e03524652cfb0c071dc1ffbdda165b",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/showstat4",
+            "bytes": 1636608,
+            "sha256": "3422f88a78de098ba76636528fa611be5a802c7f3175e7b137be10467867f59f",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/sqldiff",
+            "bytes": 1677536,
+            "sha256": "271e3c4c16ba19cdd95b55bf1635fdd3699f51fad908f19056a8107a65c2ee09",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/sqlite3",
+            "bytes": 2130656,
+            "sha256": "a383f6a1fe7cda0f461d7848cfa312e53d67e8dd0f2621ff19a721270df74d81",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/sqlite3_expert",
+            "bytes": 1665480,
+            "sha256": "2ad5b7f422dfafd05581ea55e5b4a49b6280e7ab95cadb1fc5d5435f60c2abf3",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/sqlite3_rsync",
+            "bytes": 1599808,
+            "sha256": "f3e9ad23bd667832919020a33754f69248278c22d4572825397610e4d759ff9b",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/bin/xgettext",
+            "bytes": 13607528,
+            "sha256": "24d748b361ce8eac52f397678ac94234b523ce9e8a2546fc3278814a9cc70784",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/gprofng/libgp-collector.so",
+            "bytes": 1127240,
+            "sha256": "ca2edd8d6c8dda43cc948c904d26316770018e995ed7a41b9585027f06efb76b",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libasan.so.8.0.0",
+            "bytes": 1970792,
+            "sha256": "01e4a9dbaab305a2e9574a4d85dc4f95487bd333abf11cbbfe4cfe104157c8c6",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libbfd-2.47.so",
+            "bytes": 1364584,
+            "sha256": "730687d04c52164e1386a4e82c587e829747bc375f84fd06de79250655d159fa",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libc.so.6",
+            "bytes": 2215072,
+            "sha256": "02c8c3d06180beee9c7d0392aa85736c7d19f274a81e7f8f0b3d9e28e0641524",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libcrypto.so.3",
+            "bytes": 5926392,
+            "sha256": "a75a864dcda6ef9e4dc29fad4b7988ca832b904c3915a63c920062c40763dae1",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libcurl.so.4.8.0",
+            "bytes": 1091176,
+            "sha256": "d53ce30e973b9120643dfb53b9c99986330f28d2db245189e6bda6bc1aa55bdd",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libgcrypt.so.20.8.9",
+            "bytes": 1767864,
+            "sha256": "3b6d1189d37c612da66e5b2552c90188a50df6218dbe2525638a95ab51af1473",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libgfortran.so.5.0.0",
+            "bytes": 3681264,
+            "sha256": "4a9cd191a0863e623d9877da4df52432412873ae9eebe0becc72cf8d18ef1c08",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libgio-2.0.so.0.9000.1",
+            "bytes": 1969504,
+            "sha256": "b38001cca69b2890a22fd3f6590bea7392bf489009de7ddfb6dbf296a133685e",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libglib-2.0.so.0.9000.1",
+            "bytes": 1457576,
+            "sha256": "1e8739af791b1a2f1f01fc7c6f3b9158888387d5a816195475e406438d41b688",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libgnutls.so.30.42.0",
+            "bytes": 2254952,
+            "sha256": "34fb5f09418585343efa342a2a4b57904544d6f562d7179a5eeaca60b0abd0c6",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libgprofng.so.0.0.0",
+            "bytes": 2300576,
+            "sha256": "36182c2a18d276f52fe9a50086b26ea9bcf8e5aec56eb8d606f507f3799ecb6e",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libicudata.so.78.3",
+            "bytes": 33112920,
+            "sha256": "d72003b08760852bee4c80cff32c1e6248ae6b1fda5bd313482733a4d5e70dc9",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libicui18n.so.78.3",
+            "bytes": 3721776,
+            "sha256": "60d7ad7b3f8e6e1c42895c03379954ee46008948dcdb2e556fa8e4c875742c60",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libicuuc.so.78.3",
+            "bytes": 2144304,
+            "sha256": "c99f0dd0c797c07f9ab64413d36c595393cdded6fa04cc4edd6f6a521fd155ca",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libleancrypto-fips.so.1.9.1",
+            "bytes": 2853504,
+            "sha256": "fed4a8ee21fdde83585a2846ac359ebbcb4691c36baf19db508d0085fd2f0256",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libleancrypto.so.1.9.1",
+            "bytes": 2845224,
+            "sha256": "6f7c44d5854ca7af86556bb300efdda8346f316e652d3f7e7ee0bf5cf55b41c4",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libm.so.6",
+            "bytes": 1268336,
+            "sha256": "965106704753eefe8c31ae7da6daba3ead3d18c52b19b5fcc41178bcc4aa999d",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libp11-kit.so.0.4.11",
+            "bytes": 1708192,
+            "sha256": "1b87739328f0b11906554145ab4e506281644d94a5b6195cd11594aad5e310b8",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libpython3.14.so.1.0",
+            "bytes": 6344456,
+            "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libsqlite3.so.3.54.0",
+            "bytes": 1697864,
+            "sha256": "758544266d5060aff683efcc94ee9abf2625c6ff9d02b70bb6d1296e0ee9128f",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libstdc++.so.6.0.36",
+            "bytes": 2939928,
+            "sha256": "f5fc7380f2ae46fa4053a64be04e7b98109f1066a4bbfff3c37042488aa0be0e",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libsystemd.so.0.45.0",
+            "bytes": 1345056,
+            "sha256": "1666c3ef4591827c32abb1f62d7556656c038cd2078b0a8ded73de9a33442802",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libtsan.so.2.0.0",
+            "bytes": 1524320,
+            "sha256": "396d02953faa5c79d1dba6066cceb10e7c491f57c1cd8ffdfff61d34490ef48b",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libunistring.so.5.2.1",
+            "bytes": 1992752,
+            "sha256": "ba7a4afb4b6f823d64ebe324416e182cd42a981dba049e3ddcfa1c9af03cb7f3",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/libxml2.so.16.1.4",
+            "bytes": 1326024,
+            "sha256": "5ff12cee1e6992555ba638190cce88a0aab40acad51d5c826f6487888a0160ab",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/pkcs11/p11-kit-client.so",
+            "bytes": 1323880,
+            "sha256": "cfb2eeac889f23bfa12256f5289d1591e36e43a8ceb40d9aec2eb4c11d946077",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-core-262.1-1.so",
+            "bytes": 2988368,
+            "sha256": "7d072ccb5b4181bcac26d76a5a1110050c1fe33a8b9f443a66907decd71da477",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/systemd/libsystemd-shared-262.1-1.so",
+            "bytes": 6297480,
+            "sha256": "35062156eb1f1bfa478fa7477714cec702d990a15fa825790c58a3f6a63f6f05",
+            "encoded_extent_max": 16384
+          },
+          {
+            "path": "usr/lib/systemd/systemd-networkd",
+            "bytes": 2099864,
+            "sha256": "6fb7506dae0b662de931d7b24cd54e1bb462e5403b6d2eea88744a367844aedc",
+            "encoded_extent_max": 16384
+          }
+        ]
+      },
+      "maintenance": {
+        "started": 1793091900.331971,
+        "dry_run": false,
+        "counts": {
+          "eligible": 46,
+          "repacked": 46,
+          "not-single-regular": 4,
+          "outside-validated-binary-class": 29
+        },
+        "processed_bytes": 142885416,
+        "charged_bytes": 142885416,
+        "retry_bytes": 0,
+        "verified_files": 46,
+        "finished": 1793091916.3404434,
+        "execution": {
+          "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+          "root_uuid_hex": "2dcc0d0e05d04859adfd1b54799ec8d0",
+          "root_uid": 0,
+          "usr_uid": 0,
+          "private_user_namespace": true,
+          "nvme_counter_fields": 17,
+          "private_network": true
+        }
+      },
+      "image_fingerprint": {
+        "sha256": "7e8cdcaf13b9e2bd6bd9f036c11e9b64e6eea28ad8fce3e7269c7bdeb51bf6a8",
+        "data_ranges": 42,
+        "data_bytes": 514277376,
+        "virtual_bytes": 85899345920
+      },
+      "outer_nocow": true,
+      "outer_encoded_or_shared_extents": 0,
+      "allocated_image_bytes": 514277376,
+      "read_only_baseline": true
+    }
+  },
+  "native_host_kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "separate_filesystems": true,
+  "native_io": true,
+  "loop_backed": true,
+  "physical_boot_qualified": false,
+  "controller_settings_changed": false,
+  "required_future_qos_us": {
+    "B0": 100000,
+    "B1": 5000,
+    "B2": 5000
+  },
+  "construction_qos_us": 5000,
+  "source_seed_sha256": "0c9c97b7a58a8a023c9e07f84cb307a9e8006e65d8fc4c17b83ddc8010b45c10",
+  "source_inventory": {
+    "usr": {
+      "sha256": "ee838a05cd3d318462cc6bf6fc9f94fe1ddf494910f2cfb5b15bc50845df9936",
+      "logical_bytes": 644814155,
+      "nodes": 35038
+    },
+    "etc": {
+      "sha256": "b1c6c153adc8ddd7e7f7ee114948246dde18208f8b42b1220cb3565d3000c418",
+      "logical_bytes": 4366497,
+      "nodes": 1010
+    },
+    "boot": {
+      "sha256": "6b577516c08422009a70842bf29d0f6fb1c043adead4822f1c273812db40c2b2",
+      "logical_bytes": 0,
+      "nodes": 1
+    },
+    "var/lib/pacman": {
+      "sha256": "d4eb9383f453f2ace0d1ca63db3abb5ecff1c5c28982abdf29d26458ce7363d1",
+      "logical_bytes": 11935303,
+      "nodes": 584
+    }
+  },
+  "package_inventory_sha256": "d18ea9f22d0fab15b47dd145a5ed8f9dfd1c9df0010f100d9ef4522910c72185",
+  "source_sha256": {
+    "storage_defaults_repack.py": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+    "config.json": "7fb9fe145b1e9b22ff121e977529b43f9122a228b6c1693102713d4f9ede4ebf",
+    "tools/native_volume_lab.py": "f4fbff383eff9dcb982964db75ca70af7f9ceb8ca6b73460a5a48fbb6e7ec9a1",
+    "tools/prepare_test_os.py": "f19a426f73feda6ed244e70964375d1ec5114059031da2e8b300798e1770fc75"
+  },
+  "security_metadata_copied": true,
+  "host_device_formatted": false,
+  "host_settings_changed": false,
+  "excluded_source_runtime_sockets": [
+    "etc/pacman.d/gnupg/S.keyboxd",
+    "etc/pacman.d/gnupg/S.gpg-agent",
+    "etc/pacman.d/gnupg/S.gpg-agent.ssh",
+    "etc/pacman.d/gnupg/S.gpg-agent.extra",
+    "etc/pacman.d/gnupg/S.gpg-agent.browser",
+    "etc/pacman.d/gnupg/S.dirmngr"
+  ],
+  "seed_archive_sha256": "86c626e30f88fe8097ba618474005d2d640481659c745437988141b609684ae0",
+  "control_bytes": 33554432,
+  "image_virtual_bytes": 85899345920,
+  "sparse_capacity_is_not_host_space_reservation": true,
+  "source_tree_unchanged": true,
+  "logical_trees_equal": true,
+  "completed_utc": "2026-10-27T09:05:23Z"
+}

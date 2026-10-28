@@ -1,0 +1,111 @@
+# Physical reboot qualification
+
+One orderly reboot of the actual BC-250 passes with the installed development
+profile. This closes the physical reboot check, not the independent recovery,
+suspend/resume or hardware power-loss checks. The original v0.1.0 release has not
+been rerun as a separate installation.
+
+## Recorded result
+
+The [physical transition evidence](evidence/stage0-physical-transitions.json)
+compares a synchronized private record before `systemctl reboot` with a fresh
+record after SSH returned. The following checks pass:
+
+- The kernel boot identity changed, establishing a host reboot rather than a
+  service or container restart.
+- All seven installed file hashes still match their manifest and their earlier
+  bytes; the power service and maintenance timer are enabled and active.
+- The actual NVMe latency tolerance is 5000 us. The new runtime power record
+  captures an original tolerance of 100000 us.
+- The kernel version, recorded root-subvolume path and boot configuration hash
+  are unchanged. The existing Limine boot selection was used without editing
+  the bootloader configuration or installing another kernel.
+- Every previously recorded daily budget remains charged; no allowance was
+  restored or reset to obtain this result.
+- Three format-2 private OS trees still pass their persistent workspace/guest
+  ownership checks. This includes the two migrated trees and the new seed tree.
+- No STOP marker or pending installation transaction is present.
+
+The read-only recorder and its dependencies have matching before/after source
+hashes. The 109 isolated Linux tests also pass on the rebooted machine.
+
+This is one boot on one controller/kernel configuration. It does not establish
+boot-time performance, repeated-boot reliability, SSD internal-cache coldness,
+application speedups or a separately booted recovery system. The production
+worker and its policy were not changed for this test.
+
+## Reproduce the records
+
+`tools/physical_transition_probe.py` records evidence; it never initiates reboot
+or sleep, sets alarms, changes services, repairs failures or resets a ledger.
+It requires host root and writes new files under an explicit private output.
+It refuses existing phases and unfamiliar output markers. Private records
+include host boot identity and test-tree paths; only reviewed result files
+should be redistributed.
+
+After verifying backups, the selected boot entry and that the host is available
+for a restart, record the before phase. Each optional `--test-os` must refer to
+a previously authenticated format-2 private OS tree:
+
+```sh
+sudo python3 tools/physical_transition_probe.py before-reboot \
+  --output /absolute/private-lab/new-transition-records \
+  --test-os /absolute/private-lab/prepared-test-os
+```
+
+Only a healthy profile is accepted as a before record. Initiate the orderly
+reboot separately using the system's normal service manager. After reconnecting:
+
+```sh
+sudo python3 tools/physical_transition_probe.py after-reboot \
+  --output /absolute/private-lab/new-transition-records
+```
+
+The after phase uses exactly the previously recorded test-tree paths and writes
+its result even if a comparison fails. Preserve failed records and investigate;
+do not run a repair first and present the repaired state as automatic startup.
+Use a new output for another reboot pair. `before-suspend` and `after-suspend`
+are separate record pairs; a successful suspend verdict additionally requires
+an unchanged boot identity, an increased kernel suspend-success counter and at
+least one second of suspended time from BOOTTIME minus MONOTONIC. They do not
+arm or verify a wake source.
+
+## Awake alarm failure; suspend remains untested
+
+The tested kernel exposes only `[s2idle]` in `mem_sleep`. The RTC is enabled for
+wakeup and the `rtc_cmos` ACPI-alarm parameter reads `Y`. Nevertheless, an awake
+`rtcwake --mode on --seconds 3` probe was still waiting after 34 observed seconds
+on the earlier boot. It was interrupted and its alarm cleared. A bounded probe
+after the physical reboot also timed out at 12 seconds and cleared its alarm.
+No physical suspend was attempted.
+
+`rtcwake`'s `on` mode waits for an alarm event without entering sleep; hardware
+alarm support must not be inferred merely from a writable wake-alarm attribute.
+See the [util-linux manual](https://www.man7.org/linux/man-pages/man8/rtcwake.8.html)
+and [kernel RTC interface documentation](https://www.kernel.org/doc/html/next/admin-guide/rtc.html).
+The cause on this firmware/kernel is unproven. This awake failure does not prove
+that every ACPI sleep-wake path is broken. No RTC-driver parameter, interrupt
+routing, firmware setting or kernel argument was changed to work around it.
+
+On 2026-10-27 the owner confirmed that this BC-250 has no functional suspend
+wake. Record system suspend/resume as unsupported on this target; do not attempt
+remote sleep or request wake assistance again. This is an owner-reported target
+limitation, not a physical resume result or a universal BC-250 firmware claim.
+It does not block the separate recovery-boot and workload qualification stages.
+The NVMe drive-idle policy is independent of system sleep and remains supported
+at the qualified 5000 us setting. On other targets, resume qualification still
+requires a functional wake path and an observed physical sleep/resume cycle.
+
+## Subsequent physical recovery result
+
+The [physical private-root trial](physical-recovery.md) now passes separate-root
+entry and return, original boot-menu restoration, original kernel/root/profile
+checks and retained quota history. The [Stage 0 audit](evidence/stage0-gate.json)
+maps that result and the earlier lifecycle/native tests to the six requirements.
+The prepared physical candidate is single-use and retained as evidence; create
+a fresh independent candidate for another controlled trial.
+
+Stage 1 workload/cache-state qualification, request/decompression attribution
+and tracing overhead remain open. Physical write/metadata/lost-sharing costs
+on disposable data are required before expanding maintenance policies. No
+hardware power cut or system suspend/resume was performed.

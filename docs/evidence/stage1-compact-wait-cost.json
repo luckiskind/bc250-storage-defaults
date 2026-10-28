@@ -1,0 +1,172 @@
+{
+  "kind": "bc250-compact-wait-cost-public-summary",
+  "collection_complete": true,
+  "total_trials": 300,
+  "instrumented_trials": 200,
+  "linux_tests": 302,
+  "full_screen_passed": false,
+  "compact_screen_passed": false,
+  "independently_replayed_captures": 200,
+  "capture_quality_failures": 1,
+  "capture_failure_category": "Waking recorded before switch-out; causal scheduler ordering unresolved in this reader revision",
+  "transport_complete_in_failed_capture": true,
+  "request_and_vector_proofs_complete_in_failed_capture": true,
+  "scenarios": {
+    "plain-read": {
+      "valid_blocks": 22,
+      "environment_excluded_blocks": 1,
+      "capture_integrity_failed_blocks": 1,
+      "warmup_capture_failures": 0,
+      "estimates": {
+        "full_over_off": {
+          "geometric_overhead": 0.01973889132680048,
+          "exploratory_paired_percentile_95": [
+            0.009826706308742938,
+            0.030955502373192223
+          ]
+        },
+        "compact_over_off": {
+          "geometric_overhead": 0.006421350618230226,
+          "exploratory_paired_percentile_95": [
+            -0.015168459597527217,
+            0.023412761061212484
+          ]
+        },
+        "compact_over_full": {
+          "geometric_overhead": -0.013059755611794488,
+          "exploratory_paired_percentile_95": [
+            -0.03582281103177254,
+            0.00541867190738432
+          ]
+        }
+      },
+      "full_screen_passed": false,
+      "compact_screen_passed": false,
+      "direct_direction": "unresolved"
+    },
+    "plain-mmap": {
+      "valid_blocks": 20,
+      "environment_excluded_blocks": 4,
+      "capture_integrity_failed_blocks": 0,
+      "warmup_capture_failures": 0,
+      "estimates": {
+        "full_over_off": {
+          "geometric_overhead": 0.03244530084922941,
+          "exploratory_paired_percentile_95": [
+            0.010691541537514615,
+            0.055820659965294395
+          ]
+        },
+        "compact_over_off": {
+          "geometric_overhead": 0.03370598880573656,
+          "exploratory_paired_percentile_95": [
+            0.009357240916740617,
+            0.06707303503848183
+          ]
+        },
+        "compact_over_full": {
+          "geometric_overhead": 0.0012210699738476759,
+          "exploratory_paired_percentile_95": [
+            -0.02898985630260742,
+            0.034696182973853684
+          ]
+        }
+      },
+      "full_screen_passed": false,
+      "compact_screen_passed": false,
+      "direct_direction": "unresolved"
+    },
+    "encoded-read": {
+      "valid_blocks": 21,
+      "environment_excluded_blocks": 3,
+      "capture_integrity_failed_blocks": 0,
+      "warmup_capture_failures": 0,
+      "estimates": {
+        "full_over_off": {
+          "geometric_overhead": 0.021184328453629452,
+          "exploratory_paired_percentile_95": [
+            0.009784007226615543,
+            0.02845189961703598
+          ]
+        },
+        "compact_over_off": {
+          "geometric_overhead": -0.010100468648876282,
+          "exploratory_paired_percentile_95": [
+            -0.07724091459643267,
+            0.03180014770631967
+          ]
+        },
+        "compact_over_full": {
+          "geometric_overhead": -0.03063579828911005,
+          "exploratory_paired_percentile_95": [
+            -0.09700692204745809,
+            0.014784208493700213
+          ]
+        }
+      },
+      "full_screen_passed": true,
+      "compact_screen_passed": true,
+      "direct_direction": "unresolved"
+    },
+    "encoded-mmap": {
+      "valid_blocks": 19,
+      "environment_excluded_blocks": 5,
+      "capture_integrity_failed_blocks": 0,
+      "warmup_capture_failures": 0,
+      "estimates": {
+        "full_over_off": {
+          "geometric_overhead": 0.03223984724615085,
+          "exploratory_paired_percentile_95": [
+            0.012559599565735713,
+            0.04846035035620533
+          ]
+        },
+        "compact_over_off": {
+          "geometric_overhead": 0.018467657218298152,
+          "exploratory_paired_percentile_95": [
+            -0.017905182397365604,
+            0.040890689622912646
+          ]
+        },
+        "compact_over_full": {
+          "geometric_overhead": -0.013342044549621578,
+          "exploratory_paired_percentile_95": [
+            -0.048166374477260576,
+            0.015318469946396185
+          ]
+        }
+      },
+      "full_screen_passed": false,
+      "compact_screen_passed": false,
+      "direct_direction": "unresolved"
+    }
+  },
+  "observation_totals": {
+    "full": {
+      "events": 100311,
+      "vector_edges": 123,
+      "blocked_segments": 123,
+      "unlock_records": 76800
+    },
+    "compact": {
+      "events": 23543,
+      "vector_edges": 121,
+      "blocked_segments": 121,
+      "unlock_records": 0
+    }
+  },
+  "all_owned_programs_detached": true,
+  "exact_shared_worker": true,
+  "qualified_observer_binaries_unchanged": true,
+  "historical_results_pooled": false,
+  "stage1_gate_passed": false,
+  "accelerator_gain_comparison": false,
+  "limits": [
+    "Four cold selected-worker endpoints including a content hash",
+    "One unsupported scheduler order remains unresolved",
+    "No direct interval establishes a compact/full speed difference",
+    "Recorded environmental bounds do not identify all interference",
+    "Temperature telemetry may query the controller; natural idle/wake unqualified",
+    "Detailed machine records and raw captures remain private"
+  ]
+}

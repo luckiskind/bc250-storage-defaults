@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BC-250 selected-worker folio-wait diagnostic v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "start_ns",
+    "finish_ns",
+    "detached_ns",
+    "events",
+    "malformed",
+    "discarded",
+    "schema_version",
+    "kind",
+    "libbpf",
+    "records",
+    "counters",
+    "pending_contexts",
+    "interrupted",
+    "limit_reached",
+    "links_detached",
+    "maps_pinned",
+    "critical_path_attribution_qualified",
+    "overhead_qualified",
+    "wait_counters",
+    "folio_proof_enabled"
+  ],
+  "properties": {
+    "start_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "finish_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "detached_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "events": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "malformed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "discarded": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "bc250-folio-wait-diagnostic"
+    },
+    "libbpf": {
+      "type": "string"
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 50000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "parent",
+          "time_ns",
+          "value",
+          "aux",
+          "stage",
+          "flags",
+          "result"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "parent": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "time_ns": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "value": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "aux": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18
+          },
+          "flags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "result": {
+            "type": "integer",
+            "minimum": -9223372036854775808,
+            "maximum": 9223372036854775807
+          }
+        }
+      }
+    },
+    "counters": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "pending_contexts": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "interrupted": {
+      "type": "boolean"
+    },
+    "limit_reached": {
+      "type": "boolean"
+    },
+    "links_detached": {
+      "const": true
+    },
+    "maps_pinned": {
+      "const": false
+    },
+    "critical_path_attribution_qualified": {
+      "const": false
+    },
+    "overhead_qualified": {
+      "const": false
+    },
+    "wait_counters": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "folio_proof_enabled": {
+      "type": "boolean"
+    }
+  },
+  "$comment": "Structural schema only. analysis/folio_wait_lineage.py is mandatory for combined delivery, graph, queue/bio range and scheduler proof. Exact uint64 integer clocks are required. This protocol does not establish device-request edges or whole-application critical-path waiting."
+}

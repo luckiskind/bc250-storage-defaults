@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import install_transaction as transaction
 
 SOURCE = Path(__file__).resolve().parent
 BASE = Path('/usr/local/libexec/bc250-storage-defaults')
@@ -22,6 +23,7 @@ POWER = 'bc250-nvme-power.service'
 WORKER = 'bc250-btrfs-repack.service'
 TIMER = 'bc250-btrfs-repack.timer'
 UNITS = (POWER, WORKER, TIMER)
+UNIT_DIRECTORY = Path('/etc/systemd/system')
 
 
 def require(condition, message):
@@ -46,7 +48,7 @@ def payloads():
         files[BASE / name] = (SOURCE / name, 0o755)
     files[CONFIG] = (SOURCE / 'config.json', 0o644)
     for name in UNITS:
-        files[Path('/etc/systemd/system') / name] = (SOURCE / 'systemd' / name, 0o644)
+        files[UNIT_DIRECTORY / name] = (SOURCE / 'systemd' / name, 0o644)
     files[Path('/usr/lib/systemd/system-sleep/90-bc250-nvme-power')] = (
         SOURCE / 'systemd/90-bc250-nvme-power', 0o755)
     return files
@@ -90,11 +92,28 @@ def preflight():
 def write_new(path, data, mode):
     # Never follow an existing destination, including a dangling symlink.
     fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, mode)
-    with os.fdopen(fd, 'wb') as stream:
-        stream.write(data)
-        stream.flush()
-        os.fsync(stream.fileno())
-        os.fchmod(stream.fileno(), mode)
+    owned = os.fstat(fd)
+    try:
+        with os.fdopen(fd, 'wb') as stream:
+            stream.write(data)
+            stream.flush()
+            os.fchmod(stream.fileno(), mode)
+            os.fsync(stream.fileno())
+        parent = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(parent)
+        finally:
+            os.close(parent)
+    except BaseException:
+        # A failed write never reaches install()'s completed-file list. Remove
+        # only the inode we created; preserve any administrator replacement.
+        try:
+            current = path.lstat()
+            if (current.st_dev, current.st_ino) == (owned.st_dev, owned.st_ino):
+                path.unlink()
+        except OSError:
+            pass
+        raise
 
 
 def write_manifest(data):
@@ -107,6 +126,7 @@ def write_manifest(data):
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(temporary, MANIFEST)
+        transaction.sync_directory(STATE)
     finally:
         Path(temporary).unlink(missing_ok=True)
 
@@ -128,6 +148,18 @@ def stop_all():
     run(['systemctl', 'disable', '--now', POWER])
     # A failed/stopped unit may not run ExecStop; retain helpers if restoration fails.
     run(['/usr/bin/python3', BASE / 'storage_defaults_power.py', 'restore'])
+    sync_service_links()
+
+
+def sync_service_links():
+    # systemctl's successful enable/disable does not itself promise durable
+    # directory entries. Persist link changes before committing their intent.
+    for name in ('multi-user.target.wants', 'timers.target.wants'):
+        directory = UNIT_DIRECTORY / name
+        if directory.exists() or directory.is_symlink():
+            require(directory.is_dir() and not directory.is_symlink(), 'Unsafe unit dependency directory')
+            transaction.sync_directory(directory)
+    transaction.sync_directory(UNIT_DIRECTORY)
 
 
 def prepare_directories():
@@ -139,6 +171,7 @@ def prepare_directories():
 
 
 def install():
+    transaction.assert_no_pending(STATE)
     power = preflight()
     if MANIFEST.exists():
         old = json.loads(MANIFEST.read_text())
@@ -149,6 +182,7 @@ def install():
                     'A different version is installed; keep its checkout and run its undo.sh before applying this version')
             for unit in (POWER, TIMER):
                 run(['systemctl', 'enable', '--now', unit])
+            sync_service_links()
             print('Already applied; installed files verified and startup units enabled.')
             return
     for target in payloads():
@@ -157,44 +191,38 @@ def install():
     # Compile/validate units before touching system paths; missing not-yet-installed ExecStart
     # commands are avoided by validating after files are staged, before enabling anything.
     prepare_directories()
-    installed = []
-    activation_attempted = False
-    manifest = None
+    tx = transaction.Transaction.begin(STATE, payloads(), 'install')
     try:
         for target, (source, mode) in payloads().items():
-            target.parent.mkdir(parents=True, exist_ok=True)
-            write_new(target, source.read_bytes(), mode)
-            installed.append(str(target))
+            tx.publish(target, source.read_bytes(), write_new)
+        tx.phase('validating')
         run(['systemd-analyze', 'verify', *[Path('/etc/systemd/system') / unit for unit in UNITS]])
         # Exact shipped ioctl path, only on a fresh private disposable fixture.
         test = load_module('storage_defaults_repack').self_test(STATE)
         require(test['status'] == 'repacked', 'Disposable layout validation failed')
-        manifest = dict(format_version=1, active=True, installed_at=time.time(),
+        installed = list(map(str, payloads()))
+        manifest = dict(format_version=2, active=True, installed_at=time.time(), transaction_id=tx.data['id'],
                         original_nvme_qos_us=power.info()['latency_tolerance_us'],
                         installed_files=installed, installed_sha256={p: sha(Path(p)) for p in installed},
                         disposable_validation=test)
-        write_manifest(manifest)
+        tx.phase('activating', activation_started=True)
         run(['systemctl', 'daemon-reload'])
-        activation_attempted = True
         run(['systemctl', 'enable', '--now', POWER])
         require(power.info()['latency_tolerance_us'] == power.TARGET, 'Drive did not accept the setting')
         run(['systemctl', 'enable', '--now', TIMER])
+        sync_service_links()
+        tx.phase('committing')
+        write_manifest(manifest)
+        tx.finish('installed')
         print('Applied. Drive cap: 5000 us. Gradual repacking starts after the next timer interval.')
     except BaseException:
-        if activation_attempted:
-            # A failed enable may still leave symlinks. Attempt cleanup for all units.
-            stop_all()
-        for name in reversed(installed):
-            Path(name).unlink()
-        if manifest is not None:
-            manifest['active'] = False
-            manifest['failed_install'] = True
-            write_manifest(manifest)
-        subprocess.run(['systemctl', 'daemon-reload'], capture_output=True)
+        # SIGKILL/power loss leaves the same journal for an explicit --recover.
+        recover()
         raise
 
 
 def uninstall():
+    transaction.assert_no_pending(STATE)
     if not MANIFEST.exists():
         print('No owned installation found. No changes made.')
         return
@@ -203,17 +231,75 @@ def uninstall():
         print('Already removed. Audit state retained.')
         return
     check_owned(manifest)
-    stop_all()
-    for name in manifest['installed_files']:
-        Path(name).unlink()
-    run(['systemctl', 'daemon-reload'])
-    manifest.update(active=False, removed_at=time.time())
-    write_manifest(manifest)
+    tx = transaction.Transaction.begin(STATE, payloads(), 'remove', manifest)
+    complete_removal(tx, manifest)
     print('Removed services and restored the captured drive power setting. '
           'Repacked extents and audit state are retained; old layout/reflink sharing is not reconstructed.')
 
 
+def complete_removal(tx, manifest):
+    # Validate the complete remaining set before stopping anything or deleting a file.
+    tx.audit_targets()
+    if not tx.data['services_stopped']:
+        stop_all()
+        tx.phase('removing', services_stopped=True)
+    for entry in reversed(tx.data['entries']):
+        tx.delete_target(entry)
+    run(['systemctl', 'daemon-reload'])
+    tx.phase('committing')
+    manifest.update(active=False, removed_at=time.time(), transaction_id=tx.data['id'])
+    write_manifest(manifest)
+    tx.finish('removed')
+
+
+def recover():
+    tx = transaction.Transaction.load(STATE, payloads())
+    if tx is None:
+        print('No interrupted transaction found. No installed files or services changed.')
+        return
+    manifest = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
+    committed = manifest.get('transaction_id') == tx.data['id']
+    if tx.data['operation'] == 'remove':
+        if committed and not manifest.get('active', True):
+            tx.finish('recovered-committed-removal')
+        else:
+            complete_removal(tx, manifest)
+        print('Recovered interrupted removal; audit state retained.')
+        return
+    if committed and manifest.get('active') is True:
+        check_owned(manifest)
+        tx.audit_stages()
+        # An older interrupted commit can retain the manifest while losing an
+        # unsynchronized startup link. Complete the committed activation intent.
+        run(['systemctl', 'daemon-reload'])
+        for unit in (POWER, TIMER):
+            run(['systemctl', 'enable', '--now', unit])
+        sync_service_links()
+        tx.finish('recovered-committed-install')
+        print('Committed installation preserved; interrupted staging cleanup completed.')
+        return
+    tx.audit_targets()
+    tx.audit_stages()
+    if tx.data['activation_started'] and not tx.data['services_stopped']:
+        stop_all()
+    tx.phase('rolling-back', services_stopped=True)
+    for entry in reversed(tx.data['entries']):
+        tx.delete_target(entry)
+    run(['systemctl', 'daemon-reload'])
+    if tx.data['activation_started']:
+        entries = tx.data['entries']
+        write_manifest(dict(format_version=2, active=False, failed_install=True, transaction_id=tx.data['id'],
+                            installed_files=[e['target'] for e in entries],
+                            installed_sha256={e['target']: e['sha256'] for e in entries}))
+    tx.finish('recovered-rolled-back-install')
+    print('Interrupted installation rolled back; no previous extent layout was changed by recovery.')
+
+
 def status():
+    pending = transaction.Transaction.load(STATE, payloads())
+    if pending:
+        print('Interrupted transaction:', pending.data['operation'], pending.data['phase'],
+              '(run sudo sh apply.sh --recover after inspection)')
     for unit in UNITS:
         result = subprocess.run(['systemctl', 'show', unit, '-p', 'LoadState', '-p', 'UnitFileState',
                                  '-p', 'ActiveState', '-p', 'SubState', '-p', 'Result'],
@@ -233,17 +319,22 @@ def main():
     group.add_argument('--check', '--dry-run', dest='check', action='store_true', help='Read-only compatibility check')
     group.add_argument('--uninstall', action='store_true', help='Stop and remove owned defaults')
     group.add_argument('--status', action='store_true', help='Show units, live power setting and last pass')
+    group.add_argument('--recover', action='store_true', help='Recover an owned interrupted install/removal')
     args = parser.parse_args()
     if args.check:
         preflight()
         return
     require(os.geteuid() == 0, 'Run with sudo (or use --check without installing)')
-    if args.uninstall:
-        uninstall()
-    elif args.status:
+    if args.status:
         status()
-    else:
-        install()
+        return
+    with transaction.installation_lock(STATE):
+        if args.recover:
+            recover()
+        elif args.uninstall:
+            uninstall()
+        else:
+            install()
 
 
 if __name__ == '__main__':

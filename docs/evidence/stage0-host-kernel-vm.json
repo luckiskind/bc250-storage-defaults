@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "vm_boots": 3,
+  "uses_running_host_kernel_bytes": true,
+  "uses_installed_physical_initramfs_bytes": true,
+  "matching_runtime_modules_verified": {
+    "sha256": "7fc1d9b2045061264c0d4e18b996a1b287e95fe243f77bdd4699a6a7139e8ab6",
+    "entries": 7739,
+    "logical_bytes": 182300140
+  },
+  "boot_sha256": {
+    "kernel": "5f76cd2d1fbe450a38812e4af27bc279bcf41e1b51d8ffdc651a045c08a3a6e5",
+    "initramfs.img": "0814d4f878a6623245bd3fd7e2fb14ac53fa380f527ed9482c10bd67b3a1354c"
+  },
+  "phases": [
+    {
+      "phase": "virtio-create",
+      "storage_bus": "virtio",
+      "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+      "passed": true,
+      "run_count": 1,
+      "previous_count": 0,
+      "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "real_systemd_pid1": true,
+      "usable_target_active": true,
+      "failed_guest_units": 0,
+      "elapsed_s": 58.79743294400009
+    },
+    {
+      "phase": "nvme-persist",
+      "storage_bus": "nvme",
+      "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+      "passed": true,
+      "run_count": 2,
+      "previous_count": 1,
+      "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "real_systemd_pid1": true,
+      "usable_target_active": true,
+      "failed_guest_units": 0,
+      "elapsed_s": 53.09826657900021
+    },
+    {
+      "phase": "nvme-reset",
+      "storage_bus": "nvme",
+      "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+      "passed": true,
+      "run_count": 1,
+      "previous_count": 0,
+      "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "real_systemd_pid1": true,
+      "usable_target_active": true,
+      "failed_guest_units": 0,
+      "elapsed_s": 56.4904567159997
+    }
+  ],
+  "original_protected_reference_unchanged": true,
+  "new_protected_baseline_unchanged": true,
+  "guest_filesystem_differs_from_host": true,
+  "guest_boots_distinct_from_host_and_each_other": true,
+  "persistence_across_storage_bus_change": true,
+  "fresh_overlay_reset_passed": true,
+  "no_guest_nic": true,
+  "software_cpu_emulation": true,
+  "physical_boot_tested": false,
+  "physical_recovery_tested": false,
+  "physical_device_or_firmware_compatibility_qualified": false,
+  "physical_power_loss_tested": false,
+  "host_boot_setup_changed": false,
+  "host_nvme_qos_us": 5000,
+  "headers_and_module_sources_copied": false,
+  "copied_guest_security_xattrs_qualified": false,
+  "networking_qualified": false,
+  "source_sha256": {
+    "tools/host_kernel_vm_probe.py": "5ef282af3b7902d3fc8dea39ffd4bc0a10b3c3bbd3c2296be96905d7da1bbf71",
+    "tools/native_trial_lab.py": "7f524775903665d9c2e8ec936699ce5b8f68c6f4b9c0260eb7dfcc1a912f3c66",
+    "tools/native_volume_lab.py": "080b30a47422d6856c5e989e8961af135ce58353a82a3ec6d05ae569a2b8b897",
+    "tools/prepare_test_os.py": "16242936de8bd78db41897fddb0e045d6ed328975115e190a14d2ad9b97a30d7",
+    "tools/vm_cache_faults.py": "c990f9b595a7698eada2154e431592d32306cd122b5a555966afc0effcd9cf95",
+    "tools/vm_boot_probe.py": "a08e49ce85fa3aecf0d0c1075d9828211e1dcb6091ff7cb0518927101f81745d"
+  },
+  "completed_unix": 1793099212.7044065,
+  "all_test_mounts_unmounted": true,
+  "no_attached_loop_for_new_image": true,
+  "parent_unit_exited": true,
+  "additional_executed_source_sha256": {
+    "install_transaction.py": "2761bcb1b2508822948b47de56b1a46dc956c1fc45f3094c2431476c46648738",
+    "storage_defaults_repack.py": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+    "tools/virtual_test_lab.py": "45613fd121ac387189d3c08b4fda0cc8b70efb22f4b5c5e24e319a6dfe4fa82b"
+  },
+  "live_installation": {
+    "installed_files_verified": 7,
+    "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+    "nvme_qos_us": 5000,
+    "power_active": true,
+    "timer_active": true,
+    "stop_marker": false
+  },
+  "post_run_artifact_manifest": {
+    "post_run_manifest": true,
+    "derived_baseline_sparse_fingerprint": {
+      "sha256": "62d0d6999c575878bb00be4ac9db71a22a02cfa2a880919355ccdf6564f2e699",
+      "data_ranges": 341,
+      "data_bytes": 889188352,
+      "virtual_bytes": 85899345920
+    },
+    "boot_sha256": {
+      "kernel": "5f76cd2d1fbe450a38812e4af27bc279bcf41e1b51d8ffdc651a045c08a3a6e5",
+      "initramfs.img": "0814d4f878a6623245bd3fd7e2fb14ac53fa380f527ed9482c10bd67b3a1354c"
+    },
+    "captured_unix": 1793099784.4312375
+  },
+  "isolated_linux_tests": 109
+}

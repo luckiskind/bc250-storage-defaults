@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "kind": "bc250-request-accounting-public-summary",
+  "passed": true,
+  "scope": "Offline reader regression; no new I/O tracing, workload run, native fault-path test or speed result",
+  "linux_tests": 262,
+  "native_capture_replays": 13,
+  "synthetic_prefix_cases": 1,
+  "previous_quality_verdicts_preserved": true,
+  "complete_valid_totals_unchanged": true,
+  "synthetic_prefix": {
+    "issued_bytes": 196608,
+    "reported_bytes": 12288,
+    "quality_passed": false,
+    "actual_native_stop": false
+  },
+  "frozen_reference_sources_and_results_unchanged": true,
+  "native_partial_or_error_paths_qualified": false,
+  "combined_wait_chain_qualified": false,
+  "stage1_gate_passed": false,
+  "detailed_replay_records_and_machine_capabilities": "Retained locally; omitted from this public summary"
+}

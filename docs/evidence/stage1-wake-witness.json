@@ -1,0 +1,70 @@
+{
+  "kind": "bc250-wake-witness-public-summary",
+  "passed": true,
+  "native_controls": 8,
+  "positive_accesses": 256,
+  "positive_scenarios": 4,
+  "active_programs": 31,
+  "pending_context_maps": 14,
+  "linux_tests": 322,
+  "independent_raw_replay_passed": true,
+  "independent_byte_ancestry_audit_passed": true,
+  "independent_wake_function_audit_passed": true,
+  "actual_vector_edges": 256,
+  "independently_witnessed_waking_records": 256,
+  "scenarios": {
+    "plain-read-cold": {
+      "demand_attempts": 64,
+      "actual_vector_edges": 64,
+      "blocked_switch_segments": 64,
+      "wake_function_attempts": 64,
+      "waking_task_state_snapshots": 64,
+      "waking_snapshots_on_cpu": 0,
+      "early_wake_overlap_witness_segments": 0
+    },
+    "plain-mmap-cold": {
+      "demand_attempts": 192,
+      "actual_vector_edges": 64,
+      "blocked_switch_segments": 64,
+      "wake_function_attempts": 64,
+      "waking_task_state_snapshots": 64,
+      "waking_snapshots_on_cpu": 0,
+      "early_wake_overlap_witness_segments": 0
+    },
+    "compressed-read-cold": {
+      "demand_attempts": 64,
+      "actual_vector_edges": 64,
+      "blocked_switch_segments": 64,
+      "wake_function_attempts": 64,
+      "waking_task_state_snapshots": 64,
+      "waking_snapshots_on_cpu": 0,
+      "early_wake_overlap_witness_segments": 0
+    },
+    "compressed-mmap-cold": {
+      "demand_attempts": 192,
+      "actual_vector_edges": 64,
+      "blocked_switch_segments": 64,
+      "wake_function_attempts": 64,
+      "waking_task_state_snapshots": 64,
+      "waking_snapshots_on_cpu": 0,
+      "early_wake_overlap_witness_segments": 0
+    }
+  },
+  "early_wake_overlap_segments": 0,
+  "native_early_wake_overlap_qualified": false,
+  "observer_cost_qualified": false,
+  "initial_preflight_rejected_before_build": true,
+  "initial_loader_compile_rejected_before_attach": true,
+  "all_owned_programs_detached": true,
+  "global_state_unchanged": true,
+  "installed_profile_healthy": true,
+  "raw_traces_exported": false,
+  "stage1_gate_passed": false,
+  "new_accelerator_gain_claimed": false,
+  "limits": [
+    "No early wake overlap occurred; no extension or unchanged repeat",
+    "Separate task-field reads are not a joint atomic snapshot",
+    "Hook and snapshot clocks bound observation, not exact machine switch instants",
+    "Selected private-file worker only; total observer cost and application critical paths unqualified"
+  ]
+}

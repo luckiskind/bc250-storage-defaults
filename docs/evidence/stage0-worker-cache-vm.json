@@ -1,0 +1,784 @@
+{
+  "passed": true,
+  "case_count": 4,
+  "cases": [
+    {
+      "case": "baseline",
+      "passed": true,
+      "baseline": {
+        "passed": true,
+        "mode": "worker-baseline",
+        "point": "none",
+        "token": "700724406478429a8b2a3c7197d2cad5",
+        "kernel": "7.2.11-arch1-1",
+        "root_uuid": "620dcffb-beb8-4f4f-8ee8-7a3e4b027055",
+        "boot_id": "553b1303-5f70-4d9d-b2fb-5ab79d00ceab",
+        "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+        "fixture_bytes": 6344456,
+        "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+        "fixture_metadata": {
+          "bytes": 6344456,
+          "mtime_ns": 1793085603000000000,
+          "uid": 0,
+          "gid": 0,
+          "mode": 420
+        },
+        "prior_ledger": null,
+        "after_ledger": {
+          "attempts": [
+            {
+              "id": 1,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": 6344456,
+              "status": "repacked"
+            }
+          ],
+          "budget": {
+            "2026-10-27": 6344456
+          }
+        },
+        "repeat_budget_unchanged": true,
+        "worker_run": {
+          "mapped_stat_reads": 6,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793085825.9054992,
+            "dry_run": false,
+            "counts": {
+              "eligible": 1,
+              "repacked": 1
+            },
+            "processed_bytes": 6344456,
+            "charged_bytes": 6344456,
+            "retry_bytes": 0,
+            "verified_files": 1,
+            "finished": 1793085836.8509383
+          }
+        },
+        "repeat_run": {
+          "mapped_stat_reads": 2,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793085838.2439914,
+            "dry_run": false,
+            "counts": {
+              "unchanged": 1
+            },
+            "processed_bytes": 0,
+            "charged_bytes": 0,
+            "retry_bytes": 0,
+            "verified_files": 0,
+            "finished": 1793085841.2595594
+          }
+        },
+        "initial_eligibility": null,
+        "encoded_extent_max": 16384,
+        "initial_encoded_extent_max": 131072,
+        "live_virtual_disk_stat_adapter": true,
+        "physical_power_loss_tested": false,
+        "qemu_exit": 0,
+        "elapsed_s": 70.58817377999367
+      },
+      "device_stats": {
+        "read_requests": 1076,
+        "write_requests": 1120,
+        "volatile_write_bytes": 30744576,
+        "flush_completed": 109,
+        "flush_persisted_bytes": 30744576,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 6815744,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": false
+      }
+    },
+    {
+      "case": "reserved",
+      "passed": true,
+      "interruption": {
+        "point": "reserved",
+        "mode": "cut-worker",
+        "token": "7d98d5f7ee314760a704500401229b38",
+        "worker_witness": {
+          "attempt": 1,
+          "day": "2026-10-27",
+          "reserved_bytes": 7393032,
+          "budget_bytes": 7393032,
+          "status": "started",
+          "mapped_stat_reads": 2,
+          "completed_range_syncs": 0,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "fixture_metadata": {
+            "bytes": 6344456,
+            "mtime_ns": 1793085603000000000,
+            "uid": 0,
+            "gid": 0,
+            "mode": 420
+          }
+        },
+        "device_fault_before_guest_kill": {
+          "method": "armed-next-ordinary-NBD-write",
+          "dropped_bytes": 49152,
+          "trigger_bytes": 49152
+        },
+        "qemu_exit": -9,
+        "elapsed_s": 51.128827801003354,
+        "whole_guest_terminated": true
+      },
+      "before_device_cut": {
+        "read_requests": 1042,
+        "write_requests": 319,
+        "volatile_write_bytes": 10903552,
+        "flush_completed": 69,
+        "flush_persisted_bytes": 10903552,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 4161536,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": false
+      },
+      "device_cut": {
+        "read_requests": 1043,
+        "write_requests": 320,
+        "volatile_write_bytes": 10952704,
+        "flush_completed": 69,
+        "flush_persisted_bytes": 10903552,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 1,
+        "dropped_bytes": 49152,
+        "peak_dirty_bytes": 4161536,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": true,
+        "cut_trigger_offset": 94633984,
+        "cut_trigger_bytes": 49152,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": true
+      },
+      "recovery": {
+        "passed": true,
+        "mode": "worker-recover",
+        "point": "none",
+        "token": "d4d0d3c73cdf4b27a8b452345e42262e",
+        "kernel": "7.2.11-arch1-1",
+        "root_uuid": "620dcffb-beb8-4f4f-8ee8-7a3e4b027055",
+        "boot_id": "3ec77715-4a05-4c06-a7cf-f3c88d1be062",
+        "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+        "fixture_bytes": 6344456,
+        "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+        "fixture_metadata": {
+          "bytes": 6344456,
+          "mtime_ns": 1793085603000000000,
+          "uid": 0,
+          "gid": 0,
+          "mode": 420
+        },
+        "prior_ledger": {
+          "attempts": [
+            {
+              "id": 1,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": null,
+              "status": "started"
+            }
+          ],
+          "budget": {
+            "2026-10-27": 7393032
+          }
+        },
+        "after_ledger": {
+          "attempts": [
+            {
+              "id": 1,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": null,
+              "status": "started"
+            },
+            {
+              "id": 2,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": 6344456,
+              "status": "repacked"
+            }
+          ],
+          "budget": {
+            "2026-10-27": 13737488
+          }
+        },
+        "repeat_budget_unchanged": true,
+        "worker_run": {
+          "mapped_stat_reads": 2,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793085945.3445854,
+            "dry_run": false,
+            "counts": {
+              "eligible": 1,
+              "repacked": 1
+            },
+            "processed_bytes": 6344456,
+            "charged_bytes": 6344456,
+            "retry_bytes": 0,
+            "verified_files": 1,
+            "finished": 1793085950.5640278
+          }
+        },
+        "repeat_run": {
+          "mapped_stat_reads": 6,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793085952.429109,
+            "dry_run": false,
+            "counts": {
+              "unchanged": 1
+            },
+            "processed_bytes": 0,
+            "charged_bytes": 0,
+            "retry_bytes": 0,
+            "verified_files": 0,
+            "finished": 1793085961.4644847
+          }
+        },
+        "initial_eligibility": null,
+        "encoded_extent_max": 16384,
+        "initial_encoded_extent_max": 131072,
+        "live_virtual_disk_stat_adapter": true,
+        "physical_power_loss_tested": false,
+        "qemu_exit": 0,
+        "elapsed_s": 63.51995714899385
+      },
+      "recovery_device_stats": {
+        "read_requests": 961,
+        "write_requests": 1077,
+        "volatile_write_bytes": 25772032,
+        "flush_completed": 61,
+        "flush_persisted_bytes": 25772032,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 6488064,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": false
+      }
+    },
+    {
+      "case": "range-sync-8",
+      "passed": true,
+      "interruption": {
+        "point": "range-sync-8",
+        "mode": "cut-worker",
+        "token": "f1609f46ee4648459662fdc4ed5fc250",
+        "worker_witness": {
+          "attempt": 1,
+          "day": "2026-10-27",
+          "reserved_bytes": 7393032,
+          "budget_bytes": 7393032,
+          "status": "started",
+          "mapped_stat_reads": 2,
+          "completed_range_syncs": 8,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "fixture_metadata": {
+            "bytes": 6344456,
+            "mtime_ns": 1793085603000000000,
+            "uid": 0,
+            "gid": 0,
+            "mode": 420
+          }
+        },
+        "device_fault_before_guest_kill": {
+          "method": "armed-next-ordinary-NBD-write",
+          "dropped_bytes": 110592,
+          "trigger_bytes": 49152
+        },
+        "qemu_exit": -9,
+        "elapsed_s": 52.51422666999861,
+        "whole_guest_terminated": true
+      },
+      "before_device_cut": {
+        "read_requests": 1054,
+        "write_requests": 416,
+        "volatile_write_bytes": 17899520,
+        "flush_completed": 71,
+        "flush_persisted_bytes": 17838080,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 4161536,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 61440,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": false
+      },
+      "device_cut": {
+        "read_requests": 1054,
+        "write_requests": 417,
+        "volatile_write_bytes": 17948672,
+        "flush_completed": 71,
+        "flush_persisted_bytes": 17838080,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 1,
+        "dropped_bytes": 110592,
+        "peak_dirty_bytes": 4161536,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": true,
+        "cut_trigger_offset": 17530880,
+        "cut_trigger_bytes": 49152,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": true
+      },
+      "recovery": {
+        "passed": true,
+        "mode": "worker-recover",
+        "point": "none",
+        "token": "7844c98c24d3498f804f83169a3e1828",
+        "kernel": "7.2.11-arch1-1",
+        "root_uuid": "620dcffb-beb8-4f4f-8ee8-7a3e4b027055",
+        "boot_id": "e8b86f8c-12b3-4d1b-90f9-d76dcd41ccf5",
+        "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+        "fixture_bytes": 6344456,
+        "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+        "fixture_metadata": {
+          "bytes": 6344456,
+          "mtime_ns": 1793085603000000000,
+          "uid": 0,
+          "gid": 0,
+          "mode": 420
+        },
+        "prior_ledger": {
+          "attempts": [
+            {
+              "id": 1,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": null,
+              "status": "started"
+            }
+          ],
+          "budget": {
+            "2026-10-27": 7393032
+          }
+        },
+        "after_ledger": {
+          "attempts": [
+            {
+              "id": 1,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": null,
+              "status": "started"
+            },
+            {
+              "id": 2,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": 6344456,
+              "status": "repacked"
+            }
+          ],
+          "budget": {
+            "2026-10-27": 13737488
+          }
+        },
+        "repeat_budget_unchanged": true,
+        "worker_run": {
+          "mapped_stat_reads": 2,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793086063.5946732,
+            "dry_run": false,
+            "counts": {
+              "eligible": 1,
+              "repacked": 1
+            },
+            "processed_bytes": 6344456,
+            "charged_bytes": 6344456,
+            "retry_bytes": 0,
+            "verified_files": 1,
+            "finished": 1793086068.5965052
+          }
+        },
+        "repeat_run": {
+          "mapped_stat_reads": 2,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793086070.0435083,
+            "dry_run": false,
+            "counts": {
+              "unchanged": 1
+            },
+            "processed_bytes": 0,
+            "charged_bytes": 0,
+            "retry_bytes": 0,
+            "verified_files": 0,
+            "finished": 1793086073.0589252
+          }
+        },
+        "initial_eligibility": null,
+        "encoded_extent_max": 16384,
+        "initial_encoded_extent_max": 131072,
+        "live_virtual_disk_stat_adapter": true,
+        "physical_power_loss_tested": false,
+        "qemu_exit": 0,
+        "elapsed_s": 54.698025346006034
+      },
+      "recovery_device_stats": {
+        "read_requests": 924,
+        "write_requests": 1331,
+        "volatile_write_bytes": 17580032,
+        "flush_completed": 63,
+        "flush_persisted_bytes": 17563648,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 4116480,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": false
+      }
+    },
+    {
+      "case": "verified-before-finish",
+      "passed": true,
+      "interruption": {
+        "point": "verified-before-finish",
+        "mode": "cut-worker",
+        "token": "df5521a0869e44188d8d394df189f988",
+        "worker_witness": {
+          "attempt": 1,
+          "day": "2026-10-27",
+          "reserved_bytes": 7393032,
+          "budget_bytes": 7393032,
+          "status": "started",
+          "mapped_stat_reads": 2,
+          "completed_range_syncs": 388,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "fixture_metadata": {
+            "bytes": 6344456,
+            "mtime_ns": 1793085603000000000,
+            "uid": 0,
+            "gid": 0,
+            "mode": 420
+          },
+          "verified_record": {
+            "status": "repacked",
+            "processed_bytes": 6344456,
+            "charged_bytes": 6344456,
+            "retry_bytes": 0,
+            "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+            "shared_before": false,
+            "layout_target_met": true,
+            "large_extent_count": 0,
+            "encoded_extent_max": 16384
+          }
+        },
+        "device_fault_before_guest_kill": {
+          "method": "armed-next-ordinary-NBD-write",
+          "dropped_bytes": 49152,
+          "trigger_bytes": 49152
+        },
+        "qemu_exit": -9,
+        "elapsed_s": 50.05204660900927,
+        "whole_guest_terminated": true
+      },
+      "before_device_cut": {
+        "read_requests": 1046,
+        "write_requests": 700,
+        "volatile_write_bytes": 15183872,
+        "flush_completed": 71,
+        "flush_persisted_bytes": 15183872,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 4161536,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": false
+      },
+      "device_cut": {
+        "read_requests": 1046,
+        "write_requests": 701,
+        "volatile_write_bytes": 15233024,
+        "flush_completed": 71,
+        "flush_persisted_bytes": 15183872,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 1,
+        "dropped_bytes": 49152,
+        "peak_dirty_bytes": 4161536,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": true,
+        "cut_trigger_offset": 94633984,
+        "cut_trigger_bytes": 49152,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": true
+      },
+      "recovery": {
+        "passed": true,
+        "mode": "worker-recover",
+        "point": "none",
+        "token": "1318a5927be6442f8387f3bd151616b2",
+        "kernel": "7.2.11-arch1-1",
+        "root_uuid": "620dcffb-beb8-4f4f-8ee8-7a3e4b027055",
+        "boot_id": "1dee2efe-4fd1-4ac3-89e1-c9354189fd72",
+        "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+        "fixture_bytes": 6344456,
+        "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+        "fixture_metadata": {
+          "bytes": 6344456,
+          "mtime_ns": 1793085603000000000,
+          "uid": 0,
+          "gid": 0,
+          "mode": 420
+        },
+        "prior_ledger": {
+          "attempts": [
+            {
+              "id": 1,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": null,
+              "status": "started"
+            }
+          ],
+          "budget": {
+            "2026-10-27": 7393032
+          }
+        },
+        "after_ledger": {
+          "attempts": [
+            {
+              "id": 1,
+              "day": "2026-10-27",
+              "reserved_bytes": 7393032,
+              "charged_bytes": null,
+              "status": "started"
+            }
+          ],
+          "budget": {
+            "2026-10-27": 7393032
+          }
+        },
+        "repeat_budget_unchanged": true,
+        "worker_run": {
+          "mapped_stat_reads": 2,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793086178.01686,
+            "dry_run": false,
+            "counts": {
+              "already-small-compressed": 1
+            },
+            "processed_bytes": 0,
+            "charged_bytes": 0,
+            "retry_bytes": 0,
+            "verified_files": 0,
+            "finished": 1793086181.1099613
+          }
+        },
+        "repeat_run": {
+          "mapped_stat_reads": 6,
+          "ledger_policy": {
+            "synchronous": 3,
+            "journal_mode": "delete"
+          },
+          "report": {
+            "started": 1793086182.6914506,
+            "dry_run": false,
+            "counts": {
+              "unchanged": 1
+            },
+            "processed_bytes": 0,
+            "charged_bytes": 0,
+            "retry_bytes": 0,
+            "verified_files": 0,
+            "finished": 1793086191.7220726
+          }
+        },
+        "initial_eligibility": "already-small-compressed",
+        "encoded_extent_max": 16384,
+        "initial_encoded_extent_max": 16384,
+        "live_virtual_disk_stat_adapter": true,
+        "physical_power_loss_tested": false,
+        "qemu_exit": 0,
+        "elapsed_s": 64.3688477579999
+      },
+      "recovery_device_stats": {
+        "read_requests": 943,
+        "write_requests": 665,
+        "volatile_write_bytes": 19775488,
+        "flush_completed": 41,
+        "flush_persisted_bytes": 19775488,
+        "fua_completed": 0,
+        "fua_persisted_bytes": 0,
+        "power_cuts": 0,
+        "dropped_bytes": 0,
+        "peak_dirty_bytes": 5210112,
+        "cache_limit_errors": 0,
+        "armed_for_volatile_write": false,
+        "cut_trigger_offset": -1,
+        "cut_trigger_bytes": 0,
+        "dirty_bytes": 0,
+        "capacity_bytes": 85899345920,
+        "cache_limit_bytes": 67108864,
+        "powered_off": false
+      }
+    }
+  ],
+  "worker_fault_cases_passed": 3,
+  "worker_source_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+  "worker_reference": {
+    "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+    "bytes": 6344456,
+    "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+    "reserved_bytes": 7393032,
+    "max_bytes_per_day": 14786064
+  },
+  "source_sha256": {
+    "vm_worker_faults.py": "f692bb5d37bf0ecfc757837c05d724d33667bdb4dd24ca34944717b0f539ae71",
+    "vm_cache_faults.py": "c990f9b595a7698eada2154e431592d32306cd122b5a555966afc0effcd9cf95",
+    "vm_profile_faults.py": "94a79ee766cc05bc39b1eac4eeef75b4743ef91b2f45e61a6a9636cff8bee75b",
+    "vm_boot_probe.py": "a08e49ce85fa3aecf0d0c1075d9828211e1dcb6091ff7cb0518927101f81745d",
+    "volatile_disk.py": "22d6f28ead720a28e23e521705a1a59153234cb1f512fbf0d70133230509fd10",
+    "calibrate_volatile_disk.py": "35b2bc2fa149566525c679b36184dfa30ba21207a7d72599fed06c9d1c6e9c19"
+  },
+  "calibration_source_sha256": {
+    "volatile_disk.py": "22d6f28ead720a28e23e521705a1a59153234cb1f512fbf0d70133230509fd10",
+    "calibrate_volatile_disk.py": "35b2bc2fa149566525c679b36184dfa30ba21207a7d72599fed06c9d1c6e9c19"
+  },
+  "run_label": "qualification-01",
+  "base_fingerprint_unchanged": true,
+  "base_sparse_fingerprint": {
+    "sha256": "c5101169cd42294ea9d57a894deaf6d3f68fbba24ee7865cc37bf9b3cd566fa6",
+    "data_ranges": 12,
+    "data_bytes": 690475008,
+    "virtual_bytes": 85899345920
+  },
+  "initial_copy_logical_digest": {
+    "sha256": "9af0a321fc3c2ffb86a6cb72c830a7e90ce562bf7b20e40e5222cdb0d3c314d9",
+    "virtual_bytes": 85899345920,
+    "format": "v1: virtual size, offsets/lengths and bytes of nonzero 4 KiB logical blocks; not full-image SHA256"
+  },
+  "separate_guest_kernel": true,
+  "real_systemd_pid1": true,
+  "live_virtual_disk_stat_adapter": true,
+  "physical_power_loss_tested": false,
+  "torn_writes_modeled": false,
+  "performance_tested": false,
+  "fault_scope": "Pause actual worker at selected boundaries; cut modeled cache after next ordinary write reply; kill guest and recover conservative reservations",
+  "host_nvme_qos_unchanged": true,
+  "host_nvme_qos_us": 5000,
+  "host_filesystem_uuid_differs": true,
+  "host_reboot_tested": false,
+  "recorded_utc": "2026-10-27T07:29:59Z",
+  "calibration_report_sha256": "8d0e1f88cd53f486b382e063a7dffec3dc7b247ac798709e924d6fb89ae795df",
+  "harness_source_sha256": "45613fd121ac387189d3c08b4fda0cc8b70efb22f4b5c5e24e319a6dfe4fa82b",
+  "image_build": {
+    "image_virtual_bytes": 85899345920,
+    "kernel_release": "7.2.11-arch1-1",
+    "kernel_sha256": "7ca8265d776950dd3cdfb8eab7ee33978d139125e09bcf2a3a4ff482b7d5728c",
+    "initramfs_sha256": "4d71a839ec399606eb4f57f9824ca9fd98ef819d45d94aa3ab072aab84a9be13",
+    "fixture": {
+      "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "bytes": 6344456
+    },
+    "rootdir_security_xattrs_copied": false,
+    "image_is_regular_file": true,
+    "host_device_formatted": false,
+    "guest_not_yet_booted": true,
+    "builder_source_sha256": "f0c31b526eb3b7ed00af15b4f8eb20038701556fbb2a01e18ffc8f5cf9c85c2e",
+    "storage_profile_fixture": false,
+    "worker_fixture": true,
+    "worker_guest_source_sha256": "0ad4f7d6593b2eed44dd6175e49de29de7cd4572165cc0e40ffdbfd8c59939d5",
+    "worker_reference": {
+      "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "bytes": 6344456,
+      "worker_sha256": "010eace2c9de50f8a4f94961073661b9f6ab2d2412cdeca0416795df7185a8f0",
+      "reserved_bytes": 7393032,
+      "max_bytes_per_day": 14786064
+    },
+    "embedded_probe_sha256": "cba05d207d3af7a8e81c3eaeab2802bc588d9841bb76411a6169446fc04abad4",
+    "embedded_worker_bootstrap_sha256": "2f6c659c6907383670bd9558c2db62f3ba2504c56d25c8267971d87c0d131106"
+  },
+  "artifact_label": "worker-fault-v2"
+}

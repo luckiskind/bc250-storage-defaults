@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "separate_guest_kernel": true,
+  "separate_btrfs_volume": true,
+  "real_systemd_pid1": true,
+  "software_cpu_emulation": true,
+  "physical_power_loss_tested": false,
+  "abrupt_guest_shutdown_tested": false,
+  "orderly_reboot_persistence_passed": true,
+  "fresh_overlay_reset_passed": true,
+  "base_fingerprint_unchanged": true,
+  "base_sparse_fingerprint": {
+    "sha256": "ef2df283dc09adc72c9e7050ee0db3367e06815635facf97bebb45db1c88e9b1",
+    "data_ranges": 13,
+    "data_bytes": 687415296,
+    "virtual_bytes": 85899345920
+  },
+  "boots": [
+    {
+      "passed": true,
+      "physical_power_loss_tested": false,
+      "kernel": "7.2.11-arch1-1",
+      "root_fstype": "btrfs",
+      "root_uuid": "cbe1c20f-5f17-42d7-b180-64f1d3076556",
+      "run_count": 1,
+      "previous_count": 0,
+      "nonce": "442743e496644272840fcb80547b9b47",
+      "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "boot_id": "bd187d02-0295-4b4c-9925-67fa59e2078c",
+      "free_bytes": 83158904832,
+      "real_systemd_pid1": true,
+      "elapsed_s": 50.06927043799078,
+      "qemu_exit": 0
+    },
+    {
+      "passed": true,
+      "physical_power_loss_tested": false,
+      "kernel": "7.2.11-arch1-1",
+      "root_fstype": "btrfs",
+      "root_uuid": "cbe1c20f-5f17-42d7-b180-64f1d3076556",
+      "run_count": 2,
+      "previous_count": 1,
+      "nonce": "442743e496644272840fcb80547b9b47",
+      "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "boot_id": "a75f39ad-e07a-40bd-be1a-9ab32d019ad0",
+      "free_bytes": 83147890688,
+      "real_systemd_pid1": true,
+      "elapsed_s": 49.15943848599272,
+      "qemu_exit": 0
+    },
+    {
+      "passed": true,
+      "physical_power_loss_tested": false,
+      "kernel": "7.2.11-arch1-1",
+      "root_fstype": "btrfs",
+      "root_uuid": "cbe1c20f-5f17-42d7-b180-64f1d3076556",
+      "run_count": 1,
+      "previous_count": 0,
+      "nonce": "80f847e6166e442c8874323e83695704",
+      "fixture_sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "boot_id": "388b9679-92b1-4454-9a02-e40c03bddaab",
+      "free_bytes": 83158904832,
+      "real_systemd_pid1": true,
+      "elapsed_s": 50.153232570999535,
+      "qemu_exit": 0
+    }
+  ],
+  "sparse_fingerprint_format": "v1: virtual size, data range offsets/lengths and data bytes; not full-image SHA256",
+  "run_label": "correctness-02",
+  "fault_model": "none; orderly guest shutdown/restart and overlay reset only",
+  "schema_version": 1,
+  "host_nvme_qos_unchanged": true,
+  "host_nvme_qos_us": 5000,
+  "host_filesystem_uuid_differs": true,
+  "host_reboot_tested": false,
+  "stock_guest_kernel_hardware_compatibility_qualified": false,
+  "recorded_utc": "2026-10-27T05:14:08Z",
+  "artifact_label": "verified-v1",
+  "image_build": {
+    "image_virtual_bytes": 85899345920,
+    "kernel_release": "7.2.11-arch1-1",
+    "kernel_sha256": "7ca8265d776950dd3cdfb8eab7ee33978d139125e09bcf2a3a4ff482b7d5728c",
+    "initramfs_sha256": "4d71a839ec399606eb4f57f9824ca9fd98ef819d45d94aa3ab072aab84a9be13",
+    "fixture": {
+      "sha256": "0a5be42fd90e91b9d96010310ac288037a001fe7aa582345cda4e37d15a01500",
+      "bytes": 6344456
+    },
+    "rootdir_security_xattrs_copied": false,
+    "image_is_regular_file": true,
+    "host_device_formatted": false,
+    "guest_not_yet_booted": true
+  },
+  "source_hashes": {
+    "virtual_test_lab.py": "8abb39c6251e60b4390786230bd95dbb6161e0f7a58453670e8533e6a490c17c",
+    "vm_image_builder.py": "cd3c4895b9934a54b681cc23652abbbebf3c8cb3124bbaccf8e5df64c55d6268",
+    "vm_boot_probe.py": "2a7f1654d536e0da046c3ca3a2cddeee29d4bc6290db5f6f5c582154ed530472",
+    "prepare_test_os.py": "f19a426f73feda6ed244e70964375d1ec5114059031da2e8b300798e1770fc75"
+  },
+  "toolchain_versions": [
+    "btrfs-progs 7.3-1",
+    "linux 7.2.11.arch1-1",
+    "mkinitcpio 42.2-1",
+    "python 3.14.8-1",
+    "qemu-img 11.1.2-1",
+    "qemu-system-x86 11.1.2-1",
+    "systemd 262.1-1"
+  ],
+  "failed_explorations": [
+    {
+      "stage": "prototype console",
+      "outcome": "probe exit 120; deadline stop; overlay retained",
+      "correction": "reserve guest ttyS0 by masking serial-getty"
+    },
+    {
+      "stage": "first reusable final verifier",
+      "guest_boot_checks_passed": 3,
+      "overall_passed": false,
+      "correction": "compare host UUID outside the device-isolating namespace"
+    }
+  ]
+}

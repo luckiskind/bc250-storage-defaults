@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "builder_sha256": "4b5445232455db8458bd935638b435561d69408a640b2ec0f6a713ca2f991c8d",
+  "created_utc": "2026-10-27T03:46:33Z",
+  "python": "3.14.7",
+  "kernel": "7.2.8-1.219-cachyos-bore-bc250",
+  "full_system_baseline": false,
+  "power_settings_changed": false,
+  "source_paths_in_public_manifest": false,
+  "controller_policy_applied_to_host": false,
+  "required_nvme_qos_us": {
+    "B0": 100000,
+    "B1": 5000,
+    "B2": 5000
+  },
+  "budget_units": "submitted logical layout work; not physical device writes",
+  "note": "Fresh byte copies under the recorded mount policy; not historical pre-study physical extents",
+  "cases": [
+    {
+      "name": "elf-00.bin",
+      "kind": "elf",
+      "sha256": "c7503390d36d13d372af18e619297f918e56dfb2c339bc7d507c4bc4c93bad5b"
+    },
+    {
+      "name": "elf-01.bin",
+      "kind": "elf",
+      "sha256": "719b8682a5dffd0c1e8e7ce5e2837b8a0ea277c2f5ca0190b2762db8b4e88101"
+    },
+    {
+      "name": "elf-02.bin",
+      "kind": "elf",
+      "sha256": "7f8681a584ea69cd9fc1f6b95f4447a03d0261e28187f66e87266e6bd4365330"
+    },
+    {
+      "name": "elf-03.bin",
+      "kind": "elf",
+      "sha256": "78a51dd48d16aed94887b47a573d2ddcc1520262d9cce7c1970d6f847bd8b1ef"
+    },
+    {
+      "name": "control.bin",
+      "kind": "incompressible-control",
+      "sha256": "0eac73753d007d6258fea802c1a80c37e571a129f5c0b4aaed5f0ae464e2e5b7"
+    }
+  ],
+  "variants": {
+    "B0": [
+      {
+        "name": "elf-00.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 23916488,
+          "sha256": "c7503390d36d13d372af18e619297f918e56dfb2c339bc7d507c4bc4c93bad5b",
+          "allocated_file_bytes": 23916544,
+          "extent_count": 146,
+          "encoded_logical_length_histogram": {
+            "131072": 134,
+            "61384": 1
+          },
+          "encoded_extent_max": 131072,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-01.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 55502936,
+          "sha256": "719b8682a5dffd0c1e8e7ce5e2837b8a0ea277c2f5ca0190b2762db8b4e88101",
+          "allocated_file_bytes": 55504896,
+          "extent_count": 392,
+          "encoded_logical_length_histogram": {
+            "131072": 371,
+            "59480": 1
+          },
+          "encoded_extent_max": 131072,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-02.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 7873304,
+          "sha256": "7f8681a584ea69cd9fc1f6b95f4447a03d0261e28187f66e87266e6bd4365330",
+          "allocated_file_bytes": 7876608,
+          "extent_count": 34,
+          "encoded_logical_length_histogram": {
+            "131072": 25,
+            "8984": 1
+          },
+          "encoded_extent_max": 131072,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-03.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 5392448,
+          "sha256": "78a51dd48d16aed94887b47a573d2ddcc1520262d9cce7c1970d6f847bd8b1ef",
+          "allocated_file_bytes": 5394432,
+          "extent_count": 1,
+          "encoded_logical_length_histogram": {},
+          "encoded_extent_max": 0,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "control.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 33554432,
+          "sha256": "0eac73753d007d6258fea802c1a80c37e571a129f5c0b4aaed5f0ae464e2e5b7",
+          "allocated_file_bytes": 33554432,
+          "extent_count": 1,
+          "encoded_logical_length_histogram": {},
+          "encoded_extent_max": 0,
+          "shared_extent_count": 0
+        }
+      }
+    ],
+    "B1": [
+      {
+        "name": "elf-00.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 23916488,
+          "sha256": "c7503390d36d13d372af18e619297f918e56dfb2c339bc7d507c4bc4c93bad5b",
+          "allocated_file_bytes": 23916544,
+          "extent_count": 147,
+          "encoded_logical_length_histogram": {
+            "131072": 134,
+            "61384": 1
+          },
+          "encoded_extent_max": 131072,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-01.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 55502936,
+          "sha256": "719b8682a5dffd0c1e8e7ce5e2837b8a0ea277c2f5ca0190b2762db8b4e88101",
+          "allocated_file_bytes": 55504896,
+          "extent_count": 391,
+          "encoded_logical_length_histogram": {
+            "131072": 371,
+            "59480": 1
+          },
+          "encoded_extent_max": 131072,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-02.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 7873304,
+          "sha256": "7f8681a584ea69cd9fc1f6b95f4447a03d0261e28187f66e87266e6bd4365330",
+          "allocated_file_bytes": 7876608,
+          "extent_count": 33,
+          "encoded_logical_length_histogram": {
+            "131072": 25,
+            "8984": 1
+          },
+          "encoded_extent_max": 131072,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-03.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 5392448,
+          "sha256": "78a51dd48d16aed94887b47a573d2ddcc1520262d9cce7c1970d6f847bd8b1ef",
+          "allocated_file_bytes": 5394432,
+          "extent_count": 1,
+          "encoded_logical_length_histogram": {},
+          "encoded_extent_max": 0,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "control.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 33554432,
+          "sha256": "0eac73753d007d6258fea802c1a80c37e571a129f5c0b4aaed5f0ae464e2e5b7",
+          "allocated_file_bytes": 33554432,
+          "extent_count": 1,
+          "encoded_logical_length_histogram": {},
+          "encoded_extent_max": 0,
+          "shared_extent_count": 0
+        }
+      }
+    ],
+    "B2": [
+      {
+        "name": "elf-00.bin",
+        "action": {
+          "status": "repacked",
+          "processed_bytes": 23916488,
+          "charged_bytes": 24080328,
+          "retry_bytes": 163840,
+          "sha256": "c7503390d36d13d372af18e619297f918e56dfb2c339bc7d507c4bc4c93bad5b",
+          "shared_before": false,
+          "layout_target_met": true,
+          "large_extent_count": 0,
+          "encoded_extent_max": 16384
+        },
+        "layout": {
+          "bytes": 23916488,
+          "sha256": "c7503390d36d13d372af18e619297f918e56dfb2c339bc7d507c4bc4c93bad5b",
+          "allocated_file_bytes": 23916544,
+          "extent_count": 1455,
+          "encoded_logical_length_histogram": {
+            "16384": 1452,
+            "12232": 1
+          },
+          "encoded_extent_max": 16384,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-01.bin",
+        "action": {
+          "status": "repacked",
+          "processed_bytes": 55502936,
+          "charged_bytes": 55502936,
+          "retry_bytes": 0,
+          "sha256": "719b8682a5dffd0c1e8e7ce5e2837b8a0ea277c2f5ca0190b2762db8b4e88101",
+          "shared_before": false,
+          "layout_target_met": true,
+          "large_extent_count": 0,
+          "encoded_extent_max": 16384
+        },
+        "layout": {
+          "bytes": 55502936,
+          "sha256": "719b8682a5dffd0c1e8e7ce5e2837b8a0ea277c2f5ca0190b2762db8b4e88101",
+          "allocated_file_bytes": 55504896,
+          "extent_count": 3388,
+          "encoded_logical_length_histogram": {
+            "16384": 3348,
+            "10328": 1
+          },
+          "encoded_extent_max": 16384,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-02.bin",
+        "action": {
+          "status": "repacked",
+          "processed_bytes": 7873304,
+          "charged_bytes": 7873304,
+          "retry_bytes": 0,
+          "sha256": "7f8681a584ea69cd9fc1f6b95f4447a03d0261e28187f66e87266e6bd4365330",
+          "shared_before": false,
+          "layout_target_met": true,
+          "large_extent_count": 0,
+          "encoded_extent_max": 16384
+        },
+        "layout": {
+          "bytes": 7873304,
+          "sha256": "7f8681a584ea69cd9fc1f6b95f4447a03d0261e28187f66e87266e6bd4365330",
+          "allocated_file_bytes": 7876608,
+          "extent_count": 481,
+          "encoded_logical_length_histogram": {
+            "16384": 452,
+            "8984": 1
+          },
+          "encoded_extent_max": 16384,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "elf-03.bin",
+        "action": {
+          "status": "repacked",
+          "processed_bytes": 5392448,
+          "charged_bytes": 5392448,
+          "retry_bytes": 0,
+          "sha256": "78a51dd48d16aed94887b47a573d2ddcc1520262d9cce7c1970d6f847bd8b1ef",
+          "shared_before": false,
+          "layout_target_met": true,
+          "large_extent_count": 0,
+          "encoded_extent_max": 16384
+        },
+        "layout": {
+          "bytes": 5392448,
+          "sha256": "78a51dd48d16aed94887b47a573d2ddcc1520262d9cce7c1970d6f847bd8b1ef",
+          "allocated_file_bytes": 5394432,
+          "extent_count": 324,
+          "encoded_logical_length_histogram": {
+            "16384": 319
+          },
+          "encoded_extent_max": 16384,
+          "shared_extent_count": 0
+        }
+      },
+      {
+        "name": "control.bin",
+        "action": {
+          "status": "native-mount-policy"
+        },
+        "layout": {
+          "bytes": 33554432,
+          "sha256": "0eac73753d007d6258fea802c1a80c37e571a129f5c0b4aaed5f0ae464e2e5b7",
+          "allocated_file_bytes": 33554432,
+          "extent_count": 1,
+          "encoded_logical_length_histogram": {},
+          "encoded_extent_max": 0,
+          "shared_extent_count": 0
+        }
+      }
+    ]
+  }
+}

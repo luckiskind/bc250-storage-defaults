@@ -1,0 +1,48 @@
+{
+  "kind": "bc250-combined-wait-public-summary",
+  "passed": true,
+  "native_controls": 16,
+  "positive_cases": 9,
+  "active_programs": 29,
+  "pending_context_maps": 13,
+  "linux_tests": 274,
+  "geometry_oracle_cases": 600,
+  "positive_totals": {
+    "request_generations": 102,
+    "selected_request_members": 143,
+    "multi_bio_requests": 3,
+    "request_address_reuses_with_changed_generation": 4,
+    "physical_completed_bytes": 23658496,
+    "actual_vector_edges": 24,
+    "request_backed_matched_wakes": 24,
+    "blocked_switch_segments": 24,
+    "resolved_request_folio_blocked_segments": 24,
+    "large_folio_vector_edges": 0,
+    "multi_page_vector_edges": 3,
+    "partial_folio_vector_edges": 0
+  },
+  "proof_removal_controls": [
+    "callback",
+    "issue",
+    "folio",
+    "vector"
+  ],
+  "all_four_proof_removals_fail_quality": true,
+  "all_owned_programs_detached": true,
+  "independent_cross_graph_audit_passed": true,
+  "retained_attempts": 4,
+  "failed_attempts": 2,
+  "stage1_gate_passed": false,
+  "new_accelerator_gain_claimed": false,
+  "limits": [
+    "Selected-worker disposable fixtures only",
+    "Large/partial folios and nonzero initial iterators not natively qualified",
+    "Mixed membership, partial/error/requeue and broader wake interleavings remain open",
+    "Total observer cost and whole-application critical paths remain open",
+    "Detailed machine records remain local",
+    "Suspend wake unsupported and not attempted"
+  ],
+  "passed_attempts": 2,
+  "positive_results_pooled": false,
+  "final_source_export_byte_identical": true
+}

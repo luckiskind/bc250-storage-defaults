@@ -1,0 +1,2692 @@
+{
+  "schema_version": 1,
+  "collection_complete": true,
+  "contract": {
+    "version": 3,
+    "seed": 251,
+    "scenarios": {
+      "serial-strided": {
+        "threads": 1,
+        "operations": 8192,
+        "pattern": "stride"
+      }
+    },
+    "warmup_pairs_per_scenario": 1,
+    "point_limit": 0.03,
+    "upper_interval_limit": 0.05,
+    "background_cpu_fraction_max": 0.1,
+    "minimum_available_bytes": 2147483648,
+    "additional_io_bytes_max": 131072,
+    "pre_workload_device_bytes_max": 131072,
+    "post_setup_idle_seconds": 0.25,
+    "scope": "Exploratory synthetic serial observer comparison; not application overhead or an accelerator gain",
+    "blocks": 24,
+    "minimum_valid_blocks": 20,
+    "conditions": [
+      "off",
+      "raw",
+      "batched"
+    ],
+    "ordering": "All six permutations, four blocks each; randomized before collection",
+    "exclusion_scope": "Entire three-condition block; strict whole-capture flags retained",
+    "order": [
+      {
+        "block": -1,
+        "condition": "off",
+        "warmup": true
+      },
+      {
+        "block": -1,
+        "condition": "raw",
+        "warmup": true
+      },
+      {
+        "block": -1,
+        "condition": "batched",
+        "warmup": true
+      },
+      {
+        "block": 0,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 0,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 0,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 1,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 1,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 1,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 2,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 2,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 2,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 3,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 3,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 3,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 4,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 4,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 4,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 5,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 5,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 5,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 6,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 6,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 6,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 7,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 7,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 7,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 8,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 8,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 8,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 9,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 9,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 9,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 10,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 10,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 10,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 11,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 11,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 11,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 12,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 12,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 12,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 13,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 13,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 13,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 14,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 14,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 14,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 15,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 15,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 15,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 16,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 16,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 16,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 17,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 17,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 17,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 18,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 18,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 18,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 19,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 19,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 19,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 20,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 20,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 20,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 21,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 21,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 21,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 22,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 22,
+        "condition": "batched",
+        "warmup": false
+      },
+      {
+        "block": 22,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 23,
+        "condition": "raw",
+        "warmup": false
+      },
+      {
+        "block": 23,
+        "condition": "off",
+        "warmup": false
+      },
+      {
+        "block": 23,
+        "condition": "batched",
+        "warmup": false
+      }
+    ],
+    "fixture_sha256": "24b54870050b90494c0f2bf4c47122fe82f482551327aa41a2f5d3948eb8a197",
+    "one_physical_fixture_for_all_conditions": true,
+    "original_qualification_sha256": "72d1440414aaf44cf828b473e4e06054186ed9b9e5d21e823d91035be19356cd",
+    "batched_qualification_sha256": "7beaa6bbf880a3cd41a9e13e40d49395c12b145829b6c47abf451d00921d5808",
+    "source_sha256": {
+      "bench/compare_trace_variants.py": "95e2bf1d0a03e19b24308164260dc8efb98b78927019ec8f5f2338ed2ddf9deb",
+      "analysis/trace_variants.py": "0c6c027d7c011b93cfc0f1cbf714bb4e02ae8a5f14af6e4effe911e7ae18356e",
+      "bench/measure_trace_overhead.py": "a4d46d054c5b0b54cf409d82e0b0ecd167891aced84c0085e7443b62ae72ba70",
+      "analysis/trace_overhead.py": "988b99086d3f75542cd972cad231ed0508c703e5466031178245b857ca71bed9",
+      "bench/qualify_batched_trace.py": "87e483fe95da149f94d21403b65959406febdf7fd17099867f8a9f8e9e7dc678"
+    },
+    "original_compiled_sha256": {
+      "request_trace.bpf.o": "accf5c5169d3f555709ec62c8714ea156b6010dc06615533c17e7fe150fb99a3",
+      "request-trace": "2a00d2e340ea898776b86b2a92094c0137563ddcf2555aa96fad69a4a381380d",
+      "direct-probe": "d39f79d3a9db4e67a9baaa0d7ef75084ca2f55b10c93afbb16b49589f101595f"
+    },
+    "batched_compiled_sha256": {
+      "request_trace.bpf.o": "8975bc8fdfe6605adf296eb0fb5aaa20d69960c61524b26b2877d6095648d064",
+      "request-trace": "7c09275d36675d1ae0fb9f13b3a155afb5f45f3ce49ec06751622bdf55b27356",
+      "direct-probe": "efe63bf52fc85b7428a0a8478d6897d95adfa98d8023bec65f5aa24111d7669e"
+    },
+    "frozen_unix": 1793111877.0311651
+  },
+  "summary": {
+    "valid_blocks": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      17,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "minimum_blocks_met": false,
+    "environment_excluded_blocks": [
+      {
+        "block": 3,
+        "reasons": [
+          "pre-workload-device-busy"
+        ]
+      },
+      {
+        "block": 6,
+        "reasons": [
+          "pre-workload-device-busy"
+        ]
+      },
+      {
+        "block": 8,
+        "reasons": [
+          "additional-device-io",
+          "pre-workload-device-busy"
+        ]
+      }
+    ],
+    "capture_screen_failed_blocks": [
+      {
+        "block": 6,
+        "conditions": [
+          "raw"
+        ]
+      },
+      {
+        "block": 8,
+        "conditions": [
+          "batched"
+        ]
+      },
+      {
+        "block": 9,
+        "conditions": [
+          "raw"
+        ]
+      },
+      {
+        "block": 13,
+        "conditions": [
+          "raw"
+        ]
+      },
+      {
+        "block": 18,
+        "conditions": [
+          "raw"
+        ]
+      }
+    ],
+    "comparisons": {
+      "raw_over_off": {
+        "pairs": 18,
+        "geometric_overhead": 0.00976364404336306,
+        "median_pair_overhead": 0.017390835630179558,
+        "paired_percentile_95": [
+          -0.011868606102827362,
+          0.03152861528736284
+        ],
+        "bootstrap_draws": 5000,
+        "bootstrap_seed": 251,
+        "interval_scope": "Exploratory resampling of pairs; does not establish independence or application overhead"
+      },
+      "batched_over_off": {
+        "pairs": 18,
+        "geometric_overhead": 0.014963010325008883,
+        "median_pair_overhead": 0.013971918602032646,
+        "paired_percentile_95": [
+          -0.014644132513596309,
+          0.04644559900754164
+        ],
+        "bootstrap_draws": 5000,
+        "bootstrap_seed": 251,
+        "interval_scope": "Exploratory resampling of pairs; does not establish independence or application overhead"
+      },
+      "batched_over_raw": {
+        "pairs": 18,
+        "geometric_overhead": 0.005149092376534946,
+        "median_pair_overhead": -0.0023324084645327046,
+        "paired_percentile_95": [
+          -0.0142812553884758,
+          0.02604124513675976
+        ],
+        "bootstrap_draws": 5000,
+        "bootstrap_seed": 251,
+        "interval_scope": "Exploratory resampling of pairs; does not establish independence or application overhead"
+      }
+    },
+    "fit_for_control_screen": {
+      "raw": false,
+      "batched": false
+    },
+    "batched_relative_upper_interval_below_zero": false,
+    "application_tracing_qualified": false,
+    "stage1_gate_passed": false,
+    "scope": "One synthetic serial workload, same physical fixture, exploratory blocked estimates; no accelerator gain"
+  },
+  "fixture_unchanged": true,
+  "one_physical_fixture_for_all_conditions": true,
+  "workload_binary_unchanged": true,
+  "all_owned_programs_gone": true,
+  "unrelated_program_inventory_unchanged": true,
+  "global_trace_state_unchanged": true,
+  "drive_policy_unchanged": true,
+  "nvme_qos_us": 5000,
+  "global_page_cache_reset_performed": false,
+  "private_fixture_eviction_only": true,
+  "production_observer_enabled": false,
+  "new_accelerator_throughput_comparison_performed": false,
+  "completed_unix": 1793112045.2417395,
+  "trials": [
+    {
+      "scenario": "serial-strided",
+      "pair": -1,
+      "condition": "off",
+      "warmup": true,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33566720,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 12288,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.035401999999999934,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 153731668
+      },
+      "minimum_sampled_available_bytes": 14441795584,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": -1,
+      "condition": "raw",
+      "warmup": true,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03367000000000009,
+      "observer_process_cpu_seconds": 0.04273299999999991,
+      "observer_startup_ns": 24928581,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 152883112
+      },
+      "minimum_sampled_available_bytes": 14433169408,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": -1,
+      "condition": "batched",
+      "warmup": true,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03582200000000013,
+      "observer_process_cpu_seconds": 0.025983999999999896,
+      "observer_startup_ns": 20899878,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 153182824
+      },
+      "minimum_sampled_available_bytes": 14423523328,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 0,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.033592999999999984,
+      "observer_process_cpu_seconds": 0.02585100000000007,
+      "observer_startup_ns": 16732854,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 147123391
+      },
+      "minimum_sampled_available_bytes": 14417829888,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 0,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03529499999999963,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 155774683
+      },
+      "minimum_sampled_available_bytes": 14419931136,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 0,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004132231404958678,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.035071000000000296,
+      "observer_process_cpu_seconds": 0.042246000000000006,
+      "observer_startup_ns": 20030707,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 154174460
+      },
+      "minimum_sampled_available_bytes": 14406668288,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 1,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03680699999999981,
+      "observer_process_cpu_seconds": 0.02559,
+      "observer_startup_ns": 16612048,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 156124307
+      },
+      "minimum_sampled_available_bytes": 14413770752,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 1,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03755400000000009,
+      "observer_process_cpu_seconds": 0.04068299999999958,
+      "observer_startup_ns": 16851636,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 163359145
+      },
+      "minimum_sampled_available_bytes": 14399840256,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 1,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0381929999999997,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 157530789
+      },
+      "minimum_sampled_available_bytes": 14409121792,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 2,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.040612999999999566,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 166507862
+      },
+      "minimum_sampled_available_bytes": 14410067968,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 2,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03344300000000011,
+      "observer_process_cpu_seconds": 0.029041000000000317,
+      "observer_startup_ns": 19940018,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 150640029
+      },
+      "minimum_sampled_available_bytes": 14405230592,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 2,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.033111000000000335,
+      "observer_process_cpu_seconds": 0.04139000000000026,
+      "observer_startup_ns": 16598760,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 152082776
+      },
+      "minimum_sampled_available_bytes": 14399164416,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 3,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006147540983606557,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0357829999999999,
+      "observer_process_cpu_seconds": 0.04016900000000012,
+      "observer_startup_ns": 16807174,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 155260225
+      },
+      "minimum_sampled_available_bytes": 14395142144,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 3,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03503899999999982,
+      "observer_process_cpu_seconds": 0.025863999999999887,
+      "observer_startup_ns": 16774811,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 153416065
+      },
+      "minimum_sampled_available_bytes": 14396915712,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 3,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [
+        "pre-workload-device-busy"
+      ],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002070393374741201,
+      "pre_workload_device_bytes": 1994752,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03532200000000074,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 152617605
+      },
+      "minimum_sampled_available_bytes": 14401388544,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 4,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004132231404958678,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.030619000000000618,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 146595552
+      },
+      "minimum_sampled_available_bytes": 14395981824,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 4,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0330629999999994,
+      "observer_process_cpu_seconds": 0.04111799999999999,
+      "observer_startup_ns": 19966135,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 150813461
+      },
+      "minimum_sampled_available_bytes": 14383923200,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 4,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.033626999999999185,
+      "observer_process_cpu_seconds": 0.025965000000000238,
+      "observer_startup_ns": 16735772,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 147898664
+      },
+      "minimum_sampled_available_bytes": 14390202368,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 5,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006160164271047228,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03868600000000022,
+      "observer_process_cpu_seconds": 0.02644100000000016,
+      "observer_startup_ns": 17177442,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 156773170
+      },
+      "minimum_sampled_available_bytes": 14380220416,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 5,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.031482999999999706,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 144121950
+      },
+      "minimum_sampled_available_bytes": 14384865280,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 5,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03353199999999923,
+      "observer_process_cpu_seconds": 0.04151700000000069,
+      "observer_startup_ns": 19895651,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 149774432
+      },
+      "minimum_sampled_available_bytes": 14377410560,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 6,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03325199999999917,
+      "observer_process_cpu_seconds": 0.02618200000000037,
+      "observer_startup_ns": 16796025,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 148319640
+      },
+      "minimum_sampled_available_bytes": 14370426880,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 6,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [
+        "pre-workload-device-busy"
+      ],
+      "capture_integrity": false,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.018518518518518517,
+      "pre_workload_device_bytes": 290816,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03322300000000045,
+      "observer_process_cpu_seconds": 0.03927099999999939,
+      "observer_startup_ns": 17050950,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 149080070
+      },
+      "minimum_sampled_available_bytes": 14359756800,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 6,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00823045267489712,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.035825000000000884,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 158257113
+      },
+      "minimum_sampled_available_bytes": 14369112064,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 7,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006172839506172839,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03621599999999958,
+      "observer_process_cpu_seconds": 0.04239499999999996,
+      "observer_startup_ns": 20040795,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 156330812
+      },
+      "minimum_sampled_available_bytes": 14360956928,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 7,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03278800000000004,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 150144212
+      },
+      "minimum_sampled_available_bytes": 14360682496,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 7,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.032993999999999524,
+      "observer_process_cpu_seconds": 0.029063000000000727,
+      "observer_startup_ns": 19973441,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 147007460
+      },
+      "minimum_sampled_available_bytes": 14348509184,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 8,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03389199999999981,
+      "observer_process_cpu_seconds": 0.03850200000000026,
+      "observer_startup_ns": 16899796,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 151798511
+      },
+      "minimum_sampled_available_bytes": 14348009472,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 8,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [
+        "pre-workload-device-busy",
+        "additional-device-io"
+      ],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 458752,
+      "additional_io_bytes": 458752,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 262144,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03850100000000012,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 156731735
+      },
+      "minimum_sampled_available_bytes": 14353248256,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 8,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": false,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006172839506172839,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.037488999999998995,
+      "observer_process_cpu_seconds": 0.029187999999999548,
+      "observer_startup_ns": 19973753,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 157753394
+      },
+      "minimum_sampled_available_bytes": 14340698112,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 9,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0378260000000008,
+      "observer_process_cpu_seconds": 0.026253999999999778,
+      "observer_startup_ns": 16937495,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 159919643
+      },
+      "minimum_sampled_available_bytes": 14330818560,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 9,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0317910000000019,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 144571000
+      },
+      "minimum_sampled_available_bytes": 14327087104,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 9,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": false,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03493299999999877,
+      "observer_process_cpu_seconds": 0.04010399999999947,
+      "observer_startup_ns": 19841283,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 153459415
+      },
+      "minimum_sampled_available_bytes": 14317948928,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 10,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004106776180698152,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03834099999999907,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 164946866
+      },
+      "minimum_sampled_available_bytes": 14335148032,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 10,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006172839506172839,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03677300000000017,
+      "observer_process_cpu_seconds": 0.041820999999998776,
+      "observer_startup_ns": 20094475,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 168828480
+      },
+      "minimum_sampled_available_bytes": 14323834880,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 10,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006160164271047228,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.04006299999999996,
+      "observer_process_cpu_seconds": 0.026118000000000308,
+      "observer_startup_ns": 16909998,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 168974852
+      },
+      "minimum_sampled_available_bytes": 14311366656,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 11,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006172839506172839,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03789799999999843,
+      "observer_process_cpu_seconds": 0.02534999999999954,
+      "observer_startup_ns": 16474505,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 161589579
+      },
+      "minimum_sampled_available_bytes": 14312161280,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 11,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03439200000000042,
+      "observer_process_cpu_seconds": 0.038902000000000214,
+      "observer_startup_ns": 16803751,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 152890188
+      },
+      "minimum_sampled_available_bytes": 14306611200,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 11,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03205900000000028,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 150263115
+      },
+      "minimum_sampled_available_bytes": 14317326336,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 12,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03228799999999943,
+      "observer_process_cpu_seconds": 0.041366999999999265,
+      "observer_startup_ns": 19826318,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 148447832
+      },
+      "minimum_sampled_available_bytes": 14312271872,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 12,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03382199999999891,
+      "observer_process_cpu_seconds": 0.025914999999999466,
+      "observer_startup_ns": 16739479,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 147628166
+      },
+      "minimum_sampled_available_bytes": 14306729984,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 12,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0363150000000001,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 156595091
+      },
+      "minimum_sampled_available_bytes": 14306009088,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 13,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03349200000000074,
+      "observer_process_cpu_seconds": 0.02897500000000086,
+      "observer_startup_ns": 19928780,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 148660737
+      },
+      "minimum_sampled_available_bytes": 14301409280,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 13,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03412499999999952,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 151821710
+      },
+      "minimum_sampled_available_bytes": 14305267712,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 13,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": false,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03630199999999917,
+      "observer_process_cpu_seconds": 0.042349999999999,
+      "observer_startup_ns": 19889599,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 157711331
+      },
+      "minimum_sampled_available_bytes": 14296788992,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 14,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.037048000000000414,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 155913074
+      },
+      "minimum_sampled_available_bytes": 14300983296,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 14,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002070393374741201,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03583399999999948,
+      "observer_process_cpu_seconds": 0.029334999999999667,
+      "observer_startup_ns": 20102742,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 158887939
+      },
+      "minimum_sampled_available_bytes": 14286708736,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 14,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006172839506172839,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03281100000000059,
+      "observer_process_cpu_seconds": 0.03756799999999849,
+      "observer_startup_ns": 16723610,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 153328980
+      },
+      "minimum_sampled_available_bytes": 14296457216,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 15,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.035517000000000465,
+      "observer_process_cpu_seconds": 0.040136000000000394,
+      "observer_startup_ns": 16935585,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 158639937
+      },
+      "minimum_sampled_available_bytes": 14287003648,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 15,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.038698999999997596,
+      "observer_process_cpu_seconds": 0.02560100000000176,
+      "observer_startup_ns": 16460689,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 161978252
+      },
+      "minimum_sampled_available_bytes": 14282358784,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 15,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.030625999999998044,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 142504583
+      },
+      "minimum_sampled_available_bytes": 14287769600,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 16,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03789400000000143,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 157489509
+      },
+      "minimum_sampled_available_bytes": 14293123072,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 16,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00625,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03445400000000021,
+      "observer_process_cpu_seconds": 0.029039000000000925,
+      "observer_startup_ns": 20081108,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 150853516
+      },
+      "minimum_sampled_available_bytes": 14283968512,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 16,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0361319999999985,
+      "observer_process_cpu_seconds": 0.03995200000000132,
+      "observer_startup_ns": 17030539,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 155528134
+      },
+      "minimum_sampled_available_bytes": 14277582848,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 17,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03621400000000108,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 154984238
+      },
+      "minimum_sampled_available_bytes": 14278361088,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 17,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03790899999999908,
+      "observer_process_cpu_seconds": 0.02909299999999959,
+      "observer_startup_ns": 19992413,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 161235225
+      },
+      "minimum_sampled_available_bytes": 14275031040,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 17,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.034451000000000676,
+      "observer_process_cpu_seconds": 0.03841799999999829,
+      "observer_startup_ns": 16405585,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 157665237
+      },
+      "minimum_sampled_available_bytes": 14266568704,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 18,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03622399999999715,
+      "observer_process_cpu_seconds": 0.0261710000000015,
+      "observer_startup_ns": 16927193,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 153779953
+      },
+      "minimum_sampled_available_bytes": 14273560576,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 18,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": false,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.035120999999998403,
+      "observer_process_cpu_seconds": 0.038615000000000066,
+      "observer_startup_ns": 16894899,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 158261819
+      },
+      "minimum_sampled_available_bytes": 14271897600,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 18,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.008247422680412371,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03924600000000211,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 159114548
+      },
+      "minimum_sampled_available_bytes": 14273626112,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 19,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006172839506172839,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03666899999999984,
+      "observer_process_cpu_seconds": 0.0426039999999972,
+      "observer_startup_ns": 20151183,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 155651432
+      },
+      "minimum_sampled_available_bytes": 14266593280,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 19,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.006172839506172839,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.030727999999999867,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 142642088
+      },
+      "minimum_sampled_available_bytes": 14267363328,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 19,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03711099999999945,
+      "observer_process_cpu_seconds": 0.02925000000000111,
+      "observer_startup_ns": 20071904,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 156786662
+      },
+      "minimum_sampled_available_bytes": 14257111040,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 20,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03896800000000411,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 158916303
+      },
+      "minimum_sampled_available_bytes": 14258520064,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 20,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00823045267489712,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03321799999999797,
+      "observer_process_cpu_seconds": 0.04277400000000142,
+      "observer_startup_ns": 19740664,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 154868051
+      },
+      "minimum_sampled_available_bytes": 14255939584,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 20,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.004123711340206186,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.033760999999998376,
+      "observer_process_cpu_seconds": 0.02648200000000145,
+      "observer_startup_ns": 17321162,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 147960962
+      },
+      "minimum_sampled_available_bytes": 14247018496,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 21,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00411522633744856,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03655499999999989,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 156345920
+      },
+      "minimum_sampled_available_bytes": 14242381824,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 21,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.0329060000000041,
+      "observer_process_cpu_seconds": 0.041654999999998665,
+      "observer_startup_ns": 19814895,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 148939334
+      },
+      "minimum_sampled_available_bytes": 14232317952,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 21,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.038038999999997714,
+      "observer_process_cpu_seconds": 0.025508000000002085,
+      "observer_startup_ns": 16567308,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 164795937
+      },
+      "minimum_sampled_available_bytes": 14235787264,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 22,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03292300000000026,
+      "observer_process_cpu_seconds": 0.0379870000000011,
+      "observer_startup_ns": 16847480,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 150756405
+      },
+      "minimum_sampled_available_bytes": 14237777920,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 22,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03356799999999893,
+      "observer_process_cpu_seconds": 0.026234999999999786,
+      "observer_startup_ns": 16927682,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 149313957
+      },
+      "minimum_sampled_available_bytes": 14231289856,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 22,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.00823045267489712,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03442500000000237,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 151071321
+      },
+      "minimum_sampled_available_bytes": 14236725248,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 23,
+      "condition": "raw",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002066115702479339,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.03187799999999896,
+      "observer_process_cpu_seconds": 0.04200099999999907,
+      "observer_startup_ns": 19997105,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 148186018
+      },
+      "minimum_sampled_available_bytes": 14232125440,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 23,
+      "condition": "off",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 28672,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.030781999999998533,
+      "observer_process_cpu_seconds": null,
+      "observer_startup_ns": null,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 142503308
+      },
+      "minimum_sampled_available_bytes": 14231232512,
+      "cgroup_throttled_periods_delta": 0
+    },
+    {
+      "scenario": "serial-strided",
+      "pair": 23,
+      "condition": "batched",
+      "warmup": false,
+      "environment_exclusions": [],
+      "capture_integrity": true,
+      "observed_read_bytes": 33554432,
+      "observed_write_bytes": 0,
+      "additional_io_bytes": 0,
+      "pre_workload_cpu_fraction": 0.002061855670103093,
+      "pre_workload_device_bytes": 0,
+      "fixture_resident_before_bytes": 0,
+      "fixture_resident_after_bytes": 0,
+      "worker_process_cpu_seconds": 0.037034999999999485,
+      "observer_process_cpu_seconds": 0.029119999999998925,
+      "observer_startup_ns": 19883219,
+      "workload": {
+        "threads": 1,
+        "operations": 8192,
+        "read_bytes": 33554432,
+        "elapsed_ns": 160087132
+      },
+      "minimum_sampled_available_bytes": 14225870848,
+      "cgroup_throttled_periods_delta": 0
+    }
+  ],
+  "failed_capture_screen_details": [
+    {
+      "block": 6,
+      "condition": "raw",
+      "warmup": false,
+      "flag_counts": {
+        "144": 4
+      },
+      "flagged_issue_within_workload": 0,
+      "kernel_counters": {
+        "insert": 8242,
+        "issue": 8246,
+        "final": 8246,
+        "orphan_complete": 4,
+        "zero_generation": 0,
+        "map_update_fail": 0,
+        "repeat_insert": 0,
+        "duplicate_issue": 0,
+        "requeue": 0,
+        "partial": 0,
+        "overshoot": 0,
+        "ring_lost": 0,
+        "delete_race": 0,
+        "no_issue": 0,
+        "bad_time": 0,
+        "orphan_requeue": 0
+      },
+      "right_censored_requests": 0,
+      "observed_read_bytes": 33554432,
+      "expected_workload_read_bytes": 33554432
+    },
+    {
+      "block": 8,
+      "condition": "batched",
+      "warmup": false,
+      "flag_counts": {
+        "144": 1
+      },
+      "flagged_issue_within_workload": 0,
+      "kernel_counters": {
+        "insert": 8307,
+        "issue": 8308,
+        "final": 8308,
+        "orphan_complete": 1,
+        "zero_generation": 0,
+        "map_update_fail": 0,
+        "repeat_insert": 0,
+        "duplicate_issue": 0,
+        "requeue": 0,
+        "partial": 0,
+        "overshoot": 0,
+        "ring_lost": 0,
+        "delete_race": 0,
+        "no_issue": 0,
+        "bad_time": 0,
+        "orphan_requeue": 0
+      },
+      "right_censored_requests": 0,
+      "observed_read_bytes": 33554432,
+      "expected_workload_read_bytes": 33554432
+    },
+    {
+      "block": 9,
+      "condition": "raw",
+      "warmup": false,
+      "flag_counts": {
+        "144": 4
+      },
+      "flagged_issue_within_workload": 0,
+      "kernel_counters": {
+        "insert": 8215,
+        "issue": 8219,
+        "final": 8219,
+        "orphan_complete": 4,
+        "zero_generation": 0,
+        "map_update_fail": 0,
+        "repeat_insert": 0,
+        "duplicate_issue": 0,
+        "requeue": 0,
+        "partial": 0,
+        "overshoot": 0,
+        "ring_lost": 0,
+        "delete_race": 0,
+        "no_issue": 0,
+        "bad_time": 0,
+        "orphan_requeue": 0
+      },
+      "right_censored_requests": 0,
+      "observed_read_bytes": 33554432,
+      "expected_workload_read_bytes": 33554432
+    },
+    {
+      "block": 13,
+      "condition": "raw",
+      "warmup": false,
+      "flag_counts": {
+        "144": 1
+      },
+      "flagged_issue_within_workload": 0,
+      "kernel_counters": {
+        "insert": 8317,
+        "issue": 8318,
+        "final": 8318,
+        "orphan_complete": 1,
+        "zero_generation": 0,
+        "map_update_fail": 0,
+        "repeat_insert": 0,
+        "duplicate_issue": 0,
+        "requeue": 0,
+        "partial": 0,
+        "overshoot": 0,
+        "ring_lost": 0,
+        "delete_race": 0,
+        "no_issue": 0,
+        "bad_time": 0,
+        "orphan_requeue": 0
+      },
+      "right_censored_requests": 0,
+      "observed_read_bytes": 33587200,
+      "expected_workload_read_bytes": 33554432
+    },
+    {
+      "block": 18,
+      "condition": "raw",
+      "warmup": false,
+      "flag_counts": {
+        "144": 1
+      },
+      "flagged_issue_within_workload": 0,
+      "kernel_counters": {
+        "insert": 8277,
+        "issue": 8278,
+        "final": 8278,
+        "orphan_complete": 1,
+        "zero_generation": 0,
+        "map_update_fail": 0,
+        "repeat_insert": 0,
+        "duplicate_issue": 0,
+        "requeue": 0,
+        "partial": 0,
+        "overshoot": 0,
+        "ring_lost": 0,
+        "delete_race": 0,
+        "no_issue": 0,
+        "bad_time": 0,
+        "orphan_requeue": 0
+      },
+      "right_censored_requests": 0,
+      "observed_read_bytes": 33554432,
+      "expected_workload_read_bytes": 33554432
+    }
+  ],
+  "cpu_policy_constant_across_all_trials": true,
+  "cgroup_throttled_trial_count": 0,
+  "raw_trace_data_published": false,
+  "application_tracing_qualified": false,
+  "stage1_gate_passed": false,
+  "observer_cpu_accounting_excludes_kernel_callback_cost": true,
+  "isolated_linux_tests": 130,
+  "live_installation": {
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true,
+    "healthy": true
+  }
+}

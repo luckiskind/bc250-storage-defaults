@@ -1,0 +1,151 @@
+{
+  "passed": true,
+  "conditions": [
+    {
+      "condition": "native-data-cold",
+      "before": {
+        "files": 530,
+        "page_rounded_bytes": 222560256,
+        "resident_bytes": 0,
+        "zero_resident_files": 530,
+        "fully_resident_files": 2
+      },
+      "after": {
+        "files": 530,
+        "page_rounded_bytes": 222560256,
+        "resident_bytes": 176189440,
+        "zero_resident_files": 4,
+        "fully_resident_files": 526
+      },
+      "endpoint_passed": true,
+      "normal_close_verified": true,
+      "private_owned_session_record_verified": true,
+      "readonly_bindings_verified": 530
+    },
+    {
+      "condition": "native-data-warm",
+      "before": {
+        "files": 530,
+        "page_rounded_bytes": 222560256,
+        "resident_bytes": 222560256,
+        "zero_resident_files": 2,
+        "fully_resident_files": 530
+      },
+      "after": {
+        "files": 530,
+        "page_rounded_bytes": 222560256,
+        "resident_bytes": 222560256,
+        "zero_resident_files": 2,
+        "fully_resident_files": 530
+      },
+      "endpoint_passed": true,
+      "normal_close_verified": true,
+      "private_owned_session_record_verified": true,
+      "readonly_bindings_verified": 530
+    }
+  ],
+  "private_session_checks": [
+    {
+      "records": 1,
+      "owned_user_tty_records": 1
+    },
+    {
+      "records": 1,
+      "owned_user_tty_records": 1
+    }
+  ],
+  "controller_uid_correct": true,
+  "controller_capabilities_zero": true,
+  "no_new_privs": false,
+  "performance_result": false,
+  "complete_application_input_closure": false,
+  "stage1_gate_passed": false,
+  "schema_version": 1,
+  "source_sha256": {
+    "native_application_inputs.py": "3cf55e19bce5bb86b6b70e1d1dfc455be9ef2a645bca513a7ecacad94b4e271b",
+    "native_input_mount.c": "0bb0d57360c61816062d1c4b21fee15ab03a8771cf14f6544d2dee4cdab14927",
+    "native_input_utmp.c": "65937c75e1e36071547603a96f5032d094245671a2f9b787a2a312cbec7d74b1",
+    "terminal_endpoint.py": "f32217e0c834880453b7c1ad007d99e1d46d1af347a7861337a894e5ca57c52f",
+    "copied_input_probe.py": "0cc5cdcfbbdd7afe57c436b71fb50b2cd3e4c5ec906690edbe01533dcf25b1eb"
+  },
+  "logical_file_bytes": 221429906,
+  "selected_nodes": 661,
+  "regular_files": 530,
+  "selected_metadata_matches_source": true,
+  "source_and_corpus_unchanged": true,
+  "shared_extent_count": 0,
+  "private_session_files_used": true,
+  "metadata_scope": "Selected nodes and selected-set hardlink relations; not a complete OS baseline",
+  "normal_close_left_no_view_processes": true,
+  "remaining_view_processes": 0,
+  "owned_process_root_bindings_verified": true,
+  "foreground_cgroup_limits_qualified": false,
+  "complete_os_baseline": false,
+  "completed_unix": 1793119175.700046,
+  "isolated_linux_tests": 144,
+  "cache_observer_counterexample": {
+    "passed": true,
+    "bytes": 1048576,
+    "root_before": {
+      "files": 1,
+      "page_rounded_bytes": 1048576,
+      "resident_bytes": 0,
+      "zero_resident_files": 1,
+      "fully_resident_files": 0
+    },
+    "nonowner_readonly_observer": {
+      "files": 1,
+      "page_rounded_bytes": 1048576,
+      "resident_bytes": 1048576,
+      "zero_resident_files": 0,
+      "fully_resident_files": 1
+    },
+    "root_after": {
+      "files": 1,
+      "page_rounded_bytes": 1048576,
+      "resident_bytes": 0,
+      "zero_resident_files": 1,
+      "fully_resident_files": 0
+    },
+    "scope": "Private disposable root-owned 0444 file; nonowner observer masks residency on this kernel",
+    "production_files_evicted": false
+  },
+  "privileged_construction_bounds": {
+    "memory_bytes": 2147483648,
+    "swap_bytes": 0,
+    "cpu_percent": 200,
+    "lifetime_seconds": 300,
+    "whole_foreground_application_bounds_qualified": false
+  },
+  "live_installation": {
+    "healthy": true,
+    "installed_files_verified": 7,
+    "nvme_qos_us": 5000,
+    "original_boot_configuration_verified": true,
+    "daily_quota_charges_retained": true
+  },
+  "retained_development_attempts": [
+    {
+      "attempt": 1,
+      "passed": false,
+      "scope": "Construction passed; view cache guard failed before trial; nested diagnostic unavailable",
+      "diagnosis": "Nonowner residency masking supported by subsequent controlled kernel counterexample, not recovered exact exception",
+      "retained": true
+    },
+    {
+      "attempt": 2,
+      "passed": true,
+      "scope": "Root observer, cold/warm selected metadata and private session accounting",
+      "retained": true
+    },
+    {
+      "attempt": 3,
+      "passed": true,
+      "scope": "Final source also verifies owned process root bindings and unique namespace cleanup",
+      "retained": true
+    }
+  ],
+  "original_endpoint_helper_unchanged": true,
+  "complete_metadata_equivalent_os_baseline": false,
+  "suspend_qualification": "Excluded: owner reports no functional suspend wake"
+}
