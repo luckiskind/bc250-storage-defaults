@@ -4,7 +4,7 @@ Apply the tested drive power setting and a bounded Btrfs layout prototype with o
 
 Development toward a broader accelerator follows the [sequential roadmap](docs/DEVELOPMENT_PLAN.md). The [Stage 0 baseline record](docs/baseline.md) separates completed checks from remaining hardware/recovery qualification.
 
-Current development passes **328 Linux tests**. A separate [16-slot probe-accounting experiment](docs/probe-cost.md) passes counter and causal checks using the exact qualified BPF binary. Scheduler probes contribute 41.7% of work-slot recorded program runtime, motivating context-lookup research; these totals include profiling overhead and unrelated activity. Earlier [failed cost screens](docs/compact-wait-cost.md) and the native early-overlap gap remain unchanged. The full [workload gate](docs/workloads.md) is open. No new accelerator gain or default promotion is claimed.
+Current development passes **335 Linux tests**. The separate [task-local context feature](docs/task-context.md) passes 11 native controls, with 4,299 matched context lifecycles and 17,185 scheduler observations. Two-thread and task-exit controls preserve independent identities and unfinished-context accounting. This supports building a replacement lookup path; its full causal correctness and cost remain unqualified. Earlier [failed cost screens](docs/compact-wait-cost.md) remain unchanged. The full [workload gate](docs/workloads.md) stays open. No new accelerator gain or default promotion is claimed.
 
 ## Apply
 
@@ -38,13 +38,13 @@ Undo disables the timer, stops maintenance, restores the captured drive latency 
 | Native Btrfs layout | zstd level 1, target compressed extents of at most 16 KiB; misses reported explicitly |
 | Scope | Eligible stable ELF binaries under `/usr`, `/opt`, `/home`, `/srv`, `/var/lib/flatpak` |
 | Limits | 512 MiB/pass, 2 GiB/UTC day, 5 minutes/pass, 64 GiB free-space floor |
-| Scheduling | About hourly, first check after 10ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“15 minutes; low CPU/IO priority |
+| Scheduling | About hourly, first check after 10ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ15 minutes; low CPU/IO priority |
 
 The power setting excludes the tested drive's deepest slow sleep state. It does not disable all sleep. It can increase idle power use.
 
 The prototype gradually repacks existing compressible files through Btrfs's defrag ioctl. It **does not set a universal 16 KiB policy for future writes**. Ordinary writes retain the existing mount policy, and stable eligible replacements become candidates on later passes. Non-ELF game archives/assets are outside the current validated class. No universal game-loading uplift is claimed.
 
-Before a pass, the worker checks CPU load and waits for low activity on `nvme0n1`. It skips recently modified files, hardlinks, symlinks, privileged binaries, explicit NOCOW/uncompressed/protected files, sparse/unsupported extents and poor compression samples. File sizes are limited to 1ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“256 MiB. It checks SHA-256 before/after every repack, verifies compressed extent sizes and preserves owner/mode. A stable content mismatch creates a `STOP` marker and halts future passes. Hash verification detects a failure; it is not a backup or an automatic repair mechanism.
+Before a pass, the worker checks CPU load and waits for low activity on `nvme0n1`. It skips recently modified files, hardlinks, symlinks, privileged binaries, explicit NOCOW/uncompressed/protected files, sparse/unsupported extents and poor compression samples. File sizes are limited to 1ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ256 MiB. It checks SHA-256 before/after every repack, verifies compressed extent sizes and preserves owner/mode. A stable content mismatch creates a `STOP` marker and halts future passes. Hash verification detects a failure; it is not a backup or an automatic repair mechanism.
 
 The development worker retries residual compressed extents once with stronger per-range flushing, up to 1 MiB of extra submitted logical work per file and within the existing pass/day budget. If the layout still exceeds the target but content verifies, it reports `layout-not-achieved-verified` and remembers the unchanged file instead of repeatedly rewriting it. It never counts that result as a successful 16 KiB layout. Before changing a file, it durably reserves budget; interruptions retain that conservative charge. These budgets count submitted logical layout work, including retries; they do not measure physical SSD write amplification. Each reservation is assigned to its attempt's UTC start day.
 
