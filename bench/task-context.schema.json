@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BC-250 task-context capability diagnostic v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "start_ns",
+    "finish_ns",
+    "detached_ns",
+    "events",
+    "discarded",
+    "malformed",
+    "pending_expected",
+    "threads_seen",
+    "schema_version",
+    "kind",
+    "task_storage_iteration_result",
+    "task_storage_iteration_errno",
+    "counters",
+    "interrupted",
+    "limit_reached",
+    "creation_enabled",
+    "controlled_markers",
+    "links_detached",
+    "maps_pinned",
+    "causal_attribution_qualified",
+    "observer_cost_qualified",
+    "records"
+  ],
+  "properties": {
+    "start_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "finish_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "detached_ns": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "events": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "discarded": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "malformed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "pending_expected": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "threads_seen": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "kind": {
+      "const": "bc250-task-context-feature"
+    },
+    "task_storage_iteration_result": {
+      "type": "integer",
+      "minimum": -4095,
+      "maximum": 0
+    },
+    "task_storage_iteration_errno": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4095
+    },
+    "counters": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 18446744073709551615
+      }
+    },
+    "interrupted": {
+      "type": "boolean"
+    },
+    "limit_reached": {
+      "type": "boolean"
+    },
+    "creation_enabled": {
+      "type": "boolean"
+    },
+    "controlled_markers": {
+      "type": "boolean"
+    },
+    "links_detached": {
+      "const": true
+    },
+    "maps_pinned": {
+      "const": false
+    },
+    "causal_attribution_qualified": {
+      "const": false
+    },
+    "observer_cost_qualified": {
+      "const": false
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 32768,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "token",
+          "time_ns",
+          "observed_ns",
+          "value",
+          "aux",
+          "stage",
+          "flags",
+          "result"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "token": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "time_ns": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "observed_ns": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "value": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "aux": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615,
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "flags": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 18446744073709551615,
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "result": {
+            "type": "integer",
+            "minimum": -9223372036854775808,
+            "maximum": 9223372036854775807
+          }
+        }
+      }
+    }
+  },
+  "$comment": "Structural schema only; analysis/task_context.py and lifecycle/oracle checks are mandatory. Entry/completion brackets do not establish exact point order or I/O causality. Task exit does not prove context closure."
+}
